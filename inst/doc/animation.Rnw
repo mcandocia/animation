@@ -1,0 +1,659 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+
+\documentclass[a4paper]{report}
+\usepackage{graphicx,fancyhdr}
+\usepackage[bookmarks,pdfstartview=FitH,bookmarksnumbered=true,bookmarksopen=true]{hyperref}
+%\usepackage{a4wide}
+\usepackage{Sweave}
+\usepackage{amsmath}
+
+\newcommand{\R}{\textsf{R}}
+\newcommand{\T}{\texttt{TRUE}}
+\newcommand{\F}{\texttt{FALSE}}
+\newcommand{\fun}[1]{\textit{#1}}
+\newcommand{\code}[1]{\textsf{#1}}
+\newcommand{\para}[1]{\texttt{#1}}
+\pagestyle{fancy}
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{\chaptername
+\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+
+\newenvironment{Rdsection}[1]{%
+  \ifx\@empty#1\else\subsubsection*{#1}\fi
+  \begin{list}{}{\setlength{\leftmargin}{0.25in}}\item}
+  {\end{list}}
+\newenvironment{Usage}{%
+  \begin{Rdsection}{Usage}}{\end{Rdsection}}
+\newenvironment{Examples}{\begin{Rdsection}{Examples}}{\end{Rdsection}}
+\newenvironment{ExampleCode}{\begin{verbatim}}{\end{verbatim}}
+
+
+\title{Package \code{animation}: Animated Statistics Using \R{}}
+\author{Yihui Xie\thanks{School of Statistics, Renmin University of China, 
+Beijing, 100872, China; Tel: 86-10-82509086; Fax: 86-10-82509086; Email: \texttt{paste("xieyihui", "@", "gmail.com", sep = "")}; Homepage: \url{http://www.yihui.name}; You may visit my project ``Animated Statistics Using R'' at \url{http://R.yihui.name} for a variety of animations in statistics in web pages.}}
+
+%\SweaveOpts{echo=FALSE}
+%\VignetteIndexEntry{Animated Statistics Using R}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+Animated pictures are undeniably both interesting and intuitional. This vignette mainly gives a brief overview to a large variety of animations in statstics, which could probably aid in teaching statistics, data analysis, and the presentation of statistical reports. The methods of making animations are also introduced. It is hoped that the traditional ``static'' statistics can be altered to some degree by such a kind of ``animated'' approach. 
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+
+ 
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\chapter{Introduction} 
+The concept of statistics, viewed from an analytical way, can be defined as ``the study of algorithms for data analysis'' (\cite{ART:Boot}). Nowadays statistical methods and models are increasing at an exploding speed, leading to more and more difficulties for people to understand those abstract mathematical and statistical algorithms. Basically this happens because sometimes it is really hard to imagine what on earth has happened behind a statistical algorithm, or how it works in processing data. While on the other hand, the size and complexity of data are also increasing, which results in the other problem for knowledge discovery. In the mean time, traditional \emph{static} statistical reports (printed on paper in presses) for these complex data can be rather unsatisfactory for explainations of statistical results, and we need a more \emph{active} way to present the fruits of our analyses. 
+
+\begin{quote}
+We're drowning in information and starving for knowledge.
+  \begin{flushright}
+  -- Rutherford D. Rogers
+  \end{flushright}
+\end{quote}
+
+To solve these problems, I adopted the approach of animation at last, because the human visual cortex is arguably the most powerful computing system we have access to, and visualization (especially animation) allows us to put information into a form which allows us to use the power of this computing system. Thus by virtue of our visual system we may be able to quickly understand a somewhat complicated method or result (usually in a simplified case). 
+
+However, there is currently very few work in such a literature for animations in statistics\footnote{Most of work has been contributed to the computer science, media and entertainment industries.}, therefore this vignette provides an integrated discussion on the animating of statistical models and data in the environment of \R{} language (\cite{MAN:R}). 
+
+
+\chapter{Tools for Animation} 
+\setkeys{Gin}{width=\textwidth} 
+
+
+Perhaps most people would think of \code{GIF} images as the first choice for making animations, because it is well known that \code{GIF} is one of the only few image formats that has the ability to create animations\footnote{There are other formats such as APNG (Animated Portable Network Graphics), MNG (Multiple-image Network Graphics) and SVG (Scalable Vector Graphics), etc, but less popular (SVG might be promising in animations).}, nevertheless ultimately I didn't adopt this format for several reasons\footnote{You may read this page: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. 
+
+Actually it is not so convenient to make animated image files in \R, whereas we still have other choices, among which I list two main tools I have employed as follows in section \ref{tool:R} and \ref{tool:HTML}, and other possible means are mentioned in section \ref{tool:other}. 
+
+\section{\R{} graphical devices}\label{tool:R} 
+\begin{figure}[t]
+  \begin{center}
+<<fig=TRUE,echo=FALSE,height=2.5>>=
+op = par(mar = rep(0, 4)) 
+plot(x <- c(1:4, 4:1), y <- rep(2:1, each = 4), ann = F, 
+    type = "n", axes = F, xlim = c(0.55, 4.45), ylim = c(0.55, 
+        2.45), xaxs = "i", yaxs = "i") 
+rect(x - 0.45, y - 0.45, x + 0.45, y + 0.45, border = "gray") 
+s = seq(0, 360, length = 8) 
+for (i in 1:8) {
+    text(x[i], y[i], "Animation", srt = s[i], col = rainbow(8)[i], 
+        cex = 0.5 + 50 * i/360)
+} 
+text(x, y - 0.45, paste("00:0", 1:8, sep = ""), adj = c(0.5, 
+    -0.2), col = "gray", cex = 0.75) 
+arrows(c(1:3 + 0.35, 4:2 - 0.35), rep(2:1, each = 3), 
+    c(1:3 + 0.65, 4:2 - 0.65), rep(2:1, each = 3), length = 0.15, 
+    col = "darkgray") 
+par(op) 
+@ 
+  \caption{An illustration of the process of animations.}\label{rotation} 
+  \end{center}
+\end{figure}
+
+The \R{} package \code{grDevices} has offered a variety of graphics devices, and it's really a great help when we need to produce single image files -- there are several choices such as \code{PNG}, \code{JPEG}, \code{BMP}, \code{PDF}, \code{PS}, \code{\TeX/\LaTeX} and \code{WMF}, etc. All of them work very well when producing images files one by one, but the essential problem is that none of them is able to make animation files \emph{directly}. At most what we can do is to produce a sequence of images.
+
+Nevertheless, we may as well just use the Windows graphics devices (under Windows) or X Window System graphics devices (under Linux) or MacOS X Quartz devices (under MacOS X) inside \R{} to make animations, i.e. draw graphs one after another in these devices. Again, there is an obvious drawback: it's inconvenient for users who don't have \R{} installed in their computers to watch the animations, as the pictures are displayed \emph{inside} \R{} and we need an independent platform to show our animations.
+
+For users who have installed \R{}, animations can be made with the function \fun{Sys.sleep()} in a loop. Obviously this function is intentionally used to slow down the loop so that we can see the whole process clearly. For example, we can show the process of rotating the word ``Animation'' in the loop below\footnote{This code is used in the header of \url{http://R.yihui.name}. Argument \para{srt} controls the rotating degree, \para{col} for colors, and \para{cex} for magnification.} (Figure \ref{rotation} shows some sample frames of this animation): 
+
+<<echo=FALSE>>=
+options(width = 70) 
+@
+<<>>=
+for (i in 1:360) {
+    plot(1, ann = F, type = "n", axes = F)
+    text(1, 1, "Animation", srt = i, col =
+        rainbow(360)[i], cex = 7 * i/360)
+    Sys.sleep(0.01)
+}
+@
+
+For detailed instructions and explainations in \R{} graphics system, you may refer to the book ``R graphics'' (\cite{BK:RG}) by Paul Murrell, or read R-help on graphics functions (e.g. packages \code{graphics}, \code{grDevices}, etc) carefully. 
+
+\section{\code{HTML} \& \code{JavaScript}}\label{tool:HTML} 
+Why use \code{HTML} \& \code{JavaScript}? I believe there are at least three reasons: 
+
+\begin{itemize}
+  \item \R{} already has built-in functions for reading and writing text files, so we can create \code{HTML} files easily, e.g. use \fun{cat()} with arguments \para{file} and \para{append};
+  \item Although \R{} has no devices for image formats such as \code{GIF}, there are still many other ``static'' image formats which can be well shown in \emph{web pages}, e.g. \code{JPEG}, \code{PNG}, ...;
+  \item Generally speaking, no additional programs are needed in order to display the animations, as long as the web browser supports JavaScript -- surely most browsers can meet such a simple requirement.
+\end{itemize}
+
+The work to do is just to create single image \emph{frames} and try to show them in an \code{HTML} page. And how can we fulfill this? The answer is through \code{JavaScript}\footnote{Refer to this page again for details: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. This idea has already been implemented in this package \code{animation}: all animation functions has a special argument \para{saveANI}, which determines whether to generate animation files or just to show animations inside \R. 
+
+\section{Other tools}\label{tool:other} 
+Currently there are still at least other two choices for animations: the first one is to use the package \code{rgl} which takes advantage of the \code{OpenGL} system to make 3D visulizations. The user may conveniently interact with 3D elements in the plot (drag and rotate, etc). And the second one is \code{Scalable Vector Graphics} (SVG), which is a language for describing two-dimensional graphics and graphical applications in \code{XML}. \code{SVG} files are compact and provide high-quality graphics on the Web, in print, and on resource-limited handeld devices. In addition, \code{SVG} supports scripting and animation, so is ideal for interactive, data-driven, personalized graphics. Besides, \code{SVG} is a royalty-free vendor-neutral open standard developed under the \code{W3C} (World Wide Web Consortium) Process. Currently there are a few packages supporting the creation of \code{SVG} files, e.g. \href{http://cran.r-project.org/src/contrib/Descriptions/Cairo.html}{Cairo}, \href{http://cran.r-project.org/src/contrib/Descriptions/cairoDevice.html}{cairoDevice}, and \href{http://cran.r-project.org/src/contrib/Descriptions/RSvgDevice.html}{RSvgDevice}, etc\footnote{As far as I know, there is one other package \href{http://www.stat.auckland.ac.nz/~paul/R/gridSVG_0.5-1.tar.gz}{\code{gridSVG}} by Paul Murrell, but it is still highly experimental.}. 
+
+
+
+
+\chapter{Statistics and Animations}\label{connection} 
+
+So what is the connection between statistics and animations? Generally there are three areas in which animations can be used, namely: 
+
+\begin{itemize}
+  \item algorithms involving iterations, e.g. K-Means cluster algorithm
+  \item methods relevant to random numbers, e.g. simple random sampling 
+  \item statistics with dynamic trends, e.g. time series 
+\end{itemize}
+
+Below I'll explain with examples how they work in animations respectively. 
+
+\section{Iterative Algorithms}\label{iteration} 
+
+There are a large number of algorithms in statistics which involve iterations to optimize certain functions. For example, in the K-Means cluster analysis, the basic steps are described in Figure \ref{kmstep}. What animation can do is to show the output of \emph{each} iteration. 
+
+Here I use a cluster problem containing two numerical variables as a simplified case; actually the main reason is for the convenience of making scatterplots on the 2D plane: the $x$-axis and $y$-axis denote the two variabels respectively. During the process of iterations, we may present these two elements at each iteration: 
+
+\begin{itemize}
+  \item Location of each center: just average $x$-$y$ locations within each cluster. 
+  \item Temporary cluster results: annotate each cluster by different point symbols. 
+\end{itemize} 
+
+As the iteration goes on, both the centers and cluster membership will change -- this is just the source of animation. To sum up, the animation steps may be: show centers, compute distances and cluster, show cluster membership, re-compute centers and move, re-compute distances and change cluster membership, and so one and so forth. Figure \ref{kmeans} gives two iterations of locating centers and computing distances. 
+
+The animation function in the package \code{animation} is \fun{kmeans.ani()}; see the help files for detailed usage. 
+\begin{figure}
+  \begin{center}
+<<fig=TRUE,echo=FALSE,height=2>>=
+op = par(cex = 0.8, mar = c(0, 0, 0, 0), xaxt = "n", yaxt = "n") 
+plot(1:12, ylim = c(0.5, 3.5), xlim = c(0, 14), type = "n", 
+    ann = F, bty = "n") 
+text(1, 2, "Initial centers", adj = c(0.6, 0.5)) 
+text(5, 3, "Compute distances") 
+text(9, 3, "Cluster sample") 
+text(7, 1, "Move centers") 
+text(13, 2, "Stop") 
+rect(3, 0.5, 11, 3.5, lty = 2) 
+arrows(2, 2, 3, 2, length = 0.1) 
+arrows(11, 2, 12.5, 2, length = 0.1) 
+arrows(c(6.9, 4.9, 8.9), c(1.5, 2.5, 2.4), c(5, 8.9, 
+    7), c(2.4, 2.5, 1.5), length = 0.1, angle = 30) 
+par(op) 
+@ 
+  \caption[Basic steps of K-Means cluster algorithm.]{Basic steps of K-Means cluster algorithm: the iteration in the middle box will go on and on until maximum number of steps is achieved or clusters are converged.}\label{kmstep} 
+  \end{center}
+\end{figure} 
+\begin{figure}[!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{kmeans} 
+  \caption[Sample iterations of K-Means cluster algorithm.]{Sample iterations of K-Means cluster algorithm: (1) locate cluster centers based on the average of the last step; (2) compute distances and determine cluster membership again (centers are not moved!); (3) locate cluster centers again based on the result of (2); (4) compute distances and determine cluster membership again (centers not moved). Check carefully for the changes especially from (2) to (3) and from (3) to (4).}\label{kmeans} 
+  \end{center}
+\end{figure}
+
+\section{Random Numbers}\label{random} 
+
+Surely statistics cannot survive without randomness. We can see random numbers in subjects such as probability theory, survey sampling, and numerical simulation/optimization, etc. In areas which involve with random numbers, we may generate random numbers again and again to do simulations and get corresponding results -- this is just where animations can play an important role. 
+
+Let's take the Buffon's Needle for example. This is one of the oldest problems in the field of geometrical probability and it's familiar to people who have basic knowledge of probability theory, so I wouldn't repeat the background here. 
+
+The critical parts for the simulation of this problem are:
+
+\begin{itemize}
+  \item Randomly generate a location where the needle falls (only the middle point of the needle is needed). 
+  \item Randomly generate an angle $\phi$ at which the needle falls (a number in $[0, \pi]$). 
+\end{itemize}  
+
+After these two elements have been decided, we'll immediately know whether the needle will cross the lines or not. The  problem and solution are explained in Figure \ref{buffonprob}, while the simulation is illustrated in Figure \ref{buffon}. 
+
+The animation function in the package \code{animation} is \fun{buffon.needle()}; see the help files for detailed usage. 
+
+\begin{figure}[!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{buffonprob} 
+  \caption[The problem of Buffon's Needle.]{The problem of Buffon's Needle. (1) The left plot: bold segments stand for ``needles''; $D$ is the distance between lines; $L$ is the length of needle; $x$ is the distance from the middle of the needle to the nearest line; $\phi$ is the angle at which the needle falls; (2) The right plot: the needle will cross the lines if and only if $x \leq (L/2)\mathrm{sin}(\phi)$, i.e. the point $(\phi,x)$ should fall into the shadow area.}\label{buffonprob} 
+  \end{center}
+\end{figure}
+\begin{figure}[!]
+  \begin{center}
+    \includegraphics[width=\textwidth]{buffon} 
+  \caption[Simulation of Buffon's Needle.]{Simulation of Buffon's Needle. (1) Top left: simulation of dropping needles; (2) Top right: corresponding point pairs $(\phi, x)$; (3) Bottom: values of $\pi$ calculated from the above simulations; actually this is the $150$th animation frame taken from the whole process of $200$ needle falls. }\label{buffon} 
+  \end{center}
+\end{figure} 
+
+\section{Dynamic Trends}
+\begin{figure}
+  \begin{center}
+<<fig=TRUE,echo=FALSE,height=2.5>>=
+library(animation)
+data(pageview)
+x=pageview$visits
+op=par(mfrow=c(2,1),mar=c(2,3,0.3,.5),mgp=c(2,.5,0),cex.axis=.8,cex.lab=.8,tcl=-.3)
+acf(x,xlab='',main='')
+pacf(x,xlab='',main='')
+par(op)
+@
+\caption{ACF and PACF for the number of visits to Yihui's website.}\label{acf} 
+  \end{center}
+\end{figure} 
+
+We are always exploring relationships among our variables, as descriptions for single variables are far from enough in statistics; therefore the method of \emph{conditioning} is fairly important. For instance, we may want to examine how a certain statistic $A$ varies conditioned on a variable $B$. This ``variation'' (or simply ``change'') just builds the connection between statistics and the application of animations.
+
+The most common case is the subject of time series\footnote{But the applications are absolutely not limited to time series!}, in which the conditioning variable is usually time. 
+
+For example, in time series analysis we often use the whole data set to fit an \code{ARIMA} model to examine the relationship between $X_t$ and corresponding lagged terms such as $X_{t-1}, X_{t-2}, \ldots$, however, if we want to know how such a relationship varies over time, this single model surely cannot help. Here I simply employ an intuitional method called ``\emph{Moving Window Regression}'' (MWR) to fulfill this idea. MWR is able to show the changes of coefficients over time, and what I do next is rather naive (just for demonstration). Further topics can be found in \cite{ART:Meyer}, etc. 
+
+The time series data is from the dataset \para{pageview} in \code{animation}, and we may have a look at the ACF and PACF plots in Figure \ref{acf}. 
+
+<<fig=FALSE,echo=TRUE>>=
+library(animation)
+data(pageview)
+x=pageview$visits
+par(mfrow=c(2,1)) 
+acf(x)
+pacf(x)
+@
+
+Not going further in ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MVR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+library(animation)
+data(pageview)
+x=pageview$visits
+k=15;base=0:(k-1)
+sx=2.5*(x-min(x))/(max(x)-min(x))+1.6 #scaled
+plot(sx,ylim=c(-.3,4.2),cex=1.5,yaxt='n')
+axis(2,c(0,.6,1.2),col.axis='red')
+axis(2,seq(1.6,4.1,length=4),seq(min(x),max(x),length=4),col.axis='blue')
+abline(h=1.5)
+for (i in 1:(length(x)-k+1)){
+idx=base+i
+m=arima(x[idx],order=c(1,0,0))
+phi=coef(m)["ar1"]
+se=sqrt(vcov(m)[1,1])
+rect(i,min(sx[idx]),i+k-1,max(sx[idx]),lty=2,border=i)
+arrows(i+k/2-.5,phi-2*se,i+k/2-.5,phi+2*se,angle=90,code=3,length=.05,col=i)
+points(i+k/2-.5,phi,pch=21,col='red',bg='yellow')
+Sys.sleep(1)
+}
+@
+\begin{figure}
+\begin{center}
+<<fig=TRUE,echo=FALSE,height=4>>=
+library(animation)
+data(pageview)
+x=pageview$visits
+k=15;base=0:(k-1)
+sx=2.5*(x-min(x))/(max(x)-min(x))+1.6 #scaled
+par(mar=c(1.5,3,0,0),mgp=c(2,.5,0),cex.axis=.8,cex.lab=.85,tcl=-.3)
+plot(sx,ylim=c(-.3,4.2),cex=1.5,yaxt='n',xlab='',ylab='AR(1) coefficient and corresponding original data')
+axis(2,c(0,.6,1.2),col.axis='red')
+axis(2,seq(1.6,4.1,length=4),seq(min(x),max(x),length=4),col.axis='blue')
+abline(h=1.5)
+for (i in 1:(length(x)-k+1)){
+idx=base+i
+m=arima(x[idx],order=c(1,0,0))
+phi=coef(m)["ar1"]
+se=sqrt(vcov(m)[1,1])
+rect(i,min(sx[idx]),i+k-1,max(sx[idx]),lty=2,border=i)
+arrows(i+k/2-.5,phi-2*se,i+k/2-.5,phi+2*se,angle=90,code=3,length=.05,col=i)
+points(i+k/2-.5,phi,pch=21,col='red',bg='yellow')
+}
+@
+  \caption{Illustration for Moving Window Auto-Regression.}\label{MVR} 
+  \end{center}
+\end{figure} 
+
+Figure \ref{MVR} shows the eventual result; we can roughly observe that the AR(1) coefficient $\phi$ is stable first, and begins to decrease in the 15 days centered at Oct 15, then increases from about Oct 13 (those 15 days are centered at Oct 20). 
+
+A more general animation function for MVR is still in my TODO list. 
+
+\chapter{Package \code{animation} Overview}
+The package \code{animation} is based on the most primitive idea of animation: make picture \emph{frames} one after another with a certain duration (time interval between frames) specified. And this dull method has also been implemented in an \code{HTML} animation page using \code{JavaScript} to animate the image frames. 
+
+Currently there are two ways for animation: one is just to show animations in a graphical device (Windows, X Window, etc), and the other is to make animations in an \code{HTML} page so that people without \R{} installed are also able to view the animations. There is a common argument \para{saveANI} in each animation function controlling the way to make animations: 
+
+\begin{description}
+  \item[\para{saveANI = TRUE}] Convert the animation frames into \code{PNG} files, which will be used in the \code{HTML} animation page.
+  \item[\para{saveANI = FALSE}] Don't generate animation files: just show animation inside \R. 
+\end{description}
+
+To make an \code{HTML} animation page, you have to start a page first by \fun{ani.start()}, then use any animation functions to generate \code{PNG} files in the \para{images} directory relative the \code{HTML} page, and at last use \fun{ani.stop()} to complete writing the page. By default, \fun{ani.stop()} will automatically open a web browser to view the \code{HTML} animation page\footnote{Use the function \fun{browseURL()} in \code{utils}}. 
+
+Here is a sample session: 
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+ani.start() 
+brownian.motion(saveANI = TRUE) 
+ani.stop() 
+@
+
+There a plenty of examples in the help pages of each animation functions. Just try them if you like. 
+
+Having provided a mechanism for generating animations, next I shall go into the huge project of statistical animations in the many branches. 
+ 
+\chapter{Statistical Animations Gallery}
+
+In section \ref{connection} I have explained some basic connections between animation and the discipline of statistics. In this section I just give a summary of the animation functions in the package \code{animation}. This gallery will be supplemented day by day.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probability Theory} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Probabbility theory is a subject relevant to randomness. As mentioned in section \ref{random}, animation can be closely related to this subject.
+ 
+\subsection{Probability in Flipping Coins}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{coin} 
+  \caption[Probability of flipping a coin.]{Probability of flipping a coin: Head? Tail? Or just stand on the table? Run in \R{} to watch the animation.}\label{coin} 
+  \end{center}
+\end{figure}
+In the first class of learning probability we usually begin with the probability in flipping coins or tossing dice, and the function \fun{flip.coin()} gives a simple simulation. Here the concept of a ``coin'' is acutally abstract: it can be anyting, and you just have to specify the true probabilities (or take the default \para{NULL}) for each ``face''. 
+
+\begin{Usage}
+\begin{verbatim}
+flip.coin(saveANI = FALSE, faces = 2, prob = NULL, 
+    interval = 0.2, nmax = 100, border = "white", ...)
+\end{verbatim}
+\end{Usage}
+
+For example, we toss the coin for 50 times, and considering that sometimes the result of flipping a coin is neither head or tail (the coin just stands on the table!), we specify there are three possible results \para{Head, Tail, Stand} with probabilities \para{0.45, 0.1, 0.45} respectively, as the result \para{Stand} is not likely to happen. Figure \ref{coin} shows the result of flipping this coin. 
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+# a coin would stand on the table?? :) 
+flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
+    nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45)) 
+@
+
+You may set larger times of flipping \para{nmax} to check whether the frequencies will approximate to the true probabilities. 
+ 
+\subsection{Buffon's Needle}
+This problem has been mentioned in section \ref{random}, so I will not repeat again here.
+
+\begin{Usage}
+\begin{verbatim}
+buffon.needle(saveANI = FALSE, l = 0.8, d = 1, interval = 0.05,
+    nmax = 100, redraw = TRUE)
+\end{verbatim}
+\end{Usage}
+
+\subsection{Brownian Motion}
+Brownian Motion, a.k.a ``random walk'', characterizes the trace of a point moving in a line or a plane (or in higher dimensions). Suppose the current location of the point is $x_t$, then the next location will be $x_{t+1}=x_t+\epsilon_{t+1}$ with i.i.d $\epsilon_t \sim N(\mu,\,\sigma^2)$.
+
+It is very easy to simulate this process in \R. If the initial location is 0, the next $k$ locations can be computed simply by \para{cumsum(rnorm(k))}. The function \fun{rnorm()} generates $k$ i.i.d random numbers following Normal distribution, and \fun{cumsum()} computes cumulative sums for these numbers, which is essentially the moving process of Brownian Motion.
+
+The function \fun{brownian.motion()} in \code{animation} has provided a simulation for Brownian Motion with animations.
+
+\begin{Usage}
+\begin{verbatim}
+brownian.motion(saveANI = FALSE, n = 10, interval = 0.05,
+    nmax = 100, main = "Demonstration of Brownian Motion",
+    xlim = c(-20, 20), ylim = c(-20, 20), pch = 21, cex = 5,
+    col = "red", bg = "yellow", ...)
+\end{verbatim}
+\end{Usage}
+
+For example, the code below shows the traces of 15 points moving in the 2D plane for 100 steps. Figure \ref{brownian} shows two sample frames of the animation.
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+brownian.motion(n = 15, nmax = 100)
+@
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{brownian}
+  \caption{Two sample frames of Brownian Motion. }\label{brownian}
+  \end{center}
+\end{figure}
+
+\subsection{Law of Large Numbers}
+TODO... 
+
+From frequency to probability.
+
+\subsection{Monte-Carlo Simulation for Computing Areas}
+TODO...
+
+Monte-Carlo integration.
+
+\subsection{Central Limit Theorem}
+TODO...
+
+Limit distribution of the sample mean $\bar{x}$.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Sampling Survey}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Sampling survey is also a subject based on random numbers: the process of sampling is essentially generating random numbers for \emph{indexing} the sampling frame. Therefore the problem behind sampling is just the manner to generate random numbers.
+
+\subsection{Simple Random Sampling}
+\emph{Simple Random Sampling} is the purest form of probability sampling. Each member of the population has an equal and known chance of being selected. When there are very large populations, it is often difficult or impossible to identify every member of the population, so the pool of available subjects becomes biased.
+
+In most cases, we conduct the sampling in a ``\emph{without-replacement}'' manner, i.e. we don't put back the sample points once we pick them out. Correspondingly there is another way ``sampling \emph{with} replacement'': every time before we do the sampling, we put all the individuals back again; although this is rare in practical sampling work, it's extremely important and closely related to the idea of bootstrapping (see section \ref{bootstrap}).
+
+Here we only discuss the case of ``Simple Random Sampling Without Replacement'' (SRSWOR). The function \fun{sample()} is convenient for us to conduct the sampling.
+
+\begin{Usage}
+\begin{verbatim}
+sample(x, size, replace = FALSE, prob = NULL)
+\end{verbatim}
+\end{Usage}
+
+To randomly sample 10 individuals from a population of 100 elements, \para{sample(100, 10)} is enough for indexing. Actually the other kinds of sampling are also based on this useful function.
+
+If we keep on sampling from a population, the samples will also change randomly, so this is the base of animations. 
+
+\url{http://r.yihui.name/stat/sampling_survey/simple_random/index.htm} 
+
+%The function \fun{srswor.ani()} provides such animations for SRSWOR. 
+
+
+\subsection{Stratified Sampling}
+Stratified Sampling is commonly used probability method that is superior to random sampling because it reduces sampling error. A stratum is a subset of the population that share at least one common characteristic. Examples of stratums might be males and females, or managers and non-managers. The researcher first identifies the relevant stratums and their actual representation in the population. Random sampling is then used to select a sufficient number of subjects from each stratum. ``Sufficient'' refers to a sample size large enough for us to be reasonably confident that the stratum represents the population. Stratified sampling is often used when one or more of the stratums in the population have a low incidence relative to the other stratums.
+
+\url{http://r.yihui.name/stat/sampling_survey/stratified/index.htm} 
+%The function \fun{strat.ani()} provides animations for stratified sampling.
+
+\subsection{Cluster Sampling}
+Sometimes it is cheaper to ``cluster'' the sample in some way e.g. by selecting respondents from certain areas only, or certain time-periods only. (Nearly all samples are in some sense ``clustered'' in time -- although this is rarely taken into account in the analysis.)
+
+\url{http://r.yihui.name/stat/sampling_survey/cluster/index.htm}
+
+ 
+\subsection{Systematic Sampling}
+Systematic Sampling is often used instead of random sampling. It is also called an $N$th name selection technique. After the required sample size has been calculated, every $N$th record is selected from a list of population members. As long as the list does not contain any hidden order, this sampling method is as good as the random sampling method. Its only advantage over the random sampling technique is simplicity. Systematic sampling is frequently used to select a specified number of records from a computer file.
+
+\url{http://r.yihui.name/stat/sampling_survey/systematic/index.htm} 
+
+\subsection{CLT in Sampling Survey}
+TODO...
+
+Central Limit Theorem in sampling survey for estimation and inference. 
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mathematical Statistics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Confidence Intervals} 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linear Models} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subset Selection} 
+
+
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multivariate Statistics}\label{multivar} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{K-Means Cluster Analysis}
+This algorithm has already been discussed in section \ref{iteration}.
+
+\begin{Usage}
+\begin{verbatim}
+kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, 
+    nmax = 30)
+\end{verbatim}
+\end{Usage}
+
+You may try several examples for yourself.
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+x = matrix(runif(100), ncol = 2)
+kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 1)
+x = matrix(runif(300), ncol = 2)
+kmeans.ani(FALSE, x, 6, 0.5)
+@
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{kmeansframe}
+  \caption{The first iteration for K-Means cluster analysis.}\label{kmeansframe}
+  \end{center}
+\end{figure}
+Figure \ref{kmeansframe} shows the first iteration in the K-Means algorithm: random centers are selected in the left plot, then distances are computed to determine the cluster membership; next we shall calculate the cluster centers again and repeat the steps till the maximum number of iterations is reached or the cluster membership is stable. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Nonparametric Statsitics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Kernal Density Estimation}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Computational Statistics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gradient Descent Algorithm}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Mining}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine Learning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Bootstrapping}\label{bootstrap} 
+
+What I will introduce here is rather superficial; for further knowledge about bootstrapping, please refer to \cite{BK:Bootstrap} for theories, and \cite{BK:MASS} can also be a simple guide to implementations in S language. 
+
+The two critical points for bootstrapping are: (1) data generating mechanism; (2) plug-in principle. The first tells us how to re-generate data from a sample, while the latter point tells us how to make estimations. The idea of bootstrapping is based on the method of resampling to a large degree. In the real world, we only have one sample, say, $n$ sample points $x_1, x_2, \ldots, x_n$, then the problems we must face (when making inferences) are:
+\begin{itemize} 
+    \item How to guarantee the population distribution which we have assumed is correct?
+    \item How to derive the expression of the point estimate or confidence interval of a parameter if the population distribution is tooooooo complicated?
+    \item Or how can we obtain the distribution of a statistic when the population distribution is complicated?
+\end{itemize}
+ 
+We have always been deriving mathematical formulae... for this statistic... for that statistic... under perfect but unwarranted assumptions...
+
+Why not re-generate some samples (resample the original sample with replacement) and re-compute the values of our statistic of interest? Then we can get a series of estimations of a certain parameter and in a result, we are able to make inferences based on these numbers using the plug-in principle, e.g. we may compute the standard error of a parameter by compute the corresponding standard error of that series of numbers (please do note the factual computation is not exactly so; read the references to learn the details), and estimate the quantiles of a statistic just by computing the corresponding quantiles of that series of numbers, etc. If you are confused by my description here, just keep on to the below animation example. 
+
+\url{http://r.yihui.name/stat/machine_learning/bootstrapping/index.htm}. 
+
+
+\subsection[$k$-fold Cross-Validation]{$k$-fold / Leave-one-out Cross-validation}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{crossvalidation}
+  \caption{An illustration of 10-fold cross-validation.}\label{crossvalidation}
+  \end{center}
+\end{figure}
+Cross-validation, sometimes called rotation estimation (\cite{ART:CV}), is the statistical practice of partitioning a sample of data into subsets such that the analysis is initially performed on a single subset, while the other subset(s) are retained for subsequent use in confirming and validating the initial analysis.
+
+The initial subset of data is called the \emph{training set}; the other subset(s) are called \emph{validation sets} or \emph{testing sets}.
+
+The theory of cross-validation was inaugurated by Seymour Geisser. It is important in guarding against testing hypotheses suggested by the data (``Type III error''), especially where further samples are hazardous, costly or impossible (uncomfortable science) to collect.
+
+The function \fun{cv.ani()} provides an illustration for $k$-fold cross-validation. Computation of the sizes of subsets is based on the function \fun{kfcv()}. When \para{k} is specified as \para{length(x)}, the $k$-fold cross-validation will become ``leave-one-out cross-validation''.
+
+\begin{Usage}
+\begin{verbatim}
+cv.ani(saveANI = FALSE, x = runif(150), k = 10, interval = 2, 
+    nmax = 50)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{crossvalidation} shows a possible partition of the whole data set into a training set and test set (10-fold cross-validation). The test test can move from the first part to the last part, and this is the base for animations. 
+
+\subsection{\emph{k}-Nearest Neighbor Classification}
+
+The $k$-nearest neighbor algorithm is amongst the simplest of all machine learning algorithms. It is a supervised learning algorithm where the result of new instance query is classified based on majority of $k$-nearest neighbor category. The purpose of this algorithm is to classify a new object based on attributes and training samples. The classifiers do not use any model to fit and only based on memory. Given a query point, we find K number of objects or (training points) closest to the query point. The classification is using majority vote among the classification of the K objects. Any ties can be broken at random. $K$-nearest neighbor algorithm used neighborhood classification as the prediction value of the new query instance.
+
+The function \fun{knn.ani()} provides the animated demonstration for $k$NN algorithm in the 2D case. 
+
+\begin{Usage}
+\begin{verbatim}
+knn.ani(saveANI = FALSE, train, test, cl, k = 1, interval = 1, 
+    nmax = 100, interact = FALSE)
+\end{verbatim}
+\end{Usage}
+
+You may either provide a test set or specify \para{interact = TRUE} so that you can simply use mouse-click to decide the test set. Figure \ref{knn} is the eventual result of the whole classification process. 
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{knn}
+  \caption[$k$NN algorithm in the 2D plane.]{$k$NN algorithm in the 2D plane: gray dashed lines stand for ``distances'' so that neighbors can be decided; green polygon means the $k$ nearest neighbors; at last let these neighbors vote for the classification, and the symbol (classification) was changed according to the majority vote.}\label{knn}
+  \end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} for his instructions and suggestions on the initial idea of my \code{animation} package. 
+
+
+
+
+
+\appendix
+\chapter{Introduction to R} 
+
+\chapter{R Graphics} 
+
+\bibliographystyle{plain}
+\bibliography{bib}
+
+\end{document}
+
+

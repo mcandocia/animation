@@ -1,0 +1,39 @@
+#percent {
+	background-color: #FF0000;
+	height: 100%;
+	color: #FFFFFF;
+}
+#divDemo {
+	height: 100px;
+}
+#divPreload {
+	display: none;
+}
+
+#divControl {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+#loading {
+	color: #FFFFFF;
+	background-color: #990000;
+	padding: 2px;
+	width: auto;
+	float: left;
+	text-align: left;
+}
+#footer {
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #FF0000;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+body {
+	font-size: 12px;
+	line-height: 20px;
+	background-color: #FFFFFF;
+	font-family: "Bitstream Vera Sans Mono", "Courier New", monospace;
+}
