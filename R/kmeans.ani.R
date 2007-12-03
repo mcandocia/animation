@@ -1,6 +1,6 @@
 `kmeans.ani` <-
 function(saveANI = FALSE, x, centers = 2, 
-    interval = 2, nmax = 30) {
+    interval = 2, nmax = 30, ...) {
     x = as.matrix(x)
     if (ncol(x) != 2) 
         stop("'x' must contain ONLY 2 columns!")
@@ -14,7 +14,7 @@ function(saveANI = FALSE, x, centers = 2,
             col = 1:nrow(centers))
         Sys.sleep(interval)
         if (saveANI) 
-            savePNG(n = j)
+            savePNG(n = j, ...)
         j = j + 1
         for (i in 1:nrow(centers)) {
             dst[, i] = sqrt(apply((t(t(x) - unlist(centers[i, 
@@ -31,7 +31,7 @@ function(saveANI = FALSE, x, centers = 2,
             centers[i, ] = apply(xx, 2, mean)
         }
         if (saveANI) 
-            savePNG(n = j)
+            savePNG(n = j, ...)
         j = j + 1
         Sys.sleep(interval)
         jj = jj + 1

@@ -23,8 +23,13 @@ None (invisible `\code{NULL}'). `Clean' code will be returned to the console unl
 
 \seealso{ \code{\link[base:parse]{parse}}, \code{\link[base:cat]{cat}} }
 \examples{
+## tidy up the source code of image demo 
 tidy.source(file.path(system.file(package = "graphics"), 
   "demo", "image.R"))
+## check the original code here and see the difference 
+file.show(file.path(system.file(package = "graphics"), 
+  "demo", "image.R"))
 }
+
 \keyword{ IO }
 

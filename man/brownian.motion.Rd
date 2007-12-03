@@ -17,13 +17,14 @@ brownian.motion(saveANI = FALSE, n = 10, interval = 0.05, nmax = 100,
   \item{interval}{ time interval of the animation (unit in seconds) }
   \item{nmax}{ maximum number of animation frames (i.e. steps of the motion) }
   \item{main, xlim, ylim, pch, cex, col, bg}{ Arguments passed to \code{\link[graphics:plotdefault]{plot.default}} to control the apperance of the scatterplot (title, points, etc), see \code{\link[graphics:points]{points}} for details.}
-  \item{\dots}{ other graphical parameters passed to \code{\link[graphics:plotdefault]{plot.default}}}
+  \item{\dots}{ other graphical parameters passed to \code{\link[graphics:plotdefault]{plot.default}} and \code{\link{savePNG}}}
 }
 \details{
   Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers: the location of the next step is just ``current location + random Gaussian numbers'', i.e.,
   
-  \deqn{x[k + 1] = x[k] + rnorm(1)\cr 
-  y[k + 1] = y[k] + rnorm(1)} 
+  \deqn{x_{k + 1} = x_{k} + rnorm(1)\\ 
+  y_{k + 1} = y_{k} + rnorm(1)}{x_[k + 1] = x_[k] + rnorm(1)\cr 
+  y_[k + 1] = y_[k] + rnorm(1)} 
 
   where \emph{(x, y)} stands for the location of a point. 
 }

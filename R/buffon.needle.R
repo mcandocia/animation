@@ -1,6 +1,6 @@
 `buffon.needle` <-
 function(saveANI = FALSE, l = 0.8, d = 1, 
-    interval = 0.05, nmax = 100, redraw = TRUE) {
+    interval = 0.05, nmax = 100, redraw = TRUE, ...) {
     j = 1
     n = 0
     PI = rep(NA, nmax)
@@ -62,10 +62,10 @@ function(saveANI = FALSE, l = 0.8, d = 1,
         legend("topright", legend = c(expression(pi), expression(hat(pi))), 
             lty = 2:1, col = c("red", "black"), bty = "n", cex = 1.2)
         if (saveANI) 
-            savePNG(n = j)
+            savePNG(n = j, ...)
         j = j + 1
         Sys.sleep(interval)
     }
-    return(PI)
+    invisible(PI)
 }
 

@@ -6,8 +6,8 @@
   Demonstrate the process of k-Nearest Neighbour classification on the 2D plane. 
 }
 \usage{
-knn.ani(saveANI = FALSE, train, test, cl, k = 1, interval = 1, nmax = 100, 
-  interact = FALSE)
+knn.ani(saveANI = FALSE, train, test, cl, k = 1, interval = 1, 
+  nmax = 100, interact = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,6 +19,7 @@ knn.ani(saveANI = FALSE, train, test, cl, k = 1, interval = 1, nmax = 100,
   \item{interval}{ time interval of the animation (unit in seconds) }
   \item{nmax}{ maximum times of classifying, i.e. maximum number of test points considered in the animation }
   \item{interact}{logical. If \code{TRUE}, the user will have to choose a test set for himself using mouse click on the screen; otherwise compute kNN classification based on argument \code{test}.} 
+  \item{\dots}{other arguments passed to \code{\link{savePNG}}}
 }
 \details{
   For each row of the test set, the k nearest (in Euclidean distance) training set vectors are found, and the classification is decided by majority vote, with ties broken at random. For a single test sample point, the basic steps are: 

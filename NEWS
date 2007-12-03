@@ -1,0 +1,54 @@
+			Dear Emacs, please make this -*-Text-*- mode!
+	**************************************************
+	*						 *
+	*	       0.1-1 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-1
+
+
+NEW FEATURES
+
+    o A news-reading function ani.news() added so that changes will
+  be conveniently known.
+    o boot.iid() is available for demonstration of bootstrapping 
+  i.i.d data. 
+
+
+MINOR CHANGES 
+
+    o The arguments ... is added in animation functions to control
+  PNG image files. 
+    o The sample data is permuted before cv.ani() so that every time
+  we do cross-validation, the splitting of trainig set and test set
+  will change (instead of splitting 1:n into k parts). The tick 
+  marks of x-axis will change accordingly. 
+
+
+
+	**************************************************
+	*						 *
+	*	       0.1-0 NEWS			 *
+	*						 *
+	**************************************************
+
+
+    CONSTITUTION OF animation VERSION 0.1-0 
+    
+    o ani.start() to start an HTML page for animations.
+    o ani.stop() to complete the HTML animation page.
+    o brownian.motion() to demonstrate Brownian motion in the 2D 
+  plane. 
+    o buffon.needle() to simulate the process of Buffon's needle.
+    o cv.ani() to demonstrate k-fold cross validation.
+    o flip.coin() to simulate tossing 'coins'.
+    o kfcv() to compute sample sizes for k-fold cross-validation.
+    o kmeans.ani() to show the process of K-Means cluster analysis.
+    o knn.ani() to show k-Nearest Neighbor algorithm.
+    o savePNG() to save PNG image files which constitute the basic
+  animation frames in the HTML page.
+    o tidy.source() is a trivial function to 'tidy up' R code 
+  using the internal R function parse(). 
+    o 'pageview' is a daily page view data of my personal website. 

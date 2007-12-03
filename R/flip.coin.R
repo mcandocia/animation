@@ -37,11 +37,11 @@ function(saveANI = FALSE, faces = 2, prob = NULL,
         box()
         abline(v = 1)
         if (saveANI) 
-            savePNG(n = i)
+            savePNG(n = i, ...)
         Sys.sleep(interval)
     }
     axis(3, (1:n - 0.5)/n, round(frq, 2), tcl = 0, 
         mgp = c(0, 0.5, 0))
-    return(as.matrix(frq)[, 1]) 
+    invisible(as.matrix(frq)[, 1]) 
 }
 

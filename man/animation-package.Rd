@@ -33,5 +33,5 @@ Animated Statistis Using R: \url{http://R.yihui.name}; created and maintained by
   # create an animation page in the tempdir() and auto-browse it 
   ani.start() 
   brownian.motion(saveANI = TRUE) 
-  ani.stop(footer = TRUE, autobrowse = TRUE) 
+  ani.stop() 
 }

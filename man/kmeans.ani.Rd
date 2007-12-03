@@ -6,7 +6,8 @@
   K-Means cluster algorithm may be regarded as a series of iterations of: finding cluster centers, computing distances between sample points, and redefining cluster membership. This function provides a demo of K-Means cluster algorithm for data containing only two variables (columns). 
 }
 \usage{
-kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, nmax = 30)
+kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, 
+  nmax = 30, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,6 +16,7 @@ kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, nmax = 30)
   \item{centers}{ The number of clusters; a random set of (distinct) rows in \code{x} is chosen as the initial centers. }
   \item{interval}{ Time interval of the animation (unit in seconds). }
   \item{nmax}{ The maximum number of iterations allowed. See details below. }
+  \item{\dots}{other arguments passed to \code{\link{savePNG}}}
 }
 \details{
   The data given by \code{x} is clustered by the \emph{k}-means method, which aims to partition the points into \emph{k} groups such that the sum of squares from points to the assigned cluster centers is minimized. At the minimum, all cluster centres are at the mean of their Voronoi sets (the set of data points which are nearest to the cluster centre). 

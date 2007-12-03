@@ -1,6 +1,6 @@
 `knn.ani` <-
 function(saveANI = FALSE, train, test, cl, 
-    k = 1, interval = 1, nmax = 100, interact = FALSE) {
+    k = 1, interval = 1, nmax = 100, interact = FALSE, ...) {
     train <- as.matrix(train)
     if (interact) {
         plot(train, main = "Choose test set points", pch = unclass(as.factor(cl)), 

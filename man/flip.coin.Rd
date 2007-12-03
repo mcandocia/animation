@@ -17,10 +17,10 @@ flip.coin(saveANI = FALSE, faces = 2, prob = NULL, interval = 0.2,
   \item{interval}{ Time interval of the animation (unit in seconds). }
   \item{nmax}{ The maximum number of flipping. }
   \item{border}{ The border style for the rectangles which stand for probabilities. }
-  \item{\dots}{ Other arguments passed to \code{\link[graphics:points]{points}}. }
+  \item{\dots}{ Other arguments passed to \code{\link[graphics:points]{points}} and \code{\link{savePNG}}. }
 }
 \details{
-  If \code{faces} is a single integer, for example 2, a sequence of integers from 1 to \code{faces} will be used to denote the faces of a coin; otherwise this character vector just gives the names of each face.
+  If \code{faces} is a single integer, say 2, a sequence of integers from 1 to \code{faces} will be used to denote the faces of a coin; otherwise this character vector just gives the names of each face.
   
   When the \emph{i}-th face shows up, a colored thin rectangle will be added to the corresponding place (the \emph{i}-th bar). 
   
@@ -39,11 +39,12 @@ A vector of frequencies (simulated probabilities).
 flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
     nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45)) 
 
-# HTML animation page
+\dontrun{ 
+## HTML animation page
 ani.start()
 flip.coin(TRUE, interval = 0, nmax = 30, pch = 21, bg = "yellow") 
 ani.stop() 
-
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

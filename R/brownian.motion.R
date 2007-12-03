@@ -13,7 +13,7 @@ function(saveANI = FALSE, n = 10,
         x = x + rnorm(n)
         y = y + rnorm(n)
         if (saveANI) 
-            savePNG(n = i)
+            savePNG(n = i, ...)
         Sys.sleep(interval)
         i = i + 1
     }

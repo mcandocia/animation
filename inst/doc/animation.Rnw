@@ -84,14 +84,14 @@ op = par(mar = rep(0, 4))
 plot(x <- c(1:4, 4:1), y <- rep(2:1, each = 4), ann = F, 
     type = "n", axes = F, xlim = c(0.55, 4.45), ylim = c(0.55, 
         2.45), xaxs = "i", yaxs = "i") 
-rect(x - 0.45, y - 0.45, x + 0.45, y + 0.45, border = "gray") 
+rect(x - 0.45, y - 0.45, x + 0.45, y + 0.45, border = "darkgray") 
 s = seq(0, 360, length = 8) 
 for (i in 1:8) {
     text(x[i], y[i], "Animation", srt = s[i], col = rainbow(8)[i], 
         cex = 0.5 + 50 * i/360)
 } 
 text(x, y - 0.45, paste("00:0", 1:8, sep = ""), adj = c(0.5, 
-    -0.2), col = "gray", cex = 0.75) 
+    -0.2), col = "darkgray", cex = 0.75) 
 arrows(c(1:3 + 0.35, 4:2 - 0.35), rep(2:1, each = 3), 
     c(1:3 + 0.65, 4:2 - 0.65), rep(2:1, each = 3), length = 0.15, 
     col = "darkgray") 
@@ -127,7 +127,7 @@ Why use \code{HTML} \& \code{JavaScript}? I believe there are at least three rea
 \begin{itemize}
   \item \R{} already has built-in functions for reading and writing text files, so we can create \code{HTML} files easily, e.g. use \fun{cat()} with arguments \para{file} and \para{append};
   \item Although \R{} has no devices for image formats such as \code{GIF}, there are still many other ``static'' image formats which can be well shown in \emph{web pages}, e.g. \code{JPEG}, \code{PNG}, ...;
-  \item Generally speaking, no additional programs are needed in order to display the animations, as long as the web browser supports JavaScript -- surely most browsers can meet such a simple requirement.
+  \item Generally speaking, no additional programs are needed in order to display the animations, as long as the web browser supports \code{JavaScript} -- surely most browsers can meet such a simple requirement.
 \end{itemize}
 
 The work to do is just to create single image \emph{frames} and try to show them in an \code{HTML} page. And how can we fulfill this? The answer is through \code{JavaScript}\footnote{Refer to this page again for details: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. This idea has already been implemented in this package \code{animation}: all animation functions has a special argument \para{saveANI}, which determines whether to generate animation files or just to show animations inside \R. 
@@ -585,7 +585,9 @@ The two critical points for bootstrapping are: (1) data generating mechanism; (2
  
 We have always been deriving mathematical formulae... for this statistic... for that statistic... under perfect but unwarranted assumptions...
 
-Why not re-generate some samples (resample the original sample with replacement) and re-compute the values of our statistic of interest? Then we can get a series of estimations of a certain parameter and in a result, we are able to make inferences based on these numbers using the plug-in principle, e.g. we may compute the standard error of a parameter by compute the corresponding standard error of that series of numbers (please do note the factual computation is not exactly so; read the references to learn the details), and estimate the quantiles of a statistic just by computing the corresponding quantiles of that series of numbers, etc. If you are confused by my description here, just keep on to the below animation example. 
+Why not re-generate some samples (resample the original sample with replacement) and re-compute the values of our statistic of interest? Then we can get a series of estimations of a certain parameter and in a result, we are able to make inferences based on these numbers using the plug-in principle, e.g. we may compute the standard error of a parameter by compute the corresponding standard error of that series of numbers (please do note the factual computation is not exactly so; read the references to learn the details), and estimate the quantiles of a statistic just by computing the corresponding quantiles of that series of numbers, etc. If you are confused by my description here, just keep on to the below animation example.
+
+Function \fun{boot.iid()} is available now. 
 
 \url{http://r.yihui.name/stat/machine_learning/bootstrapping/index.htm}. 
 
@@ -650,6 +652,18 @@ I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} fo
 \chapter{Introduction to R} 
 
 \chapter{R Graphics} 
+
+\chapter{Misc Functions in \code{animation}} 
+\section{Functions for \R}
+tidy up source code: \fun{tidy.source()} 
+ 
+generate R definition file for the software Highlight \fun{highlight.def()}
+
+\section{Functions for Systems}
+rename a sequence of files \fun{rename.seq()}
+
+\section{Functions for Web (HTML/XML/RSS)} 
+create RSS feed \fun{write.rss()} 
 
 \bibliographystyle{plain}
 \bibliography{bib}
