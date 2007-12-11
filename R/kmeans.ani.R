@@ -1,6 +1,14 @@
-`kmeans.ani` <-
-function(saveANI = FALSE, x, centers = 2, 
-    interval = 2, nmax = 30, ...) {
+`kmeans.ani` <- function(x = matrix(runif(100), ncol = 2), 
+    centers = 2, control = ani.control(interval = 2, nmax = 30), 
+    ...) {
+    extraArgs = list(...)
+    if (length(extraArgs)) {
+        controlargs = names(formals(ani.control))
+        idx = match(names(extraArgs), controlargs, nomatch = 0)
+        if (any(idx == 0)) 
+            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
+        control[names(extraArgs)] = extraArgs
+    }
     x = as.matrix(x)
     if (ncol(x) != 2) 
         stop("'x' must contain ONLY 2 columns!")
@@ -8,13 +16,13 @@ function(saveANI = FALSE, x, centers = 2,
     centers = x[sample(nrow(x), centers), ]
     dst = matrix(nrow = nrow(x), ncol = nrow(centers))
     j = jj = 1
-    while (jj <= nmax) {
+    while (jj <= control$nmax) {
         plot(x, pch = ocluster, col = ocluster, main = "Move Cluster Centers")
         points(centers, pch = 1:nrow(centers), cex = 3, lwd = 2, 
             col = 1:nrow(centers))
-        Sys.sleep(interval)
-        if (saveANI) 
-            savePNG(n = j, ...)
+        Sys.sleep(control$interval)
+        if (control$saveANI) 
+            savePNG(n = j, width = control$width, height = control$height)
         j = j + 1
         for (i in 1:nrow(centers)) {
             dst[, i] = sqrt(apply((t(t(x) - unlist(centers[i, 
@@ -30,15 +38,14 @@ function(saveANI = FALSE, x, centers = 2,
             points(xx, pch = i, col = i)
             centers[i, ] = apply(xx, 2, mean)
         }
-        if (saveANI) 
-            savePNG(n = j, ...)
+        if (control$saveANI) 
+            savePNG(n = j, width = control$width, height = control$height)
         j = j + 1
-        Sys.sleep(interval)
+        Sys.sleep(control$interval)
         jj = jj + 1
         if (all(ncluster == ocluster)) 
             break
         ocluster = ncluster
     }
-    return(list(cluster = ncluster, centers = centers))
-}
-
+    invisible(list(cluster = ncluster, centers = centers))
+} 

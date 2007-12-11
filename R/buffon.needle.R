@@ -1,13 +1,20 @@
-`buffon.needle` <-
-function(saveANI = FALSE, l = 0.8, d = 1, 
-    interval = 0.05, nmax = 100, redraw = TRUE, ...) {
+`buffon.needle` <- function(l = 0.8, d = 1, redraw = TRUE, 
+    control = ani.control(interval = 0.05, nmax = 100), ...) {
+    extraArgs = list(...)
+    if (length(extraArgs)) {
+        controlargs = names(formals(ani.control))
+        idx = match(names(extraArgs), controlargs, nomatch = 0)
+        if (any(idx == 0)) 
+            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
+        control[names(extraArgs)] = extraArgs
+    }
     j = 1
     n = 0
-    PI = rep(NA, nmax)
+    PI = rep(NA, control$nmax)
     x = y = x0 = y0 = phi = ctr = NULL
     layout(matrix(c(1, 2, 4, 1, 3, 4), nrow = 3), height = c(1, 
         6, 3))
-    while (j <= nmax) {
+    while (j <= length(PI)) {
         par(mar = c(0, 0, 0, 0))
         plot.new()
         text(0.5, 0.5, "Simulation of Buffon's Needle", cex = 1.2, 
@@ -61,11 +68,10 @@ function(saveANI = FALSE, l = 0.8, d = 1,
         abline(h = pi, lty = 2, col = "red")
         legend("topright", legend = c(expression(pi), expression(hat(pi))), 
             lty = 2:1, col = c("red", "black"), bty = "n", cex = 1.2)
-        if (saveANI) 
-            savePNG(n = j, ...)
+        if (control$saveANI) 
+            savePNG(n = j, width = control$width, height = control$height)
         j = j + 1
-        Sys.sleep(interval)
+        Sys.sleep(control$interval)
     }
     invisible(PI)
-}
-
+} 

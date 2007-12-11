@@ -6,18 +6,16 @@
   This function provides a simulation for the problem of Buffon's Needle, which is one of the oldest problems in the field of geometrical probability. `Needles' are denoted by segments in the plane, and dropped randomly to check whether they cross the lines. Through many times of `dropping' needles, the approximate value of \code{pi} can be calculated out. 
 }
 \usage{
-buffon.needle(saveANI = FALSE, l = 0.8, d = 1, interval = 0.05, 
-  nmax = 100, redraw = TRUE, ...)
+buffon.needle(l = 0.8, d = 1, redraw = TRUE, 
+    control = ani.control(interval = 0.05, nmax = 100), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{saveANI}{ logical. Should the animation frames be saved as png files? }
-  \item{l}{ numerical. length of the needle. }
+  \item{l}{ numerical. length of the needle; shorter than \code{d}. }
   \item{d}{ numerical. distances between lines; it should be longer than \code{l}. }
-  \item{interval}{ time interval of the animation (unit in seconds), i.e. duration between drops. }
-  \item{nmax}{ maximum number of simulations (drops). }
   \item{redraw}{ logical. redraw former `needles' or not for each drop. }
-  \item{\dots}{ other arguments passed to \code{\link{savePNG}}}
+  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
+  \item{\dots}{ other arguments passed to \code{\link{ani.control}}}
 }
 \details{
   This is quite an old problem in probability. For mathematical background, please refer to \url{http://en.wikipedia.org/wiki/Buffon's_needle} or \url{http://www.mste.uiuc.edu/reese/buffon/buffon.html}.
@@ -31,7 +29,7 @@ Ramaley, J. F. (Oct 1969). Buffon's Noodle Problem. \emph{The American Mathemati
 }
 \author{ Yihui Xie }
 \note{ 
-Note that \code{redraw} will affect the speed of the simulation (animation) to a great deal if \code{nmax} is quite large, so you'd better specify it as \code{FALSE} when doing large amout of simulations. 
+Note that \code{redraw} will affect the speed of the simulation (animation) to a great deal if the control argument \code{nmax} (in \code{control}) is quite large, so you'd better specify it as \code{FALSE} when doing large amount of simulations. 
 }
 \seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
 \examples{
@@ -43,7 +41,7 @@ buffon.needle(nmax = 500, interval = 0, redraw = FALSE)
 
 # create HTML animation page
 ani.start()
-buffon.needle(TRUE, nmax = 100, interval = 0.01, redraw = FALSE) 
+buffon.needle(saveANI = TRUE, nmax = 100, interval = 0.01, redraw = FALSE) 
 ani.stop() 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

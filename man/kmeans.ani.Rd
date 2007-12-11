@@ -6,17 +6,15 @@
   K-Means cluster algorithm may be regarded as a series of iterations of: finding cluster centers, computing distances between sample points, and redefining cluster membership. This function provides a demo of K-Means cluster algorithm for data containing only two variables (columns). 
 }
 \usage{
-kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, 
-  nmax = 30, ...)
+kmeans.ani(x = matrix(runif(100), ncol = 2), centers = 2, 
+    control = ani.control(interval = 2, nmax = 30), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{saveANI}{ logical. Should the animation frames be saved as png files? }
   \item{x}{ A numercal matrix containing only 2 columns.}
   \item{centers}{ The number of clusters; a random set of (distinct) rows in \code{x} is chosen as the initial centers. }
-  \item{interval}{ Time interval of the animation (unit in seconds). }
-  \item{nmax}{ The maximum number of iterations allowed. See details below. }
-  \item{\dots}{other arguments passed to \code{\link{savePNG}}}
+  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
+  \item{\dots}{other arguments passed to \code{\link{ani.control}}}
 }
 \details{
   The data given by \code{x} is clustered by the \emph{k}-means method, which aims to partition the points into \emph{k} groups such that the sum of squares from points to the assigned cluster centers is minimized. At the minimum, all cluster centres are at the mean of their Voronoi sets (the set of data points which are nearest to the cluster centre). 
@@ -36,17 +34,17 @@ Hartigan, J. A. and Wong, M. A. (1979). A K-means clustering algorithm. \emph{Ap
 \author{ Yihui Xie }
 \seealso{ \code{\link[stats:kmeans]{kmeans}} }
 \examples{
-x = matrix(runif(100), ncol = 2)
-kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 1) 
+x = matrix(runif(200), ncol = 2)
+kmeans.ani(x = x, centers = 2, interval = 1) 
 
 # create HTML animation page 
 op = par(mar = c(2, 2, 3, 0), cex.axis = 0.75, cex.main = 1)
 ani.start() 
-kmeans.ani(saveANI = TRUE, x, centers = 3, interval = 0.1) 
-ani.stop(TRUE, TRUE)
+kmeans.ani(saveANI = TRUE, x = x, centers = 3, interval = 0.1) 
+ani.stop()
 par(op)
 }
 \keyword{ hplot }
-\keyword{ dynamic }% __ONLY ONE__ keyword per line
+\keyword{ dynamic }
 \keyword{ multivariate }
 \keyword{ cluster }

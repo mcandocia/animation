@@ -14,16 +14,20 @@ kfcv(k, N)
   \item{N}{ total sample size. }
 }
 \details{
-  If N/k is an integer, the sample sizes are k `N/k's (N/k, N/k, ...), otherwise the remainder will be added to the \emph{first} group. 
+  If N/k is an integer, the sample sizes are k `N/k's (N/k, N/k, ...), otherwise the remainder will be allocated to each group as `uniformly' as possible, and at last these sample sizes will be permuted randomly.  
 }
 \value{
-  A vector of length \code{k} containing k sample sizes. 
+  A vector of length \code{k} containing \emph{k} sample sizes. 
 }
 
 \author{ Yihui Xie }
 \seealso{ \code{\link{cv.ani}} }
 \examples{
-kfcv(10,71) 
+# divisible
+kfcv(5, 25)
+
+# not divisible 
+kfcv(10,77) 
 }
 \keyword{ arith }
-\keyword{ classif }% __ONLY ONE__ keyword per line
+\keyword{ classif }

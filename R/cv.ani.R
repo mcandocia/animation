@@ -1,12 +1,20 @@
-`cv.ani` <- function(saveANI = FALSE, x = runif(150), 
-    k = 10, interval = 2, nmax = 50, ...) {
+cv.ani <- function(x = runif(150), k = 10, control = ani.control(interval = 2, 
+    nmax = 50), ...) {
+    extraArgs = list(...)
+    if (length(extraArgs)) {
+        controlargs = names(formals(ani.control))
+        idx = match(names(extraArgs), controlargs, nomatch = 0)
+        if (any(idx == 0)) 
+            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
+        control[names(extraArgs)] = extraArgs
+    }
     N = length(x)
     n = sample(N)
     x = x[n]
     kf = cumsum(c(1, kfcv(k, N)))
     j = 1
     for (i in 2:length(kf)) {
-        if (j > nmax) 
+        if (j > control$nmax) 
             break
         plot(x, xlim = c(1, N), type = "n", xlab = "Sample index", 
             ylab = "Sample value", main = "Demonstration of Cross Validation", 
@@ -27,9 +35,10 @@
             lwd = 1)
         text(mean(seq(N)[-idx]), quantile(x, prob = 0.25), "Training Set", 
             cex = 1.5, col = "blue")
-        if (saveANI) 
-            savePNG(n = j, ...)
-        Sys.sleep(interval)
+        if (control$saveANI) 
+            savePNG(n = j, width = control$width, height = control$height)
+        Sys.sleep(control$interval)
+        j = j + 1
     }
     invisible(NULL)
 } 

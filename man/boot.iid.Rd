@@ -6,18 +6,16 @@
   Demonstrate bootstrapping for i.i.d data: use sunflower scatter plot to illustrate the situation of sampling, and histogram to show the distribution of the statistic of interest. 
 }
 \usage{
-boot.iid(saveANI = FALSE, x = runif(20), statistic = mean, 
-  m = length(x), interval = 1, nmax = 40, ...)
+boot.iid(x = runif(20), statistic = mean, m = length(x), 
+    control = ani.control(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{saveANI}{ logical. Should the animation frames be saved as png files? }
   \item{x}{ a numerical vector (the original data). }
   \item{statistic}{ A function which returns a value of the statistic of interest when applied to the data x. }
   \item{m}{ the sample size for bootstrapping (m-out-of-n bootstrap) }
-  \item{interval}{ time interval of the animation (unit in seconds) }
-  \item{nmax}{ The number of bootstrap replicates. }
-  \item{\dots}{ other arguments passed to \code{\link{savePNG}} }
+  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
+  \item{\dots}{ other arguments passed to \code{\link{ani.control}} }
 }
 \details{
   This is actually a very naive version of bootstrapping but may be useful for novices. The blue points denote the orignial dataset, while the red points with (possible) leaves denote sample points being resampled; the number of leaves just means how many times these points are resampled, as bootstrap samples \emph{with} replacement. 
@@ -39,9 +37,12 @@ Efron, B. and Tibshirani, R. (1993) \emph{An Introduction to the Bootstrap}. Cha
 # bootstrap for 20 random numbers following U(0, 1) 
 boot.iid()
 
+# for the median of 15 points from chi-square(5) 
+boot.iid(x = rchisq(15, 5), statistic = median) 
+
 # save the animation in HTML pages
 ani.start()
-boot.iid(TRUE)
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
 ani.stop()
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -1,6 +1,41 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       0.1-2 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-2
+
+
+NEW FEATURES
+
+    o A new function bagging.tree() to illustrate the process of 
+  bagging classification trees is to be added (sorry it's not
+  available yet). 
+
+MINOR CHANGES 
+
+    o An argument 'col' added to flip.coin() to control colors of 
+  each face of the coin. 
+    o The 'pageview' data updated to Dec 3, 2007.
+    o Points that have already been classified in knn.ani() are
+  marked out in later steps of classification for the rest points.
+    o The values of PI are silently returned in buffon.needle().
+    o The result for the test set can be returned in knn.ani(). 
+
+SIGNIFICANT CHANGES
+
+    o The computation for kfcv() is changed so that the sample
+  sizes will be more 'uniformly' allocated.
+    o A new function ani.control() added so that the controlling
+  parameters can be more uniform and the scalability of the
+  animation functions will also be better. All the animation 
+  functions are chanaged accordingly. 
+
+	**************************************************
+	*						 *
 	*	       0.1-1 NEWS			 *
 	*						 *
 	**************************************************

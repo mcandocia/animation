@@ -1,6 +1,5 @@
-`savePNG` <-
-function(outdir = tempdir(), n = 1, width = 480, 
-    height = 480, unit = "px", ...) {
+`savePNG` <- function(outdir = tempdir(), n = 1, width = 480, 
+    height = 480, ...) {
     if (!is.null(dev.list())) {
         from = dev.cur()
         if (exists("ANIenv", envir = .GlobalEnv)) {
@@ -10,7 +9,7 @@ function(outdir = tempdir(), n = 1, width = 480,
                 envir = .GlobalEnv))), "images")
         }
         png(paste(file.path(outdir, n), ".png", sep = ""), width = width, 
-            height = height, unit = unit, ...)
+            height = height, unit = "px", ...)
         to = dev.cur()
         dev.set(from)
         dev.copy(which = to)
@@ -20,5 +19,4 @@ function(outdir = tempdir(), n = 1, width = 480,
         warning("There are no available graphical devices opened!")
     }
     invisible(NULL)
-}
-
+} 

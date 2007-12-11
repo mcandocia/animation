@@ -7,7 +7,7 @@
 }
 \usage{
 ani.start(outdir = tempdir(), filename = "index", extension = "htm", 
-  withprompt = "ANI> ", Title = "Animated Statistics Using R")
+    withprompt = "ANI> ", Title = "Animated Statistics Using R")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

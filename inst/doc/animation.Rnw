@@ -228,7 +228,7 @@ The animation function in the package \code{animation} is \fun{buffon.needle()};
 <<fig=TRUE,echo=FALSE,height=2.5>>=
 library(animation)
 data(pageview)
-x=pageview$visits
+x=pageview$visits[11:41]
 op=par(mfrow=c(2,1),mar=c(2,3,0.3,.5),mgp=c(2,.5,0),cex.axis=.8,cex.lab=.8,tcl=-.3)
 acf(x,xlab='',main='')
 pacf(x,xlab='',main='')
@@ -244,23 +244,23 @@ The most common case is the subject of time series\footnote{But the applications
 
 For example, in time series analysis we often use the whole data set to fit an \code{ARIMA} model to examine the relationship between $X_t$ and corresponding lagged terms such as $X_{t-1}, X_{t-2}, \ldots$, however, if we want to know how such a relationship varies over time, this single model surely cannot help. Here I simply employ an intuitional method called ``\emph{Moving Window Regression}'' (MWR) to fulfill this idea. MWR is able to show the changes of coefficients over time, and what I do next is rather naive (just for demonstration). Further topics can be found in \cite{ART:Meyer}, etc. 
 
-The time series data is from the dataset \para{pageview} in \code{animation}, and we may have a look at the ACF and PACF plots in Figure \ref{acf}. 
+The time series data is from the dataset \para{pageview} in \code{animation}, and we may have a look at the ACF and PACF plots in Figure \ref{acf} just for data between Oct 1 to 31, 2007. 
 
 <<fig=FALSE,echo=TRUE>>=
 library(animation)
 data(pageview)
-x=pageview$visits
+x=pageview$visits[11:41]
 par(mfrow=c(2,1)) 
 acf(x)
 pacf(x)
 @
 
-Not going further in ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MVR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
+Not going further in the traditional ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MVR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
 library(animation)
 data(pageview)
-x=pageview$visits
+x=pageview$visits[11:41]
 k=15;base=0:(k-1)
 sx=2.5*(x-min(x))/(max(x)-min(x))+1.6 #scaled
 plot(sx,ylim=c(-.3,4.2),cex=1.5,yaxt='n')
@@ -283,7 +283,7 @@ Sys.sleep(1)
 <<fig=TRUE,echo=FALSE,height=4>>=
 library(animation)
 data(pageview)
-x=pageview$visits
+x=pageview$visits[11:41]
 k=15;base=0:(k-1)
 sx=2.5*(x-min(x))/(max(x)-min(x))+1.6 #scaled
 par(mar=c(1.5,3,0,0),mgp=c(2,.5,0),cex.axis=.8,cex.lab=.85,tcl=-.3)
@@ -356,16 +356,17 @@ In the first class of learning probability we usually begin with the probability
 
 \begin{Usage}
 \begin{verbatim}
-flip.coin(saveANI = FALSE, faces = 2, prob = NULL, 
-    interval = 0.2, nmax = 100, border = "white", ...)
+flip.coin(saveANI = FALSE, faces = 2, prob = NULL, interval = 0.2, 
+    nmax = 100, border = "white", cl = 1:2, ...)
 \end{verbatim}
 \end{Usage}
 
 For example, we toss the coin for 50 times, and considering that sometimes the result of flipping a coin is neither head or tail (the coin just stands on the table!), we specify there are three possible results \para{Head, Tail, Stand} with probabilities \para{0.45, 0.1, 0.45} respectively, as the result \para{Stand} is not likely to happen. Figure \ref{coin} shows the result of flipping this coin. 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
-# a coin would stand on the table?? :) 
+# a coin would stand on the table?? just kidding :) 
 flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
-    nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45)) 
+    nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45), 
+    cl =c(1, 2, 4)) 
 @
 
 You may set larger times of flipping \para{nmax} to check whether the frequencies will approximate to the true probabilities. 
@@ -376,7 +377,7 @@ This problem has been mentioned in section \ref{random}, so I will not repeat ag
 \begin{Usage}
 \begin{verbatim}
 buffon.needle(saveANI = FALSE, l = 0.8, d = 1, interval = 0.05,
-    nmax = 100, redraw = TRUE)
+    nmax = 100, redraw = TRUE, ...)
 \end{verbatim}
 \end{Usage}
 

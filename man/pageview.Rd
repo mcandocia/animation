@@ -1,15 +1,15 @@
 \name{pageview}
 \alias{pageview}
 \docType{data}
-\title{ Data of page view in Oct 2007 for Yihui's website}
+\title{ Data of page view from Sep 21, 2007 for Yihui's website}
 \description{
-  Page view data for Yihui's website in October 2007. 
+  Page view data for Yihui's website from Sep 21, 2007 to a recent date. 
 }
 \usage{data(pageview)}
 \format{
-  A data frame with 31 observations on the following 5 variables.
+  A data frame with 73 observations on the following 5 variables.
   \describe{
-    \item{\code{day}}{Date from Oct 1 to 31, 2001.}
+    \item{\code{day}}{Date starts from Sep 21, 2007 to a recent date.}
     \item{\code{visits}}{number of visits: a new visit is defined as each new \emph{incoming visitor} (viewing or browsing a page) who was not connected to the site during last \emph{60 min}.}
     \item{\code{pages}}{number of times a \emph{page} of the site is viewed (sum for all visitors for all visits).
     This piece of data differs from ``files'' in that it counts only HTML pages and excludes images and other files.}
@@ -27,5 +27,7 @@
 data(pageview)
 plot(pageview[,1:2], type = "b", col = "red", 
   main = "Number of Visits in Yihui's Web")
+# partial auto-correlation 
+pacf(pageview$visits) 
 }
 \keyword{datasets}

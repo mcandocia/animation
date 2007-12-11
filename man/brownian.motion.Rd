@@ -6,25 +6,24 @@
   Demonstrate Brownian motion (random walk) in a 2D scatterplot. 
 }
 \usage{
-brownian.motion(saveANI = FALSE, n = 10, interval = 0.05, nmax = 100, 
-  main = "Demonstration of Brownian Motion", xlim = c(-20, 20), 
-  ylim = c(-20, 20), pch = 21, cex = 5, col = "red", bg = "yellow", ...)
+brownian.motion(n = 10, main = "Demonstration of Brownian Motion", 
+    xlim = c(-20, 20), ylim = c(-20, 20), pch = 21, cex = 5, 
+    col = "red", bg = "yellow", control = ani.control(nmax = 100, 
+    interval = 0.05), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{saveANI}{ logical. Should the animation frames be saved as png files? }
   \item{n}{ Number of points in the scatterplot }
-  \item{interval}{ time interval of the animation (unit in seconds) }
-  \item{nmax}{ maximum number of animation frames (i.e. steps of the motion) }
   \item{main, xlim, ylim, pch, cex, col, bg}{ Arguments passed to \code{\link[graphics:plotdefault]{plot.default}} to control the apperance of the scatterplot (title, points, etc), see \code{\link[graphics:points]{points}} for details.}
-  \item{\dots}{ other graphical parameters passed to \code{\link[graphics:plotdefault]{plot.default}} and \code{\link{savePNG}}}
+  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
+  \item{\dots}{ other arguments passed to \code{\link{ani.control}}}
 }
 \details{
   Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers: the location of the next step is just ``current location + random Gaussian numbers'', i.e.,
   
-  \deqn{x_{k + 1} = x_{k} + rnorm(1)\\ 
-  y_{k + 1} = y_{k} + rnorm(1)}{x_[k + 1] = x_[k] + rnorm(1)\cr 
-  y_[k + 1] = y_[k] + rnorm(1)} 
+  \deqn{x_{k + 1} = x_{k} + rnorm(1)}{x_[k + 1] = x_[k] + rnorm(1)} 
+  
+  \deqn{y_{k + 1} = y_{k} + rnorm(1)}{y_[k + 1] = y_[k] + rnorm(1)} 
 
   where \emph{(x, y)} stands for the location of a point. 
 }
@@ -35,9 +34,9 @@ None (invisible `\code{NULL}').
 \author{ Yihui Xie}
 \seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
 \examples{
-  # show an animation in (Windows/X Window...) a graphics device 
-  # unless you have opened an invisible device like png(), pdf(), ... 
-  brownian.motion(n = 15, nmax = 100) 
+# show an animation in (Windows/X Window...) a graphics device 
+# unless you have opened an invisible device like png(), pdf(), ... 
+brownian.motion(n = 15, nmax = 100) 
 }
-\keyword{ graphs }
-\keyword{ dynamic }% __ONLY ONE__ keyword per line
+\keyword{ dplot }
+\keyword{ dynamic }

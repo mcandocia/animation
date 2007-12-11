@@ -6,7 +6,7 @@
   Copy the current graphical device to a \acronym{PNG} device to generate a PNG image file. 
 }
 \usage{
-savePNG(outdir = tempdir(), n = 1, width = 480, height = 480, unit = "px", ...)
+savePNG(outdir = tempdir(), n = 1, width = 480, height = 480, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,6 @@ savePNG(outdir = tempdir(), n = 1, width = 480, height = 480, unit = "px", ...)
   \item{n}{ file name of the PNG image; can be either numeric or characters }
   \item{width}{ width of PNG image }
   \item{height}{ height of PNG image }
-  \item{unit}{ The units in which `height' and `width' are given. Can be `in' (inches), `px' (pixels), `cm' or `mm'. }
   \item{\dots}{ other parameter passed to \code{\link[grDevices:png]{png}} }
 }
 \details{
@@ -32,14 +31,16 @@ This function provides a \emph{general} method to save plots as PNG files, thus 
 }
 \seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
 \examples{
-  # a plot save to file.path(getwd(), "1.png") 
-  plot(rnorm(100)) 
-  savePNG(getwd(), n = 1)
-  
-  # a sequence of plots saved in the work directory 
-  for(i in 1:10){
-    plot(rnorm(1), rnorm(1), xlim = c(-1, 1), ylim = c(-1, 1))
-    savePNG(getwd(), n = i) 
-  } 
+# a plot save to file.path(getwd(), "1.png") 
+plot(rnorm(100)) 
+savePNG(getwd(), n = 1)
+
+# a sequence of plots saved in the work directory 
+# this is just how animations are produced 
+for(i in 1:10){
+  plot(rnorm(1), rnorm(1), xlim = c(-1, 1), ylim = c(-1, 1))
+  savePNG(getwd(), n = i) 
+}
+# you might need file.remove(paste(1:10, ".png", sep = "")) 
 }
 \keyword{ device }

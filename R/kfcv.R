@@ -8,7 +8,7 @@
             rep(N%/%k, k)
         }
         else {
-            c(N%%k + N%/%k, rep(N%/%k, k - 1))
+            sample(c(rep(1, N%%k), rep(0, k - N%%k)) + rep(N%/%k, k))
         }
     }
 } 
