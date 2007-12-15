@@ -24,7 +24,7 @@ If you haven't started an animation page yet, there'll be a warning, and the ani
 \examples{
 # create an animation page in the tempdir() and auto-browse it 
 ani.start() 
-brownian.motion(saveANI = TRUE) 
+brownian.motion(saveANI = TRUE, interval = 0) 
 ani.stop(footer =TRUE, autobrowse = TRUE) 
 }
 \keyword{ utilities }

@@ -28,7 +28,12 @@ Please note that \code{nmax} is usually equal to the number of animation frames 
 }
 \seealso{ It is used in many animation functions such as \code{\link{brownian.motion}}, \code{\link{boot.iid}}, \code{\link{buffon.needle}}, \code{\link{cv.ani}}, \code{\link{flip.coin}}, \code{\link{kmeans.ani}}, \code{\link{knn.ani}}, etc.}
 \examples{
-
+op = par(mar = c(3, 3, 2, 0.5), mgp = c(2, .5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1) 
+brownian.motion(control = ani.control(interval = 0, nmax = 100,
+    height = 500, width = 600))
+par(op) 
+ani.stop() 
 }
 \keyword{ misc }
 

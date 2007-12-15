@@ -1,7 +1,6 @@
-`brownian.motion` <- function(n = 10, main = "Demonstration of Brownian Motion", 
-    xlim = c(-20, 20), ylim = c(-20, 20), pch = 21, cex = 5, 
-    col = "red", bg = "yellow", control = ani.control(nmax = 100, 
-    interval = 0.05), ...) {
+`sample.system` <-
+function(nrow = 10, ncol = 10, size = 15, 
+    control = ani.control(interval = 0.2), ...) {
     extraArgs = list(...)
     if (length(extraArgs)) {
         if ("interval" %in% names(extraArgs)) 
@@ -12,19 +11,21 @@
             stop("Argument ", names(extraArgs)[idx == 0], "not matched")
         control[names(extraArgs)] = extraArgs
     }
-    x = rnorm(n)
-    y = rnorm(n)
-    i = 1
-    while (i <= control$nmax) {
-        plot(x, y, main = main, xlim = xlim, ylim = ylim, pch = pch, 
-            cex = cex, col = col, bg = bg)
-        text(x, y)
-        x = x + rnorm(n)
-        y = y + rnorm(n)
+    n = nrow * ncol
+    if (size > n) 
+        stop("sample size must be smaller than the population")
+    x = cbind(rep(1:ncol, nrow), gl(nrow, ncol))
+    op = par(mar = rep(0.1, 4))
+    for (i in 1:control$nmax) {
+        plot(x, pch = 19, col = "blue", axes = FALSE, ann = FALSE)
+        points(x[seq(sample(n, 1), by = n%/%size, length = size)%%n, 
+            ], col = "red", cex = 3, lwd = 2)
+        box()
         if (control$saveANI) 
             savePNG(n = i, width = control$width, height = control$height)
         Sys.sleep(control$interval)
-        i = i + 1
     }
+    par(op)
     invisible(NULL)
-} 
+}
+

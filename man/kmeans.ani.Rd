@@ -34,8 +34,9 @@ Hartigan, J. A. and Wong, M. A. (1979). A K-means clustering algorithm. \emph{Ap
 \author{ Yihui Xie }
 \seealso{ \code{\link[stats:kmeans]{kmeans}} }
 \examples{
+#set larger 'interval' if the speed is too fast 
 x = matrix(runif(200), ncol = 2)
-kmeans.ani(x = x, centers = 2, interval = 1) 
+kmeans.ani(x = x, centers = 2, interval = 0.5) 
 
 # create HTML animation page 
 op = par(mar = c(2, 2, 3, 0), cex.axis = 0.75, cex.main = 1)

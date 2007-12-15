@@ -21,10 +21,8 @@ brownian.motion(n = 10, main = "Demonstration of Brownian Motion",
 \details{
   Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers: the location of the next step is just ``current location + random Gaussian numbers'', i.e.,
   
-  \deqn{x_{k + 1} = x_{k} + rnorm(1)}{x_[k + 1] = x_[k] + rnorm(1)} 
-  
-  \deqn{y_{k + 1} = y_{k} + rnorm(1)}{y_[k + 1] = y_[k] + rnorm(1)} 
-
+  \deqn{x_{k + 1} = x_{k} + rnorm(1)\\
+  y_{k + 1} = y_{k} + rnorm(1)}{x_[k + 1] = x_[k] + rnorm(1)\cr y_[k + 1] = y_[k] + rnorm(1)} 
   where \emph{(x, y)} stands for the location of a point. 
 }
 \value{

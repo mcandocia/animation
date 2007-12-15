@@ -46,6 +46,7 @@ function fasterImage(step) {
 		pct.style.display = "block"
 	}
 	else pct.style.display = "none"
+	if (tmp < 0) lblTime.innerHTML = "0"
 }
 
 window.onload = function(){
@@ -54,4 +55,5 @@ window.onload = function(){
 	}
 	if(getElem("loading")) getElem("loading").style.display = "none"
 	if(getElem("divDemo")) getElem("divDemo").style.height = ht + "px"
+	fasterImage(0)
 }

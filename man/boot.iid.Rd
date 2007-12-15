@@ -1,6 +1,5 @@
 \name{boot.iid}
 \alias{boot.iid}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Bootstrap for i.i.d data }
 \description{
   Demonstrate bootstrapping for i.i.d data: use sunflower scatter plot to illustrate the situation of sampling, and histogram to show the distribution of the statistic of interest. 
@@ -9,7 +8,6 @@
 boot.iid(x = runif(20), statistic = mean, m = length(x), 
     control = ani.control(), ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ a numerical vector (the original data). }
   \item{statistic}{ A function which returns a value of the statistic of interest when applied to the data x. }
@@ -32,22 +30,20 @@ Efron, B. and Tibshirani, R. (1993) \emph{An Introduction to the Bootstrap}. Cha
 
 }
 \author{ Yihui Xie }
-\seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
+\seealso{ \code{\link[graphics:sunflowerplot]{sunflowerplot }}, \code{\link{ani.start}}, \code{\link{ani.stop}} }
 \examples{
 # bootstrap for 20 random numbers following U(0, 1) 
-boot.iid()
+boot.iid(interval = 0.5)
 
 # for the median of 15 points from chi-square(5) 
-boot.iid(x = rchisq(15, 5), statistic = median) 
+boot.iid(x = rchisq(15, 5), statistic = median, interval = 0.5) 
 
 # save the animation in HTML pages
 ani.start()
 boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
 ani.stop()
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{ nonparametric }
 \keyword{ dynamic }
-\keyword{ hplot }
+\keyword{ dplot }
 

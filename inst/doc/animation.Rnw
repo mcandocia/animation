@@ -71,12 +71,11 @@ However, there is currently very few work in such a literature for animations in
 \chapter{Tools for Animation} 
 \setkeys{Gin}{width=\textwidth} 
 
-
 Perhaps most people would think of \code{GIF} images as the first choice for making animations, because it is well known that \code{GIF} is one of the only few image formats that has the ability to create animations\footnote{There are other formats such as APNG (Animated Portable Network Graphics), MNG (Multiple-image Network Graphics) and SVG (Scalable Vector Graphics), etc, but less popular (SVG might be promising in animations).}, nevertheless ultimately I didn't adopt this format for several reasons\footnote{You may read this page: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. 
 
 Actually it is not so convenient to make animated image files in \R, whereas we still have other choices, among which I list two main tools I have employed as follows in section \ref{tool:R} and \ref{tool:HTML}, and other possible means are mentioned in section \ref{tool:other}. 
 
-\section{\R{} graphical devices}\label{tool:R} 
+\section{\R{} Graphical Devices}\label{tool:R} 
 \begin{figure}[t]
   \begin{center}
 <<fig=TRUE,echo=FALSE,height=2.5>>=
@@ -87,11 +86,11 @@ plot(x <- c(1:4, 4:1), y <- rep(2:1, each = 4), ann = F,
 rect(x - 0.45, y - 0.45, x + 0.45, y + 0.45, border = "darkgray") 
 s = seq(0, 360, length = 8) 
 for (i in 1:8) {
-    text(x[i], y[i], "Animation", srt = s[i], col = rainbow(8)[i], 
+    text(x[i], y[i], "Animation", srt = s[i], col = i, 
         cex = 0.5 + 50 * i/360)
 } 
 text(x, y - 0.45, paste("00:0", 1:8, sep = ""), adj = c(0.5, 
-    -0.2), col = "darkgray", cex = 0.75) 
+    -0.2), col = "darkgray", cex = 0.75, font = 2) 
 arrows(c(1:3 + 0.35, 4:2 - 0.35), rep(2:1, each = 3), 
     c(1:3 + 0.65, 4:2 - 0.65), rep(2:1, each = 3), length = 0.15, 
     col = "darkgray") 
@@ -132,10 +131,12 @@ Why use \code{HTML} \& \code{JavaScript}? I believe there are at least three rea
 
 The work to do is just to create single image \emph{frames} and try to show them in an \code{HTML} page. And how can we fulfill this? The answer is through \code{JavaScript}\footnote{Refer to this page again for details: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. This idea has already been implemented in this package \code{animation}: all animation functions has a special argument \para{saveANI}, which determines whether to generate animation files or just to show animations inside \R. 
 
-\section{Other tools}\label{tool:other} 
-Currently there are still at least other two choices for animations: the first one is to use the package \code{rgl} which takes advantage of the \code{OpenGL} system to make 3D visulizations. The user may conveniently interact with 3D elements in the plot (drag and rotate, etc). And the second one is \code{Scalable Vector Graphics} (SVG), which is a language for describing two-dimensional graphics and graphical applications in \code{XML}. \code{SVG} files are compact and provide high-quality graphics on the Web, in print, and on resource-limited handeld devices. In addition, \code{SVG} supports scripting and animation, so is ideal for interactive, data-driven, personalized graphics. Besides, \code{SVG} is a royalty-free vendor-neutral open standard developed under the \code{W3C} (World Wide Web Consortium) Process. Currently there are a few packages supporting the creation of \code{SVG} files, e.g. \href{http://cran.r-project.org/src/contrib/Descriptions/Cairo.html}{Cairo}, \href{http://cran.r-project.org/src/contrib/Descriptions/cairoDevice.html}{cairoDevice}, and \href{http://cran.r-project.org/src/contrib/Descriptions/RSvgDevice.html}{RSvgDevice}, etc\footnote{As far as I know, there is one other package \href{http://www.stat.auckland.ac.nz/~paul/R/gridSVG_0.5-1.tar.gz}{\code{gridSVG}} by Paul Murrell, but it is still highly experimental.}. 
+\section{Other Tools}\label{tool:other} 
+Currently there are still at least other two choices for animations: the first one is to use the package \code{rgl} which takes advantage of the \code{OpenGL} system to make 3D visulizations. The user may conveniently interact with 3D elements in the plot (drag and rotate, etc). And the second one is \code{Scalable Vector Graphics} (SVG), which is a language for describing two-dimensional graphics and graphical applications in \code{XML}. \code{SVG} files are compact and provide high-quality graphics on the Web, in print, and on resource-limited handeld devices. In addition, \code{SVG} supports scripting and animation, so is ideal for interactive, data-driven, personalized graphics. Besides, \code{SVG} is a royalty-free vendor-neutral open standard developed under the \code{W3C} (World Wide Web Consortium) Process. Currently there are a few packages supporting the creation of \code{SVG} files, e.g. \href{http://cran.r-project.org/src/contrib/Descriptions/Cairo.html}{\code{Cairo}}, \href{http://cran.r-project.org/src/contrib/Descriptions/cairoDevice.html}{\code{cairoDevice}}, and \href{http://cran.r-project.org/src/contrib/Descriptions/RSvgDevice.html}{\code{RSvgDevice}}, etc\footnote{As far as I know, there is one other package \href{http://www.stat.auckland.ac.nz/~paul/R/gridSVG_0.5-1.tar.gz}{\code{gridSVG}} by Paul Murrell, but it is still highly experimental.}. 
 
+Besides, this package might be a little bit like \code{TeachingDemos}, which contains several demonstrations for teaching and learning, however, clearly \code{animation} is focused on demonstrations that can be \emph{animated}, and what's more, the tools for animations of these two packages are different, too\footnote{\code{TeachingDemos} mainly takes advantage of the function \fun{locator()}, the package \code{rgl} and \code{Tcl/Tk} to interact with users.}. The package \code{animation} also aims to cover many more fields in statistics.
 
+And there is still another project related to the package \code{animation}. That is ``\href{http://addictedtor.free.fr/movies/}{the R Movies Gallery}''. Currently I haven't checked it carefully, but I see at least one difference: special software has to be installed to watch the movies, which is not necessary for the package \code{animation}. 
 
 
 \chapter{Statistics and Animations}\label{connection} 
@@ -163,7 +164,7 @@ Here I use a cluster problem containing two numerical variables as a simplified 
 
 As the iteration goes on, both the centers and cluster membership will change -- this is just the source of animation. To sum up, the animation steps may be: show centers, compute distances and cluster, show cluster membership, re-compute centers and move, re-compute distances and change cluster membership, and so one and so forth. Figure \ref{kmeans} gives two iterations of locating centers and computing distances. 
 
-The animation function in the package \code{animation} is \fun{kmeans.ani()}; see the help files for detailed usage. 
+The animation function in the package \code{animation} is \fun{kmeans.ani()}; see the help files for detailed usage (Section \ref{Sec:kmeans}). 
 \begin{figure}
   \begin{center}
 <<fig=TRUE,echo=FALSE,height=2>>=
@@ -207,7 +208,7 @@ The critical parts for the simulation of this problem are:
 
 After these two elements have been decided, we'll immediately know whether the needle will cross the lines or not. The  problem and solution are explained in Figure \ref{buffonprob}, while the simulation is illustrated in Figure \ref{buffon}. 
 
-The animation function in the package \code{animation} is \fun{buffon.needle()}; see the help files for detailed usage. 
+The animation function in the package \code{animation} is \fun{buffon.needle()}; see the help files for detailed usage (Section \ref{Sec:buffon}). 
 
 \begin{figure}[!]
   \begin{center}
@@ -222,7 +223,7 @@ The animation function in the package \code{animation} is \fun{buffon.needle()};
   \end{center}
 \end{figure} 
 
-\section{Dynamic Trends}
+\section{Dynamic Trends}\label{Sec:dynamic} 
 \begin{figure}
   \begin{center}
 <<fig=TRUE,echo=FALSE,height=2.5>>=
@@ -234,7 +235,7 @@ acf(x,xlab='',main='')
 pacf(x,xlab='',main='')
 par(op)
 @
-\caption{ACF and PACF for the number of visits to Yihui's website.}\label{acf} 
+\caption[ACF and PACF for the number of visits to Yihui's website]{ACF and PACF for the number of visits to Yihui's website from Oct 1 to 31, 2007.}\label{acf} 
   \end{center}
 \end{figure} 
 
@@ -255,7 +256,7 @@ acf(x)
 pacf(x)
 @
 
-Not going further in the traditional ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MVR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
+Not going further in the traditional ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MWR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
 library(animation)
@@ -301,32 +302,50 @@ arrows(i+k/2-.5,phi-2*se,i+k/2-.5,phi+2*se,angle=90,code=3,length=.05,col=i)
 points(i+k/2-.5,phi,pch=21,col='red',bg='yellow')
 }
 @
-  \caption{Illustration for Moving Window Auto-Regression.}\label{MVR} 
+  \caption[Illustration for Moving Window Auto-Regression with real data]{Illustration for Moving Window Auto-Regression with real data for a window width of 15 days.}\label{MWR} 
   \end{center}
 \end{figure} 
 
-Figure \ref{MVR} shows the eventual result; we can roughly observe that the AR(1) coefficient $\phi$ is stable first, and begins to decrease in the 15 days centered at Oct 15, then increases from about Oct 13 (those 15 days are centered at Oct 20). 
+Figure \ref{MWR} shows the eventual result; we can roughly observe that the AR(1) coefficient $\phi$ is stable first, and begins to decrease in the 15 days centered at Oct 15, then increases from about Oct 13 (those 15 days are centered at Oct 20). 
 
-A more general animation function for MVR is still in my TODO list. 
+A general animation function for ``Moving Window Auto-Regression'' \fun{mwar.ani()} is available since the package version 0.1-3. See Section \ref{Sec:MWR} for usage. 
 
 \chapter{Package \code{animation} Overview}
 The package \code{animation} is based on the most primitive idea of animation: make picture \emph{frames} one after another with a certain duration (time interval between frames) specified. And this dull method has also been implemented in an \code{HTML} animation page using \code{JavaScript} to animate the image frames. 
 
-Currently there are two ways for animation: one is just to show animations in a graphical device (Windows, X Window, etc), and the other is to make animations in an \code{HTML} page so that people without \R{} installed are also able to view the animations. There is a common argument \para{saveANI} in each animation function controlling the way to make animations: 
+Currently there are two ways for animation: one is just to show animations in a graphical device (Windows, X Window, etc), and the other is to make animations in an \code{HTML} page so that people without \R{} installed are also able to view the animations. 
+
+There are some common arguments in each animation function controlling the way to make animations, for example, whehter to save \code{PNG} files during the animation demonstration (\para{saveANI}), the time interval \para{interval} between each frame of a whole animation, and the \para{height} and \para{width} of the animation frames if they are to be saved. These arguments are controlled by a special function \fun{ani.control()}: 
+
+\begin{Usage}
+\begin{verbatim}
+ani.control(saveANI = FALSE, interval = 1, nmax = 50,
+    width = 480, height = 480, ...)
+\end{verbatim}
+\end{Usage}
+
+The meaning of these arguments are very easy because the way of making animations is quite naive, e.g., for \para{saveANI}: 
 
 \begin{description}
   \item[\para{saveANI = TRUE}] Convert the animation frames into \code{PNG} files, which will be used in the \code{HTML} animation page.
   \item[\para{saveANI = FALSE}] Don't generate animation files: just show animation inside \R. 
 \end{description}
 
-To make an \code{HTML} animation page, you have to start a page first by \fun{ani.start()}, then use any animation functions to generate \code{PNG} files in the \para{images} directory relative the \code{HTML} page, and at last use \fun{ani.stop()} to complete writing the page. By default, \fun{ani.stop()} will automatically open a web browser to view the \code{HTML} animation page\footnote{Use the function \fun{browseURL()} in \code{utils}}. 
+Nevertheless, the interpretation for \para{nmax} is not so apparent: it depends on the specified animation function; \para{nmax} is usually equal to the number of animation frames (e.g. for \fun{brownian.motion()}) but not \emph{always}! The reason is that sometimes there are more than one frame recorded in a single step of a loop, for instance, there are 2 frames generated in each step of \fun{kmeans.ani()}, and 4 frames in \fun{knn.ani()}, etc. 
+
+To make an \code{HTML} animation page, you have to start a page first by \fun{ani.start()}, then use any animation functions to generate \code{PNG} files in the \para{images} directory relative the \code{HTML} page, and at last use \fun{ani.stop()} to complete writing the page. By default, \fun{ani.stop()} will automatically open a web browser to view the \code{HTML} animation page\footnote{Use the function \fun{browseURL()} in \code{utils}.}. 
 
 Here is a sample session: 
 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
+library(animation) 
 ani.start() 
-brownian.motion(saveANI = TRUE) 
-ani.stop() 
+op = par(mar = c(3, 3, 2, 0.5), mgp = c(2, .5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1) 
+brownian.motion(control = ani.control(saveANI = TRUE, interval = 0.01,
+    nmax = 100))
+par(op) 
+ani.stop()
 @
 
 There a plenty of examples in the help pages of each animation functions. Just try them if you like. 
@@ -356,8 +375,9 @@ In the first class of learning probability we usually begin with the probability
 
 \begin{Usage}
 \begin{verbatim}
-flip.coin(saveANI = FALSE, faces = 2, prob = NULL, interval = 0.2, 
-    nmax = 100, border = "white", cl = 1:2, ...)
+flip.coin(faces = 2, prob = NULL, border = "white", col = 1:2,
+    type = "p", pch = 21, bg = "transparent",
+    control = ani.control(interval = 0.2, nmax = 100), ...)
 \end{verbatim}
 \end{Usage}
 
@@ -366,18 +386,18 @@ For example, we toss the coin for 50 times, and considering that sometimes the r
 # a coin would stand on the table?? just kidding :) 
 flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
     nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45), 
-    cl =c(1, 2, 4)) 
+    col =c(1, 2, 4)) 
 @
 
 You may set larger times of flipping \para{nmax} to check whether the frequencies will approximate to the true probabilities. 
  
-\subsection{Buffon's Needle}
+\subsection{Buffon's Needle}\label{Sec:buffon} 
 This problem has been mentioned in section \ref{random}, so I will not repeat again here.
 
 \begin{Usage}
 \begin{verbatim}
-buffon.needle(saveANI = FALSE, l = 0.8, d = 1, interval = 0.05,
-    nmax = 100, redraw = TRUE, ...)
+buffon.needle(l = 0.8, d = 1, redraw = TRUE,
+    control = ani.control(interval = 0.05, nmax = 100), ...)
 \end{verbatim}
 \end{Usage}
 
@@ -390,17 +410,17 @@ The function \fun{brownian.motion()} in \code{animation} has provided a simulati
 
 \begin{Usage}
 \begin{verbatim}
-brownian.motion(saveANI = FALSE, n = 10, interval = 0.05,
-    nmax = 100, main = "Demonstration of Brownian Motion",
+brownian.motion(n = 10, main = "Demonstration of Brownian Motion",
     xlim = c(-20, 20), ylim = c(-20, 20), pch = 21, cex = 5,
-    col = "red", bg = "yellow", ...)
+    col = "red", bg = "yellow", control = ani.control(nmax = 100,
+    interval = 0.05), ...)
 \end{verbatim}
 \end{Usage}
 
 For example, the code below shows the traces of 15 points moving in the 2D plane for 100 steps. Figure \ref{brownian} shows two sample frames of the animation.
 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
-brownian.motion(n = 15, nmax = 100)
+brownian.motion(control = ani.control(interval = 0.05, nmax = 100))
 @
 
 \begin{figure}
@@ -437,6 +457,12 @@ Limit distribution of the sample mean $\bar{x}$.
 Sampling survey is also a subject based on random numbers: the process of sampling is essentially generating random numbers for \emph{indexing} the sampling frame. Therefore the problem behind sampling is just the manner to generate random numbers.
 
 \subsection{Simple Random Sampling}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{srswor}
+  \caption[A possible result of simple random sampling.]{A possible result of simple random sampling: 13 points are sampled from a population of 50 points. }\label{srswor}
+  \end{center}
+\end{figure}
 \emph{Simple Random Sampling} is the purest form of probability sampling. Each member of the population has an equal and known chance of being selected. When there are very large populations, it is often difficult or impossible to identify every member of the population, so the pool of available subjects becomes biased.
 
 In most cases, we conduct the sampling in a ``\emph{without-replacement}'' manner, i.e. we don't put back the sample points once we pick them out. Correspondingly there is another way ``sampling \emph{with} replacement'': every time before we do the sampling, we put all the individuals back again; although this is rare in practical sampling work, it's extremely important and closely related to the idea of bootstrapping (see section \ref{bootstrap}).
@@ -451,29 +477,91 @@ sample(x, size, replace = FALSE, prob = NULL)
 
 To randomly sample 10 individuals from a population of 100 elements, \para{sample(100, 10)} is enough for indexing. Actually the other kinds of sampling are also based on this useful function.
 
-If we keep on sampling from a population, the samples will also change randomly, so this is the base of animations. 
+If we keep on sampling from a population, the samples will also change randomly, so this is the base of animations. The function \fun{sample.simple()} provides such animations for SRSWOR. 
 
-\url{http://r.yihui.name/stat/sampling_survey/simple_random/index.htm} 
+\begin{Usage}
+\begin{verbatim}
+sample.simple(nrow = 10, ncol = 10, size = 15, 
+    control = ani.control(interval = 0.2), ...)
+\end{verbatim}
+\end{Usage}
 
-%The function \fun{srswor.ani()} provides such animations for SRSWOR. 
+Figure \ref{srswor} is one possible result for simple random sampling. 
+
+Web page: \url{http://r.yihui.name/stat/sampling_survey/simple_random/} 
+
+
 
 
 \subsection{Stratified Sampling}
-Stratified Sampling is commonly used probability method that is superior to random sampling because it reduces sampling error. A stratum is a subset of the population that share at least one common characteristic. Examples of stratums might be males and females, or managers and non-managers. The researcher first identifies the relevant stratums and their actual representation in the population. Random sampling is then used to select a sufficient number of subjects from each stratum. ``Sufficient'' refers to a sample size large enough for us to be reasonably confident that the stratum represents the population. Stratified sampling is often used when one or more of the stratums in the population have a low incidence relative to the other stratums.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{strat}
+  \caption[A possible result of stratified sampling.]{A possible result of stratified sampling: 14 points are sampled from a population of 5 stratum. }\label{strat}
+  \end{center}
+\end{figure}
 
-\url{http://r.yihui.name/stat/sampling_survey/stratified/index.htm} 
-%The function \fun{strat.ani()} provides animations for stratified sampling.
+\emph{Stratified Sampling} is commonly used probability method that is superior to random sampling because it reduces sampling error. A stratum is a subset of the population that share at least one common characteristic. Examples of stratums might be males and females, or managers and non-managers. The researcher first identifies the relevant stratums and their actual representation in the population. Random sampling is then used to select a sufficient number of subjects from each stratum. ``Sufficient'' refers to a sample size large enough for us to be reasonably confident that the stratum represents the population. Stratified sampling is often used when one or more of the stratums in the population have a low incidence relative to the other stratums.
+
+The function \fun{sample.strat()} provides the demonstration of stratified sampling: 
+
+\begin{Usage}
+\begin{verbatim}
+sample.strat(pop = ceiling(10 * runif(10, 0.5, 1)), 
+    size = ceiling(pop * runif(length(pop), 0, 0.5)), 
+    control = ani.control(interval = 0.2), ...)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{strat} is one possible result for stratified sampling. 
+
+Web page: \url{http://r.yihui.name/stat/sampling_survey/stratified/} 
+
 
 \subsection{Cluster Sampling}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{cluster}
+  \caption[A possible result of cluster sampling.]{A possible result of cluster sampling: 2 clusters are sampled from a population of 5 clusters. }\label{cluster}
+  \end{center}
+\end{figure}
 Sometimes it is cheaper to ``cluster'' the sample in some way e.g. by selecting respondents from certain areas only, or certain time-periods only. (Nearly all samples are in some sense ``clustered'' in time -- although this is rarely taken into account in the analysis.)
 
-\url{http://r.yihui.name/stat/sampling_survey/cluster/index.htm}
+The function \fun{sample.cluster()} provides the demonstration of cluster sampling: 
+
+\begin{Usage}
+\begin{verbatim}
+sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), 
+    size = 3, control = ani.control(interval = 0.2), ...)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{cluster} is one possible result for cluster sampling. 
+
+Web page: \url{http://r.yihui.name/stat/sampling_survey/cluster/}
 
  
 \subsection{Systematic Sampling}
-Systematic Sampling is often used instead of random sampling. It is also called an $N$th name selection technique. After the required sample size has been calculated, every $N$th record is selected from a list of population members. As long as the list does not contain any hidden order, this sampling method is as good as the random sampling method. Its only advantage over the random sampling technique is simplicity. Systematic sampling is frequently used to select a specified number of records from a computer file.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{system}
+  \caption[A possible result of systematic sampling.]{A possible result of systematic sampling: 12 points are sampled from a population of 50 points. Please note that the point at (8, 5) is the starting point!}\label{system}
+  \end{center}
+\end{figure}
+\emph{Systematic Sampling} is often used instead of random sampling. It is also called an $N$th name selection technique. After the required sample size has been calculated, every $N$th record is selected from a list of population members. As long as the list does not contain any hidden order, this sampling method is as good as the random sampling method. Its only advantage over the random sampling technique is simplicity. Systematic sampling is frequently used to select a specified number of records from a computer file.
 
-\url{http://r.yihui.name/stat/sampling_survey/systematic/index.htm} 
+The function \fun{sample.system()} provides the demonstration of systematic sampling. The sample points with equal intervals are drawn out according to a random starting point. 
+
+\begin{Usage}
+\begin{verbatim}
+sample.system(nrow = 10, ncol = 10, size = 15, 
+    control = ani.control(interval = 0.2), ...)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{system} is one possible result for systematic sampling. 
+
+Web page: \url{http://r.yihui.name/stat/sampling_survey/systematic/} 
 
 \subsection{CLT in Sampling Survey}
 TODO...
@@ -509,22 +597,22 @@ Central Limit Theorem in sampling survey for estimation and inference.
 \section{Multivariate Statistics}\label{multivar} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{K-Means Cluster Analysis}
+\subsection{K-Means Cluster Analysis}\label{Sec:kmeans} 
 This algorithm has already been discussed in section \ref{iteration}.
 
 \begin{Usage}
 \begin{verbatim}
-kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 2, 
-    nmax = 30)
+kmeans.ani(x = matrix(runif(100), ncol = 2), centers = 2,
+    control = ani.control(interval = 2, nmax = 30), ...)
 \end{verbatim}
 \end{Usage}
 
 You may try several examples for yourself.
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
 x = matrix(runif(100), ncol = 2)
-kmeans.ani(saveANI = FALSE, x, centers = 2, interval = 1)
+kmeans.ani(x, centers = 2, interval = 1)
 x = matrix(runif(300), ncol = 2)
-kmeans.ani(FALSE, x, 6, 0.5)
+kmeans.ani(x, centers = 6, interval = 0.5)
 @
 \begin{figure}
   \begin{center}
@@ -545,6 +633,48 @@ Figure \ref{kmeansframe} shows the first iteration in the K-Means algorithm: ran
 \subsection{Kernal Density Estimation}
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Time Series Analysis}\label{Sec:ts} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I'm not sure whether everyone knows the famous \href{http://www.ted.com/index.php/talks/view/id/92}{Hans Rosling presentation}\footnote{It was named ``Debunking third-world myths with the best stats you've ever seen''.} in which a large number of animations were displayed and the talk was a great success (at least it seemed to be) due to the exciting moving pictures (surely as well as his excellent skills at giving presentations). Hans just showed the changing relationship of several variables over time. 
+
+\subsection{Moving Window Auto-Regression}\label{Sec:MWR} 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{mwar}
+  \caption[A general illustration for Moving Window Auto-Regression]{A general illustration for Moving Window Auto-Regression: the top plot is the original data points, and the bottom plot shows the AR(1) coefficients (with confidence intervals) changing along with time.}\label{mwar}
+  \end{center}
+\end{figure}
+
+As described in Section \ref{Sec:dynamic}, we may check the variation of some statistics over time, and MVR is just one kind of such methods. 
+
+\begin{Usage}
+\begin{verbatim}
+mwar.ani(x, k = 15, conf = 2, control = ani.control(), ...)
+\end{verbatim}
+\end{Usage}
+
+This function just fulfills a very naive idea about moving window regression using rectangles to denote the ``windows'' and move them, and the corresponding AR(1) coefficients as long as rough confidence intervals are computed for data points inside the ``windows'' during the process of moving.
+
+Figure \ref{mwar} demonstrates a process of moving windows and computing AR(1) coefficients for a random sample. Both the colors and locations of the above ``windows'' are corresponding to the confidence intervals below.
+
+You may try more examples like:
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+mwar.ani(interval = 0.3)
+
+# for the data 'pageview'
+data(pageview)
+mwar.ani(pageview$visits, k = 30, interval = 0.2) 
+
+# HTML animation page
+ani.start()
+mwar.ani(interval = 0, width = 600, height = 500) 
+ani.stop() 
+@
 
 
 
@@ -574,8 +704,13 @@ Figure \ref{kmeansframe} shows the first iteration in the K-Means algorithm: ran
 
 
 \subsection{Bootstrapping}\label{bootstrap} 
-
-What I will introduce here is rather superficial; for further knowledge about bootstrapping, please refer to \cite{BK:Bootstrap} for theories, and \cite{BK:MASS} can also be a simple guide to implementations in S language. 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{bootiid}
+  \caption{Bootstrapping for i.i.d data.}\label{bootiid}
+  \end{center}
+\end{figure}
+What I am to introduce here is rather superficial; for further knowledge about bootstrapping, please refer to \cite{BK:Bootstrap} for theories, and \cite{BK:MASS} can also be a simple guide to implementations in S language. 
 
 The two critical points for bootstrapping are: (1) data generating mechanism; (2) plug-in principle. The first tells us how to re-generate data from a sample, while the latter point tells us how to make estimations. The idea of bootstrapping is based on the method of resampling to a large degree. In the real world, we only have one sample, say, $n$ sample points $x_1, x_2, \ldots, x_n$, then the problems we must face (when making inferences) are:
 \begin{itemize} 
@@ -586,12 +721,34 @@ The two critical points for bootstrapping are: (1) data generating mechanism; (2
  
 We have always been deriving mathematical formulae... for this statistic... for that statistic... under perfect but unwarranted assumptions...
 
-Why not re-generate some samples (resample the original sample with replacement) and re-compute the values of our statistic of interest? Then we can get a series of estimations of a certain parameter and in a result, we are able to make inferences based on these numbers using the plug-in principle, e.g. we may compute the standard error of a parameter by compute the corresponding standard error of that series of numbers (please do note the factual computation is not exactly so; read the references to learn the details), and estimate the quantiles of a statistic just by computing the corresponding quantiles of that series of numbers, etc. If you are confused by my description here, just keep on to the below animation example.
+Why not re-generate some samples (resample the original sample \emph{with} replacement) and re-compute the values of our statistic of interest? Then we can get a series of estimations of a certain parameter and in a result, we are able to make inferences based on these numbers using the plug-in principle, e.g. we may compute the standard error of a parameter by compute the corresponding standard error of that series of numbers (please do note the factual computation is not exactly so; read the references to learn the details), and estimate the quantiles of a statistic just by computing the corresponding quantiles of that series of numbers, etc. If you are confused by my description here, just keep on to the below animation example.
 
-Function \fun{boot.iid()} is available now. 
+The function \fun{boot.iid()} is provided for bootstrapping i.i.d data since the package version 0.1-2.
 
-\url{http://r.yihui.name/stat/machine_learning/bootstrapping/index.htm}. 
+\begin{Usage}
+\begin{verbatim}
+boot.iid(x = runif(20), statistic = mean, m = length(x),
+    control = ani.control(), ...)
+\end{verbatim}
+\end{Usage}
 
+We just resample \para{m} points from \para{x} for \para{nmax} times, and in each time we compute the statistics of interest (e.g. mean, median, quantiles, etc). In the end, the approximate distribution of the statistic is illustrated in a histogram with a density line. 
+
+The blue points denote the orignial dataset, while the red points with (possible) leaves denote sample points being resampled; the number of leaves in the sunflower scatter plot just means how many times these points are resampled, as bootstrap samples \emph{with} replacement. 
+
+Figure \ref{bootiid} is a demonstration of bootstrapping 20 random numbers following $U(0, 1)$ for the distribution of the sample mean. Here are some more examples:  
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+boot.iid()
+# for the median of 15 points from chi-square(5) 
+boot.iid(x = rchisq(15, 5), statistic = median) 
+# save the animation in HTML pages
+ani.start()
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+ani.stop()
+@
+ 
+Web page: \url{http://r.yihui.name/stat/machine_learning/bootstrapping/} 
 
 \subsection[$k$-fold Cross-Validation]{$k$-fold / Leave-one-out Cross-validation}
 \begin{figure}
@@ -610,34 +767,34 @@ The function \fun{cv.ani()} provides an illustration for $k$-fold cross-validati
 
 \begin{Usage}
 \begin{verbatim}
-cv.ani(saveANI = FALSE, x = runif(150), k = 10, interval = 2, 
-    nmax = 50)
+cv.ani(x = runif(150), k = 10, control = ani.control(interval = 2,
+    nmax = 50), ...)
 \end{verbatim}
 \end{Usage}
 
 Figure \ref{crossvalidation} shows a possible partition of the whole data set into a training set and test set (10-fold cross-validation). The test test can move from the first part to the last part, and this is the base for animations. 
 
 \subsection{\emph{k}-Nearest Neighbor Classification}
-
-The $k$-nearest neighbor algorithm is amongst the simplest of all machine learning algorithms. It is a supervised learning algorithm where the result of new instance query is classified based on majority of $k$-nearest neighbor category. The purpose of this algorithm is to classify a new object based on attributes and training samples. The classifiers do not use any model to fit and only based on memory. Given a query point, we find K number of objects or (training points) closest to the query point. The classification is using majority vote among the classification of the K objects. Any ties can be broken at random. $K$-nearest neighbor algorithm used neighborhood classification as the prediction value of the new query instance.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{knn}
+  \caption[$k$NN algorithm in the 2D plane.]{$k$NN algorithm in the 2D plane: gray dashed lines stand for ``distances'' so that neighbors can be decided; the red polygon means the $k$ nearest neighbors (15 in this example); at last let these neighbors vote for the classification, and the symbol (classification) was changed according to the majority vote. Points marked by question marks ``\para{?}'' are the remaining points in the test set with unknown classifications yet.}\label{knn}
+  \end{center}
+\end{figure}
+The $k$-nearest neighbor algorithm is amongst the simplest of all machine learning algorithms. It is a supervised learning algorithm where the result of new instance query is classified based on majority of $k$-nearest neighbor category. The purpose of this algorithm is to classify a new object based on attributes and training samples. The classifiers do not use any model to fit and only based on memory. Given a query point, we find $k$ number of objects or (training points) closest to the query point. The classification is using majority vote among the classification of the $k$ objects. Any ties can be broken at random. $k$-nearest neighbor algorithm used neighborhood classification as the prediction value of the new query instance.
 
 The function \fun{knn.ani()} provides the animated demonstration for $k$NN algorithm in the 2D case. 
 
 \begin{Usage}
 \begin{verbatim}
-knn.ani(saveANI = FALSE, train, test, cl, k = 1, interval = 1, 
-    nmax = 100, interact = FALSE)
+knn.ani(train, test, cl, k = 10, interact = FALSE,
+    control = ani.control(), ...)
 \end{verbatim}
 \end{Usage}
 
-You may either provide a test set or specify \para{interact = TRUE} so that you can simply use mouse-click to decide the test set. Figure \ref{knn} is the eventual result of the whole classification process. 
+You may either provide a test set or specify \para{interact = TRUE} so that you can simply use mouse-click to decide the test set. Figure \ref{knn} is an intermediate result of the whole classification process. 
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\textwidth]{knn}
-  \caption[$k$NN algorithm in the 2D plane.]{$k$NN algorithm in the 2D plane: gray dashed lines stand for ``distances'' so that neighbors can be decided; green polygon means the $k$ nearest neighbors; at last let these neighbors vote for the classification, and the symbol (classification) was changed according to the majority vote.}\label{knn}
-  \end{center}
-\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgements}
@@ -656,14 +813,56 @@ I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} fo
 
 \chapter{Misc Functions in \code{animation}} 
 \section{Functions for \R}
-tidy up source code: \fun{tidy.source()} 
- 
-generate R definition file for the software Highlight \fun{highlight.def()}
+\subsection{Tidy up the Source Code} 
+For people who are lazy to type spaces and tabs in the source code, this simple function \fun{tidy.source()} might be of a little help, which mainly uses \fun{parse()} to get the parsed code.
+
+\begin{Usage}
+\begin{verbatim}
+tidy.source(file)
+\end{verbatim}
+\end{Usage}
+
+For example, this is the original (ugly) code: 
+
+\begin{verbatim}
+pdf('kmeansframe.pdf',height=3)
+par(mfrow=c(1,2),mar=c(2,2,0,1),cex.axis=.8,cex.main=1,ann=F)
+x= matrix(runif(300), ncol = 2)
+kmeans.ani(x,6,interval=0,nmax=1)
+dev.off()
+\end{verbatim}
+
+Proper spaces, tabs, and indents will be added after \fun{tidy.source()} is used to the file: 
+
+\begin{verbatim}
+pdf("kmeansframe.pdf", height = 3) 
+par(mfrow = c(1, 2), mar = c(2, 2, 0, 1), cex.axis = 0.8, 
+    cex.main = 1, ann = F) 
+x = matrix(runif(300), ncol = 2) 
+kmeans.ani(x, 6, interval = 0, nmax = 1) 
+dev.off()
+\end{verbatim}
+
+\subsection{Generate \R{} Definition File for \code{Highlight}} 
+The default definition file for R in the software \href{http://www.andre-simon.de/}{\code{Highlight}}\footnote{\code{Highlight} is a freeware for converting source code to formatted text with syntax highlighting by Andr\'{e} Simon; it is released under the terms of the \code{GNU GPL} license. It supports more than 100 programming languages, including \R.} is somewhat incomplete, and this function \fun{highlight.def()} is to dynamically generate such a file according to packages in the search path. 
+
+\begin{Usage}
+\begin{verbatim}
+highlight.def(file = "r.lang")
+\end{verbatim}
+\end{Usage}
+
+Just copy the output to the directory \para{langDefs} of \code{Highlight}, and you will be able to convert your \R{} code into other formats such as \code{HTML}, which is used almost everywhere in \url{http://R.yihui.name}. 
 
 \section{Functions for Systems}
+
+TODO 
+
 rename a sequence of files \fun{rename.seq()}
 
 \section{Functions for Web (HTML/XML/RSS)} 
+TODO 
+
 create RSS feed \fun{write.rss()} 
 
 \bibliographystyle{plain}

@@ -13,9 +13,9 @@ function(outdir = tempdir(), filename = "index",
     else {
         file.remove(list.files("images"))
     }
-    file.copy(system.file("data", "ANI.css", package = "animation"), 
+    file.copy(system.file("js", "ANI.css", package = "animation"), 
         "ANI.css", overwrite = TRUE)
-    file.copy(system.file("data", "FUN.js", package = "animation"), 
+    file.copy(system.file("js", "FUN.js", package = "animation"), 
         "FUN.js", overwrite = TRUE)
     setwd(op)
     .ani.file = file.path(outdir, paste(filename, ".", extension, 

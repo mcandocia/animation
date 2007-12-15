@@ -3,6 +3,8 @@
     control = ani.control(interval = 0.2, nmax = 100), ...) {
     extraArgs = list(...)
     if (length(extraArgs)) {
+        if ("interval" %in% names(extraArgs)) 
+            ani.control(...)
         controlargs = names(formals(ani.control))
         idx = match(names(extraArgs), controlargs, nomatch = 0)
         if (any(idx == 0)) 

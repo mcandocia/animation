@@ -33,8 +33,8 @@ After calling \code{\link{ani.start}}, either animation functions in this packag
 \examples{
 # create an animation page in the tempdir() and auto-browse it 
 ani.start() 
-brownian.motion(saveANI = TRUE) 
-ani.stop(footer =TRUE, autobrowse = TRUE) 
+brownian.motion(saveANI = TRUE, interval = 0.05) 
+ani.stop() 
 }
 \keyword{ utilities }
 
