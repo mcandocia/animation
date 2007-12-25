@@ -1,14 +1,12 @@
 \name{tidy.source}
 \alias{tidy.source}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ `Tidy' up R code }
+\title{ `Tidy up' R code }
 \description{
   Actually this function has nothing to do with code optimization; it just returns parsed source code. 
 }
 \usage{
 tidy.source(file)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{ a string: location of the source code }
 }

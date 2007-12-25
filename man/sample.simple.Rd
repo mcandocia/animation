@@ -2,7 +2,7 @@
 \alias{sample.simple}
 \title{ Demonstration for simple random sampling without replacement}
 \description{
-  The whole sample frame is denoted by a matrix (nrow * ncol) in the plane, and the points being sampled are marked by red circles. Each member of the population has an equal and known chance of being selected. 
+  The whole sample frame is denoted by a matrix (nrow * ncol) in the plane just for convenience, and the points being sampled are marked by red circles. Each member of the population has an equal and known chance of being selected. 
 }
 \usage{
 sample.simple(nrow = 10, ncol = 10, size = 15, 

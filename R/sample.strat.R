@@ -4,13 +4,13 @@ function(pop = ceiling(10 * runif(10,
     control = ani.control(interval = 0.2), ...) {
     extraArgs = list(...)
     if (length(extraArgs)) {
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
         controlargs = names(formals(ani.control))
         idx = match(names(extraArgs), controlargs, nomatch = 0)
         if (any(idx == 0)) 
             stop("Argument ", names(extraArgs)[idx == 0], "not matched")
         control[names(extraArgs)] = extraArgs
+        if ("interval" %in% names(extraArgs)) 
+            ani.control(...)
     }
     if (any(size > pop)) 
         stop("sample size must be smaller than population")

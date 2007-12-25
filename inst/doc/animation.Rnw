@@ -800,7 +800,7 @@ You may either provide a test set or specify \para{interact = TRUE} so that you 
 \section*{Acknowledgements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} for his instructions and suggestions on the initial idea of my \code{animation} package. 
+I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} for his instructions and suggestions on the initial idea of my \code{animation} package. I'd like to thank Gregor Gorjanc for reminding me of creating an RSS feed for my web site \url{http://R.yihui.name}. 
 
 
 
@@ -860,10 +860,109 @@ TODO
 
 rename a sequence of files \fun{rename.seq()}
 
-\section{Functions for Web (HTML/XML/RSS)} 
-TODO 
+\section[Functions for the Web]{Functions for the Web (\code{HTML/XML/RSS})} 
+Here are some functions related to web pages (\code{HTML/XML/RSS}):
+\subsection{Create \code{RSS} Feed from a CSV Data File} 
 
-create RSS feed \fun{write.rss()} 
+The function \fun{write.rss()} can create an RSS feed given an appropriate data file; I choose the CSV format because it's relatively convenient to edit with other software. 
+
+\begin{Usage}
+\begin{verbatim}
+write.rss(file = "feed.xml", entry = "rss.csv", xmlver = "1.0", 
+    rssver = "2.0", title = "What's New?", 
+    link = "http://R.yihui.name", 
+    description = "Animated Statistics Using R", 
+    language = "en-us", copyright = "Copyright 2007, Yihui Xie", 
+    pubDate = Sys.time(), lastBuildDate = Sys.time(), 
+    docs = "http://R.yihui.name", 
+    generator = "Function write.rss() in R package animation", 
+    managingEditor = "xieyihui[at]gmail.com", 
+    webMaster = "xieyihui[at]gmail.com", 
+    maxitem = 10, ...)
+\end{verbatim}
+\end{Usage}
+
+The structure of the CSV data file is just like Table \ref{rss}. Note the order of items in the CSV file: newer items are added to the end of the file. But this order will be \emph{reversed} in the RSS file! Just refer to \url{http://cyber.law.harvard.edu/rss/rss.html} for the specification of an RSS file. Here is a simple example:
+
+\begin{table}
+  \centering
+  \begin{tabular}{l|l|l|l|l|l|l}
+    \hline
+    title & link & author & description & pubDate & guid & category\\
+    \hline
+    ... & ... & ... & ... & ... & ... & ...\\
+    \hline
+  \end{tabular}
+  \caption{Common elements of an item in an RSS feed.}\label{rss}
+\end{table}
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+write.rss(entry = system.file("js", "rss.csv", 
+    package = "animation")) 
+@
+
+The result might be like this: 
+\begin{verbatim}
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>What's New in 'Animated Statistics Using R'?</title>
+    <link>http://R.yihui.name</link>
+    <description>Animated Statistics Using R</description>
+    <language>en-us</language>
+    <pubDate>Mon, 17 Dec 2007 13:19:15 GMT</pubDate>
+    <lastBuildDate>Mon, 17 Dec 2007 13:19:15 GMT</lastBuildDate>
+    <docs>http://R.yihui.name</docs>
+    <generator>write.rss() in R package animation</generator>
+    <managingEditor>xieyihui[at]gmail.com</managingEditor>
+    <webMaster>xieyihui[at]gmail.com</webMaster>
+    <item>
+      <title>The Way of Animation Found</title>
+      <link>http://r.yihui.name/misc/java.htm</link>
+      <author>Yihui Xie, xieyihui[at]gmail.com</author>
+      <description>
+      <![CDATA[
+      <p>I spent really a lot of time on searching for a proper 
+      way for animations. After <a href="../misc/gif_pdf_grDev.htm">
+      several trials</a>, I found <a href="../misc/java.htm">
+      JavaScript could help me</a>. 
+      <acronym title="The HTML Document Object Model">HTML DOM
+      </acronym> is really important. </p>
+      <p>Cheers! Users won't need R or any other special programs 
+      to see my animations now -- just a browser supporting 
+      JavaScript is enough. </p>
+      ]]>
+      </description>
+      <pubDate>Sun, 14 Oct 2007 00:00:00 GMT</pubDate>
+      <guid>2</guid>
+      <category>Technique</category>
+    </item>
+    <item>
+      <title>Creation of This Website</title>
+      <link>http://r.yihui.name/news/index.htm</link>
+      <author>Yihui Xie, xieyihui[at]gmail.com</author>
+      <description>
+      <![CDATA[
+      <p>Personally I don't like those complicated mathematical 
+      theories... And I believe many people hold the same opinion 
+      with me. I want to find some simpler approaches to learn 
+      statistics. That's my original motivation to create such a 
+      website.</p>
+      <p>Sure, I'm too lazy. Simulation and graphics alone cannot 
+      contribute to mathematics and statistics directly. So, we 
+      should face the reality anyway... We should <em>prove</em> 
+      the effect of gradient descent algorithm <em>X<sub>n+1</sub>
+      = X<sub>n</sub> - &gamma;F'(X<sub>n</sub>)</em> instead of 
+      just giving an illustration. </p>
+      ]]>
+      </description>
+      <pubDate>Sat, 06 Oct 2007 00:00:00 GMT</pubDate>
+      <guid>1</guid>
+      <category>Web</category>
+    </item>
+   </channel>
+</rss>
+\end{verbatim}
 
 \bibliographystyle{plain}
 \bibliography{bib}

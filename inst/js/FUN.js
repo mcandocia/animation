@@ -10,7 +10,7 @@ function displayImage() {
 	var lblTime = document.getElementById("lbl")
 	var tm = Math.round((parseFloat(lblTime.innerHTML))*1000)
 	if (n > nmax) n = 1
-	if (n == nmax) tm = 1000 * Math.min(Math.exp(tm / 1000), tm / 1000 + 5)
+//	if (n == nmax) tm = 1000 * Math.min(Math.exp(tm / 1000), tm / 1000 + 5)
 	getElem("btnBegin").disabled = true
 	getElem("btnStop").disabled = false
 	getElem("btnFaster").disabled = (parseFloat(lblTime.innerHTML) <= 0)

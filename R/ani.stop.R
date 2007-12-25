@@ -1,7 +1,8 @@
 `ani.stop` <- function(footer = TRUE, autobrowse = TRUE) {
     if (exists("ANIenv", envir = .GlobalEnv)) {
         if (exists("ht", envir = get("ANIenv", envir = .GlobalEnv)) & 
-            exists("nmax", envir = get("ANIenv", envir = .GlobalEnv))) {
+            exists("nmax", envir = get("ANIenv", envir = .GlobalEnv)) &
+            exists("interval", envir = get("ANIenv", envir = .GlobalEnv))) {
             .ani.file = get(".ani.file", envir = get("ANIenv", 
                 envir = .GlobalEnv))
             cat(paste("var nmax = ", get("nmax", envir = get("ANIenv", 
@@ -27,6 +28,9 @@
                 "\n")
             on.exit(rm("ANIenv", envir = .GlobalEnv), add = TRUE)
         }
+        else {
+            warning("It seems that no animation function has been called yet!") 
+        } 
     }
     else {
         warning("It seems that you haven't started an animation yet!")
