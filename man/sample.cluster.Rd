@@ -27,7 +27,7 @@ sample.cluster()
 
 # HTML animation page
 ani.start()
-sample.cluster(pop = sample(15, 5), size = 2, interval = 0)
+sample.cluster(pop = sample(15, 5), size = 2, interval = 0.1)
 ani.stop() 
 
 }

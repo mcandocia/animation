@@ -45,7 +45,7 @@ flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2,
 
 # HTML animation page
 ani.start()
-flip.coin(saveANI = TRUE, interval = 0, nmax = 30, bg = "yellow") 
+flip.coin(saveANI = TRUE, interval = 0.1, nmax = 30, bg = "yellow") 
 ani.stop() 
 
 }

@@ -28,7 +28,7 @@ sample.strat()
 
 # HTML animation page
 ani.start()
-sample.strat(pop = sample(15, 5), interval = 0)
+sample.strat(pop = sample(15, 5), interval = 0.1)
 ani.stop() 
 
 }

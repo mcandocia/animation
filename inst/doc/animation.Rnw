@@ -33,7 +33,7 @@
 
 \title{Package \code{animation}: Animated Statistics Using \R{}}
 \author{Yihui Xie\thanks{School of Statistics, Renmin University of China, 
-Beijing, 100872, China; Tel: 86-10-82509086; Fax: 86-10-82509086; Email: \texttt{paste("xieyihui", "@", "gmail.com", sep = "")}; Homepage: \url{http://www.yihui.name}; You may visit my project ``Animated Statistics Using R'' at \url{http://R.yihui.name} for a variety of animations in statistics in web pages.}}
+Beijing, 100872, China; Tel: 86-10-82509086; Fax: 86-10-82509086; Email: \texttt{cat('xieyihui', 'gmail.com', sep = '@')}; Homepage: \url{http://www.yihui.name}; You may visit my project ``Animated Statistics Using R'' at \url{http://R.yihui.name} for a variety of animations in statistics in web pages.}}
 
 %\SweaveOpts{echo=FALSE}
 %\VignetteIndexEntry{Animated Statistics Using R}
@@ -441,14 +441,31 @@ TODO...
 Monte-Carlo integration.
 
 \subsection{Central Limit Theorem}
-TODO...
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{CLT}
+  \caption[A CLT simulation for samples from the Uniform distribution]{A CLT simulation for samples from the Uniform distribution: the top two plots embody obvious characteristics of the Uniform distribution, while the bottom one is the well-known ``bell-shaped'' curve.}\label{CLT}
+  \end{center}
+\end{figure}
+The Central Limit Theorem (CLT) is one of the most famous theorems in probability theory, and here we may check the distribution of the sample mean $\bar{x}$ when the sample size $n$ is large enough. Relative theories can be easily found in most textbooks in probability theory or mathematical statistics (e.g. \cite{BK:ELST}). 
 
-Limit distribution of the sample mean $\bar{x}$.
+The function \fun{clt.ani()} provides a demonstration for CLT in the following schema: first of all, \para{n} sample points are generated from a certain distribution, and the ECDF as well as the PDF (estimated from \fun{density()}) is plotted. Then the sample mean is computed, and at last the density of these sample means is plotted as the replication of the generation of random numbers from that distribution. The whole plot area is divided into three parts to show the ECDF and PDF of the sample points from the corresponding replication and the PDF of the sample means estimated from all the replications. 
 
+\begin{Usage}
+\begin{verbatim}
+clt.ani(n = 30, FUN = runif, control = ani.control(interval = 0.1), 
+    ...)
+\end{verbatim}
+\end{Usage}
 
+The function for the argument \para{FUN} is flexible, so we may just define it as we wish. For example, we can generate random numbers from $\chi^2(5)$ as follows: 
 
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+f = function(n) rchisq(n, 5) 
+clt.ani(FUN = f) 
+@
 
-
+Figure \ref{CLT} shows a simulation for samples from the Uniform distribution. Other distributions such as Cauchy distribution (which has no finite variance\footnote{This is an interesting example.}) or Log Normal distribution may also be tried. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Sampling Survey}
@@ -811,14 +828,15 @@ I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} fo
 
 \chapter{R Graphics} 
 
-\chapter{Misc Functions in \code{animation}} 
+\chapter{Misc Functions in \code{animation}}
+Some miscellaneous functions are provided in the package \code{animation} too: some might be of help with using \R, some can fulfill certain tasks in the operating system, and some are just for fun (e.g. visual illusions). 
 \section{Functions for \R}
 \subsection{Tidy up the Source Code} 
 For people who are lazy to type spaces and tabs in the source code, this simple function \fun{tidy.source()} might be of a little help, which mainly uses \fun{parse()} to get the parsed code.
 
 \begin{Usage}
 \begin{verbatim}
-tidy.source(file)
+tidy.source(source, ...)
 \end{verbatim}
 \end{Usage}
 
@@ -964,6 +982,38 @@ The result might be like this:
 </rss>
 \end{verbatim}
 
+
+\section{Visual Illusions}
+I write these functions just for fun -- they don't have anything to do with statistics. The names of these functions are like \fun{vi.*()}.
+\subsection{Lilac Chaser}
+Just stare at the center cross for a few (say 30) seconds to experience the phenomena of the illusion. 
+\begin{Usage}
+\begin{verbatim}
+vi.lilac.chaser(np = 16, col = "magenta", bg = "gray", 
+    cex.p = 7, cex.c = 5, control = ani.control(interval = 0.05,
+    nmax = 30), ...)
+\end{verbatim}
+\end{Usage}
+For details please refer to \url{http://en.wikipedia.org/wiki/Lilac_chaser}.
+
+\subsection{Grid Illusions}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{gridillusion}
+  \caption[Scintillating grid illusions and Hermann grid illusions.]{Scintillating grid illusions and Hermann grid illusions: are there really some moving dots?}\label{gridillusion}
+  \end{center}
+\end{figure}
+
+A grid illusion is any kind of grid that deceives a person's vision. The two most common types of grid illusions are Hermann grid illusions and Scintillating grid illusions. This function \fun{vi.grid.illusion()} provides illustrations for both illusions as in Figure \ref{gridillusion}. 
+\begin{Usage}
+\begin{verbatim}
+vi.grid.illusion(nrow = 8, ncol = 8, lwd = 8, cex = 3, 
+    col = "darkgray", type = c("s", "h"))
+\end{verbatim}
+\end{Usage}
+For details please refer to \url{http://en.wikipedia.org/wiki/Grid_illusion}.
+
+ 
 \bibliographystyle{plain}
 \bibliography{bib}
 

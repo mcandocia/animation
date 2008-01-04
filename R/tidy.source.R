@@ -1,10 +1,10 @@
-`tidy.source` <-
-function(file) {
-    exprs = parse(file)
-    for (i in 1:length(exprs)) {
+`tidy.source` <- function(source, ...) {
+    exprs = parse(source)
+    n = length(exprs)
+    res = character(n)
+    for (i in 1:n) {
         dep = paste(deparse(exprs[i]), collapse = "\n")
-        dep = substring(dep, 12, nchar(dep) - 1)
-        cat(dep, "\n")
+        res[i] = substring(dep, 12, nchar(dep) - 1)
     }
-}
-
+    cat(paste(res, collapse = "\n"), "\n", ...)
+} 

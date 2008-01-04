@@ -26,7 +26,7 @@ None.
 \references{ \url{http://en.wikipedia.org/wiki/Lilac_chaser} }
 \author{ Yihui Xie }
 \note{ 
-Points in the original version of `Lilac Chaser' \emph{blurred}, which is not implemented in this function. If you have any idea, please contact me. 
+In fact, points in the original version of `Lilac Chaser' are \emph{blurred}, which is not implemented in this function. If you have any idea, please contact me. 
 }
 \seealso{ \code{\link[graphics:points]{points}} }
 \examples{
@@ -35,8 +35,11 @@ vi.lilac.chaser(nmax = 20)
 
 # HTML animation page; nmax = 1 is enough! 
 ani.start()
-vi.lilac.chaser(saveANI = TRUE, nmax = 1) 
+par(mar = rep(1, 4)) 
+vi.lilac.chaser(np = 12, saveANI = TRUE, nmax = 1) 
 ani.stop() 
+
+par(op) 
 }
 \keyword{ dynamic }
 

@@ -38,7 +38,7 @@ mwar.ani(pageview$visits, k = 30, interval = 0.2)
 
 # HTML animation page
 ani.start()
-mwar.ani(interval = 0, width = 600, height = 500) 
+mwar.ani(interval = 0.1, width = 600, height = 500) 
 ani.stop() 
 }
 \keyword{ dplot }

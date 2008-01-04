@@ -1,6 +1,5 @@
 \name{ani.start}
 \alias{ani.start}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Start the generation of an HTML animation page }
 \description{
   Copy JavaScript file \file{FUN.js} and CSS file \file{ANI.css} to the same directory as the HTML animation page and write the header part of the HTML page. The prompt of the current R session is modified (by default \code{ANI>}). 
@@ -9,7 +8,6 @@
 ani.start(outdir = tempdir(), filename = "index", extension = "htm", 
     withprompt = "ANI> ", Title = "Animated Statistics Using R")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{outdir}{ physical directory to store the animation output }
   \item{filename}{ name of the target HTML main file }

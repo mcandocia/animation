@@ -19,18 +19,18 @@
                   Sys.time(), "</div>", sep = ""), file = .ani.file, 
                   append = TRUE)
             cat("</body>\n</html>", file = .ani.file, append = TRUE)
-            options(prompt = get("oldprompt", envir = get("ANIenv", 
-                envir = .GlobalEnv)))
             if (autobrowse) 
                 on.exit(browseURL(paste("file://", .ani.file, 
                   sep = "")), add = TRUE)
             cat("HTML animation page created: ", normalizePath(.ani.file), 
                 "\n")
-            on.exit(rm("ANIenv", envir = .GlobalEnv), add = TRUE)
         }
         else {
             warning("It seems that no animation function has been called yet!") 
         } 
+        options(prompt = get("oldprompt", envir = get("ANIenv", 
+            envir = .GlobalEnv)))
+        on.exit(rm("ANIenv", envir = .GlobalEnv), add = TRUE)
     }
     else {
         warning("It seems that you haven't started an animation yet!")

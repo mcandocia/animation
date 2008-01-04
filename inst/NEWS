@@ -6,13 +6,20 @@
 	**************************************************
 
 
-		CHANGES TO APPEAR IN animation VERSION 0.1-5 
+		CHANGES IN animation VERSION 0.1-5 
 
 
 NEW FEATURES
 
-    o A new function bagging.tree() to illustrate the process of 
-  bagging classification trees is to be added. 
+    o cli.ani() to illustrate the Centrol Limit Theorem (CLT).
+    o vi.grid.illusion() to illustrate two kinds of grid
+  illusions (Scintillating grid illusion and Hermann grid illusion). 
+ 
+
+MINOR CHANGES
+
+    o Argument '...' added to tidy.source() for more flexible 
+  control of the output. 
 
 
 	**************************************************
@@ -29,6 +36,7 @@ NEW FEATURES
 
     o write.rss() for creating RSS feed files from a CSV file
   containing RSS items. 
+    o vi.lilac.chaser() for the visual illusion 'Lilac Chaser'. 
 
 MINOR CHANGES
 
