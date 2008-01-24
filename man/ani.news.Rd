@@ -10,10 +10,10 @@ ani.news(...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{\dots}{ arguments passed to \code{\link[base:file.show]{file.show}}. }
+  \item{\dots}{ arguments passed to \code{\link[base]{file.show}}. }
 }
 \details{
-  This function just makes use of \code{\link[base:file.show]{file.show}} to display a file \file{NEWS} in this package. 
+  This function just makes use of \code{\link[base]{file.show}} to display a file \file{NEWS} in this package. 
 }
 \value{
 None (invisible `\code{NULL}').

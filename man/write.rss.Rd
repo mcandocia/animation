@@ -54,6 +54,12 @@ Note the order of items in the CSV file: newer items are added to the end of the
 # create rss feed from a sample file in 'animation' 
 # to getwd() 
 write.rss(entry = system.file("js", "rss.csv", package = "animation")) 
+
+\dontrun{
+
+# Read entries from the internet 
+write.rss(entry = "http://r.yihui.name/news/rss.csv")} 
+
 }
 \keyword{ IO }
 \keyword{ misc }

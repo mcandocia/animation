@@ -5,7 +5,8 @@
     if (nmax < 0) 
         stop("Maximum number of animation frames must be positive!")
     if (exists("ANIenv", envir = .GlobalEnv))
-        assign('interval', interval, envir = ANIenv) 
+        assign('interval', interval, envir = get("ANIenv",
+            envir = .GlobalEnv)) 
     list(saveANI = saveANI, interval = interval, nmax = nmax, 
         width = width, height = height, ...)
 } 

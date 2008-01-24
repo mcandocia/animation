@@ -41,25 +41,32 @@ There is a special restriction (only two columns) on the training and test data 
 
 If either one of \code{train} and \code{test} is missing, there'll be random matrices prepared for them. (It's the same for \code{cl}.) 
 }
-\seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
+\seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}}, \code{\link[class]{knn}} }
 \examples{
 ## a binary classification problem 
 x = matrix(c(rnorm(80, mean = -1), rnorm(80, mean = 1)), 
     ncol = 2, byrow = TRUE) 
 y = matrix(rnorm(20, mean = 0, sd = 1.2), ncol = 2) 
+knn.ani(train = x, test = y, cl = rep(c("first class", "second class"),
+    each = 40), k = 30, control = ani.control(interval = 2)) 
+
+\dontrun{ 
+
 ani.start() 
-op = par(mar = c(3.5, 3.5, 3, 0), mgp = c(2, 0.5, 
+op = par(mar = c(3.5, 3.5, 3, 1), mgp = c(2, 0.5, 
     0), cex.axis = 0.75, tcl = -0.3) 
 knn.ani(train = x, test = y, cl = rep(c("first class", "second class"),
     each = 40), k = 30, control = ani.control(saveANI = TRUE, 
-    nmax = 50, interval = 2)) 
+    interval = 0.5, width = 600, height = 600)) 
 par(op) 
 ani.stop() 
 
 ## this is an interactive demo; just click your mouse
-\dontrun{knn.ani(train = x, cl = rep(c("first class", "second class"), 
-    each = 40), k = 30, nmax = 10, interact = TRUE) 
-}}
+knn.ani(train = x, cl = rep(c("first class", "second class"), 
+    each = 40), k = 30, nmax = 5, interact = TRUE) 
+
+}
+}
 \keyword{ hplot }
 \keyword{ iplot }
 \keyword{ dynamic }

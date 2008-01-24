@@ -21,7 +21,7 @@ brownian.motion(n = 10, main = "Demonstration of Brownian Motion",
 \details{
   Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers: the location of the next step is just ``current location + random Gaussian numbers'', i.e.,
   
-  \deqn{x_{k + 1} = x_{k} + rnorm(1)\cr  
+  \deqn{x_{k + 1} = x_{k} + rnorm(1)\;  
   y_{k + 1} = y_{k} + rnorm(1)}{x[k + 1] = x[k] + rnorm(1)\cr y[k + 1] = y[k] + rnorm(1)} 
   where \emph{(x, y)} stands for the location of a point. 
 }
@@ -34,7 +34,17 @@ None (invisible `\code{NULL}').
 \examples{
 # show an animation in (Windows/X Window...) a graphics device 
 # unless you have opened an invisible device like png(), pdf(), ... 
-brownian.motion(n = 15, nmax = 100) 
+brownian.motion(n = 15, nmax = 150) 
+
+\dontrun{
+ 
+# create HTML animation page
+ani.start()
+brownian.motion(n = 15, nmax = 100, saveANI = TRUE, interval = 0, 
+    width = 500, height = 500) 
+ani.stop() 
+
+}
 }
 \keyword{ dplot }
 \keyword{ dynamic }

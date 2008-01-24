@@ -37,11 +37,15 @@ buffon.needle(nmax = 500, interval = 0)
 # this will be faster 
 buffon.needle(nmax = 500, interval = 0, redraw = FALSE)
 
+\dontrun{
+ 
 # create HTML animation page
 ani.start()
-buffon.needle(saveANI = TRUE, nmax = 100, interval = 0.01, 
-    redraw = FALSE) 
+buffon.needle(saveANI = TRUE, nmax = 100, interval = 0, 
+    width = 600, height = 600, redraw = FALSE) 
 ani.stop() 
+
+}
 }
 \keyword{ dplot }
 \keyword{ hplot }

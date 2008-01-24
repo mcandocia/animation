@@ -23,7 +23,7 @@ flip.coin(faces = 2, prob = NULL, border = "white", col = 1:2,
 \details{
   If \code{faces} is a single integer, say 2, a sequence of integers from 1 to \code{faces} will be used to denote the faces of a coin; otherwise this character vector just gives the names of each face.
   
-  When the \emph{i}-th face shows up, a colored thin rectangle will be added to the corresponding place (the \emph{i}-th bar). 
+  When the \emph{i}-th face shows up, a colored thin rectangle will be added to the corresponding place (the \emph{i}-th bar), and there will be corresponding annotations for the number of tosses and frequencies. 
   
   The special argument \code{border} is for consideration of a too large number of flipping, in which case if you still draw borders of rectangles, the graph will almost only show the color of the borders, thus we should specify it as \code{NA}. 
   
@@ -43,11 +43,15 @@ A vector of frequencies (simulated probabilities).
 flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
     nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4)) 
 
+\dontrun{
+ 
 # HTML animation page
 ani.start()
-flip.coin(saveANI = TRUE, interval = 0.1, nmax = 30, bg = "yellow") 
+flip.coin(saveANI = TRUE, interval = 0, nmax = 30, bg = "yellow",
+    width = 600, height = 500) 
 ani.stop() 
 
+}
 }
 
 \keyword{ hplot }

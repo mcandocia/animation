@@ -24,14 +24,18 @@ None.
 E. L. Lehmann, \emph{Elements of Large-Sample Theory}. Springer-Verlag, New York, 1999.
 }
 \author{ Yihui Xie }
-\seealso{ \code{\link[stats:density]{density}} }
+\seealso{ \code{\link[stats]{density}} }
 \examples{
 clt.ani()
 
+\dontrun{
+ 
 # HTML animation page
 ani.start()
 clt.ani(saveANI = TRUE, height = 500, width = 600)
 ani.stop()
+
+}
 
 # other distributions: Chi-square with df = 5 
 f = function(n) rchisq(n, 5) 

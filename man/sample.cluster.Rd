@@ -25,11 +25,15 @@ Cochran, W G (1977) \emph{Sampling Techniques}, Wiley, ISBN 0-471-16240-X
 \examples{
 sample.cluster()
 
+\dontrun{ 
+
 # HTML animation page
 ani.start()
-sample.cluster(pop = sample(15, 5), size = 2, interval = 0.1)
+sample.cluster(pop = sample(15, 5), size = 2, interval = 0, 
+    saveANI = TRUE)
 ani.stop() 
 
+}
 }
 \keyword{ distribution }
 \keyword{ dynamic }

@@ -34,10 +34,14 @@ cv.ani()
 # leave-one-out CV 
 cv.ani(x = runif(15), k = 15) 
 
+\dontrun{
+ 
 # save the animation in HTML pages
 ani.start()
 cv.ani(saveANI = TRUE)
 ani.stop() 
+
+}
 }
 \keyword{ hplot }
 \keyword{ dynamic }

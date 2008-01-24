@@ -27,10 +27,14 @@ Cochran, W G (1977) \emph{Sampling Techniques}, Wiley, ISBN 0-471-16240-X
 \examples{
 sample.system()
 
+\dontrun{ 
+
 # HTML animation page
 ani.start()
-sample.system(nrow = 5, size = 12, interval = 0.1)
+sample.system(nrow = 5, size = 12, interval = 0, saveANI = TRUE)
 ani.stop() 
+
+}
 }
 \keyword{ distribution }
 \keyword{ dynamic }

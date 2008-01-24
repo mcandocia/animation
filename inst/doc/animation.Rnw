@@ -44,7 +44,7 @@ Beijing, 100872, China; Tel: 86-10-82509086; Fax: 86-10-82509086; Email: \texttt
 
 
 \begin{abstract}
-Animated pictures are undeniably both interesting and intuitional. This vignette mainly gives a brief overview to a large variety of animations in statstics, which could probably aid in teaching statistics, data analysis, and the presentation of statistical reports. The methods of making animations are also introduced. It is hoped that the traditional ``static'' statistics can be altered to some degree by such a kind of ``animated'' approach. 
+Animated pictures are undeniably both interesting and intuitional. This vignette mainly gives a brief overview to a large variety of animations in statistics, which could probably aid in teaching statistics, data analysis, and the presentation of statistical reports. The methods of making animations are also introduced. It is hoped that the traditional ``static'' statistics can be altered to some degree by such a kind of ``animated'' approach. 
 \end{abstract}
 
 \tableofcontents
@@ -54,7 +54,7 @@ Animated pictures are undeniably both interesting and intuitional. This vignette
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
 \chapter{Introduction} 
-The concept of statistics, viewed from an analytical way, can be defined as ``the study of algorithms for data analysis'' (\cite{ART:Boot}). Nowadays statistical methods and models are increasing at an exploding speed, leading to more and more difficulties for people to understand those abstract mathematical and statistical algorithms. Basically this happens because sometimes it is really hard to imagine what on earth has happened behind a statistical algorithm, or how it works in processing data. While on the other hand, the size and complexity of data are also increasing, which results in the other problem for knowledge discovery. In the mean time, traditional \emph{static} statistical reports (printed on paper in presses) for these complex data can be rather unsatisfactory for explainations of statistical results, and we need a more \emph{active} way to present the fruits of our analyses. 
+The concept of statistics, viewed from an analytical way, can be defined as ``the study of algorithms for data analysis'' (\cite{ART:Boot}). Nowadays statistical methods and models are increasing at an exploding speed, leading to more and more difficulties for people to understand those abstract mathematical and statistical algorithms. Basically this happens because sometimes it is really hard to imagine what on earth has happened behind a statistical algorithm, or how it works in processing data. While on the other hand, the size and complexity of data are also increasing, which results in the other problem for knowledge discovery. In the mean time, traditional \emph{static} statistical reports (printed on paper in presses) for these complex data can be rather unsatisfactory for explanations of statistical results, and we need a more \emph{active} way to present the fruits of our analyses. 
 
 \begin{quote}
 We're drowning in information and starving for knowledge.
@@ -71,7 +71,7 @@ However, there is currently very few work in such a literature for animations in
 \chapter{Tools for Animation} 
 \setkeys{Gin}{width=\textwidth} 
 
-Perhaps most people would think of \code{GIF} images as the first choice for making animations, because it is well known that \code{GIF} is one of the only few image formats that has the ability to create animations\footnote{There are other formats such as APNG (Animated Portable Network Graphics), MNG (Multiple-image Network Graphics) and SVG (Scalable Vector Graphics), etc, but less popular (SVG might be promising in animations).}, nevertheless ultimately I didn't adopt this format for several reasons\footnote{You may read this page: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. 
+Perhaps most people would think of \code{GIF} images as the first choice for making animations, because it is well known that \code{GIF} is one of the only few image formats that has the ability to create animations\footnote{There are other formats such as \code{APNG} (Animated Portable Network Graphics), \code{MNG} (Multiple-image Network Graphics) and \code{SVG} (Scalable Vector Graphics), etc, but less popular (SVG might be promising in animations).}, nevertheless ultimately I didn't adopt this format as the primary means for creating animations because of several reasons\footnote{You may read this page: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. Anyway, it will be briefly introduced in section \ref{tool:other}. 
 
 Actually it is not so convenient to make animated image files in \R, whereas we still have other choices, among which I list two main tools I have employed as follows in section \ref{tool:R} and \ref{tool:HTML}, and other possible means are mentioned in section \ref{tool:other}. 
 
@@ -118,7 +118,7 @@ for (i in 1:360) {
 }
 @
 
-For detailed instructions and explainations in \R{} graphics system, you may refer to the book ``R graphics'' (\cite{BK:RG}) by Paul Murrell, or read R-help on graphics functions (e.g. packages \code{graphics}, \code{grDevices}, etc) carefully. 
+For detailed instructions and explanations in \R{} graphics system, you may refer to the book ``R graphics'' (\cite{BK:RG}) by Paul Murrell, or read R-help on graphics functions (e.g. packages \code{graphics}, \code{grDevices}, etc) carefully. 
 
 \section{\code{HTML} \& \code{JavaScript}}\label{tool:HTML} 
 Why use \code{HTML} \& \code{JavaScript}? I believe there are at least three reasons: 
@@ -132,7 +132,17 @@ Why use \code{HTML} \& \code{JavaScript}? I believe there are at least three rea
 The work to do is just to create single image \emph{frames} and try to show them in an \code{HTML} page. And how can we fulfill this? The answer is through \code{JavaScript}\footnote{Refer to this page again for details: \url{http://r.yihui.name/misc/gif_pdf_grDev.htm}}. This idea has already been implemented in this package \code{animation}: all animation functions has a special argument \para{saveANI}, which determines whether to generate animation files or just to show animations inside \R. 
 
 \section{Other Tools}\label{tool:other} 
-Currently there are still at least other two choices for animations: the first one is to use the package \code{rgl} which takes advantage of the \code{OpenGL} system to make 3D visulizations. The user may conveniently interact with 3D elements in the plot (drag and rotate, etc). And the second one is \code{Scalable Vector Graphics} (SVG), which is a language for describing two-dimensional graphics and graphical applications in \code{XML}. \code{SVG} files are compact and provide high-quality graphics on the Web, in print, and on resource-limited handeld devices. In addition, \code{SVG} supports scripting and animation, so is ideal for interactive, data-driven, personalized graphics. Besides, \code{SVG} is a royalty-free vendor-neutral open standard developed under the \code{W3C} (World Wide Web Consortium) Process. Currently there are a few packages supporting the creation of \code{SVG} files, e.g. \href{http://cran.r-project.org/src/contrib/Descriptions/Cairo.html}{\code{Cairo}}, \href{http://cran.r-project.org/src/contrib/Descriptions/cairoDevice.html}{\code{cairoDevice}}, and \href{http://cran.r-project.org/src/contrib/Descriptions/RSvgDevice.html}{\code{RSvgDevice}}, etc\footnote{As far as I know, there is one other package \href{http://www.stat.auckland.ac.nz/~paul/R/gridSVG_0.5-1.tar.gz}{\code{gridSVG}} by Paul Murrell, but it is still highly experimental.}. 
+As mentioned above, we can take \code{GIF} images as a medium for the expression of animations. However, it is likely that we need a certain special software to help with the generation of \code{GIF} images. The function \fun{saveMovie()} in the package ``\code{animation}'' has provided a wrapper to create \code{GIF} animations with the help of ``\href{http://www.imagemagick.org}{\code{ImageMagick}}'':
+
+\begin{Usage}
+\begin{verbatim}
+saveMovie(expr, interval = 1, moviename = "movie", 
+    movietype = "gif", loop = 0, dev = png, 
+    filename = "Rplot", fmt = "%03d", outdir = tempdir(), ...)
+\end{verbatim}
+\end{Usage} 
+
+Currently there are still at least other two choices for animations: the first one is to use the package \code{rgl} which takes advantage of the \code{OpenGL} system to make 3D visualizations. The user may conveniently interact with 3D elements in the plot (drag and rotate, etc). And the second one is \code{Scalable Vector Graphics} (SVG), which is a language for describing two-dimensional graphics and graphical applications in \code{XML}. \code{SVG} files are compact and provide high-quality graphics on the Web, in print, and on resource-limited handled devices. In addition, \code{SVG} supports scripting and animation, so is ideal for interactive, data-driven, personalized graphics. Besides, \code{SVG} is a royalty-free vendor-neutral open standard developed under the \code{W3C} (World Wide Web Consortium) Process. Currently there are a few packages supporting the creation of \code{SVG} files, e.g. \href{http://cran.r-project.org/src/contrib/Descriptions/Cairo.html}{\code{Cairo}}, \href{http://cran.r-project.org/src/contrib/Descriptions/cairoDevice.html}{\code{cairoDevice}}, and \href{http://cran.r-project.org/src/contrib/Descriptions/RSvgDevice.html}{\code{RSvgDevice}}, etc\footnote{As far as I know, there is one other package \href{http://www.stat.auckland.ac.nz/~paul/R/gridSVG_0.5-1.tar.gz}{\code{gridSVG}} by Paul Murrell, but it is still highly experimental.}. 
 
 Besides, this package might be a little bit like \code{TeachingDemos}, which contains several demonstrations for teaching and learning, however, clearly \code{animation} is focused on demonstrations that can be \emph{animated}, and what's more, the tools for animations of these two packages are different, too\footnote{\code{TeachingDemos} mainly takes advantage of the function \fun{locator()}, the package \code{rgl} and \code{Tcl/Tk} to interact with users.}. The package \code{animation} also aims to cover many more fields in statistics.
 
@@ -155,7 +165,7 @@ Below I'll explain with examples how they work in animations respectively.
 
 There are a large number of algorithms in statistics which involve iterations to optimize certain functions. For example, in the K-Means cluster analysis, the basic steps are described in Figure \ref{kmstep}. What animation can do is to show the output of \emph{each} iteration. 
 
-Here I use a cluster problem containing two numerical variables as a simplified case; actually the main reason is for the convenience of making scatterplots on the 2D plane: the $x$-axis and $y$-axis denote the two variabels respectively. During the process of iterations, we may present these two elements at each iteration: 
+Here I use a cluster problem containing two numerical variables as a simplified case; actually the main reason is for the convenience of making scatterplots on the 2D plane: the $x$-axis and $y$-axis denote the two variables respectively. During the process of iterations, we may present these two elements at each iteration: 
 
 \begin{itemize}
   \item Location of each center: just average $x$-$y$ locations within each cluster. 
@@ -256,7 +266,7 @@ acf(x)
 pacf(x)
 @
 
-Not going further in the traditional ARIMA anlysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MWR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
+Not going further in the traditional ARIMA analysis, I just use an AR(1) model for computation. Suppose there are $n$ observations $\{x_1, x_2, \ldots, x_n\}$, and the MWR method is just to split the data into $n-k+1$ subsets depending on the window width $k$: $\{x_1,\ldots,x_k\}$, $\{x_2,\ldots,x_{k+1}\}$, ..., $\{x_{n-k+1},\ldots,x_{n}\}$, and at last compute AR(1) models on each subset. In the code below, I computed the coefficient $\phi$ for $n-k+1$ AR(1) models $x_t=\phi x_{t-1}+\epsilon_t$ using \fun{arima()} in package \code{stats}, and during the moving (in a loop), I marked out observations used in MWR by rectangles with different colors, and plotted the corresponding coefficients as well as ``$\phi\,\pm$ 2*s.e.'' in the lower part of the graph. The last line \para{Sys.sleep(1)} is to slow down the process of moving windows so that we can clearly see the ``real moving''\footnote{Just for demonstration; in practical applications there's no need to slow down the computation.}. 
 
 <<fig=FALSE,echo=TRUE,eval=FALSE>>=
 library(animation)
@@ -315,7 +325,7 @@ The package \code{animation} is based on the most primitive idea of animation: m
 
 Currently there are two ways for animation: one is just to show animations in a graphical device (Windows, X Window, etc), and the other is to make animations in an \code{HTML} page so that people without \R{} installed are also able to view the animations. 
 
-There are some common arguments in each animation function controlling the way to make animations, for example, whehter to save \code{PNG} files during the animation demonstration (\para{saveANI}), the time interval \para{interval} between each frame of a whole animation, and the \para{height} and \para{width} of the animation frames if they are to be saved. These arguments are controlled by a special function \fun{ani.control()}: 
+There are some common arguments in each animation function controlling the way to make animations, for example, whether to save \code{PNG} files during the animation demonstration (\para{saveANI}), the time interval \para{interval} between each frame of a whole animation, and the \para{height} and \para{width} of the animation frames if they are to be saved. These arguments are controlled by a special function \fun{ani.control()}: 
 
 \begin{Usage}
 \begin{verbatim}
@@ -350,6 +360,14 @@ ani.stop()
 
 There a plenty of examples in the help pages of each animation functions. Just try them if you like. 
 
+Beside the approach of \code{HTML} animation pages, the function \fun{saveMovie()} also provides another way for animations as mentioned before. Actually we may generate movies of any formats as long as they are supported by ``\code{ImageMagick}'', such as \code{GIF} (*.gif) or \code{MPEG} (*.mpg). Here are two examples:
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+library(animation) 
+saveMovie(for(i in 1:10) plot(runif(10), ylim = 0:1), loop = 1)
+saveMovie(brownian.motion(nmax = 40), width = 600, height = 600) 
+@
+
 Having provided a mechanism for generating animations, next I shall go into the huge project of statistical animations in the many branches. 
  
 \chapter{Statistical Animations Gallery}
@@ -362,7 +380,7 @@ In section \ref{connection} I have explained some basic connections between anim
 \section{Probability Theory} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Probabbility theory is a subject relevant to randomness. As mentioned in section \ref{random}, animation can be closely related to this subject.
+Probability theory is a subject relevant to randomness. As mentioned in section \ref{random}, animation can be closely related to this subject.
  
 \subsection{Probability in Flipping Coins}
 \begin{figure}
@@ -371,7 +389,7 @@ Probabbility theory is a subject relevant to randomness. As mentioned in section
   \caption[Probability of flipping a coin.]{Probability of flipping a coin: Head? Tail? Or just stand on the table? Run in \R{} to watch the animation.}\label{coin} 
   \end{center}
 \end{figure}
-In the first class of learning probability we usually begin with the probability in flipping coins or tossing dice, and the function \fun{flip.coin()} gives a simple simulation. Here the concept of a ``coin'' is acutally abstract: it can be anyting, and you just have to specify the true probabilities (or take the default \para{NULL}) for each ``face''. 
+In the first class of learning probability we usually begin with the probability in flipping coins or tossing dice, and the function \fun{flip.coin()} gives a simple simulation. Here the concept of a ``coin'' is actually abstract: it can be anything, and you just have to specify the true probabilities (or take the default \para{NULL}) for each ``face''. 
 
 \begin{Usage}
 \begin{verbatim}
@@ -644,10 +662,10 @@ Figure \ref{kmeansframe} shows the first iteration in the K-Means algorithm: ran
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Nonparametric Statsitics}
+\section{Nonparametric Statistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Kernal Density Estimation}
+\subsection{Kernel Density Estimation}
 
 
 
@@ -751,7 +769,7 @@ boot.iid(x = runif(20), statistic = mean, m = length(x),
 
 We just resample \para{m} points from \para{x} for \para{nmax} times, and in each time we compute the statistics of interest (e.g. mean, median, quantiles, etc). In the end, the approximate distribution of the statistic is illustrated in a histogram with a density line. 
 
-The blue points denote the orignial dataset, while the red points with (possible) leaves denote sample points being resampled; the number of leaves in the sunflower scatter plot just means how many times these points are resampled, as bootstrap samples \emph{with} replacement. 
+The blue points denote the original dataset, while the red points with (possible) leaves denote sample points being resampled; the number of leaves in the sunflower scatter plot just means how many times these points are resampled, as bootstrap samples \emph{with} replacement. 
 
 Figure \ref{bootiid} is a demonstration of bootstrapping 20 random numbers following $U(0, 1)$ for the distribution of the sample mean. Here are some more examples:  
 
@@ -789,7 +807,7 @@ cv.ani(x = runif(150), k = 10, control = ani.control(interval = 2,
 \end{verbatim}
 \end{Usage}
 
-Figure \ref{crossvalidation} shows a possible partition of the whole data set into a training set and test set (10-fold cross-validation). The test test can move from the first part to the last part, and this is the base for animations. 
+Figure \ref{crossvalidation} shows a possible partition of the whole data set into a training set and test set (10-fold cross-validation). The test set can move from the first part to the last part, and this is the base for animations. 
 
 \subsection{\emph{k}-Nearest Neighbor Classification}
 \begin{figure}
@@ -817,14 +835,13 @@ You may either provide a test set or specify \para{interact = TRUE} so that you 
 \section*{Acknowledgements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} for his instructions and suggestions on the initial idea of my \code{animation} package. I'd like to thank Gregor Gorjanc for reminding me of creating an RSS feed for my web site \url{http://R.yihui.name}. 
+I'm grateful to \href{http://www.stat.auckland.ac.nz/~paul/}{Dr Paul Murrell} for his instructions and suggestions on the initial idea of my \code{animation} package. I'd like to thank \href{http://www.bfro.uni-lj.si/MR/ggorjan/}{Gregor Gorjanc} for reminding me of creating an RSS feed for my web site \url{http://R.yihui.name}, and \href{http://wwwmaths.anu.edu.au/~johnm/}{John Maindonald} for valuable comments as well as a large number of ideas for statistical animations (I'm still working on them). 
 
 
 
 
 
 \appendix
-\chapter{Introduction to R} 
 
 \chapter{R Graphics} 
 

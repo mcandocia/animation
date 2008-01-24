@@ -12,7 +12,7 @@ ani.start(outdir = tempdir(), filename = "index", extension = "htm",
   \item{outdir}{ physical directory to store the animation output }
   \item{filename}{ name of the target HTML main file }
   \item{extension}{ extension of the target HTML file (htm, html,...) }
-  \item{withprompt}{ prompt to display while using \code{\link{ani.start}}/\code{\link{ani.stop}} }
+  \item{withprompt}{ prompt to display while using \code{\link{ani.start}} (restore with \code{\link{ani.stop}}) }
   \item{Title}{ string to pass to HTML \code{<title>} tag }
 }
 \details{
@@ -29,10 +29,14 @@ After calling \code{\link{ani.start}}, either animation functions in this packag
 }
 \seealso{ \code{\link{savePNG}}, \code{\link{ani.stop}} }
 \examples{
-# create an animation page in the tempdir() and auto-browse it 
-ani.start() 
-brownian.motion(saveANI = TRUE, interval = 0.05) 
-ani.stop() 
+\dontrun{
+ 
+# save the animation in HTML pages and auto-browse it 
+ani.start()
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+ani.stop()
+
+}
 }
 \keyword{ utilities }
 

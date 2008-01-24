@@ -38,12 +38,17 @@ Hartigan, J. A. and Wong, M. A. (1979). A K-means clustering algorithm. \emph{Ap
 x = matrix(runif(200), ncol = 2)
 kmeans.ani(x = x, centers = 2, interval = 0.5) 
 
+\dontrun{
+
 # create HTML animation page 
-op = par(mar = c(2, 2, 3, 0), cex.axis = 0.75, cex.main = 1)
+op = par(mar = c(2, 2, 3, 1), cex.axis = 0.75, cex.main = 1)
 ani.start() 
-kmeans.ani(saveANI = TRUE, x = x, centers = 3, interval = 0.1) 
+kmeans.ani(saveANI = TRUE, x = x, centers = 3, interval = 1,
+    width = 600, height = 600) 
 ani.stop()
 par(op)
+
+}
 }
 \keyword{ hplot }
 \keyword{ dynamic }

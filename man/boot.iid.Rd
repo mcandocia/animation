@@ -38,10 +38,14 @@ boot.iid(interval = 0.5)
 # for the median of 15 points from chi-square(5) 
 boot.iid(x = rchisq(15, 5), statistic = median, interval = 0.5) 
 
+\dontrun{
+ 
 # save the animation in HTML pages
 ani.start()
-boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0.1)
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
 ani.stop()
+
+}
 }
 \keyword{ nonparametric }
 \keyword{ dynamic }

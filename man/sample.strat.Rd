@@ -26,11 +26,14 @@ Cochran, W G (1977) \emph{Sampling Techniques}, Wiley, ISBN 0-471-16240-X
 \examples{
 sample.strat()
 
+\dontrun{
+
 # HTML animation page
 ani.start()
-sample.strat(pop = sample(15, 5), interval = 0.1)
+sample.strat(pop = sample(15, 5), interval = 0, saveANI = TRUE)
 ani.stop() 
 
+}
 }
 \keyword{ distribution }
 \keyword{ dynamic }

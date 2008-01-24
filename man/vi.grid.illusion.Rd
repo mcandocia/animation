@@ -33,7 +33,7 @@ In fact there isn't any animations!
 vi.grid.illusion()
 
 # set wider lines to see Hermann grid illusions 
-vi.grid.illusion(type = "h", lwd = 25, nrow = 5, ncol = 5, 
+vi.grid.illusion(type = "h", lwd = 22, nrow = 5, ncol = 5, 
     col = "white") 
 }
 \keyword{ dynamic }

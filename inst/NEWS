@@ -1,6 +1,26 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       0.1-6 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-6 
+
+
+NEW FEATURES
+
+    o saveMovie() to create single movies using ImageMagick. 
+ 
+
+MINOR CHANGES
+
+    o The number of tosses is added to the plot in flip.coin(). 
+
+
+	**************************************************
+	*						 *
 	*	       0.1-5 NEWS			 *
 	*						 *
 	**************************************************

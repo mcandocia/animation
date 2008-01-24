@@ -22,9 +22,13 @@ If you haven't started an animation page yet, there'll be a warning, and the ani
 }
 \seealso{ \code{\link{savePNG}}, \code{\link{ani.start}} }
 \examples{
-# create an animation page in the tempdir() and auto-browse it 
-ani.start() 
-brownian.motion(saveANI = TRUE, interval = 0) 
-ani.stop(footer =TRUE, autobrowse = TRUE) 
+\dontrun{
+ 
+# save the animation in HTML pages and auto-browse it 
+ani.start()
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+ani.stop()
+
+}
 }
 \keyword{ utilities }

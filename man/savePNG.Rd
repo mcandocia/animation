@@ -31,6 +31,8 @@ This function provides a \emph{general} method to save plots as PNG files, thus 
 }
 \seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
 \examples{
+\dontrun{
+ 
 # a plot save to file.path(getwd(), "1.png") 
 plot(rnorm(100)) 
 savePNG(getwd(), n = 1)
@@ -42,5 +44,7 @@ for(i in 1:10){
   savePNG(getwd(), n = i) 
 }
 # you might need file.remove(paste(1:10, ".png", sep = "")) 
+}
+
 }
 \keyword{ device }
