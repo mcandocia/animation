@@ -12,7 +12,7 @@ Various functions for animations in statistics which could probably aid in teach
 Package: \tab animation\cr
 Type: \tab Package\cr
 Version: \tab 0.1\cr
-Date: \tab 2008-01-24\cr
+Date: \tab 2008-01-27\cr
 License: \tab GPL (>=2)\cr
 }
 This package mainly makes use of HTML \& JavaScript to illustrate animations, and other approaches such as graphical devices (\code{\link[grDevices:windows]{x11}} or \pkg{rgl}, etc) or GIF/MPG movies can also be employed. 
@@ -38,6 +38,6 @@ brownian.motion(control = ani.control(interval = 0.05, nmax = 100))
 par(op) 
 
 # Bootstrapping
-boot.iid(width = 600, height = 500, interval = 0.3)
+boot.iid(interval = 0.3)
  
 }

@@ -1,15 +1,6 @@
 `boot.iid` <- function(x = runif(20), statistic = mean, 
     m = length(x), control = ani.control(), ...) {
-    extraArgs = list(...)
-    if (length(extraArgs)) {
-        controlargs = names(formals(ani.control))
-        idx = match(names(extraArgs), controlargs, nomatch = 0)
-        if (any(idx == 0)) 
-            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
-        control[names(extraArgs)] = extraArgs
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
-    }
+    control = checkargs(control, ...) 
     xx = statistic(sample(x, m, TRUE))
     layout(matrix(1:2, 2))
     op = par(mar = c(1.5, 3, 2, 0.1), cex.main = 1, cex.lab = 0.8, 
@@ -26,7 +17,7 @@
         rug(xx)
         if (control$saveANI) 
             savePNG(n = i, width = control$width, height = control$height)
-        Sys.sleep(control$interval)
+        else Sys.sleep(control$interval)
     }
     par(op)
     invisible(list(t0 = statistic(x), tstar = xx))

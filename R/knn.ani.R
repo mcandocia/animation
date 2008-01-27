@@ -1,15 +1,6 @@
 `knn.ani` <- function(train, test, cl, k = 10, interact = FALSE, 
     control = ani.control(), ...) {
-    extraArgs = list(...)
-    if (length(extraArgs)) {
-        controlargs = names(formals(ani.control))
-        idx = match(names(extraArgs), controlargs, nomatch = 0)
-        if (any(idx == 0)) 
-            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
-        control[names(extraArgs)] = extraArgs
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
-    }
+    control = checkargs(control, ...) 
     if (missing(train)) {
         train = matrix(c(rnorm(40, mean = -1), rnorm(40, mean = 1)), 
             ncol = 2, byrow = TRUE)
@@ -68,8 +59,8 @@
             cex = 0.85)
         if (control$saveANI) 
             savePNG(n = j, width = control$width, height = control$height)
+        else Sys.sleep(control$interval)
         j = j + 1
-        Sys.sleep(control$interval)
         idx = rank(apply(train, 1, function(x) sqrt(sum((x - 
             test[i, ])^2))), ties.method = "random") %in% seq(k)
         vote = cl[idx]
@@ -79,8 +70,8 @@
             2], lty = "dashed", col = "gray")
         if (control$saveANI) 
             savePNG(n = j, width = control$width, height = control$height)
+        else Sys.sleep(control$interval)
         j = j + 1
-        Sys.sleep(control$interval)
         bd = train[idx, 1:2]
         if (k > 1) {
             polygon(bd[chull(bd), ], density = 10, col = "tomato")
@@ -91,16 +82,16 @@
         }
         if (control$saveANI) 
             savePNG(n = j, width = control$width, height = control$height)
+        else Sys.sleep(control$interval)
         j = j + 1
-        Sys.sleep(control$interval)
         points(test[i, 1], test[i, 2], col = "white", pch = "?", 
             cex = 2)
         points(test[i, 1], test[i, 2], col = "red", pch = unclass(res)[i], 
             cex = 3, lwd = 2)
         if (control$saveANI) 
             savePNG(n = j, width = control$width, height = control$height)
+        else Sys.sleep(control$interval)
         j = j + 1
-        Sys.sleep(control$interval)
         jj = jj + 1
     }
     invisible(levels(clf)[res])

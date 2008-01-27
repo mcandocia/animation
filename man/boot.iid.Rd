@@ -42,7 +42,7 @@ boot.iid(x = rchisq(15, 5), statistic = median, interval = 0.5)
  
 # save the animation in HTML pages
 ani.start()
-boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0.2)
 ani.stop()
 
 }

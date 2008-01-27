@@ -17,7 +17,7 @@ saveMovie(expr, interval = 1, moviename = "movie", movietype = "gif",
   \item{loop}{ iterations of the movie; set iterations to zero to repeat the animation an infinite number of times, otherwise the animation repeats itself up to \code{loop} times (N.B. for GIF only!) } 
   \item{dev}{ a function for a graphical device such as \code{\link[grDevices:png]{png}}, \code{\link[grDevices:png]{jpeg}} and \code{\link[grDevices:png]{bmp}}, etc. }
   \item{filename}{ file name of the sequence of images (`pure' name; without any format or extension) }
-  \item{fmt}{ a C-style string formatting command, such as \code{'\%3d'}  }
+  \item{fmt}{ a C-style string formatting command, such as \code{\%3d}  }
   \item{outdir}{ the directory for the movie frames and the movie itself }
   \item{\dots}{ other arguments passed to the graphical device, such as \code{height} and \code{width}, ... }
 }
@@ -25,16 +25,16 @@ saveMovie(expr, interval = 1, moviename = "movie", movietype = "gif",
   The convenience of this function is that it can create a single movie file, however, two drawbacks are obvious too: (1) we need a special (free) software ImageMagick; (2) the speed of the animation cannot be conveniently controlled, as we have specified a fixed \code{interval}. So just go ahead with this function to create your movies if you don't mind these two points. 
 }
 \value{
-An integer indicating failure (-1) or success (0) of the converting (refer to \code{\link[base]{shell}}). 
+An integer indicating failure (-1) or success (0) of the converting (refer to \code{\link[base]{system}}). 
 }
 \references{
-http://www.imagemagick.org/script/convert.php 
+\url{http://www.imagemagick.org/script/convert.php} 
 }
 \author{ Yihui Xie }
 \note{ 
 Creating HTML animation pages will not require any other software to be installed, and the duration of animations can also be controlled; refer to \code{\link{ani.start}} and \code{\link{ani.stop}}. 
 }
-\seealso{ \code{\link[base]{shell}}, \code{\link{ani.start}}, \code{\link{ani.stop}}, \code{\link[grDevices:png]{png}} }
+\seealso{ \code{\link[base]{system}}, \code{\link{ani.start}}, \code{\link{ani.stop}}, \code{\link[grDevices]{png}} }
 \examples{
 ## make sure ImageMagick has been installed in your system 
 \dontrun{

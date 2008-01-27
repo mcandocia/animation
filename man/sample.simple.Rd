@@ -30,7 +30,7 @@ sample.simple()
 
 # HTML animation page
 ani.start()
-sample.simple(nrow = 5, size = 20, interval = 0, saveANI = TRUE)
+sample.simple(nrow = 5, size = 20, saveANI = TRUE)
 ani.stop() 
 
 }

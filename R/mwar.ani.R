@@ -1,16 +1,7 @@
 `mwar.ani` <-
 function(x, k = 15, conf = 2, control = ani.control(), 
     ...) {
-    extraArgs = list(...)
-    if (length(extraArgs)) {
-        controlargs = names(formals(ani.control))
-        idx = match(names(extraArgs), controlargs, nomatch = 0)
-        if (any(idx == 0)) 
-            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
-        control[names(extraArgs)] = extraArgs
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
-    }
+    control = checkargs(control, ...) 
     if(missing(x))
         x = sin(seq(0, 2 * pi, length = 50)) + rnorm(50, sd = 0.2) 
     n = length(x)
@@ -52,7 +43,7 @@ function(x, k = 15, conf = 2, control = ani.control(),
             bg = "yellow",type='o')
         if (control$saveANI) 
             savePNG(n = i, width = control$width, height = control$height)
-        Sys.sleep(control$interval)
+        else Sys.sleep(control$interval)
         j = j + 1
     }
     par(op)

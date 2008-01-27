@@ -31,7 +31,7 @@ sample.system()
 
 # HTML animation page
 ani.start()
-sample.system(nrow = 5, size = 12, interval = 0, saveANI = TRUE)
+sample.system(nrow = 5, size = 12, saveANI = TRUE)
 ani.stop() 
 
 }

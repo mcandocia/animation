@@ -26,7 +26,7 @@ If you haven't started an animation page yet, there'll be a warning, and the ani
  
 # save the animation in HTML pages and auto-browse it 
 ani.start()
-boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0.2)
 ani.stop()
 
 }

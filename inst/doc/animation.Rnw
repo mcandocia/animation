@@ -109,9 +109,9 @@ For users who have installed \R{}, animations can be made with the function \fun
 <<echo=FALSE>>=
 options(width = 70) 
 @
-<<>>=
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
 for (i in 1:360) {
-    plot(1, ann = F, type = "n", axes = F)
+    plot(1, ann = F, type = "n", axes = FALSE)
     text(1, 1, "Animation", srt = i, col =
         rainbow(360)[i], cex = 7 * i/360)
     Sys.sleep(0.01)
@@ -420,6 +420,12 @@ buffon.needle(l = 0.8, d = 1, redraw = TRUE,
 \end{Usage}
 
 \subsection{Brownian Motion}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{brownian}
+  \caption{Two sample frames of Brownian Motion. }\label{brownian}
+  \end{center}
+\end{figure}
 Brownian Motion, a.k.a ``random walk'', characterizes the trace of a point moving in a line or a plane (or in higher dimensions). Suppose the current location of the point is $x_t$, then the next location will be $x_{t+1}=x_t+\epsilon_{t+1}$ with i.i.d $\epsilon_t \sim N(\mu,\,\sigma^2)$.
 
 It is very easy to simulate this process in \R. If the initial location is 0, the next $k$ locations can be computed simply by \para{cumsum(rnorm(k))}. The function \fun{rnorm()} generates $k$ i.i.d random numbers following Normal distribution, and \fun{cumsum()} computes cumulative sums for these numbers, which is essentially the moving process of Brownian Motion.
@@ -441,17 +447,32 @@ For example, the code below shows the traces of 15 points moving in the 2D plane
 brownian.motion(control = ani.control(interval = 0.05, nmax = 100))
 @
 
-\begin{figure}
+
+\subsection{Law of Large Numbers}
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[width=\textwidth]{brownian}
-  \caption{Two sample frames of Brownian Motion. }\label{brownian}
+    \includegraphics[width=\textwidth]{lln}
+  \caption[A demonstration of Law of Large Numbers.]{A demonstration of Law of Large Numbers. For the sample size $i$ changing from 1 to $n=300$: compute the sample mean for $i$ random numbers from the Bernoulli($p$) distribution with $p=0.2$, repeat this step for 10 times to get 10 means and plot them. Apparently, as the sample size $n$ grows, the sample mean will approach to the true mean $p$.}\label{lln}
   \end{center}
 \end{figure}
 
-\subsection{Law of Large Numbers}
-TODO... 
+The law of large numbers (LLN) is a theorem in probability that describes the long-term stability of a random variable. Given a sample of independent and identically distributed random variables with a finite population mean, the average of these observations will eventually approach and stay close to the population mean.
 
-From frequency to probability.
+The function \fun{lln.ani()} can illustrate this phenomenon in animations: for a series of sample sizes (denoted by $i$) from 1 to $n$, check the behaviour of the sample mean corresponding to this sample size $i$ by sampling \para{np} times from a certain distribution (given by the argument \para{FUN}). According to LLN, the sample mean will finally approach to the population mean (specified by the argument \para{mu}). Figure \ref{lln} has revealed this fact. 
+
+\begin{Usage}
+\begin{verbatim}
+lln.ani(FUN = rnorm, mu = 0, np = 30, pch = 20, 
+    control = ani.control(interval = 0.3), ...)
+\end{verbatim}
+\end{Usage}
+
+Note that the arugment \para{FUN} is a function with two arguments \para{n} and \para{mean}, i.e. in the form of \code{FUN(n, mean)}. We may extend the distribution in this function by defining custom functions like:
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+f = function(n, mean) rbinom(n, 1, mean) 
+lln.ani(FUN = f, mu = 0.2, np = 10, pch = ".", nmax = 100) 
+@
 
 \subsection{Monte-Carlo Simulation for Computing Areas}
 TODO...
@@ -465,9 +486,9 @@ Monte-Carlo integration.
   \caption[A CLT simulation for samples from the Uniform distribution]{A CLT simulation for samples from the Uniform distribution: the top two plots embody obvious characteristics of the Uniform distribution, while the bottom one is the well-known ``bell-shaped'' curve.}\label{CLT}
   \end{center}
 \end{figure}
-The Central Limit Theorem (CLT) is one of the most famous theorems in probability theory, and here we may check the distribution of the sample mean $\bar{x}$ when the sample size $n$ is large enough. Relative theories can be easily found in most textbooks in probability theory or mathematical statistics (e.g. \cite{BK:ELST}). 
+The Central Limit Theorem (CLT) is one of the most famous theorems in probability theory, and here we may check the distribution of the sample mean $\bar{x}$ when the sample size $n$ is large enough. Relative theories can be easily found in most textbooks in probability theory or mathematical statistics (e.g. \cite{BK:ELST} and \cite{BK:SI}). 
 
-The function \fun{clt.ani()} provides a demonstration for CLT in the following schema: first of all, \para{n} sample points are generated from a certain distribution, and the ECDF as well as the PDF (estimated from \fun{density()}) is plotted. Then the sample mean is computed, and at last the density of these sample means is plotted as the replication of the generation of random numbers from that distribution. The whole plot area is divided into three parts to show the ECDF and PDF of the sample points from the corresponding replication and the PDF of the sample means estimated from all the replications. 
+The function \fun{clt.ani()} provides a demonstration for CLT in the following schema: first of all, \para{n} sample points are generated from a certain distribution, and the ecdf (empirical cumulative distribution function) as well as the pdf (estimated from \fun{density()}) is plotted. Then the sample mean is computed, and at last the density of these sample means is plotted as the replication of the generation of random numbers from that distribution. The whole plot area is divided into three parts to show the ecdf and pdf of the sample points from the corresponding replication and the pdf of the sample means estimated from all the replications. 
 
 \begin{Usage}
 \begin{verbatim}
@@ -483,7 +504,7 @@ f = function(n) rchisq(n, 5)
 clt.ani(FUN = f) 
 @
 
-Figure \ref{CLT} shows a simulation for samples from the Uniform distribution. Other distributions such as Cauchy distribution (which has no finite variance\footnote{This is an interesting example.}) or Log Normal distribution may also be tried. 
+Figure \ref{CLT} shows a simulation for samples from the Uniform distribution. Other distributions such as Cauchy distribution (which has no finite variance\footnote{This is an interesting example to show a non-Gaussian distribution when the conditions are not satisfied.}) or Log Normal distribution may also be tried. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Sampling Survey}
@@ -598,11 +619,6 @@ Figure \ref{system} is one possible result for systematic sampling.
 
 Web page: \url{http://r.yihui.name/stat/sampling_survey/systematic/} 
 
-\subsection{CLT in Sampling Survey}
-TODO...
-
-Central Limit Theorem in sampling survey for estimation and inference. 
-
 
 
 
@@ -613,12 +629,25 @@ Central Limit Theorem in sampling survey for estimation and inference.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mathematical Statistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Confidence Intervals} 
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=\textwidth]{confint}
+  \caption[The interpretation of confidence intervals.]{The interpretation of confidence intervals. Take samples from the Normal distribution $N(\mu, \sigma)$ (with $\sigma$ known) for example: the confidence interval for the population mean $\mu$ is $[\bar{x}-z_{\alpha/2}\sigma/n,\bar{x}+z_{\alpha/2}\sigma/n]$, so every time we get a sample we can compute such an interval. If we keep on sampling from $N(\mu, \sigma)$, we may obtain a series of intervals because $\bar{x}$ will change according to different samples. Some intervals may cover the true mean, while other ones may not. However, in the end, we can see that this coverage rate will be close to $1-\alpha$. In this example, the coverage rate is $47/50=94\%$ and the true $1-\alpha=95\%$.}\label{confint}
+  \end{center}
+\end{figure}
 
+The concept of confidence intervals is quite important in mathematical statistics, but it is also confusing at the same time. A typical wrong interpretation for a confidence interval is that $P\{L(\mathbf{x})<\theta<U(\mathbf{x})\}=1-\alpha$ where $\mathbf{x}$ denotes the observations. For the \emph{observed} values of a sample, this interval is \emph{non-random}, so there is no meaning speaking of the probability of coverage, as the probability for a fixed interval to cover the true parameter is either 1 or 0. The fact is that the intervals are random quantities, i.e. functions of the random $\mathbf{X}$ rather than the observed $\mathbf{x}$. Based on this point, the function \fun{conf.int()} gives a illustration for the interval estimation of the parameter $\mu$ from $N(\mu, \sigma)$. For further knowledge of confidence intervals, please refer to textbooks such as \cite{BK:SI}. 
 
+\begin{Usage}
+\begin{verbatim}
+conf.int(level = 0.95, size = 50, 
+    control = ani.control(interval = 0.3), ...)
+\end{verbatim}
+\end{Usage}
 
-
-
+Figure \ref{confint} is the result of drawing samples from $N(0, 1)$ for 50 times and plotting the corresponding intervals with segments. Obviously some segments cover the true parameter 0 and some do not. Theoretically there should be $50*0.95=47.5$ intervals convering the true parameter. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Linear Models} 
@@ -675,7 +704,7 @@ Figure \ref{kmeansframe} shows the first iteration in the K-Means algorithm: ran
 \section{Time Series Analysis}\label{Sec:ts} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-I'm not sure whether everyone knows the famous \href{http://www.ted.com/index.php/talks/view/id/92}{Hans Rosling presentation}\footnote{It was named ``Debunking third-world myths with the best stats you've ever seen''.} in which a large number of animations were displayed and the talk was a great success (at least it seemed to be) due to the exciting moving pictures (surely as well as his excellent skills at giving presentations). Hans just showed the changing relationship of several variables over time. 
+I'm not sure whether everyone knows the famous \href{http://www.ted.com/index.php/talks/view/id/92}{Hans Rosling presentation}\footnote{It was entitled ``Debunking third-world myths with the best stats you've ever seen''.} in which a large number of animations were displayed and the talk was a great success (at least it seemed to be) due to the exciting moving pictures (surely as well as his excellent skills at giving presentations). Hans just showed the changing relationship of several variables over time. 
 
 \subsection{Moving Window Auto-Regression}\label{Sec:MWR} 
 \begin{figure}
@@ -719,9 +748,123 @@ ani.stop()
 \section{Computational Statistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Computational Statistics is the area of specialization within statistics that includes statistical visualization and other computationally-intensive methods of statistics. Computational statistics is built on mathematical theories and statistical methods, and includes visualization, statistical computing, and Monte Carlo methods, etc. 
+
+One of the characteristics of computational statistics is that it often involves with iterations and random numbers, which have been mentioned in section \ref{iteration} and \ref{random} respectively. A large proportion of demonstrations in this section have shown these two features (especially iterations). Usually the frames of animations are in accordance with iterations in the algorithms. 
+
+\subsection{Bisection Method}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{bisection}
+  \caption[Bisection method for root-finding on an interval]{Bisection method for root-finding on an interval. The equation to solve is $x^3 - 7x - 10 = 0$, and the initial interval is $[-3, 5]$. }\label{bisection}
+  \end{center}
+\end{figure}
+
+In mathematics, the bisection method is a root-finding algorithm which works by repeatedly dividing an interval in half and then selecting the subinterval in which a root exists. 
+
+Suppose we want to solve the equation $f(x) = 0$. Given two points $a$ and $b$ such that $f(a)$ and $f(b)$ have opposite signs, we know by the \emph{intermediate value theorem} that $f$ must have at least one root in the interval $[a, b]$ as long as $f$ is continuous on this interval. The bisection method divides the interval in two by computing $c = (a + b) / 2$. There are now two possibilities: either $f(a)$ and $f(c)$ have opposite signs, or $f(c)$ and $f(b)$ have opposite signs. The bisection algorithm is then applied recursively to the sub-interval where the sign change occurs.
+
+The function \fun{bisection.method()} gives a visual demonstration of this process of finding the root of an equation $f(x) = 0$. During the process of searching, the mid-points of subintervals are annotated in the graph by both texts (indicating the values) and blue straight lines, and the end-points are denoted in dashed red lines. The root of each iteration is also plotted in the right margin of the graph. 
+
+\begin{Usage}
+\begin{verbatim}
+bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 10), 
+    tol = 0.001, interact = FALSE, control = ani.control(), ...)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{bisection} is an example for finding the root of the equation $x^3 - 7x - 10 = 0$. 
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+f = function(x) x^3 - 7 * x - 10 
+xx = bisection.method(f, c(-3, 5)) 
+@
+
 \subsection{Gradient Descent Algorithm}
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=\textwidth]{graddesc}
+  \caption[Gradient descent algorithm for a 2-D case]{Gradient descent algorithm for a 2-D case: $z(x, y) = x^2 + 2y^2$. By default, the iteration starts at the point $(-3, 3)$. The arrows are indicating the detailed process of minimization. Theoretically the point $(0, 0)$ is the best solution, and we can see from the figure that the solution in the end is quite close to this point.}\label{graddesc}
+  \end{center}
+\end{figure}
+Gradient descent is an optimization algorithm. To find a local minimum of a function using gradient descent, one takes steps proportional to the negative of the gradient (or the approximate gradient) of the function at the current point. If instead one takes steps proportional to the gradient, one approaches a local maximum of that function; the procedure is then known as gradient ascent.
 
+Gradient descent is based on the observation that if the real-valued function $F(\mathbf{x})$ is defined and differentiable in a neighborhood of a point $\mathbf{a}$, then $F(\mathbf{x})$ decreases fastest if one goes from $\mathbf{a}$ in the direction of the negative gradient of $F$ at $\mathbf{a}$, $-\nabla F(\mathbf{a}$). It follows that, if
 
+\begin{equation}
+    \mathbf{b}=\mathbf{a}-\gamma\nabla F(\mathbf{a})
+\end{equation}
+
+for $\gamma > 0$ a small enough number, then $F(\mathbf{a})\geq F(\mathbf{b})$. With this observation in mind, one starts with a guess $\mathbf{x}_0$ for a local minimum of $F$, and considers the sequence $\mathbf{x}_0, \mathbf{x}_1, \mathbf{x}_2, \ldots$ such that
+
+\begin{equation}
+    \mathbf{x}_{n+1}=\mathbf{x}_n-\gamma_n \nabla F(\mathbf{x}_n),\ n \ge 0.
+\end{equation}
+
+We have
+
+\begin{equation}
+    F(\mathbf{x}_0)\ge F(\mathbf{x}_1)\ge F(\mathbf{x}_2)\ge \ldots,
+\end{equation}
+
+so hopefully the sequence $\{\mathbf{x}_n\}$ converges to the desired local minimum.
+
+The function \fun{grad.desc()} has provided a visual illustration for this process of minimization:
+
+\begin{Usage}
+\begin{verbatim}
+grad.desc(FUN = function(x, y) x^2 + 2 * y^2, rg = c(-3, -3, 3, 3), 
+    init = c(-3, 3), gamma = 0.05, tol = 0.001, len = 50, 
+    interact = FALSE, control = ani.control(interval = 0.1), ...)
+\end{verbatim}
+\end{Usage}
+ 
+Note that the iteration will stop if the change in the \para{FUN} values is smaller than the threshold \para{tol}. Figure \ref{graddesc} shows a illustration of minimizing the function $z(x, y) = x^2 + 2y^2$. Actually we may try even more complex function, for example:
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+f1 = function(x, y) x^2 + 3 * sin(y) 
+xx = grad.desc(f1, pi * c(-2, -2, 2, 2), c(-2 * pi, 2)) 
+xx$persp(col = "lightblue", theta = 30, phi = 30)
+f2 = function(x, y) sin(1/2 * x^2 - 1/4 * y^2 + 3) * 
+    cos(2 * x + 1 - exp(y))  
+xx = grad.desc(f2, c(-2, -2, 2, 2), c(-1, 0.5), 
+    gamma = 0.1, tol = 1e-04, nmax = 200, interval = 0) 
+xx = grad.desc(f2, c(-2, -2, 2, 2), interact = TRUE, 
+    tol = 1e-04, nmax = 200, interval = 0) 
+xx$persp(col = "lightblue", theta = 30, phi = 30)
+@
+ 
+
+\subsection{Newton's Method}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{newton}
+  \caption[Newton-Raphson method to solve an equation]{Newton-Raphson method to solve an equation $e^{-x} x = 0$ from a starting value $x_0 = 2$.}\label{newton}
+  \end{center}
+\end{figure}
+In numerical analysis, Newton's method (also known as the Newton-Raphson method or the Newton-Fourier method) is an efficient algorithm for finding approximations to the zeros (or roots) of a real-valued function. As such, it is an example of a root-finding algorithm. It produces iteratively a sequence of approximations to the root, their rate of convergence to the root is quadratic. It can also be used to find a minimum or maximum of such a function, by finding a zero in the function's first derivative.
+
+The function \fun{newton.method()} is a very simple implementation of Newton's method. The iteration in the code follows this formula: 
+
+\begin{equation}
+    x_{k + 1} = x_{k} - \frac{f(x_{k})}{f'(x_{k})}
+\end{equation}
+
+From the starting value $x_{0}$, blue vertical lines and red points are plotted to show the location of the sequence of iteration values $x_1, x_2, \ldots$; red tangent lines are drawn to illustrate the relationship between successive iterations; the iteration values are in the right margin of the plot.
+
+\begin{Usage}
+\begin{verbatim}
+newton.method(FUN = function(x) x^2 - 4, init = 10, 
+    rg = c(-1, 10), tol = 0.001, interact = FALSE, 
+    control = ani.control(interval = 2), ...)
+\end{verbatim}
+\end{Usage}
+
+Figure \ref{newton} shows the process of finding the root of $e^{-x} x = 0$ by Newton's method from a starting value $x_0 = 2$. 
+
+<<fig=FALSE,echo=TRUE,eval=FALSE>>=
+newton.method(function(x) exp(-x) * x, rg = c(0, 10), init = 2)
+@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -810,7 +953,7 @@ cv.ani(x = runif(150), k = 10, control = ani.control(interval = 2,
 Figure \ref{crossvalidation} shows a possible partition of the whole data set into a training set and test set (10-fold cross-validation). The test set can move from the first part to the last part, and this is the base for animations. 
 
 \subsection{\emph{k}-Nearest Neighbor Classification}
-\begin{figure}
+\begin{figure}[t]
   \begin{center}
     \includegraphics[width=\textwidth]{knn}
   \caption[$k$NN algorithm in the 2D plane.]{$k$NN algorithm in the 2D plane: gray dashed lines stand for ``distances'' so that neighbors can be decided; the red polygon means the $k$ nearest neighbors (15 in this example); at last let these neighbors vote for the classification, and the symbol (classification) was changed according to the majority vote. Points marked by question marks ``\para{?}'' are the remaining points in the test set with unknown classifications yet.}\label{knn}

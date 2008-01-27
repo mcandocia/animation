@@ -1,6 +1,37 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       0.1-7 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-7 
+
+
+NEW FEATURES
+
+    o conf.int() to illustrate the concept of confidence 
+  intervals. 
+    o lln.ani() to illustrate the Law of Large Numbers. 
+    o grad.desc() for the Gradient Descent Algorithm.
+    o bisection.method() for the illustration of the 
+  Bisection method.
+    o newton.method() for the demonstration of Newton-Raphson
+  method. 
+ 
+
+MINOR CHANGES
+
+    o A special function checkargs() is added to validate 
+  animation arguments, which can promote the efficiency 
+  of animation functions. 
+    o It doesn't need Sys.sleep() when creating HTML pages,
+  so the code is modified to avoid suspending in this case. 
+
+
+	**************************************************
+	*						 *
 	*	       0.1-6 NEWS			 *
 	*						 *
 	**************************************************

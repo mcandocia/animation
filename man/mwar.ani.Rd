@@ -27,7 +27,7 @@ A list containing
 Robert A. Meyer, Jr. Estimating coefficients that change over time. \emph{International Economic Review}, 13(3):705-710, 1972.
 }
 \author{ Yihui Xie }
-\seealso{  \code{\link[stats:arima]{arima}} }
+\seealso{  \code{\link[stats]{arima}} }
 \examples{
 # moving window along a sin curve 
 mwar.ani(interval = 0.3)
@@ -40,7 +40,7 @@ mwar.ani(pageview$visits, k = 30, interval = 0.2)
 
 # HTML animation page
 ani.start()
-mwar.ani(interval = 0, width = 600, height = 500) 
+mwar.ani(interval = 0.2, width = 600, height = 500) 
 ani.stop() 
 
 }

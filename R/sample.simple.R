@@ -1,16 +1,7 @@
 `sample.simple` <-
 function(nrow = 10, ncol = 10, size = 15, 
     control = ani.control(interval = 0.2), ...) {
-    extraArgs = list(...)
-    if (length(extraArgs)) {
-        controlargs = names(formals(ani.control))
-        idx = match(names(extraArgs), controlargs, nomatch = 0)
-        if (any(idx == 0)) 
-            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
-        control[names(extraArgs)] = extraArgs
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
-    }
+    control = checkargs(control, ...) 
     if (size > nrow*ncol) 
         stop("sample size must be smaller than the population")
     x = cbind(rep(1:ncol, nrow), gl(nrow, ncol))
@@ -22,7 +13,7 @@ function(nrow = 10, ncol = 10, size = 15,
         box()
         if (control$saveANI) 
             savePNG(n = i, width = control$width, height = control$height)
-        Sys.sleep(control$interval)
+        else Sys.sleep(control$interval)
     }
     par(op)
     invisible(NULL)

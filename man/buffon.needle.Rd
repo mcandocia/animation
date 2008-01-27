@@ -41,7 +41,7 @@ buffon.needle(nmax = 500, interval = 0, redraw = FALSE)
  
 # create HTML animation page
 ani.start()
-buffon.needle(saveANI = TRUE, nmax = 100, interval = 0, 
+buffon.needle(saveANI = TRUE, nmax = 100, interval = 0.05, 
     width = 600, height = 600, redraw = FALSE) 
 ani.stop() 
 

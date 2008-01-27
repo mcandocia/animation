@@ -57,7 +57,7 @@ op = par(mar = c(3.5, 3.5, 3, 1), mgp = c(2, 0.5,
     0), cex.axis = 0.75, tcl = -0.3) 
 knn.ani(train = x, test = y, cl = rep(c("first class", "second class"),
     each = 40), k = 30, control = ani.control(saveANI = TRUE, 
-    interval = 0.5, width = 600, height = 600)) 
+    width = 600, height = 600)) 
 par(op) 
 ani.stop() 
 

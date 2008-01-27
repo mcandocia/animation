@@ -33,7 +33,7 @@ After calling \code{\link{ani.start}}, either animation functions in this packag
  
 # save the animation in HTML pages and auto-browse it 
 ani.start()
-boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0)
+boot.iid(saveANI = TRUE, width = 600, height = 500, interval = 0.2)
 ani.stop()
 
 }

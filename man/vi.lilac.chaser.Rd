@@ -33,12 +33,15 @@ In fact, points in the original version of `Lilac Chaser' are \emph{blurred}, wh
 op = par(pty = "s") 
 vi.lilac.chaser(nmax = 20) 
 
+\dontrun{ 
+
 # HTML animation page; nmax = 1 is enough! 
 ani.start()
 par(mar = rep(1, 4)) 
 vi.lilac.chaser(np = 12, saveANI = TRUE, nmax = 1) 
 ani.stop() 
 
+}
 par(op) 
 }
 \keyword{ dynamic }

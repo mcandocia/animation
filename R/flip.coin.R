@@ -1,16 +1,7 @@
 `flip.coin` <- function(faces = 2, prob = NULL, border = "white", 
     col = 1:2, type = "p", pch = 21, bg = "transparent", control = ani.control(interval = 0.2, 
         nmax = 100), ...) {
-    extraArgs = list(...)
-    if (length(extraArgs)) {
-        controlargs = names(formals(ani.control))
-        idx = match(names(extraArgs), controlargs, nomatch = 0)
-        if (any(idx == 0)) 
-            stop("Argument ", names(extraArgs)[idx == 0], "not matched")
-        control[names(extraArgs)] = extraArgs
-        if ("interval" %in% names(extraArgs)) 
-            ani.control(...)
-    }
+    control = checkargs(control, ...) 
     if (length(faces) == 1) {
         faces = as.factor(seq(faces))
     }
@@ -57,7 +48,7 @@
         axis(1, 1.5, paste("Number of Tosses:", i), tcl = 0)
         if (control$saveANI) 
             savePNG(n = i, width = control$width, height = control$height)
-        Sys.sleep(control$interval)
+        else Sys.sleep(control$interval)
     }
     invisible(as.matrix(frq)[, 1])
 } 
