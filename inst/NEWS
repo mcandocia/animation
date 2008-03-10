@@ -1,6 +1,23 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       0.1-8 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-8
+
+
+MINOR CHANGES
+
+    o the function flip.coin() is slightly modified (a new
+  argument 'grid' added and the digits of probabilities 
+  in the graph can be controlled)
+ 
+
+	**************************************************
+	*						 *
 	*	       0.1-7 NEWS			 *
 	*						 *
 	**************************************************
