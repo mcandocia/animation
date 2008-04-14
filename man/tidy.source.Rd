@@ -5,7 +5,7 @@
   Actually this function has nothing to do with code optimization; it just returns parsed source code. 
 }
 \usage{
-tidy.source(source, ...)
+tidy.source(source = "clipboard", ...)
 }
 \arguments{
   \item{source}{ a string: location of the source code }

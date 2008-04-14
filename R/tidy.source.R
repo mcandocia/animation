@@ -1,4 +1,4 @@
-`tidy.source` <- function(source, ...) {
+`tidy.source` <- function(source = "clipboard", ...) {
     exprs = parse(source)
     n = length(exprs)
     res = character(n)

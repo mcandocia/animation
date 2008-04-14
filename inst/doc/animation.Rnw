@@ -803,33 +803,28 @@ Monte-Carlo integration.
     \includegraphics[width=\textwidth]{CLT}
   \caption[A CLT simulation for samples from the Uniform
 distribution]{A CLT simulation for samples from the Uniform
-distribution: the top two plots embody obvious characteristics of
-the Uniform distribution, while the bottom one is the well-known
+distribution: we know the original Uniform distribution is ``flat'',
+while the density of the sample mean is the well-known
 ``bell-shaped'' curve.}\label{CLT}
   \end{center}
 \end{figure}
 The Central Limit Theorem (CLT) is one of the most famous theorems
 in probability theory, and here we may check the distribution of the
-sample mean $\bar{x}$ when the sample size $n$ is large enough.
-Relative theories can be easily found in most textbooks in
+sample mean $\bar{X}_n=\sum X_i/n$ when the sample size $n$ is large
+enough. Relative theories can be easily found in most textbooks in
 probability theory or mathematical statistics (e.g. \cite{Lehmann99}
 and \cite{Casella01}).
 
 The function \fun{clt.ani()} provides a demonstration for CLT in the
-following schema: first of all, \para{n} sample points are generated
-from a certain distribution, and the ecdf (empirical cumulative
-distribution function) as well as the pdf (estimated from
-\fun{density()}) is plotted. Then the sample mean is computed, and
-at last the density of these sample means is plotted as the
-replication of the generation of random numbers from that
-distribution. The whole plot area is divided into three parts to
-show the ecdf and pdf of the sample points from the corresponding
-replication and the pdf of the sample means estimated from all the
-replications.
+following schema: First of all, a number of \code{obs} observations
+are generated from a certain distribution for each variable $X_i$
+($i = 1, 2, \cdots, n$), then the sample means are computed, and at
+last the density of these sample means is plotted as the sample size
+$n$ increases.
 
 \begin{Usage}
 \begin{verbatim}
-clt.ani(n = 30, FUN = runif, control = ani.control(interval = 0.1),
+clt.ani(obs = 30, FUN = runif, control = ani.control(interval = 0.1),
     ...)
 \end{verbatim}
 \end{Usage}

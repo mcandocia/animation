@@ -10,7 +10,8 @@
     dst = matrix(nrow = nrow(x), ncol = nrow(centers))
     j = jj = 1
     while (jj <= control$nmax) {
-        plot(x, pch = ocluster, col = ocluster, main = "Move Cluster Centers")
+        plot(x, pch = ocluster, col = ocluster, main = "Move Cluster Centers", 
+            panel.first = grid())
         points(centers, pch = 1:nrow(centers), cex = 3, lwd = 2, 
             col = 1:nrow(centers))
         if (control$saveANI) 
@@ -23,6 +24,7 @@
         }
         ncluster = apply(dst, 1, which.min)
         plot(x, type = "n", main = "Find Cluster Membership")
+        grid()
         points(centers, cex = 3, col = 1:nrow(centers), pch = 1:nrow(centers), 
             lwd = 2)
         for (i in 1:nrow(centers)) {

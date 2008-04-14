@@ -1,6 +1,53 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       0.2-0 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.2-0
+
+
+NEW FEATURES
+
+    o cv.nfeaturesLDA() to illustrate the process of k-fold
+  cross-validation to find the optimum number of features
+  in LDA. 
+
+MINOR CHANGES
+
+    o A rectangular grid has been added to the plot in
+  kmeans.ani() so that the moving of centers can be
+  better observed.
+    o The default value for the argument "source" is set
+  to be "clipboard".
+
+SIGNIFICANT CHANGES
+
+    o The code for clt.ani() has been modified to make
+  better illustrations for the CLT. 
+ 
+
+	**************************************************
+	*						 *
+	*	       0.1-9 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 0.1-9
+
+
+MINOR CHANGES
+
+    o A rectangular grid has been added to the plot in
+  kmeans.ani() so that the moving of centers can be
+  better observed.
+ 
+
+	**************************************************
+	*						 *
 	*	       0.1-8 NEWS			 *
 	*						 *
 	**************************************************

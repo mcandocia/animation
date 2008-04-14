@@ -1,4 +1,4 @@
-cv.ani <- function(x = runif(150), k = 10, control = ani.control(interval = 2, 
+`cv.ani` <- function(x = runif(150), k = 10, control = ani.control(interval = 2, 
     nmax = 50), ...) {
     control = checkargs(control, ...) 
     N = length(x)
