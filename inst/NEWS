@@ -1,6 +1,52 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
+	*	       1.0-0 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 1.0-0
+
+
+NEW FEATURES
+
+    o ani.options() added to control animation parameters.
+  It is much better than ani.control() in previous
+  versions.
+    o ani.start() and ani.stop() are modified. The former
+  function opens a graphics device and the latter one
+  create an HTML page with a new interface.
+    o A wiki has been build to support this package:
+  http://animation.yihui.name (AniWiki: Animations in
+  Statistics)
+
+MINOR CHANGES
+
+    o Graphical parameters can be set in ... argument for:
+  brownian.motion(), buffon.needle(), clt.ani(), conf.int(),
+  cv.ani(), lln.ani(), mwar.ani(), newton.method(),
+  sample.cluster(), sample.strat().
+    o P-values are computed in clt.ani() to check the
+  normality (using 'shapiro.test()').
+
+SIGNIFICANT CHANGES
+
+    o The vignette is abandoned and stopped being updated;
+  the wiki http://animation.yihui.name will be used instead.
+    o The way to create HTML animations is significantly
+  changed for the sake of a better interface and more
+  flexible control of animations. Read the help files 
+  for ani.control(), ani.start(), ani.stop().
+    o The function savePNG() removed. The new way to
+  create animation frames allows ANY graphics devices.
+    o ani.control() and checkargs() removed. The new
+  way to control animation parameters is more flexible.
+ 
+
+
+	**************************************************
+	*						 *
 	*	       0.2-0 NEWS			 *
 	*						 *
 	**************************************************
@@ -29,22 +75,6 @@ SIGNIFICANT CHANGES
   better illustrations for the CLT. 
  
 
-	**************************************************
-	*						 *
-	*	       0.1-9 NEWS			 *
-	*						 *
-	**************************************************
-
-
-		CHANGES IN animation VERSION 0.1-9
-
-
-MINOR CHANGES
-
-    o A rectangular grid has been added to the plot in
-  kmeans.ani() so that the moving of centers can be
-  better observed.
- 
 
 	**************************************************
 	*						 *

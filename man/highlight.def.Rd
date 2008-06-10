@@ -1,6 +1,5 @@
 \name{highlight.def}
 \alias{highlight.def}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Create R definition file for the software Highlight }
 \description{
   The default definition file for R in Highlight is somewhat incomplete, and this function is to dynamically generate such a file according to packages in the search path. 
@@ -8,7 +7,6 @@
 \usage{
 highlight.def(file = "r.lang")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{ the path of the output definition file. }
 }

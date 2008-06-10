@@ -1,38 +1,36 @@
-`ani.stop` <- function(footer = TRUE, autobrowse = TRUE) {
-    if (exists("ANIenv", envir = .GlobalEnv)) {
-        if (exists("ht", envir = get("ANIenv", envir = .GlobalEnv)) & 
-            exists("nmax", envir = get("ANIenv", envir = .GlobalEnv)) &
-            exists("interval", envir = get("ANIenv", envir = .GlobalEnv))) {
-            .ani.file = get(".ani.file", envir = get("ANIenv", 
-                envir = .GlobalEnv))
-            cat(paste("var nmax = ", get("nmax", envir = get("ANIenv", 
-                envir = .GlobalEnv)), "\n var ht = ", get("ht", 
-                envir = get("ANIenv", envir = .GlobalEnv)), "\n", 
-                sep = ""), file = .ani.file, append = TRUE)
-            cat("for(i = 1; i <= nmax; i++){\n\tdocument.write(\"<div id=\\\"divPreload\" + i + \"\\\"><img src=\\\"images/\" + i + \".png\\\" /></div>\")\n}\n</script>\n</div>\n</div>\n<div style=\"border: solid 1px #FF0000; margin-top: 20px; height: 20px;\" title=\"Speed\">\n<div id=\"percent\" style=\"width: 80%\">80%</div>\n</div>\n<div id=\"divControl\">\n<input type=\"button\" disabled=\"disabled\" id=\"btnBegin\" onclick=\"displayImage()\" value=\"Begin\"/>\n<input type=\"button\" disabled=\"disabled\" id=\"btnFaster\" onclick=\"fasterImage(-0.1)\" value=\"Faster\"/>\n<input type=\"button\" disabled=\"disabled\" id=\"btnSlower\" onclick=\"fasterImage(0.1)\" value=\"Slower\"/>\n<input type=\"button\" disabled=\"disabled\" id=\"btnStop\" onclick=\"stopImage()\" value=\"Stop \"/> \nTime Interval: <label id=\"lbl\">", 
-                file = .ani.file, append = TRUE)
-            cat(paste(get("interval", envir = get("ANIenv", envir = .GlobalEnv)), 
-                "</label> seconds; <label id=\"lblImage\"></label>\n</div>\n", 
-                sep = ""), file = .ani.file, append = TRUE)
-            if (footer) 
-                cat(paste("<div id=\"footer\">Created by package \"animation\" written by <a href=\"http://www.yihui.name/\" target=\"_blank\">Yihui XIE</a>.<br>", 
-                  Sys.time(), "</div>", sep = ""), file = .ani.file, 
-                  append = TRUE)
-            cat("</body>\n</html>", file = .ani.file, append = TRUE)
-            if (autobrowse) 
-                on.exit(browseURL(paste("file://", .ani.file, 
-                  sep = "")), add = TRUE)
-            cat("HTML animation page created: ", normalizePath(.ani.file), 
-                "\n")
-        }
-        else {
-            warning("It seems that no animation function has been called yet!") 
-        } 
-        options(prompt = get("oldprompt", envir = get("ANIenv", 
-            envir = .GlobalEnv)))
-        on.exit(rm("ANIenv", envir = .GlobalEnv), add = TRUE)
-    }
-    else {
-        warning("It seems that you haven't started an animation yet!")
-    }
-} 
+`ani.stop` <- function() {
+    if (ani.options("footer"))
+        footer = paste("<div class=\"footer\">Created by R package \"<a href=\"http://cran.r-project.org/package=animation\" target=\"_blank\">animation</a>\" written by <a href=\"http://www.yihui.name/\" target=\"_blank\">Yihui XIE</a>.<br>",
+            Sys.time(), "</div>", sep = "")
+    else footer = NULL
+    ani.file = file.path(ani.options("outdir")[1], ani.options("filename"))
+    html = paste("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><title>",
+        ani.options("title"), "</title><script language=\"JavaScript\" type=\"text/javascript\" src=\"FUN.js\"></script><link href=\"ANI.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body onload=loading('ANIR')>",
+        "<div align=\"center\" class=\"anidemo\" title=\"", ani.options("title"),
+        "\"><fieldset><legend align=\"center\">", ani.options("title"),
+        "</legend><div id=\"loadingANIR\" class=\"loading\">loading animation frames... </div><div id=\"divPreloadANIR\" class=\"divPreload\">\n<script language=\"JavaScript\" type=\"text/javascript\">\n var sourceANIR = \"images/\"; var imgtypeANIR = \"",
+        ani.options("ani.type"), "\"; var tmpANIR = 0; var nmaxANIR=",
+        ani.options("nmax"), "; var nANIR=1; var tANIR;\n for(i = 1; i <= nmaxANIR; i++){",
+        "document.write(\"", "<div class=\\\"divFrame\\\" id=\\\"divPreloadANIR\" + i + \"\\\"><img src=\\\"\" + sourceANIR + i + \".\" + imgtypeANIR + \"\\\"\" + \" id = \\\"img\" + \"ANIR\" + i + \"\\\" alt=\\\"",
+        ani.options("title"), "\\\" title=\\\"", ani.options("title"),
+        "\\\" /></div>\"", ");}\n</script></div><div class=\"btncontrol\"><input name=\"nmaxANIR\" type=\"hidden\" id=\"nmaxANIR\" value=\"",
+        ani.options("nmax"), "\" /><input name=\"heightANIR\" type=\"hidden\" id=\"heightANIR\" value=\"",
+        ani.options("ani.height"), "\" /><input name=\"btnPlayANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnPlayANIR\" title=\"Play\" onclick=\"playAni('ANIR')\" value=\"  &gt;  \" /> <input name=\"btnPauseANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnPauseANIR\" title=\"Pause\" onclick=\"pauseAni('ANIR')\" value=\"  O  \" /> <input name=\"btnFastANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnFastANIR\" title=\"Speed up\" onclick=\"fastAni('ANIR',1)\" value=\"  +  \" /> <input name=\"btnSlowANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnSlowANIR\" title=\"Slow down\" onclick=\"fastAni('ANIR',-1)\" value=\"  -  \" /> <input name=\"btnPrevANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnPrevANIR\" title=\"Previous frame\" onclick=\"prevAni('ANIR',1)\" value=\"  &lt;&lt;  \" /> <input name=\"btnNextANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnNextANIR\" title=\"Next frame\" onclick=\"prevAni('ANIR',-1)\" value=\"  &gt;&gt;  \" /> <input name=\"btnFirstANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnFirstANIR\" title=\"First frame\" onclick=\"firstAni('ANIR',true)\" value=\"  |&lt;  \" /> <input name=\"btnLastANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnLastANIR\" title=\"Last frame\" onclick=\"firstAni('ANIR',false)\" value=\"  &gt;|  \" /> <input name=\"btnMoreANIR\" type=\"submit\" disabled=\"disabled\" class=\"anibutton\" id=\"btnMoreANIR\" title=\"More controls\" onclick=\"btnMore('ANIR')\" value=\"  &lt;&gt;  \" /></div><div id=\"moreParANIR\" class=\"morepar\"><label title=\"Which frame to go?\" onmouseover=\"this.style.backgroundColor='#8cacbb'\" onmouseout=\"this.style.backgroundColor='#ffffff'\">View <input name=\"txtFrameANIR\" type=\"text\" id=\"txtFrameANIR\" onblur=\"txtFrame(this.value, 'ANIR')\" value=\"1\" size=\"4\" class=\"text\" />/",
+        ani.options("nmax"), " frame</label> <label title=\"Loop or not?\" onmouseover=\"this.style.backgroundColor='#8cacbb'\" onmouseout=\"this.style.backgroundColor='#ffffff'\"><input name=\"checkLoopANIR\" type=\"checkbox\" id=\"checkLoopANIR\" checked=\"checked\"/>Loop</label> <label title=\"Time interval for the animation (in sec)\" onmouseover=\"this.style.backgroundColor='#8cacbb'\" onmouseout=\"this.style.backgroundColor='#ffffff'\">Time Interval: <input name=\"txtIntervalANIR\" type=\"text\" id=\"txtIntervalANIR\" onblur=\"txtInterval(this)\" value=\"",
+        ani.options("interval")[2], "\" size=\"4\" class=\"text\" /></label> <label title=\"Increment in time interval\" onmouseover=\"this.style.backgroundColor='#8cacbb'\" onmouseout=\"this.style.backgroundColor='#ffffff'\">Step: <input name=\"txtStepANIR\" type=\"text\" id=\"txtStepANIR\" onblur=\"txtInterval(this)\" value=\"0.1\" size=\"4\" class=\"text\" /></label></div><div class=\"description\">",
+        ani.options("description"), "</div></fieldset>", footer,
+        "</div>", "</body></html>", sep = "")
+    cat(html, file = ani.file)
+    ani.options(interval = ani.options("interval")[2])
+    setwd(ani.options("outdir")[2])
+    ani.options(outdir = ani.options("outdir")[1])
+    if (ani.options("autobrowse"))
+        on.exit(browseURL(paste("file://", ani.file, sep = "")),
+            add = TRUE)
+    options(prompt = ani.options("withprompt")[1])
+    ani.options(withprompt = ani.options("withprompt")[2])
+    dev.off()
+    cat(ani.options("nmax"), "animation frames recorded.\n")
+    cat("HTML animation page created:", normalizePath(ani.file),
+        "\n")
+}

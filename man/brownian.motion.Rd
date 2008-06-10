@@ -1,22 +1,16 @@
 \name{brownian.motion}
 \alias{brownian.motion}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Demonstration of Brownian motion on the 2D plane }
 \description{
   Demonstrate Brownian motion (random walk) in a 2D scatterplot. 
 }
 \usage{
-brownian.motion(n = 10, main = "Demonstration of Brownian Motion", 
-    xlim = c(-20, 20), ylim = c(-20, 20), pch = 21, cex = 5, 
-    col = "red", bg = "yellow", control = ani.control(nmax = 100, 
-    interval = 0.05), ...)
+brownian.motion(n = 10, xlim = c(-20, 20), ylim = c(-20, 20), ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{n}{ Number of points in the scatterplot }
-  \item{main, xlim, ylim, pch, cex, col, bg}{ Arguments passed to \code{\link[graphics:plotdefault]{plot.default}} to control the apperance of the scatterplot (title, points, etc), see \code{\link[graphics:points]{points}} for details.}
-  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
-  \item{\dots}{ other arguments passed to \code{\link{ani.control}}}
+  \item{xlim, ylim}{ Arguments passed to \code{\link[graphics:plotdefault]{plot.default}} to control the apperance of the scatterplot (title, points, etc), see \code{\link[graphics:points]{points}} for details.}
+  \item{\dots}{ other arguments passed to \code{\link[graphics:plotdefault]{plot.default}}}
 }
 \details{
   Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers: the location of the next step is just ``current location + random Gaussian numbers'', i.e.,
@@ -28,22 +22,34 @@ brownian.motion(n = 10, main = "Demonstration of Brownian Motion",
 \value{
 None (invisible `\code{NULL}').
 }
-
+\references{
+\url{http://animation.yihui.name/prob:brownian_motion}
+}
 \author{ Yihui Xie}
-\seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
+\seealso{ \code{\link[stats:Normal]{rnorm}} }
 \examples{
 # show an animation in (Windows/X Window...) a graphics device 
 # unless you have opened an invisible device like png(), pdf(), ... 
-brownian.motion(n = 15, nmax = 150) 
+oopt = ani.options(interval = 0.05, nmax = 150)
+brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow",
+    main = "Demonstration of Brownian Motion")
+ani.options(oopt)
 
 \dontrun{
- 
-# create HTML animation page
+# create an HTML animation page
+# store the old option to restore it later
+oopt = ani.options(interval = 0.05, nmax = 100, ani.dev = png,
+    ani.type = "png",
+    title = "Demonstration of Brownian Motion",
+    description = "Random walk on the 2D plane: for each point
+    (x, y), x = x + rnorm(1) and y = y + rnorm(1).")
 ani.start()
-brownian.motion(n = 15, nmax = 100, saveANI = TRUE, width = 500,
-    height = 500) 
-ani.stop() 
-
+opar = par(mar = c(3, 3, 1, 0.5), mgp = c(2, .5, 0), tcl = -0.3,
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
+brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
+par(opar)
+ani.stop()
+ani.options(oopt)
 }
 }
 \keyword{ dplot }

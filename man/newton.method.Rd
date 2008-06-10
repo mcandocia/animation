@@ -5,9 +5,9 @@
   Newton's method (also known as the Newton-Raphson method or the Newton-Fourier method) is an efficient algorithm for finding approximations to the zeros (or roots) of a real-valued function f(x). This function provides an illustration of the iterations in Newton's method. 
 }
 \usage{
-newton.method(FUN = function(x) x^2 - 4, init = 10, 
-    rg = c(-1, 10), tol = 0.001, interact = FALSE, 
-    control = ani.control(interval = 2), ...)
+newton.method(FUN = function(x) x^2 - 4, init = 10, rg = c(-1, 10),
+    tol = 0.001, interact = FALSE, col.lp = c("blue", "red", "red"),
+    main, xlab, ylab, ...)
 }
 \arguments{
   \item{FUN}{ the function in the equation to solve (univariate) }
@@ -15,15 +15,16 @@ newton.method(FUN = function(x) x^2 - 4, init = 10,
   \item{rg}{ the range for plotting the curve }
   \item{tol}{ the desired accuracy (convergence tolerance) }
   \item{interact}{ logical; whether choose the starting point by cliking on the curve (for 1 time) directly? }
-  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
-  \item{\dots}{ other arguments passed to \code{\link{ani.control}} }
+  \item{col.lp}{ a vector of length 3 specifying the colors of: vertical lines, tangent lines and points }
+  \item{main, xlab, ylab}{ titles of the plot; there are default values for them (depending on the form of the function \code{FUN}) }
+  \item{\dots}{ other arguments passed to \code{\link[graphics]{curve}} }
 }
 \details{
   The iteration goes on in this way:
   
   \deqn{x_{k + 1} = x_{k} - \frac{FUN(x_{k})}{FUN'(x_{k})}}{x[k + 1] = x[k] - FUN(x[k]) / FUN'(x[k])} 
 
-  From the starting value x0, blue vertical lines and red points are plotted to show the location of the sequence of iteration values x1, x2, ...; red tangent lines are drawn to illustrate the relationship between successive iterations; the iteration values are in the right margin of the plot. 
+  From the starting value \eqn{x_0}, vertical lines and points are plotted to show the location of the sequence of iteration values \eqn{x_1, x_2, \ldots}{x1, x2, \dots}; tangent lines are drawn to illustrate the relationship between successive iterations; the iteration values are in the right margin of the plot.
 }
 \value{
   A list containing 
@@ -36,14 +37,23 @@ The algorithm might not converge -- it depends on the starting value. See the ex
 } 
 \references{ 
 \url{http://en.wikipedia.org/wiki/Newton's_method}
+
+\url{}
 }
 \author{ Yihui Xie }
 \seealso{ \code{\link[stats]{optim}} }
 \examples{
-op = par(pch = 19) 
+
+oopt = ani.options(interval = 1, nmax = 50)
+op = par(pch = 20)
+
 # default example 
 xx = newton.method() 
 xx$root  # solution
+
+# take a long long journey
+newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 *
+    x + 100, 7.15, c(-6.2, 7.1))
 
 \dontrun{
  
@@ -59,10 +69,16 @@ xx = newton.method(function(x) atan(x), rg = c(-2,
     2), interact = TRUE) 
 
 # HTML animation pages 
+ani.options(ani.height = 500, ani.width = 600, outdir = getwd(), nmax = 100,
+    interval = 1, title = "Demonstration of the Newton-Raphson Method",
+    description = "Go along with the tangent lines and iterate.")
 ani.start()
-newton.method(function(x) exp(-x) * x, rg = c(0, 10), 
-    init = 2, saveANI = TRUE, width = 600, height = 500)
-ani.stop() 
+par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0), pch = 19)
+newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 *
+    x + 100, 7.15, c(-6.2, 7.1), main = "")
+ani.stop()
+ani.options(oopt)
+
 
 }
 par(op) 

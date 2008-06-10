@@ -1,24 +1,27 @@
-`boot.iid` <- function(x = runif(20), statistic = mean, 
-    m = length(x), control = ani.control(), ...) {
-    control = checkargs(control, ...) 
-    xx = statistic(sample(x, m, TRUE))
-    layout(matrix(1:2, 2))
-    op = par(mar = c(1.5, 3, 2, 0.1), cex.main = 1, cex.lab = 0.8, 
-        cex.axis = 0.8, mgp = c(2, 0.5, 0), tcl = -0.3)
-    for (i in 1:control$nmax) {
-        idx = sample(length(x), m, TRUE)
-        xx = c(xx, statistic(x[idx]))
-        plot(x, pch = 19, col = "blue", cex = 1.5, main = "Demonstration of bootstrapping for i.i.d data", 
-            xlab = "", ylab = "x")
-        sunflowerplot(idx, x[idx], add = TRUE, col = "red", cex = 2)
-        hist(xx, freq = FALSE, main = "Distribution of bootstrap estimates", 
-            col = "bisque")
-        lines(density(xx), col = "red")
-        rug(xx)
-        if (control$saveANI) 
-            savePNG(n = i, width = control$width, height = control$height)
-        else Sys.sleep(control$interval)
+`boot.iid` <- function(x = runif(20), statistic = mean,
+    m = length(x), mat = matrix(1:2, 2), widths = rep(1, ncol(mat)),
+    heights = rep(1, nrow(mat)), col = c("black", "red", "bisque",
+        "red", "gray"), cex = c(1.5, 0.8), main = c("Bootstrapping the i.i.d data",
+        "Density of bootstrap estimates"), ...) {
+    idx = replicate(ani.options("nmax"), sample(length(x), m,
+        TRUE))
+    xx = matrix(x[idx], nrow = m)
+    xest = apply(xx, 2, statistic)
+    xrg = range(hist(xest, plot = FALSE)$breaks)
+    layout(mat, widths, heights)
+    interval = ani.options("interval")
+    for (i in 1:ani.options("nmax")) {
+        sunflowerplot(idx[, i], xx[, i], col = col[2], cex = cex[2],
+            xlim = c(1, length(x)), ylim = range(x) + c(-1, 1) *
+                diff(range(x)) * 0.1, panel.first = points(x,
+                col = col[1], cex = cex[1]), xlab = "", ylab = "x",
+            main = main[1], ...)
+        hist(xest[1:i], freq = FALSE, main = main[2], col = col[3],
+            xlab = "", xlim = xrg)
+        if (i > 1) lines(density(xest[1:i]), col = col[4]) else axis(2)
+        rug(xest[1:i], col = col[5])
+        axis(1)
+        Sys.sleep(interval)
     }
-    par(op)
     invisible(list(t0 = statistic(x), tstar = xx))
-} 
+}

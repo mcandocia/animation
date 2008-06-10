@@ -1,6 +1,5 @@
 \name{flip.coin}
 \alias{flip.coin}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Probability in flipping coins }
 \description{
   In the first class of learning probability theory, we usually begin with flipping coins or tossing dice. This function provides a simulation to such a process and computes the frequency for `heads' and `tails'. 
@@ -8,10 +7,8 @@
 \usage{
 flip.coin(faces = 2, prob = NULL, border = "white", grid = "white",
     col = 1:2, type = "p", pch = 21, bg = "transparent",
-    digits = 3, control = ani.control(interval = 0.2, nmax = 100),
-    ...)
+    digits = 3)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{faces}{ an integer or a character vector. See details below. }
   \item{prob}{ the probability vector of showing each face. If \code{NULL}, each face will be shown in the same probability. }
@@ -20,8 +17,6 @@ flip.coin(faces = 2, prob = NULL, border = "white", grid = "white",
   \item{col}{ The colors to annotate different faces of the `coin'. } 
   \item{type, pch, bg}{ See \code{\link[graphics:points]{points}}.} 
   \item{digits}{integer indicating the precision to be used in the annotation of frequencies in the plot} 
-  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
-  \item{\dots}{ other arguments passed to \code{\link{ani.control}}}
 }
 \details{
   If \code{faces} is a single integer, say 2, a sequence of integers from 1 to \code{faces} will be used to denote the faces of a coin; otherwise this character vector just gives the names of each face.
@@ -43,19 +38,31 @@ flip.coin(faces = 2, prob = NULL, border = "white", grid = "white",
 
 \author{ Yihui Xie }
 \seealso{ \code{\link{ani.start}}, \code{\link{ani.stop}} }
+\references{
+\url{http://animation.yihui.name/prob:flipping_coins}
+}
 \examples{
+
+oopt = ani.options(interval = 0.2, nmax = 100)
 # a coin would stand on the table?? just kidding :) 
-flip.coin(faces = c("Head", "Stand", "Tail"), interval = 0.2, 
-    nmax = 50, type = "n", prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4)) 
+flip.coin(faces = c("Head", "Stand", "Tail"), type = "n",
+    prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4))
+
+flip.coin(bg = "yellow")
 
 \dontrun{
  
 # HTML animation page
+ani.options(ani.height = 500, ani.width = 600, outdir = getwd(), interval = 0.2,
+    nmax = 50, title = "Probability in flipping coins",
+    description = "This animation has provided a simulation of flipping coins,
+    which might be helpful in understanding the concept of probability.")
 ani.start()
-flip.coin(saveANI = TRUE, interval = 0.1, nmax = 30, bg = "yellow",
-    width = 600, height = 500) 
-ani.stop() 
-
+par(mar = c(2, 3, 2, 1.5), mgp = c(1.5, 0.5, 0))
+flip.coin(faces = c("Head", "Stand", "Tail"), type = "n",
+    prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4))
+ani.stop()
+ani.options(oopt)
 }
 }
 

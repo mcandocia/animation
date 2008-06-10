@@ -5,17 +5,20 @@
   This function just fulfills a very naive idea about moving window regression using rectangles to denote the ``windows'' and move them, and the corresponding AR(1) coefficients as long as rough confidence intervals are computed for data points inside the ``windows'' during the process of moving.  
 }
 \usage{
-mwar.ani(x, k = 15, conf = 2, control = ani.control(), ...)
+mwar.ani(x, k = 15, conf = 2, mat = matrix(1:2,
+    2), widths = rep(1, ncol(mat)), heights = rep(1, nrow(mat)),
+    lty.rect = 2, ...)
 }
 \arguments{
-  \item{x}{ univariate time-series (a single numerical vector); default to be \emph{sin(seq(0, 2 * pi, length = 50)) + rnorm(50, sd = 0.2)} }
+  \item{x}{ univariate time-series (a single numerical vector); default to be \code{sin(seq(0, 2 * pi, length = 50)) + rnorm(50, sd = 0.2)} }
   \item{k}{ an integer of the window width }
   \item{conf}{ a positive number: the confidence intervals are computed as [ar1 - conf*s.e., ar1 + conf*s.e.] }
-  \item{control}{ control parameters for the animation; see \code{\link{ani.control}} }
-  \item{\dots}{ other arguments passed to \code{\link{ani.control}} }
+  \item{mat, widths, heights}{ arguments passed to \code{\link[graphics]{layout}} to divide the device into 2 parts }
+  \item{lty.rect}{ the line type of the rectangles respresenting the moving ``windows'' }
+  \item{\dots}{ other arguments passed to \code{\link[graphics]{points}} in the bottom plot (the centers of the arrows) }
 }
 \details{
-The AR(1) coefficients are computed by \code{\link[stats:arima]{arima}}. 
+The AR(1) coefficients are computed by \code{\link[stats]{arima}}.
 } 
 \value{
 A list containing 
@@ -25,23 +28,36 @@ A list containing
 }
 \references{ 
 Robert A. Meyer, Jr. Estimating coefficients that change over time. \emph{International Economic Review}, 13(3):705-710, 1972.
+
+\url{http://animation.yihui.name/ts:moving_window_ar}
 }
 \author{ Yihui Xie }
 \seealso{  \code{\link[stats]{arima}} }
 \examples{
 # moving window along a sin curve 
-mwar.ani(interval = 0.3)
+oopt = ani.options(interval = 0.1, nmax = 50)
+op = par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
+mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow",type='o')
 
 # for the data 'pageview'
+ani.options(interval = 0.1, nmax = 50)
 data(pageview)
-mwar.ani(pageview$visits, k = 30, interval = 0.2) 
+mwar.ani(pageview$visits, k = 30)
 
+par(op)
 \dontrun{ 
 
 # HTML animation page
+ani.options(ani.height = 500, ani.width = 600, outdir = getwd(), nmax = 50,
+    title = "Demonstration of Moving Window Auto-Regression",
+    description = "Compute the AR(1) coefficient for the data in the
+    window and plot the confidence intervals. Repeat this step as the
+    window moves.")
 ani.start()
-mwar.ani(interval = 0.2, width = 600, height = 500) 
-ani.stop() 
+par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
+mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow",type='o')
+ani.stop()
+ani.options(oopt)
 
 }
 }

@@ -1,30 +1,20 @@
-`ani.start` <-
-function(outdir = tempdir(), filename = "index", 
-    extension = "htm", withprompt = "ANI> ", Title = "Animated Statistics Using R") {
-    assign("ANIenv", new.env(parent = .GlobalEnv), envir = .GlobalEnv)
-    assign("oldprompt", getOption("prompt"), envir = get("ANIenv", 
-        envir = .GlobalEnv))
-    options(prompt = withprompt)
-    op = getwd()
-    setwd(outdir)
+`ani.start` <- function(...) {
+    ani.options(...)
+    ani.options(withprompt = c(options(prompt = ani.options("withprompt"))$prompt,
+        ani.options("withprompt")))
+    ani.options(outdir = c(ani.options("outdir"), setwd(ani.options("outdir"))))
     if (!file.exists("images")) {
         dir.create("images")
     }
     else {
-        file.remove(list.files("images"))
+        file.remove(list.files("images", full.names = TRUE))
     }
-    file.copy(system.file("js", "ANI.css", package = "animation"), 
+    file.copy(system.file("js", "ANI.css", package = "animation"),
         "ANI.css", overwrite = TRUE)
-    file.copy(system.file("js", "FUN.js", package = "animation"), 
+    file.copy(system.file("js", "FUN.js", package = "animation"),
         "FUN.js", overwrite = TRUE)
-    setwd(op)
-    .ani.file = file.path(outdir, paste(filename, ".", extension, 
-        sep = ""))
-    assign(".ani.file", .ani.file, envir = get("ANIenv", envir = .GlobalEnv))
-    cat("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<title>", 
-        file = .ani.file)
-    cat(Title, file = .ani.file, append = TRUE)
-    cat("</title>\n<link href=\"ANI.css\" rel=\"stylesheet\" type=\"text/css\" />\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"FUN.js\"></script>\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"ARG.js\"></script>\n<meta name=\"Author\" content=\"Yihui XIE\" />\n</head>\n<body>\n<div align=\"center\" id=\"divDemo\">\n<div id=\"loading\">loading animation frames...</div>\n<div id=\"divPreload\">\n<script language=\"JavaScript\" type=\"text/javascript\">\n", 
-        file = .ani.file, append = TRUE)
+    ani.options(interval = c(0, ani.options("interval")))
+    dev = ani.options("ani.dev")
+    dev(filename = paste("images/%d", ".", ani.options("ani.type"), sep = ""),
+        width = ani.options("ani.width"), height = ani.options("ani.height"))
 }
-

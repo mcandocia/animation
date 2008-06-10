@@ -1,19 +1,21 @@
-`clt.ani` <-
-function(obs = 100, FUN = runif, control = ani.control(interval = 0.1), 
-    ...) {
-    control = checkargs(control, ...) 
-    op = par(mar = c(3.2, 3, 2, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3)
-    for (i in 1:control$nmax) {
-        xbar = apply(matrix(replicate(obs, FUN(i)), i), 2, mean)
-        hist(xbar, freq = FALSE, main = substitute("Density Estimation of" ~ 
-            ~italic(bar(X)[i]),list(i =i)), xlab = substitute(italic(bar(x)[i]),list(i=i)), 
-            col = "bisque")
-        lines(density(xbar), col = "red")
-        if (control$saveANI) 
-            savePNG(n = i, width = control$width, height = control$height)
-        else Sys.sleep(control$interval)
+`clt.ani` <- function(obs = 300, FUN = rexp, col = c("bisque",
+    "red", "black"), mat = matrix(1:2, 2), widths = rep(1, ncol(mat)),
+    heights = rep(1, nrow(mat)), ...) {
+    interval = ani.options("interval")
+    nmax = ani.options("nmax")
+    x = apply(matrix(replicate(obs, FUN(nmax)), nmax), 2, cumsum)
+    xbar = x/matrix(1:nmax, nrow = nmax, ncol = obs)
+    pvalue = apply(xbar, 1, function(xx) shapiro.test(xx)$p.value)
+    layout(mat, widths, heights)
+    for (i in 1:nmax) {
+        hist(xbar[i, ], freq = FALSE, main = "", xlab = substitute(italic(bar(x)[i]),
+            list(i = i)), col = col[1])
+        lines(density(xbar[i, ]), col = col[2])
+        legend("topright", legend = paste("P-value:", format(round(pvalue[i],
+            3), nsmall = 3)), bty = "n")
+        plot(pvalue[1:i], xlim = c(1, nmax), ylim = range(pvalue),
+            xlab = "n", ylab = "P-value", col = col[3], ...)
+        Sys.sleep(interval)
     }
-    par(op)
-    invisible(NULL)
+    invisible(data.frame(n = 1:nmax, p.value = pvalue))
 }
-

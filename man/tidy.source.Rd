@@ -32,7 +32,8 @@ tidy.source(x, file = tempfile())
 file.show(x)
 
 ## if you've copied R code into the clipboard 
-\dontrun{tidy.source("clipboard")}
+\dontrun{
+tidy.source("clipboard")}
 }
 
 \keyword{ IO }

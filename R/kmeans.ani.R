@@ -1,46 +1,48 @@
-`kmeans.ani` <- function(x = matrix(runif(100), ncol = 2), 
-    centers = 2, control = ani.control(interval = 2, nmax = 30), 
-    ...) {
-    control = checkargs(control, ...) 
+`kmeans.ani` <- function(x = matrix(runif(100), ncol = 2,
+    dimnames = list(NULL, c("X1", "X2"))), centers = 3, pch = 1:3,
+    col = 1:3, hints = c("Move centers!", "Find cluster?")) {
     x = as.matrix(x)
-    if (ncol(x) != 2) 
-        stop("'x' must contain ONLY 2 columns!")
     ocluster = sample(centers, nrow(x), replace = TRUE)
-    centers = x[sample(nrow(x), centers), ]
-    dst = matrix(nrow = nrow(x), ncol = nrow(centers))
-    j = jj = 1
-    while (jj <= control$nmax) {
-        plot(x, pch = ocluster, col = ocluster, main = "Move Cluster Centers", 
-            panel.first = grid())
-        points(centers, pch = 1:nrow(centers), cex = 3, lwd = 2, 
-            col = 1:nrow(centers))
-        if (control$saveANI) 
-            savePNG(n = j, width = control$width, height = control$height)
-        else Sys.sleep(control$interval)
+    if (length(centers) == 1)
+        centers = x[sample(nrow(x), centers), ]
+    else centers = as.matrix(centers)
+    numcent = nrow(centers)
+    dst = matrix(nrow = nrow(x), ncol = numcent)
+    j = 1
+    pch = rep(pch, length = numcent)
+    col = rep(col, length = numcent)
+    interval = ani.options("interval")
+    while (j <= ani.options("nmax")) {
+        plot(x, pch = pch[ocluster], col = col[ocluster], panel.first = grid())
+        mtext(hints[1], 4)
+        points(centers, pch = pch[1:numcent], cex = 3,
+            lwd = 2, col = col[1:numcent])
         j = j + 1
-        for (i in 1:nrow(centers)) {
-            dst[, i] = sqrt(apply((t(t(x) - unlist(centers[i, 
+        Sys.sleep(interval)
+        for (i in 1:numcent) {
+            dst[, i] = sqrt(apply((t(t(x) - unlist(centers[i,
                 ])))^2, 1, sum))
         }
         ncluster = apply(dst, 1, which.min)
-        plot(x, type = "n", main = "Find Cluster Membership")
+        plot(x, type = "n")
+        mtext(hints[2], 4)
         grid()
-        points(centers, cex = 3, col = 1:nrow(centers), pch = 1:nrow(centers), 
-            lwd = 2)
-        for (i in 1:nrow(centers)) {
+        ocenters = centers
+        for (i in 1:numcent) {
             xx = subset(x, ncluster == i)
-            polygon(xx[chull(xx), ], density = 10, col = i, lty = 2)
-            points(xx, pch = i, col = i)
+            polygon(xx[chull(xx), ], density = 10, col = col[i],
+                lty = 2)
+            points(xx, pch = pch[i], col = col[i])
             centers[i, ] = apply(xx, 2, mean)
         }
-        if (control$saveANI) 
-            savePNG(n = j, width = control$width, height = control$height)
-        else Sys.sleep(control$interval)
+        points(ocenters, cex = 3, col = col[1:numcent],
+            pch = pch[1:numcent], lwd = 2)
         j = j + 1
-        jj = jj + 1
-        if (all(ncluster == ocluster)) 
+        Sys.sleep(interval)
+        if (all(ncluster == ocluster))
             break
         ocluster = ncluster
     }
+    ani.options(nmax = j - 1)
     invisible(list(cluster = ncluster, centers = centers))
-} 
+}

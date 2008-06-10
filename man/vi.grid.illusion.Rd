@@ -22,7 +22,11 @@ This is actually a static image; pay attention to the intersections of the grid 
 \value{
 None.
 }
-\references{ \url{http://en.wikipedia.org/wiki/Grid_illusion} }
+\references{
+\url{http://en.wikipedia.org/wiki/Grid_illusion}
+
+\url{http://animation.yihui.name/animation:misc}
+}
 \author{ Yihui Xie }
 \note{ 
 In fact there isn't any animations!
