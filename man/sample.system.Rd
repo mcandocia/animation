@@ -39,9 +39,9 @@ ani.start()
 par(mar = rep(1, 4), lwd = 2)
 sample.system()
 ani.stop()
-ani.options(oopt)
 
 }
+ani.options(oopt)
 }
 \keyword{ distribution }
 \keyword{ dynamic }

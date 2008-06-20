@@ -57,9 +57,9 @@ ani.start()
 par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
 mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow",type='o')
 ani.stop()
-ani.options(oopt)
 
 }
+ani.options(oopt)
 }
 \keyword{ dplot }
 \keyword{ dynamic }

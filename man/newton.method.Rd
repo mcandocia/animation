@@ -77,11 +77,11 @@ par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0), pch = 19)
 newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 *
     x + 100, 7.15, c(-6.2, 7.1), main = "")
 ani.stop()
-ani.options(oopt)
 
 
 }
 par(op) 
+ani.options(oopt)
 }
 \keyword{ optimize }
 \keyword{ dynamic }

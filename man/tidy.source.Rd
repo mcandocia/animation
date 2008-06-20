@@ -19,7 +19,7 @@ None (invisible `\code{NULL}'). `Clean' code will be returned to the console unl
 }
 
 \author{ Yihui Xie }
-
+\references{\url{http://animation.yihui.name/animation:misc\#tidy_up_r_source}}
 \seealso{ \code{\link[base:parse]{parse}}, \code{\link[base:cat]{cat}} }
 \examples{
 ## tidy up the source code of image demo 

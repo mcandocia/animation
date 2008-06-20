@@ -72,9 +72,8 @@ colnames(x) = c("X1", "X2")
 kmeans.ani(x, centers = 4, pch = 1:4, col = 1:4)
 ani.stop()
 
-ani.options(oopt)
-
 }
+ani.options(oopt)
 }
 \keyword{ hplot }
 \keyword{ dynamic }

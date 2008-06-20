@@ -25,11 +25,11 @@ None.
 \references{
 \url{http://en.wikipedia.org/wiki/Grid_illusion}
 
-\url{http://animation.yihui.name/animation:misc}
+\url{http://animation.yihui.name/animation:misc\#visual_illusions}
 }
 \author{ Yihui Xie }
 \note{ 
-In fact there isn't any animations!
+In fact there isn't any animation!
 }
 \seealso{ \code{\link[graphics:points]{points}}, \code{\link[graphics:abline]{abline}} }
 \examples{

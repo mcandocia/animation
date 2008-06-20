@@ -75,10 +75,9 @@ ani.options(ani.height = 500, ani.width = 500, outdir = getwd(), interval = 0.3,
 ani.start()
 grad.desc()
 ani.stop()
-ani.options(oopt)
-
 
 }
+ani.options(oopt)
 }
 \keyword{ optimize }
 \keyword{ dynamic }

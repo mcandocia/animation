@@ -90,7 +90,7 @@
                 points(bd[1], bd[2], col = knn.col, pch = cl.pch[unclass(clf)[idx]],
                   cex = 2, lwd = 2)
             }
-            points(test[i, 1], test[i, 2], col = "red", pch = cl.pch[unclass(res)[i]],
+            points(test[i, 1], test[i, 2], col = tt.col[2], pch = cl.pch[unclass(res)[i]],
                 cex = 3, lwd = 2)
         }, FALSE)
         Sys.sleep(interval)

@@ -1,6 +1,5 @@
 \name{kfcv}
 \alias{kfcv}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Sample sizes for k-fold cross-validation }
 \description{
   Compute sample sizes for \emph{k}-fold cross-validation. 

@@ -52,9 +52,9 @@ ani.start()
 par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
 lln.ani(cex = 0.6)
 ani.stop()
-ani.options(oopt)
 
 }
+ani.options(oopt)
 }
 \keyword{ dynamic }
 \keyword{ dplot }

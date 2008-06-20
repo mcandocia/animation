@@ -62,8 +62,8 @@ par(mar = c(2, 3, 2, 1.5), mgp = c(1.5, 0.5, 0))
 flip.coin(faces = c("Head", "Stand", "Tail"), type = "n",
     prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4))
 ani.stop()
-ani.options(oopt)
 }
+ani.options(oopt)
 }
 
 \keyword{ hplot }

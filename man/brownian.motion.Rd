@@ -49,8 +49,8 @@ opar = par(mar = c(3, 3, 1, 0.5), mgp = c(2, .5, 0), tcl = -0.3,
 brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
 par(opar)
 ani.stop()
-ani.options(oopt)
 }
+ani.options(oopt)
 }
 \keyword{ dplot }
 \keyword{ dynamic }

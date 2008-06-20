@@ -47,8 +47,8 @@ ani.start()
 par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
 clt.ani(type = "h")
 ani.stop()
-ani.options(oopt)
 }
+ani.options(oopt)
 
 # other distributions: Chi-square with df = 5 
 f = function(n) rchisq(n, 5) 

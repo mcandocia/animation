@@ -51,6 +51,7 @@ conf.int()
 ani.stop() 
 
 }
+ani.options(oopt)
 }
 \keyword{ dynamic }
 \keyword{ dplot }

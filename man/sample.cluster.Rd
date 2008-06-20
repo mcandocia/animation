@@ -41,9 +41,9 @@ ani.start()
 par(mar = rep(1, 4), lwd = 2)
 sample.cluster(col = c("bisque", "white"))
 ani.stop()
-ani.options(oopt)
 
 }
+ani.options(oopt)
 }
 \keyword{ distribution }
 \keyword{ dynamic }

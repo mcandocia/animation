@@ -23,7 +23,7 @@ None.
 \references{
 \url{http://en.wikipedia.org/wiki/Lilac_chaser}
 
-\url{http://animation.yihui.name/animation:misc}
+\url{http://animation.yihui.name/animation:misc\#lilac_chaser}
 }
 \author{ Yihui Xie }
 \note{ 
@@ -46,10 +46,10 @@ ani.start()
 par(pty = "s", mar = rep(1, 4))
 vi.lilac.chaser()
 ani.stop()
-ani.options(oopt)
 
 }
 par(op) 
+ani.options(oopt)
 }
 \keyword{ dynamic }
 
