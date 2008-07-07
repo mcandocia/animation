@@ -1,8 +1,8 @@
 Package: animation
 Type: Package
 Title: Demonstrate Animations in Statistics 
-Version: 1.0-1
-Date: 2008-06-20
+Version: 1.0-2
+Date: 2008-07-07
 Author: Yihui Xie 
 Maintainer: Yihui Xie <xieyihui@gmail.com>
 Description: This package consists of various functions for animations in
@@ -14,4 +14,4 @@ Description: This package consists of various functions for animations in
 Depends: MASS
 License: 	GPL-2 | GPL-3
 URL: http://animation.yihui.name
-Packaged: Fri Jun 20 17:28:48 2008; Xie
+Packaged: Sun Sep 14 04:39:13 2008; theussl

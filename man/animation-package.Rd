@@ -12,7 +12,7 @@ Various functions for animations in statistics which could probably aid in teach
 Package: \tab animation\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
-Date: \tab 2008-06-20\cr
+Date: \tab 2008-07-07\cr
 License: \tab GPL-2 | GPL-3\cr
 }
 This package mainly makes use of HTML \& JavaScript and R windows graphics devices (such as \code{\link[grDevices:windows]{x11}}) to demonstrate animations in statistics; other kinds of output such as Flash (SWF) or GIF/MPG animations are also available if necessary software has been installed.
@@ -43,7 +43,7 @@ ani.start()
 opar = par(mar = c(3, 3, 2, 0.5), mgp = c(2, .5, 0), tcl = -0.3,
     cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
 brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow",
-    main = "Demonstration of Brownian Motion",)
+    main = "Demonstration of Brownian Motion")
 par(opar)
 ani.stop()
 ani.options(oopt)
