@@ -1,14 +1,17 @@
 `ani.stop` <- function() {
+    dev.off()
     if (isTRUE(ani.options("footer")))
         footer = paste("<div class=\"footer\">Created by R package \"<a href=\"http://cran.r-project.org/package=animation\" target=\"_blank\">animation ", packageDescription("animation", fields = "Version"), "</a>\" written by <a href=\"http://yihui.name/\" target=\"_blank\">Yihui XIE</a>.<br>",
             Sys.time(), "</div>", sep = "")
     else footer = ifelse(is.character(ani.options("footer")), sprintf("<div class=\"footer\">%s</div>", ani.options("footer")), "")
     ani.file = file.path(ani.options("outdir")[1], ani.options("filename"))
+    imgdir = ani.options("imgdir")
+    if (file.exists(imgdir)) ani.options(nmax = length(list.files(imgdir)))
     html = paste("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><title>",
         ani.options("title"), "</title><script language=\"JavaScript\" type=\"text/javascript\" src=\"FUN.js\"></script><link href=\"ANI.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body onload=loading('ANIR')>",
         "<div align=\"center\" class=\"anidemo\" title=\"", ani.options("title"),
         "\"><fieldset><legend align=\"center\">", ani.options("title"),
-        "</legend><div id=\"loadingANIR\" class=\"loading\">loading animation frames... </div><div id=\"divPreloadANIR\" class=\"divPreload\">\n<script language=\"JavaScript\" type=\"text/javascript\">\n var sourceANIR = \"images/\"; var imgtypeANIR = \"",
+        "</legend><div id=\"loadingANIR\" class=\"loading\">loading animation frames... </div><div id=\"divPreloadANIR\" class=\"divPreload\">\n<script language=\"JavaScript\" type=\"text/javascript\">\n var sourceANIR = \"", imgdir, "/\"; var imgtypeANIR = \"",
         ani.options("ani.type"), "\"; var tmpANIR = 0; var nmaxANIR=",
         ani.options("nmax"), "; var nANIR=1; var tANIR;\n for(i = 1; i <= nmaxANIR; i++){",
         "document.write(\"", "<div class=\\\"divFrame\\\" id=\\\"divPreloadANIR\" + i + \"\\\"><img src=\\\"\" + sourceANIR + i + \".\" + imgtypeANIR + \"\\\"\" + \" id = \\\"img\" + \"ANIR\" + i + \"\\\" alt=\\\"",
@@ -22,16 +25,13 @@
         "</div>", "</body></html>", sep = "")
     cat(html, file = ani.file)
     ani.options(interval = ani.options("interval")[2])
-    setwd(ani.options("outdir")[2])
-    ani.options(outdir = ani.options("outdir")[1])
     if (ani.options("autobrowse"))
         on.exit(browseURL(paste("file://", ani.file, sep = "")),
             add = TRUE)
     options(prompt = ani.options("withprompt")[1])
     ani.options(withprompt = ani.options("withprompt")[2])
-    dev.off()
-    if (file.exists("images")) ani.options(nmax = length(list.files("images")))
-    cat(ani.options("nmax"), "animation frames recorded.\n")
-    cat("HTML animation page created:", normalizePath(ani.file),
-        "\n")
+    setwd(ani.options("outdir")[2])
+    ani.options(outdir = ani.options("outdir")[1])
+    message(ani.options("nmax"), " animation frames recorded.")
+    message("HTML animation page created: ", normalizePath(ani.file))
 }

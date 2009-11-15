@@ -1,5 +1,56 @@
 	**************************************************
 	*						 *
+	*	       1.0-9 NEWS			 *
+	*						 *
+	**************************************************
+
+
+		CHANGES IN animation VERSION 1.0-9
+
+
+NEW FEATURES
+
+    o saveLatex() to embed the animation into a
+  LaTeX document (with LaTeX package 'animate').
+    o a new option 'imgdir' added to ani.options()
+  so that users can specify the name of the image 
+  directory
+    o a message will come up if the animation option
+  'nmax' is changed; this will help users know the
+  actual number of images in the current session;
+  this message will only show in interactive mode
+    o saveMovie() will try to install ImageMagick
+  automatically if 'convert' not found
+
+MINOR CHANGES
+
+    o query ani.options('interval') will return 0 if
+  the animation is run in a non-interactive mode;
+  this will save much time typically in 'R CMD check'
+  (Thanks to Prof Ripley)
+    o the option 'nmax' will be adjusted to the 
+  *actual* number of images in the directory 
+  ani.options('imgdir'), because sometimes the actual
+  number of images does not equal to ani.options('nmax')
+    o shortened the descriptions in Rd files and 
+  several changes in documentations 
+    o fixed several buglets in ani.stop()
+    o changed the 'while' loop to 'for' loop in
+  brownian.motion(); this will shorten the code by
+  two lines
+    o ani.options('ani.dev') can be the name of a
+  function (character), e.g. "png" 
+    
+TO APPEAR 
+    
+    o A function boot.loess() added to show the
+  bootstrapping effects on loess().
+    o A function cart.ani() to show the splitting
+  process of classification and regression trees.
+
+
+	**************************************************
+	*						 *
 	*	       1.0-8 NEWS			 *
 	*						 *
 	**************************************************
@@ -11,17 +62,12 @@
 NEW FEATURES
 
     o ecol.death.sim() to simulate the death of two
-  sepecies in a field
+  species in a field
 
+MINOR CHANGES
 
-TO APPEAR 
-    
-    o A function boot.loess() added to show the
-  bootstrapping effects on loess().
-    o A function cart.ani() to show the splitting
-  process of classification and regression trees.
-    o saveLatex() to embed the animation into a
-  LaTeX document (with LaTeX package 'animate').
+    o fixed an error in the example of HuSpeech
+
 
 
 	**************************************************
@@ -37,6 +83,10 @@ TO APPEAR
 NEW FEATURES
 
     o moving.block() to plot a subset of data by blocks
+    o ani.options() gained a new argument 'loop' to 
+  control the iteration of the animation in an HTML
+  page: TRUE to interate for infinite times, and FALSE
+  not to interate (only play once). Thanks, Marcin Kozak!
 
 MINOR CHANGES
 
@@ -45,10 +95,6 @@ MINOR CHANGES
   an error for non-existent object 'footer'; I should
   have used the value ani.options("footer") in the code.
   Thanks, Marcin Kozak!
-    o ani.options() gained a new argument 'loop' to 
-  control the iteration of the animation in an HTML
-  page: TRUE to interate for infinite times, and FALSE
-  not to interate (only play once). Thanks, Marcin Kozak!
 
 
 	**************************************************
