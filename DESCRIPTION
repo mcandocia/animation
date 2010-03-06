@@ -1,8 +1,8 @@
 Package: animation
 Type: Package
 Title: Demonstrate Animations in Statistics
-Version: 1.0-10
-Date: 2009-12-03
+Version: 1.1-0
+Date: 2010-03-06
 Author: Yihui Xie
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: This package consists of various functions for animations
@@ -17,6 +17,6 @@ License: GPL-2 | GPL-3
 URL: http://animation.yihui.name
 Repository: CRAN
 Repository/R-Forge/Project: animation
-Repository/R-Forge/Revision: 115
-Date/Publication: 2009-12-02 07:58:35
-Packaged: 2009-12-01 21:09:43 UTC; rforge
+Repository/R-Forge/Revision: 136
+Date/Publication: 2010-03-08 10:19:42
+Packaged: 2010-03-05 21:41:37 UTC; rforge

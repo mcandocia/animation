@@ -14,7 +14,8 @@ saveLatex(expr, interval = ani.options("interval"),
     ani.first = par(), ani.opts = "controls,width=\\\\textwidth", 
     centering = "\\\\centering", caption = NULL, 
     label = NULL, pkg.opts = NULL, documentclass = "article", 
-    latex.filename = "animation.tex", pdflatex = "pdflatex", ...)
+    latex.filename = "animation.tex", pdflatex = "pdflatex", 
+    install.animate = TRUE, ...)
 }
 \arguments{
   \item{expr}{ an expression to generate animations; use either the animation functions (e.g. \code{brownian.motion()}) in this package or a custom expression (e.g. \code{for(i in 1:10) plot(runif(10), ylim = 0:1)}). }
@@ -55,6 +56,9 @@ file name of the LaTeX document; if an empty string \code{""}, the LaTeX code wi
   \item{pdflatex}{
 the command for pdfLaTeX (set to \code{NULL} to ignore the compiling)
 }
+  \item{install.animate}{
+copy the LaTeX style files \file{animate.sty} and \file{animfp.sty} to \code{outdir}? If you have not installed the LaTeX package \code{animate}, it suffices just to copy these to files.
+}
   \item{\dots}{
 other arguments passed to the graphics device \code{ani.dev}, e.g. height and width
 }
@@ -81,13 +85,14 @@ PDF devices are recommended because of their high quality and usually they are m
 }
 \examples{
 \dontrun{
+
 oopt = ani.options(interval = 0.1, nmax = 100)
-## brownian motion: note the 'loop' option and how to set graphics 
-#    parameters with 'ani.first'
+## brownian motion: note the 'loop' option in ani.opts
+##     and how to set graphics parameters with 'ani.first'
 saveLatex({
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow", 
         main = "Demonstration of Brownian Motion")
-}, ani.basename = "BM", ani.opts = "controls,loop,width=0.8\\textwidth", 
+}, ani.basename = "BM", ani.opts = "controls,loop,width=0.8\\\\textwidth", 
     ani.first = par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), 
         tcl = -0.3, cex.axis = 0.8, cex.lab = 0.8, cex.main = 1), 
     latex.filename = "brownian.motion.tex")
