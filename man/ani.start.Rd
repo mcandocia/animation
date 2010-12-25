@@ -1,7 +1,8 @@
 \name{ani.start}
 \alias{ani.start}
 \title{Start the generation of an HTML animation page.}
-\usage{ani.start(...)}
+\usage{ani.start(...)
+}
 \description{Start the generation of an HTML animation page.
 This function copies JavaScript file \file{FUN.js} and CSS file \file{ANI.css}
 to the same directory as the HTML animation page, create a directory
@@ -10,7 +11,7 @@ specified as \code{ani.dev} in \code{\link{ani.options}}). The prompt of the
 current R session is modified (by default \code{ANI> }).}
 \value{None (invisible `\code{NULL}').}
 \note{After calling \code{\link{ani.start}}, either animation functions in
-this package or R script of your own can be used to generate \& save
+this package or R script of your own can be used to generate \\& save
 animated pictures using proper graphics devices (specified as
 \code{ani.dev} in \code{\link{ani.options}}), then watch your animation
 by \code{\link{ani.stop}()}.
@@ -22,13 +23,15 @@ removed.}
 \references{\url{http://animation.yihui.name/animation:create_html_animation_page}}
 \keyword{utilities}
 \arguments{\item{\dots}{arguments passed to \code{\link{ani.options}} to set animation
-parameters}}
+parameters}
+}
 \examples{\dontrun{
-
-# save the animation in HTML pages and auto-browse it
-ani.options(ani.width = 600, ani.height = 500, interval = 0.2)
-ani.start()
-boot.iid()
-ani.stop()
-
+    
+    # save the animation in HTML pages and auto-browse it
+    ani.options(ani.width = 600, ani.height = 500, interval = 0.2)
+    ani.start()
+    boot.iid()
+    ani.stop()
+    
 }}
+

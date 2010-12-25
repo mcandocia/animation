@@ -1,10 +1,12 @@
 \name{least.squares}
 \alias{least.squares}
-\title{Demonstrate the Least Squares...}
-\usage{least.squares(x, y, n=15, ani.type=c("slope", "intercept"), a, b,
-    a.range, b.range, ab.col=c("gray", "black"), est.pch=19,
-    v.col="red", v.lty=2, rss.pch=19, rss.type="o", mfrow=c(1, 2), ...)}
-\description{Demonstrate the Least Squares
+\title{Demonstrate the least squares method.}
+\usage{least.squares(x, y, n = 15, ani.type = c("slope", 
+    "intercept"), a, b, a.range, b.range, ab.col = c("gray", 
+    "black"), est.pch = 19, v.col = "red", v.lty = 2, rss.pch = 19, 
+    rss.type = "o", mfrow = c(1, 2), ...)
+}
+\description{Demonstrate the least squares method.
 This is a simple demonstration of the meaning of least squares in
 univariate linear regression.}
 \details{With either the intercept or the slope changing, the lines will be moving
@@ -46,7 +48,8 @@ plot}
 \item{mfrow}{defines the layout of the graph; see
 \code{\link[graphics]{par}}}
 \item{\dots}{other parameters passed to \code{\link[graphics]{plot}} to
-define the appearance of the scatterplot}}
+define the appearance of the scatterplot}
+}
 \examples{opar = par(mar = c(5, 4, 0.5, 0.1))
 oopt = ani.options(interval = 0.3, nmax = 50)
 # default animation: with slope changing
@@ -56,16 +59,15 @@ least.squares(ani.type = "i")
 
 par(opar)
 
-\dontrun{ 
-# save the animation in HTML pages
-ani.options(ani.height = 450, ani.width = 600,
-title = "Demonstration of Least Squares",
-description = "We want to find an estimate for the slope
-in 50 candidate slopes, so we just compute the RSS one by one. ")
-ani.start()
-par(mar = c(4, 4, 0.5, 0.1), mgp = c(2, 0.5, 0), tcl = -0.3)
-least.squares()
-ani.stop()
+\dontrun{
+    # save the animation in HTML pages
+    ani.options(ani.height = 450, ani.width = 600, title = "Demonstration of Least Squares", 
+        description = "We want to find an estimate for the slope\\nin 50 candidate slopes, so we just compute the RSS one by one. ")
+    ani.start()
+    par(mar = c(4, 4, 0.5, 0.1), mgp = c(2, 0.5, 0), tcl = -0.3)
+    least.squares()
+    ani.stop()
 }
 
 ani.options(oopt)}
+

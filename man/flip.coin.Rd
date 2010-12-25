@@ -1,9 +1,10 @@
 \name{flip.coin}
 \alias{flip.coin}
-\title{Probability in flipping coins...}
-\usage{flip.coin(faces=2, prob, border="white", grid="white", col=1:2,
-    type="p", pch=21, bg="transparent", digits=3)}
-\description{Probability in flipping coins
+\title{Probability in flipping coins.}
+\usage{flip.coin(faces = 2, prob, border = "white", grid = "white", 
+    col = 1:2, type = "p", pch = 21, bg = "transparent", digits = 3)
+}
+\description{Probability in flipping coins.
 This function provides a simulation to the process of flipping coins and
 computes the frequencies for `heads' and `tails'.}
 \details{If \code{faces} is a single integer, say 2, a sequence of integers from 1
@@ -42,25 +43,25 @@ probabilities.}
 \item{col}{The colors to annotate different faces of the `coin'.}
 \item{type,pch,bg}{See \code{\link[graphics:points]{points}}.}
 \item{digits}{integer indicating the precision to be used in the annotation
-of frequencies in the plot}}
+of frequencies in the plot}
+}
 \examples{oopt = ani.options(interval = 0.2, nmax = 100)
-# a coin would stand on the table?? just kidding :) 
-flip.coin(faces = c("Head", "Stand", "Tail"), type = "n",
-prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4))
+# a coin would stand on the table?? just kidding :)
+flip.coin(faces = c("Head", "Stand", "Tail"), type = "n", 
+    prob = c(0.45, 0.1, 0.45), col = c(1, 2, 4))
 
 flip.coin(bg = "yellow")
 
-\dontrun{ 
-# HTML animation page
-ani.options(ani.height = 500, ani.width = 600, interval = 0.2,
-nmax = 50, title = "Probability in flipping coins",
-description = "This animation has provided a simulation of flipping coins,
-which might be helpful in understanding the concept of probability.")
-ani.start()
-par(mar = c(2, 3, 2, 1.5), mgp = c(1.5, 0.5, 0))
-flip.coin(faces = c("Head", "Stand", "Tail"), type = "n",
-prob = c(0.45, 0.1, 0.45), col =c(1, 2, 4))
-ani.stop()
+\dontrun{
+    # HTML animation page
+    ani.options(ani.height = 500, ani.width = 600, interval = 0.2, 
+        nmax = 50, title = "Probability in flipping coins", description = "This animation has provided a simulation of flipping coins,\\nwhich might be helpful in understanding the concept of probability.")
+    ani.start()
+    par(mar = c(2, 3, 2, 1.5), mgp = c(1.5, 0.5, 0))
+    flip.coin(faces = c("Head", "Stand", "Tail"), type = "n", 
+        prob = c(0.45, 0.1, 0.45), col = c(1, 2, 4))
+    ani.stop()
 }
 
 ani.options(oopt)}
+

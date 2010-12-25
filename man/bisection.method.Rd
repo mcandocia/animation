@@ -1,10 +1,11 @@
 \name{bisection.method}
 \alias{bisection.method}
-\title{Demonstration of the Bisection Method for Root-finding on an Interval...}
-\usage{bisection.method(FUN=function(x) x^2 - 4, rg=c(-1, 10), tol=0.001,
-    interact=FALSE, main, xlab, ylab, ...)}
-\description{Demonstration of the Bisection Method for Root-finding on an Interval
-A visual demonstration of finding the root of an equation \eqn{f(x) = 0} on
+\title{Demonstration of the Bisection Method for root-finding on an interval.}
+\usage{bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 
+    10), tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
+}
+\description{Demonstration of the Bisection Method for root-finding on an interval.
+This is a visual demonstration of finding the root of an equation \eqn{f(x) = 0} on
 an interval using the Bisection Method.}
 \details{Suppose we want to solve the equation \eqn{f(x) = 0}. Given two points a
 and b such that \eqn{f(a)} and \eqn{f(b)} have opposite signs, we know by
@@ -40,26 +41,26 @@ for the root; in a \code{c(a, b)} form}
 \item{interact}{logical; whether choose the end-points by cliking on the
 curve (for two times) directly?}
 \item{xlab,ylab,main}{axis and main titles to be used in the plot}
-\item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}}
-\examples{# default example 
-xx = bisection.method() 
-xx$root  # solution
+\item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}
+}
+\examples{# default example
+xx = bisection.method()
+xx$root
 
-# a cubic curve 
-f = function(x) x^3 - 7 * x - 10 
-xx = bisection.method(f, c(-3, 5)) 
+# a cubic curve
+f = function(x) x^3 - 7 * x - 10
+xx = bisection.method(f, c(-3, 5))
 
 \dontrun{
-# interaction: use your mouse to select the end-points 
-bisection.method(f, c(-3, 5), interact = TRUE) 
-
-# HTML animation pages 
-ani.start(nmax = 50, ani.height = 400, ani.width = 600, interval = 1,
-title = "The Bisection Method for Root-finding on an Interval",
-description = "The bisection method is a root-finding algorithm
-which works by repeatedly dividing an interval in half and then
-selecting the subinterval in which a root exists.")
-par(mar = c(4, 4, 1, 2))
-bisection.method(main = "")
-ani.stop() 
+    # interaction: use your mouse to select the end-points
+    bisection.method(f, c(-3, 5), interact = TRUE)
+    
+    # HTML animation pages
+    ani.start(nmax = 50, ani.height = 400, ani.width = 600, interval = 1, 
+        title = "The Bisection Method for Root-finding on an Interval", 
+        description = "The bisection method is a root-finding algorithm\\nwhich works by repeatedly dividing an interval in half and then\\nselecting the subinterval in which a root exists.")
+    par(mar = c(4, 4, 1, 2))
+    bisection.method(main = "")
+    ani.stop()
 }}
+

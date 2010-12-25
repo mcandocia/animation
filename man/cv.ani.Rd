@@ -1,11 +1,12 @@
 \name{cv.ani}
 \alias{cv.ani}
 \title{Demonstration for the process of cross-validation...}
-\usage{cv.ani(x=runif(150), k=10, col=c("green", "red", "blue"), pch=c(4, 1),
-    ...)}
+\usage{cv.ani(x = runif(150), k = 10, col = c("green", "red", 
+    "blue"), pch = c(4, 1), ...)
+}
 \description{Demonstration for the process of cross-validation
 This function uses rectangles to illustrate the \eqn{k} folds and mark the
-test set \& the training set with different colors.}
+test set \\& the training set with different colors.}
 \details{Briefly speaking, the process of cross-validation is just to split the
 whole data set into several parts and select one part as the test set and
 the rest parts as the training set.
@@ -35,25 +36,25 @@ points of the training set.}
 \item{pch}{a numeric vector of length 2 specifying the symbols of the test
 set and training set respectively.}
 \item{\dots}{other arguments passed to
-\code{\link[graphics:plot.default]{plot}}}}
+\code{\link[graphics:plot.default]{plot}}}
+}
 \examples{oopt = ani.options(interval = 2, nmax = 10)
-cv.ani(main = "Demonstration of the k-fold Cross Validation", bty = "l")
+cv.ani(main = "Demonstration of the k-fold Cross Validation", 
+    bty = "l")
 
-# leave-one-out CV 
-cv.ani(x = runif(15), k = 15) 
+# leave-one-out CV
+cv.ani(x = runif(15), k = 15)
 
-\dontrun{ 
-# save the animation in HTML pages
-ani.options(ani.height = 400, ani.width = 600, interval = 2,
-nmax = 10, title = "Demonstration of the k-fold Cross Validation",
-description = "This is a naive demonstration for the k-fold cross
-validation. The k rectangles in the plot denote the k folds of data.
-Each time a fold will be used as the test set and the rest parts
-as the training set.")
-ani.start()
-par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
-cv.ani(bty = "l")
-ani.stop()
+\dontrun{
+    # save the animation in HTML pages
+    ani.options(ani.height = 400, ani.width = 600, interval = 2, 
+        nmax = 10, title = "Demonstration of the k-fold Cross Validation", 
+        description = "This is a naive demonstration for the k-fold cross\\nvalidation. The k rectangles in the plot denote the k folds of data.\\nEach time a fold will be used as the test set and the rest parts\\nas the training set.")
+    ani.start()
+    par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
+    cv.ani(bty = "l")
+    ani.stop()
 }
 
 ani.options(oopt)}
+

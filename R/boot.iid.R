@@ -1,5 +1,3 @@
-
-
 ##' Demonstrate bootstrapping for iid data.
 ##' Use a sunflower scatter plot to
 ##' illustrate the results of sampling, and a histogram to show the
@@ -38,7 +36,7 @@
 ##'   variations. For a relatively complete one, you may just refer to:
 ##'
 ##' Efron, B. and Tibshirani, R. (1993) \emph{An Introduction to the
-##'   Bootstrap}. Chapman \& Hall.
+##'   Bootstrap}. Chapman & Hall.
 ##'
 ##' \url{http://animation.yihui.name/dmml:bootstrap_i.i.d}
 ##' @keywords nonparametric dynamic dplot

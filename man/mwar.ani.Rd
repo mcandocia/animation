@@ -1,9 +1,11 @@
 \name{mwar.ani}
 \alias{mwar.ani}
-\title{Demonstration for ``Moving Window Auto-Regression''...}
-\usage{mwar.ani(x, k=15, conf=2, mat=matrix(1:2, 2), widths=rep(1, ncol(mat)),
-    heights=rep(1, nrow(mat)), lty.rect=2, ...)}
-\description{Demonstration for ``Moving Window Auto-Regression''
+\title{Demonstration for ``Moving Window Auto-Regression''.}
+\usage{mwar.ani(x, k = 15, conf = 2, mat = matrix(1:2, 2), 
+    widths = rep(1, ncol(mat)), heights = rep(1, nrow(mat)), 
+    lty.rect = 2, ...)
+}
+\description{Demonstration for ``Moving Window Auto-Regression''.
 This function just fulfills a very naive idea about moving window
 regression using rectangles to denote the ``windows'' and move them, and
 the corresponding AR(1) coefficients as long as rough confidence intervals
@@ -32,11 +34,14 @@ time. \emph{International Economic Review}, 13(3):705-710, 1972.
 \item{lty.rect}{the line type of the rectangles respresenting the moving
 ``windows''}
 \item{\dots}{other arguments passed to \code{\link[graphics]{points}} in
-the bottom plot (the centers of the arrows)}}
-\examples{# moving window along a sin curve 
+the bottom plot (the centers of the arrows)}
+}
+\examples{# moving window along a sin curve
 oopt = ani.options(interval = 0.1, nmax = 50)
-op = par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
-mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow",type='o')
+op = par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 
+    0))
+mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow", 
+    type = "o")
 
 # for the data 'pageview'
 ani.options(interval = 0.1, nmax = 50)
@@ -45,17 +50,17 @@ mwar.ani(pageview$visits, k = 30)
 
 par(op)
 
-\dontrun{ 
-# HTML animation page
-ani.options(ani.height = 500, ani.width = 600, nmax = 50,
-title = "Demonstration of Moving Window Auto-Regression",
-description = "Compute the AR(1) coefficient for the data in the
-window and plot the confidence intervals. Repeat this step as the
-window moves.")
-ani.start()
-par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
-mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow",type='o')
-ani.stop()
+\dontrun{
+    # HTML animation page
+    ani.options(ani.height = 500, ani.width = 600, nmax = 50, 
+        title = "Demonstration of Moving Window Auto-Regression", 
+        description = "Compute the AR(1) coefficient for the data in the\\nwindow and plot the confidence intervals. Repeat this step as the\\nwindow moves.")
+    ani.start()
+    par(mar = c(2, 3, 1, 0.5), mgp = c(1.5, 0.5, 0))
+    mwar.ani(lty.rect = 3, pch = 21, col = "red", bg = "yellow", 
+        type = "o")
+    ani.stop()
 }
 
 ani.options(oopt)}
+

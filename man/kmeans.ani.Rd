@@ -1,11 +1,12 @@
 \name{kmeans.ani}
 \alias{kmeans.ani}
-\title{Demonstration of K-Means Cluster Algorithm...}
-\usage{kmeans.ani(x=matrix(runif(100), ncol = 2, dimnames = list(NULL, c("X1",
-    "X2"))), centers=3, pch=1:3, col=1:3, hints=c("Move centers!",
-    "Find cluster?"))}
-\description{Demonstration of K-Means Cluster Algorithm
-This function provides a demo of K-Means cluster algorithm for data
+\title{Demonstration of k-Means clustering algorithm.}
+\usage{kmeans.ani(x = cbind(X1 = runif(50), X2 = runif(50)), 
+    centers = 3, pch = 1:3, col = 1:3, hints = c("Move centers!", 
+        "Find cluster?"))
+}
+\description{Demonstration of k-Means clustering algorithm.
+This function provides a demo of k-Means cluster algorithm for data
 containing only two variables (columns).}
 \details{K-Means cluster algorithm may be regarded as a series of iterations of:
 finding cluster centers, computing distances between sample points, and
@@ -48,16 +49,18 @@ cluster centres.  If a number, a random set of (distinct) rows in
 these two arguments should be equal to the number of clusters, or they
 will be recycled.}
 \item{hints}{Two text strings indicating the steps of k-means clustering:
-move the center or find the cluster membership?}}
+move the center or find the cluster membership?}
+}
 \examples{#set larger 'interval' if the speed is too fast
 oopt = ani.options(interval = 2, nmax = 50)
-op = par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0))
+op = par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 
+    0))
 kmeans.ani()
 
 ani.options(nmax = 50)
 # the kmeans() example; very fast to converge!
-x = rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),
-matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+x = rbind(matrix(rnorm(100, sd = 0.3), ncol = 2), 
+    matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
 colnames(x) = c("x", "y")
 kmeans.ani(x, centers = 2)
 
@@ -68,18 +71,20 @@ kmeans.ani(x, centers = 3)
 par(op)
 
 \dontrun{
-# create HTML animation page 
-ani.options(ani.height = 480, ani.width = 480, interval = 2,
-nmax = 50, title = "Demonstration of the K-means Cluster Algorithm",
-description = "Move! Average! Cluster! Move! Average! Cluster! ...")
-ani.start()
-par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0))
-cent = 1.5 * c(1, 1, -1, -1, 1, -1, 1, -1); x = NULL
-for (i in 1:8) x = c(x, rnorm(25, mean = cent[i]))
-x = matrix(x, ncol = 2)
-colnames(x) = c("X1", "X2")
-kmeans.ani(x, centers = 4, pch = 1:4, col = 1:4)
-ani.stop()
+    # create HTML animation page
+    ani.options(ani.height = 480, ani.width = 480, interval = 2, 
+        nmax = 50, title = "Demonstration of the K-means Cluster Algorithm", 
+        description = "Move! Average! Cluster! Move! Average! Cluster! ...")
+    ani.start()
+    par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0))
+    cent = 1.5 * c(1, 1, -1, -1, 1, -1, 1, -1)
+    x = NULL
+    for (i in 1:8) x = c(x, rnorm(25, mean = cent[i]))
+    x = matrix(x, ncol = 2)
+    colnames(x) = c("X1", "X2")
+    kmeans.ani(x, centers = 4, pch = 1:4, col = 1:4)
+    ani.stop()
 }
 
 ani.options(oopt)}
+

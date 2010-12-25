@@ -1,10 +1,12 @@
 \name{saveSWF}
 \alias{saveSWF}
-\title{Convert Images to Flash Animations...}
-\usage{saveSWF(expr, interval=1, swfname="movie.swf", dev=c("png", "jpeg",
-    "pdf"), filename="Rplot", fmt="\%03d", outdir=tempdir(), swftools,
-    para=par(no.readonly = TRUE), ...)}
-\description{Convert Images to Flash Animations
+\title{Convert images to Flash animations.}
+\usage{saveSWF(expr, interval = 1, swfname = "movie.swf", 
+    dev = c("png", "jpeg", "pdf"), filename = "Rplot", fmt = "\%03d", 
+    outdir = tempdir(), swftools, para = par(no.readonly = TRUE), 
+    ...)
+}
+\description{Convert images to Flash animations.
 This function opens a graphical device first to generate a sequence of
 images based on \code{expr}, then makes use of the commands in `SWF Tools'
 (\code{png2swf}, \code{jpeg2swf}, \code{pdf2swf}) to convert these images
@@ -17,7 +19,7 @@ to a single Flash animation.}
 \seealso{\code{\link{saveMovie}}, \code{\link[base]{system}},
 \code{\link[grDevices]{png}}, \code{\link[grDevices]{jpeg}},
 \code{\link[grDevices]{pdf}}}
-\references{\url{http://animation.yihui.name/animation:start\#create_flash_animations}}
+\references{\url{http://animation.yihui.name/animation:start#create_flash_animations}}
 \keyword{dynamic}
 \keyword{device}
 \keyword{utilities}
@@ -27,8 +29,8 @@ expression (e.g. \code{for(i in 1:10) plot(runif(10), ylim = 0:1)}).}
 \item{interval}{duration between animation frames (unit in seconds)}
 \item{swfname}{file name of the Flash file}
 \item{dev}{character: the graphics device to be used. Three choices are
-available: \code{\link[grDevices:png]{png}},
-\code{\link[grDevices:png]{jpeg}} and \code{\link[grDevices]{pdf}}, etc.}
+available: \code{\link[grDevices]{png}},
+\code{\link[grDevices]{jpeg}} and \code{\link[grDevices]{pdf}}, etc.}
 \item{filename}{file name of the sequence of images (`pure' name; without
 any format or extension)}
 \item{fmt}{a C-style string formatting command, such as `\code{\%3d}'}
@@ -40,18 +42,20 @@ be guaranteed that these commands can be executed without the path.}
 \item{para}{a list: the graphics parameters to be set before plotting;
 passed to \code{\link[graphics]{par}}}
 \item{\dots}{other arguments passed to the graphical device, such as
-\code{height} and \code{width}, ...}}
+\code{height} and \code{width}, ...}
+}
 \examples{\dontrun{
-oopt = ani.options(nmax = 50)
-# from png
-saveSWF(knn.ani(test = matrix(rnorm(16), ncol = 2),
-cl.pch = c(16, 2)), 1.5, dev = "png", para = list(mar = c(3,
-3, 1, 1.5), mgp = c(1.5, 0.5, 0)), swfname = "kNN.swf")
-
-# from pdf (vector plot!)
-ani.options(nmax = 50)
-saveSWF(brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow"),
-0.2, "brownian.swf", "pdf", fmt = "")
-
-ani.options(oopt)
+    oopt = ani.options(nmax = 50)
+    # from png
+    saveSWF(knn.ani(test = matrix(rnorm(16), ncol = 2), cl.pch = c(16, 
+        2)), 1.5, dev = "png", para = list(mar = c(3, 3, 1, 1.5), 
+        mgp = c(1.5, 0.5, 0)), swfname = "kNN.swf")
+    
+    # from pdf (vector plot!)
+    ani.options(nmax = 50)
+    saveSWF(brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow"), 
+        0.2, "brownian.swf", "pdf", fmt = "")
+    
+    ani.options(oopt)
 }}
+

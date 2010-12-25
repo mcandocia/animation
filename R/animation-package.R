@@ -3,8 +3,8 @@
 ##' teaching statistics and data analysis.
 ##'
 ##' \tabular{ll}{ Package: \tab animation\cr Type: \tab Package\cr Version:
-##' \tab 1.1\cr Date: \tab 2010-09-28\cr License: \tab GPL-2 | GPL-3\cr } This
-##' package mainly makes use of HTML \& JavaScript and R windows graphics
+##' \tab 1.1\cr License: \tab GPL-2 | GPL-3\cr } This
+##' package mainly makes use of HTML & JavaScript and R windows graphics
 ##' devices (such as \code{\link[grDevices]{x11}}) to demonstrate animations in
 ##' statistics; other kinds of output such as Flash (SWF) or GIF animations
 ##' or PDF animations are also available if required software packages have
@@ -13,6 +13,7 @@
 ##' @name animation-package
 ##' @aliases animation-package animation
 ##' @docType package
+##' @exportPattern "^[^\\.]"
 ##' @author Yihui Xie <\url{http://yihui.name}>
 ##' @references AniWiki: Animations in Statistics
 ##'   \url{http://animation.yihui.name}
@@ -232,3 +233,13 @@ NULL
 
 
 
+##' Average yearly temperatures in central Iowa.
+##'
+##' @name iatemp
+##' @docType data
+##' @format The format is:
+##'
+##' Time-Series [1:116] from 1895 to 2010: 32.7 27.8 32.7 30.4 42.6 31.9 34.5 39.8 32.6 39.6 ...
+##' @source \url{http://www.wrcc.dri.edu/cgi-bin/divplot1_form.pl?1305}
+##' @keywords datasets
+NULL

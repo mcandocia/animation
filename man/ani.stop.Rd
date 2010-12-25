@@ -13,11 +13,12 @@ in \code{\link{ani.options}}.}
 \references{\url{http://animation.yihui.name/animation:create_html_animation_page}}
 \keyword{utilities}
 \examples{\dontrun{
-
-# save the animation in HTML pages and auto-browse it
-ani.options(ani.width = 600, ani.height = 500, interval = 0.2)
-ani.start()
-boot.iid()
-ani.stop()
-
+    
+    # save the animation in HTML pages and auto-browse it
+    ani.options(ani.width = 600, ani.height = 500, interval = 0.2)
+    ani.start()
+    boot.iid()
+    ani.stop()
+    
 }}
+

@@ -1,9 +1,11 @@
 \name{MC.hitormiss}
 \alias{MC.hitormiss}
-\title{Hit or Miss Monte Carlo Integration...}
-\usage{MC.hitormiss(FUN=function(x) x - x^2, n=ani.options("nmax"), from=0,
-    to=1, col.points=c("black", "red"), pch.points=c(20, 4), ...)}
-\description{Hit or Miss Monte Carlo Integration
+\title{Hit or Miss Monte Carlo integration.}
+\usage{MC.hitormiss(FUN = function(x) x - x^2, n = ani.options("nmax"), 
+    from = 0, to = 1, col.points = c("black", "red"), pch.points = c(20, 
+        4), ...)
+}
+\description{Hit or Miss Monte Carlo integration.
 Integrate a function using the Hit-or-Miss Monte Carlo algorithm}
 \details{We compute the proportion of points hitting the area under the curve, and
 the integral can be estimated by the proportion multiplied by the total
@@ -25,22 +27,23 @@ be very inaccurate when \code{n} is small.}
 \item{from,to}{the limits of integration}
 \item{col.points,pch.points}{colors and point characters for points which
 ``hit'' or ``miss'' the area under the curve}
-\item{\dots}{other arguments passed to \code{\link[graphics]{points}}}}
+\item{\dots}{other arguments passed to \code{\link[graphics]{points}}}
+}
 \examples{oopt = ani.options(interval = 0.2, nmax = 100)
 
 # should be close to 1/6
 MC.hitormiss()$est
 # should be close to 1/12
-MC.hitormiss(from = 0.5, to = 1)$est 
+MC.hitormiss(from = 0.5, to = 1)$est
 
 \dontrun{
-## HTML animation page
-ani.options(interval = 0.5, title = "Hit or Miss Monte Carlo Integration",
-description = "Generate Uniform random numbers and compute the proportion
-of points under the curve.")
-ani.start()
-MC.hitormiss()
-ani.stop()
+    ## HTML animation page
+    ani.options(interval = 0.5, title = "Hit or Miss Monte Carlo Integration", 
+        description = "Generate Uniform random numbers and compute the proportion\\nof points under the curve.")
+    ani.start()
+    MC.hitormiss()
+    ani.stop()
 }
 
 ani.options(oopt)}
+

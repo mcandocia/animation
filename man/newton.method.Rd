@@ -1,10 +1,11 @@
 \name{newton.method}
 \alias{newton.method}
-\title{Demonstration of the Newton-Raphson Method for Root-finding...}
-\usage{newton.method(FUN=function(x) x^2 - 4, init=10, rg=c(-1, 10),
-    tol=0.001, interact=FALSE, col.lp=c("blue", "red", "red"), main,
-    xlab, ylab, ...)}
-\description{Demonstration of the Newton-Raphson Method for Root-finding
+\title{Demonstration of the Newton-Raphson method for root-finding.}
+\usage{newton.method(FUN = function(x) x^2 - 4, init = 10, 
+    rg = c(-1, 10), tol = 0.001, interact = FALSE, col.lp = c("blue", 
+        "red", "red"), main, xlab, ylab, ...)
+}
+\description{Demonstration of the Newton-Raphson method for root-finding.
 This function provides an illustration of the iterations in Newton's
 method.}
 \details{Newton's method (also known as the Newton-Raphson method or the
@@ -18,7 +19,7 @@ FUN(x[k]) / FUN'(x[k])}
 
 From the starting value \eqn{x_0}, vertical lines and points are plotted to
 show the location of the sequence of iteration values \eqn{x_1, x_2,
-\ldots}{x1, x2, \dots}; tangent lines are drawn to illustrate the
+\ldots}{x1, x2, \\dots}; tangent lines are drawn to illustrate the
 relationship between successive iterations; the iteration values are in the
 right margin of the plot.}
 \value{A list containing \item{root }{the root found by the algorithm}
@@ -48,45 +49,46 @@ the curve (for 1 time) directly?}
 lines, tangent lines and points}
 \item{main,xlab,ylab}{titles of the plot; there are default values for
 them (depending on the form of the function \code{FUN})}
-\item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}}
+\item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}
+}
 \examples{oopt = ani.options(interval = 1, nmax = 50)
 op = par(pch = 20)
 
-# default example 
-xx = newton.method() 
-xx$root  # solution
+# default example
+xx = newton.method()
+xx$root
 
 # take a long long journey
 ani.options(nmax = 50)
-newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 *
-x + 100, 7.15, c(-6.2, 7.1))
+newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 * 
+    x + 100, 7.15, c(-6.2, 7.1))
 
-# another function 
+# another function
 ani.options(interval = 0.5, nmax = 50)
 xx = newton.method(function(x) exp(-x) * x, rg = c(0, 
-10), init = 2) 
+    10), init = 2)
 # not converge!
 ani.options(interval = 0.5, nmax = 50)
 xx = newton.method(function(x) atan(x), rg = c(-5, 
-5), init = 1.5) 
-xx$root   # Inf 
+    5), init = 1.5)
+xx$root
 
 \dontrun{
-# interaction: use your mouse to select the starting point
-ani.options(interval = 0.5, nmax = 50)
-xx = newton.method(function(x) atan(x), rg = c(-2, 
-2), interact = TRUE) 
-
-# HTML animation pages 
-ani.options(ani.height = 500, ani.width = 600, nmax = 100,
-interval = 1, title = "Demonstration of the Newton-Raphson Method",
-description = "Go along with the tangent lines and iterate.")
-ani.start()
-par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0), pch = 19)
-newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 *
-x + 100, 7.15, c(-6.2, 7.1), main = "")
-ani.stop()
+    # interaction: use your mouse to select the starting point
+    ani.options(interval = 0.5, nmax = 50)
+    xx = newton.method(function(x) atan(x), rg = c(-2, 2), interact = TRUE)
+    
+    # HTML animation pages
+    ani.options(ani.height = 500, ani.width = 600, nmax = 100, 
+        interval = 1, title = "Demonstration of the Newton-Raphson Method", 
+        description = "Go along with the tangent lines and iterate.")
+    ani.start()
+    par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0), pch = 19)
+    newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 * x + 100, 
+        7.15, c(-6.2, 7.1), main = "")
+    ani.stop()
 }
 
-par(op) 
+par(op)
 ani.options(oopt)}
+

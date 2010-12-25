@@ -1,10 +1,11 @@
 \name{ecol.death.sim}
 \alias{ecol.death.sim}
-\title{A Simulation of Death of Two Species...}
-\usage{ecol.death.sim(nr=10, nc=10, num.sp=c(50, 50), col.sp=c(1, 2),
-    pch.sp=c(1, 2), col.die=1, pch.die=4, cex=3, ...)}
-\description{A Simulation of Death of Two Species
-A simulation of the death of two species with certain probabilities.}
+\title{A simulation of the death of two species with certain probabilities.}
+\usage{ecol.death.sim(nr = 10, nc = 10, num.sp = c(50, 50), 
+    col.sp = c(1, 2), pch.sp = c(1, 2), col.die = 1, pch.die = 4, 
+    cex = 3, ...)
+}
+\description{A simulation of the death of two species with certain probabilities.}
 \details{Suppose there are two plant species in a field: A and B. One of them will
 die at each time and a new plant will grow in the place where the old plant
 died; the species of the new plant depends on the proportions of two
@@ -30,16 +31,18 @@ respectively}
 \item{col.die,pch.die,cex}{the color, point symbol and magnification to
 annotate the plant which dies (symbol default to be an `X')}
 \item{\dots}{other arguments passed to \code{\link[graphics]{plot}} to set
-up the plot}}
+up the plot}
+}
 \examples{oopt = ani.options(nmax = 50, interval = 0.3)
 par(ann = FALSE, mar = rep(0, 4))
 ecol.death.sim()
 
 \dontrun{
-## large scale simulation
-ani.options(nmax = 1000, interval = 0.02)
-ecol.death.sim(col.sp = c(8, 2), pch.sp = c(20, 17)) 
-
+    ## large scale simulation
+    ani.options(nmax = 1000, interval = 0.02)
+    ecol.death.sim(col.sp = c(8, 2), pch.sp = c(20, 17))
+    
 }
 
 ani.options(oopt)}
+

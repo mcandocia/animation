@@ -1,11 +1,12 @@
 \name{grad.desc}
 \alias{grad.desc}
-\title{Gradient Descent Algorithm for the 2D Case...}
-\usage{grad.desc(FUN=function(x, y) x^2 + 2 * y^2, rg=c(-3, -3, 3, 3),
-    init=c(-3, 3), gamma=0.05, tol=0.001, len=50, interact=FALSE,
-    col.contour="red", col.arrow="blue")}
-\description{Gradient Descent Algorithm for the 2D Case
-This function has provided a visual illustration for the process of
+\title{Gradient Descent Algorithm for the 2D case.}
+\usage{grad.desc(FUN = function(x, y) x^2 + 2 * y^2, rg = c(-3, 
+    -3, 3, 3), init = c(-3, 3), gamma = 0.05, tol = 0.001, len = 50, 
+    interact = FALSE, col.contour = "red", col.arrow = "blue")
+}
+\description{Gradient Descent Algorithm for the 2D case.
+This function provids a visual illustration for the process of
 minimizing a real-valued function through Gradient Descent Algorithm.}
 \details{Gradient descent is an optimization algorithm. To find a local minimum of a
 function using gradient descent, one takes steps proportional to the
@@ -54,37 +55,39 @@ for contours)}
 \item{interact}{logical; whether choose the starting values by cliking on
 the contour plot directly?}
 \item{col.contour,col.arrow}{colors for the contour lines and arrows
-respectively (default to be red and blue)}}
-\examples{# default example 
+respectively (default to be red and blue)}
+}
+\examples{# default example
 oopt = ani.options(interval = 0.3, nmax = 50)
 xx = grad.desc()
-xx$par  # solution
-xx$persp(col = "lightblue", phi = 30)   # perspective plot 
+xx$par
+xx$persp(col = "lightblue", phi = 30)
 
-# define more complex functions; a little time-consuming 
-f1 = function(x, y) x^2 + 3 * sin(y) 
-xx = grad.desc(f1, pi * c(-2, -2, 2, 2), c(-2 * pi, 2)) 
+# define more complex functions; a little time-consuming
+f1 = function(x, y) x^2 + 3 * sin(y)
+xx = grad.desc(f1, pi * c(-2, -2, 2, 2), c(-2 * pi, 
+    2))
 xx$persp(col = "lightblue", theta = 30, phi = 30)
-# or 
+# or
 ani.options(interval = 0, nmax = 200)
 f2 = function(x, y) sin(1/2 * x^2 - 1/4 * y^2 + 3) * 
-cos(2 * x + 1 - exp(y))  
-xx = grad.desc(f2, c(-2, -2, 2, 2), c(-1, 0.5), 
-gamma = 0.1, tol = 1e-04)
+    cos(2 * x + 1 - exp(y))
+xx = grad.desc(f2, c(-2, -2, 2, 2), c(-1, 0.5), gamma = 0.1, 
+    tol = 1e-04)
 
-\dontrun{ 
-# click your mouse to select a start point 
-xx = grad.desc(f2, c(-2, -2, 2, 2), interact = TRUE, 
-tol = 1e-04)
-xx$persp(col = "lightblue", theta = 30, phi = 30)
-
-# HTML animation pages 
-ani.options(ani.height = 500, ani.width = 500, outdir = getwd(), interval = 0.3,
-nmax = 50, title = "Demonstration of the Gradient Descent Algorithm",
-description = "The arrows will take you to the optimum step by step.")
-ani.start()
-grad.desc()
-ani.stop()
+\dontrun{
+    # click your mouse to select a start point
+    xx = grad.desc(f2, c(-2, -2, 2, 2), interact = TRUE, tol = 1e-04)
+    xx$persp(col = "lightblue", theta = 30, phi = 30)
+    
+    # HTML animation pages
+    ani.options(ani.height = 500, ani.width = 500, outdir = getwd(), 
+        interval = 0.3, nmax = 50, title = "Demonstration of the Gradient Descent Algorithm", 
+        description = "The arrows will take you to the optimum step by step.")
+    ani.start()
+    grad.desc()
+    ani.stop()
 }
 
 ani.options(oopt)}
+

@@ -1,10 +1,11 @@
 \name{sample.cluster}
 \alias{sample.cluster}
-\title{Demonstration for cluster sampling...}
-\usage{sample.cluster(pop=ceiling(10 * runif(10, 0.2, 1)), size=3,
-    p.col=c("blue", "red"), p.cex=c(1, 3), ...)}
-\description{Demonstration for cluster sampling
-Every rectangle stands for a cluster, and the simple random sampling
+\title{Demonstration for the cluster sampling.}
+\usage{sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), 
+    size = 3, p.col = c("blue", "red"), p.cex = c(1, 3), ...)
+}
+\description{Demonstration for the cluster sampling.
+Each rectangle stands for a cluster, and the simple random sampling
 without replacement is performed for each cluster. All points in the
 clusters being sampled will be drawn out.}
 \value{None (invisible `\code{NULL}').}
@@ -12,10 +13,7 @@ clusters being sampled will be drawn out.}
 \seealso{\code{\link[base]{sample}}, \code{\link{sample.simple}},
 \code{\link{sample.ratio}}, \code{\link{sample.strat}},
 \code{\link{sample.system}}}
-\references{Cochran, W G (1977) \emph{Sampling Techniques}, Wiley, ISBN
-0-471-16240-X
-
-\url{http://animation.yihui.name/samp:cluster_sampling}}
+\references{\url{http://animation.yihui.name/samp:cluster_sampling}}
 \keyword{distribution}
 \keyword{dynamic}
 \arguments{\item{pop}{a vector for the size of each cluster in the population.}
@@ -23,22 +21,23 @@ clusters being sampled will be drawn out.}
 \item{p.col,p.cex}{different colors / magnification rate to annotate the
 population and the sample}
 \item{\dots}{other arguments passed to \code{\link[graphics]{rect}} to
-annotate the ``clusters''}}
+annotate the ``clusters''}
+}
 \examples{oopt = ani.options(interval = 1, nmax = 30)
 op = par(mar = rep(1, 4))
 sample.cluster(col = c("bisque", "white"))
 par(op)
-\dontrun{ 
-
-# HTML animation page
-ani.options(ani.height = 350, ani.width = 500, nmax = 30,
-interval = 1, title = "Demonstration of the cluster sampling",
-description = "Once a cluster is sampled, all its elements will be
-chosen.")
-ani.start()
-par(mar = rep(1, 4), lwd = 2)
-sample.cluster(col = c("bisque", "white"))
-ani.stop()
-
+\dontrun{
+    
+    # HTML animation page
+    ani.options(ani.height = 350, ani.width = 500, nmax = 30, 
+        interval = 1, title = "Demonstration of the cluster sampling", 
+        description = "Once a cluster is sampled, all its elements will be\\nchosen.")
+    ani.start()
+    par(mar = rep(1, 4), lwd = 2)
+    sample.cluster(col = c("bisque", "white"))
+    ani.stop()
+    
 }
 ani.options(oopt)}
+

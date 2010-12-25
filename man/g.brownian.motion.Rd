@@ -1,10 +1,11 @@
 \name{g.brownian.motion}
 \alias{g.brownian.motion}
-\title{Brownian Motion Using Google Visualization API...}
-\usage{g.brownian.motion(p=20, start=1900, digits=14,
-    file="brownian.motion.html", width=800, height=600)}
-\description{Brownian Motion Using Google Visualization API
-We can use R to generate random numbers from the Normal distribution and
+\title{Brownian Motion using Google Visualization API.}
+\usage{g.brownian.motion(p = 20, start = 1900, digits = 14, 
+    file = "brownian.motion.html", width = 800, height = 600)
+}
+\description{Brownian Motion using Google Visualization API.}
+\details{We can use R to generate random numbers from the Normal distribution and
 write them into an HTML document, then the Google Visualization gadget
 ``motionchart'' will prepare the animation for us (a Flash animation with
 several buttons).}
@@ -24,8 +25,9 @@ usual.}
 but it's the required by the Google gadget}
 \item{digits}{the precision to round the numbers}
 \item{file}{the file name}
-\item{width,height}{width and height of the animation}}
+\item{width,height}{width and height of the animation}
+}
 \examples{\dontrun{
-g.brownian.motion(15, digits = 2, width = 600, 
-height = 500) 
+    g.brownian.motion(15, digits = 2, width = 600, height = 500)
 }}
+

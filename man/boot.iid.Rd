@@ -1,9 +1,11 @@
 \name{boot.iid}
 \alias{boot.iid}
 \title{Demonstrate bootstrapping for iid data.}
-\usage{boot.iid(x=runif(20), statistic=mean, m=length(x), mat=matrix(1:2, 2),
-    widths=rep(1, ncol(mat)), heights=rep(1, nrow(mat)), col=c("black",
-    "red", "bisque", "red", "gray"), cex=c(1.5, 0.8), main, ...)}
+\usage{boot.iid(x = runif(20), statistic = mean, m = length(x), 
+    mat = matrix(1:2, 2), widths = rep(1, ncol(mat)), heights = rep(1, 
+        nrow(mat)), col = c("black", "red", "bisque", "red", 
+        "gray"), cex = c(1.5, 0.8), main, ...)
+}
 \description{Demonstrate bootstrapping for iid data.
 Use a sunflower scatter plot to
 illustrate the results of sampling, and a histogram to show the
@@ -24,7 +26,7 @@ applied to 'x'.} \item{tstar }{Bootstrap versions of the 'statistic'.}}
 variations. For a relatively complete one, you may just refer to:
 
 Efron, B. and Tibshirani, R. (1993) \emph{An Introduction to the
-Bootstrap}. Chapman \& Hall.
+Bootstrap}. Chapman & Hall.
 
 \url{http://animation.yihui.name/dmml:bootstrap_i.i.d}}
 \keyword{nonparametric}
@@ -45,16 +47,18 @@ points and the sunflowerplot points.}
 \item{main}{a character vector of length 2: the main titles of the two
 graphs.}
 \item{\dots}{other arguments passed to
-\code{\link[graphics]{sunflowerplot}}}}
+\code{\link[graphics]{sunflowerplot}}}
+}
 \examples{# bootstrap for 20 random numbers from U(0, 1)
-opar = par(mar = c(1.5, 3, 1, 0.1), cex.lab = 0.8, cex.axis = 0.8,
-mgp = c(2, 0.5, 0), tcl = -0.3)
+opar = par(mar = c(1.5, 3, 1, 0.1), cex.lab = 0.8, 
+    cex.axis = 0.8, mgp = c(2, 0.5, 0), tcl = -0.3)
 oopt = ani.options(interval = 0.5, nmax = 40)
 # don't want the titles
 boot.iid(main = c("", ""))
 
 # for the median of 15 points from chi-square(5)
-boot.iid(x = rchisq(15, 5), statistic = median, main = c("", ""))
+boot.iid(x = rchisq(15, 5), statistic = median, main = c("", 
+    ""))
 
 # change the layout; or you may try 'mat = matrix(1:2, 1)'
 par(mar = c(1.5, 3, 2.5, 0.1), cex.main = 1)
@@ -63,17 +67,16 @@ boot.iid(heights = c(1, 2))
 par(opar)
 
 \dontrun{
-
-# save the animation in HTML pages
-ani.options(ani.height = 500, ani.width = 600, outdir = getwd(),
-title = "Bootstrapping the i.i.d data",
-description = "This is a naive version of bootstrapping but
-may be useful for novices.")
-ani.start()
-par(mar = c(2.5, 4, 0.5, 0.5))
-boot.iid(main = c("", ""), heights = c(1, 2))
-ani.stop()
-
+    
+    # save the animation in HTML pages
+    ani.options(ani.height = 500, ani.width = 600, outdir = getwd(), 
+        title = "Bootstrapping the i.i.d data", description = "This is a naive version of bootstrapping but\\nmay be useful for novices.")
+    ani.start()
+    par(mar = c(2.5, 4, 0.5, 0.5))
+    boot.iid(main = c("", ""), heights = c(1, 2))
+    ani.stop()
+    
 }
 
 ani.options(oopt)}
+

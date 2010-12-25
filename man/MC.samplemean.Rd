@@ -1,9 +1,10 @@
 \name{MC.samplemean}
 \alias{MC.samplemean}
-\title{Sample Mean Monte Carlo Integration...}
-\usage{MC.samplemean(FUN=function(x) x - x^2, n=ani.options("nmax"),
-    col.rect=c("gray", "black"), adj.x=TRUE, ...)}
-\description{Sample Mean Monte Carlo Integration
+\title{Sample Mean Monte Carlo integration.}
+\usage{MC.samplemean(FUN = function(x) x - x^2, n = ani.options("nmax"), 
+    col.rect = c("gray", "black"), adj.x = TRUE, ...)
+}
+\description{Sample Mean Monte Carlo integration.
 Integrate a function from 0 to 1 using the Sample Mean Monte Carlo
 algorithm}
 \details{\emph{Sample Mean Monte Carlo} integration can compute
@@ -39,7 +40,8 @@ current one)}
 If \code{TRUE}, the rectangles will be laid side by side and it is
 informative for us to assess the total area of the rectangles, otherwise
 the rectangles will be laid at their exact locations.}
-\item{\dots}{other arguments passed to \code{\link[graphics]{rect}}}}
+\item{\dots}{other arguments passed to \code{\link[graphics]{rect}}}
+}
 \examples{oopt = ani.options(interval = 0.2, nmax = 50)
 par(mar = c(4, 4, 1, 1))
 ## when the number of rectangles is large, use border = NA
@@ -47,19 +49,19 @@ MC.samplemean(border = NA)$est
 integrate(function(x) x - x^2, 0, 1)
 ## when adj.x = FALSE, use semi-transparent colors
 MC.samplemean(adj.x = FALSE, col.rect = c(rgb(0, 0, 
-0, 0.3), rgb(1, 0, 0)), border = NA)
+    0, 0.3), rgb(1, 0, 0)), border = NA)
 ## another function to be integrated
 MC.samplemean(FUN = function(x) x^3 - 0.5^3, border = NA)$est
 integrate(function(x) x^3 - 0.5^3, 0, 1)
 
 \dontrun{
-## HTML animation page
-ani.options(interval = 0.5, title = "Sample Mean Monte Carlo Integration",
-description = "Generate Uniform random numbers and compute the average
-function values.")
-ani.start()
-MC.samplemean(n = 100, border = NA)
-ani.stop()
+    ## HTML animation page
+    ani.options(interval = 0.5, title = "Sample Mean Monte Carlo Integration", 
+        description = "Generate Uniform random numbers and compute the average\\nfunction values.")
+    ani.start()
+    MC.samplemean(n = 100, border = NA)
+    ani.stop()
 }
 
 ani.options(oopt)}
+

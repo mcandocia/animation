@@ -1,9 +1,11 @@
 \name{quincunx}
 \alias{quincunx}
-\title{Demonstration of the Quincunx (Bean Machine/Galton Box)...}
-\usage{quincunx(balls=200, layers=15, pch.layers=2, pch.balls=19,
-    col.balls=sample(colors(), balls, TRUE), cex.balls=2)}
-\description{Demonstration of the Quincunx (Bean Machine/Galton Box)
+\title{Demonstration of the Quincunx (Bean Machine/Galton Box).}
+\usage{quincunx(balls = 200, layers = 15, pch.layers = 2, 
+    pch.balls = 19, col.balls = sample(colors(), balls, TRUE), 
+    cex.balls = 2)
+}
+\description{Demonstration of the Quincunx (Bean Machine/Galton Box).
 This function simulates the quincunx with ``balls'' (beans) falling through
 several layers (denoted by triangles) and the distribution of the final
 locations at which the balls hit is denoted by a histogram.}
@@ -34,19 +36,20 @@ animation frames.}
 \item{pch.layers}{point character of layers; triangles (\code{pch = 2}) are
 recommended}
 \item{pch.balls,col.balls,cex.balls}{point character, colors and
-magnification of balls}}
+magnification of balls}
+}
 \examples{set.seed(123)
-ani.options(nmax = 200 + 15 -2, interval = 0.03)
+ani.options(nmax = 200 + 15 - 2, interval = 0.03)
 freq = quincunx(balls = 200, col.balls = rainbow(200))
 # frequency table
 barplot(freq, space = 0)
 
 \dontrun{
-ani.options(ani.height = 500, ani.width = 600, 
-interval = 0.03, nmax = 213, title = "Demonstration of the Galton Box", 
-description = "Balls falling through pins will show you the Normal
-distribution.")
-ani.start()
-quincunx()
-ani.stop()
+    ani.options(ani.height = 500, ani.width = 600, interval = 0.03, 
+        nmax = 213, title = "Demonstration of the Galton Box", 
+        description = "Balls falling through pins will show you the Normal\\ndistribution.")
+    ani.start()
+    quincunx()
+    ani.stop()
 }}
+

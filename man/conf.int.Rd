@@ -1,8 +1,10 @@
 \name{conf.int}
 \alias{conf.int}
-\title{Demonstration of Confidence Intervals...}
-\usage{conf.int(level=0.95, size=50, cl=c("red", "gray"), ...)}
-\description{Demonstration of Confidence Intervals
+\title{Demonstration of the concept of confidence intervals.}
+\usage{conf.int(level = 0.95, size = 50, cl = c("red", "gray"), 
+    ...)
+}
+\description{Demonstration of the concept of confidence intervals.
 This function gives a demonstration of the concept of confidence intervals
 in mathematical statistics.}
 \details{Keep on drawing samples from the Normal distribution N(0, 1), computing the
@@ -35,23 +37,22 @@ Inference}. Duxbury Press, 2th edition, 2001.
 \item{cl}{two different colors to annotate whether the confidence intervals
 cover the true mean (\code{cl[1]}: yes; \code{cl[2]}: no)}
 \item{\dots}{other arguments passed to
-\code{\link[graphics:plot.default]{plot}}}}
+\code{\link[graphics:plot.default]{plot}}}
+}
 \examples{oopt = ani.options(interval = 0.1, nmax = 100)
 # 90\% interval
-conf.int(0.90, main = "Demonstration of Confidence Intervals")
+conf.int(0.9, main = "Demonstration of Confidence Intervals")
 
 \dontrun{
-# save the animation in HTML pages
-ani.options(ani.height = 400, ani.width = 600, nmax = 100,
-interval = 0.15, title = "Demonstration of Confidence Intervals",
-description = "This animation shows the concept of the confidence
-interval which depends on the observations: if the samples change,
-the interval changes too. At last we can see that the coverage rate
-will be approximate to the confidence level.")
-ani.start()
-par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
-conf.int()
-ani.stop() 
+    # save the animation in HTML pages
+    ani.options(ani.height = 400, ani.width = 600, nmax = 100, 
+        interval = 0.15, title = "Demonstration of Confidence Intervals", 
+        description = "This animation shows the concept of the confidence\\ninterval which depends on the observations: if the samples change,\\nthe interval changes too. At last we can see that the coverage rate\\nwill be approximate to the confidence level.")
+    ani.start()
+    par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
+    conf.int()
+    ani.stop()
 }
 
 ani.options(oopt)}
+

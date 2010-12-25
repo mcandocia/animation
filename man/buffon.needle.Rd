@@ -1,10 +1,12 @@
 \name{buffon.needle}
 \alias{buffon.needle}
-\title{Simulation of Buffon's Needle...}
-\usage{buffon.needle(l=0.8, d=1, redraw=TRUE, mat=matrix(c(1, 3, 2, 3), 2),
-    heights=c(3, 2), col=c("lightgray", "red", "gray", "red", "blue",
-    "black", "red"), expand=0.4, type="l", ...)}
-\description{Simulation of Buffon's Needle
+\title{Simulation of Buffon's Needle.}
+\usage{buffon.needle(l = 0.8, d = 1, redraw = TRUE, mat = matrix(c(1, 
+    3, 2, 3), 2), heights = c(3, 2), col = c("lightgray", "red", 
+    "gray", "red", "blue", "black", "red"), expand = 0.4, type = "l", 
+    ...)
+}
+\description{Simulation of Buffon's Needle.
 This function provides a simulation for the problem of Buffon's Needle,
 which is one of the oldest problems in the field of geometrical
 probability.}
@@ -53,30 +55,30 @@ when plotting the estimated \eqn{\pi} values: the \code{ylim} will be
 when plotting the estimated \eqn{\pi} values (default to be lines).}
 \item{\dots}{other arguments passed to
 \code{\link[graphics:plot.default]{plot}} when plotting the values of
-estimated \eqn{\pi}.}}
-\examples{# it takes several seconds if 'redraw = TRUE' 
+estimated \eqn{\pi}.}
+}
+\examples{# it takes several seconds if 'redraw = TRUE'
 oopt = ani.options(nmax = 500, interval = 0)
-opar = par(mar = c(3, 2.5, 0.5, 0.2), pch = 20, mgp = c(1.5, 0.5, 0))
+opar = par(mar = c(3, 2.5, 0.5, 0.2), pch = 20, mgp = c(1.5, 
+    0.5, 0))
 buffon.needle()
 
-# this will be faster 
+# this will be faster
 buffon.needle(redraw = FALSE)
 
 par(opar)
 
-\dontrun{ 
-# create HTML animation page
-ani.options(nmax = 100, interval = 0.1, ani.height = 500, ani.width = 600,
-title = "Simulation of Buffon's Needle",
-description = "There are three graphs made in each step: the top-left
-one is a simulation of the scenario, the top-right one is to help us
-understand the connection between dropping needles and the mathematical
-method to estimate pi, and the bottom one is the result for each
-dropping.")
-ani.start()
-par(mar = c(3, 2.5, 1, 0.2), pch = 20, mgp = c(1.5, 0.5, 0))
-buffon.needle(type = "S")
-ani.stop() 
+\dontrun{
+    # create HTML animation page
+    ani.options(nmax = 100, interval = 0.1, ani.height = 500, 
+        ani.width = 600, title = "Simulation of Buffon's Needle", 
+        description = "There are three graphs made in each step: the top-left\\none is a simulation of the scenario, the top-right one is to help us\\nunderstand the connection between dropping needles and the mathematical\\nmethod to estimate pi, and the bottom one is the result for each\\ndropping.")
+    ani.start()
+    par(mar = c(3, 2.5, 1, 0.2), pch = 20, mgp = c(1.5, 0.5, 
+        0))
+    buffon.needle(type = "S")
+    ani.stop()
 }
 
 ani.options(oopt)}
+
