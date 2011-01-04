@@ -2,37 +2,44 @@
 \alias{vanke1127}
 \alias{vanke1127}
 \title{Stock prices of Vanke Co.}
+\usage{data(vanke1127)}
 \description{Stock prices of Vanke Co., Ltd on 2009/11/27.
 This is a sample of stock prices of the Vanke Co., Ltd on 2009/11/27.}
+\details{Format: a data frame with 2831 observations on the following 2 variables.
+\describe{ \item{time}{POSIXt: the time corresponding to stock
+prices} \item{price}{a numeric vector: stock prices} }}
 \docType{data}
 \keyword{datasets}
 \examples{data(vanke1127)
 with(vanke1127, {
     tab.price = table(price)
-    plot(as.numeric(names(tab.price)), tab.price, type = "h", 
-        xlab = "price", ylab = "frequency")
+    plot(as.numeric(names(tab.price)), as.numeric(tab.price), 
+        type = "h", xlab = "price", ylab = "frequency")
 })
 
-\dontrun{
-    ani.options(interval = 0.5, loop = FALSE)
-    
-    with(vanke1127, {
-        ## a series of HTML animations with different time spans
-        ani.start(title = "Prices changing along with time interval 15 min")
-        price.ani(price, time, lwd = 2)
-        ani.stop()
-        
-        ani.start(title = "Prices changing along with time interval 30 min")
-        price.ani(price, time, span = 30 * 60, lwd = 3)
-        ani.stop()
-        
-        ani.start(title = "Prices changing along with time interval 5 min")
-        price.ani(price, time, span = 5 * 60, lwd = 2)
-        ani.stop()
-        
-        ## GIF animation
-        saveMovie(price.ani(price, time, lwd = 2), interval = 1, 
-            moviename = "price", loop = 1)
-    })
-}}
+oopt = ani.options(interval = 0.5, loop = FALSE, title = "Stock price of Vanke")
+
+## a series of HTML animations with different time spans
+saveHTML({
+    data(vanke1127)
+    price.ani(vanke1127$price, vanke1127$time, lwd = 2)
+}, img.name = "vanke_a", description = "Prices changing along with time interval 15 min")
+
+saveHTML({
+    data(vanke1127)
+    price.ani(vanke1127$price, vanke1127$time, span = 30 * 60, 
+        lwd = 3)
+}, img.name = "vanke_b", description = "Prices changing along with time interval 30 min")
+
+saveHTML({
+    data(vanke1127)
+    price.ani(vanke1127$price, vanke1127$time, span = 5 * 60, 
+        lwd = 2)
+}, img.name = "vanke_c", description = "Prices changing along with time interval 5 min")
+
+## GIF animation
+saveMovie(price.ani(vanke1127$price, vanke1127$time, 
+    lwd = 2), movie.name = "price.gif", loop = 1)
+
+ani.options(oopt)}
 

@@ -22,7 +22,7 @@
 ##' @param cl two different colors to annotate whether the confidence intervals
 ##'   cover the true mean (\code{cl[1]}: yes; \code{cl[2]}: no)
 ##' @param \dots other arguments passed to
-##'   \code{\link[graphics:plot.default]{plot}}
+##'   \code{\link[graphics]{plot.default}}
 ##' @return A list containing \item{level }{confidence level} \item{size
 ##'   }{sample size} \item{CI}{a matrix of confidence intervals for each
 ##'   sample} \item{CR}{coverage rate}
@@ -34,23 +34,22 @@
 ##' @keywords dynamic dplot distribution
 ##' @examples
 ##'
-##' oopt = ani.options(interval = 0.1, nmax = 100)
-##' # 90% interval
+##' oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 100, 2))
+##' ## 90% interval
 ##' conf.int(0.90, main = "Demonstration of Confidence Intervals")
 ##'
-##' \dontrun{
-##' # save the animation in HTML pages
-##' ani.options(ani.height = 400, ani.width = 600, nmax = 100,
-##'     interval = 0.15, title = "Demonstration of Confidence Intervals",
-##'     description = "This animation shows the concept of the confidence
-##'     interval which depends on the observations: if the samples change,
-##'     the interval changes too. At last we can see that the coverage rate
-##'     will be approximate to the confidence level.")
-##' ani.start()
+##' ## save the animation in HTML pages
+##' saveHTML({
+##' ani.options(interval = 0.15, nmax = ifelse(interactive(), 100, 10))
 ##' par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
 ##' conf.int()
-##' ani.stop()
-##' }
+##' }, img.name='conf.int',htmlfile='conf.int.html',
+##' ani.height = 400, ani.width = 600,
+##'     title = "Demonstration of Confidence Intervals",
+##'     description = c("This animation shows the concept of the confidence",
+##'     'interval which depends on the observations: if the samples change,',
+##'     'the interval changes too. At last we can see that the coverage rate',
+##'     'will be approximate to the confidence level.'))
 ##'
 ##' ani.options(oopt)
 ##'
@@ -65,7 +64,6 @@ conf.int = function(level = 0.95, size = 50, cl = c("red",
     rg = range(c(y0, y1))
     cvr = y0 < 0 & y1 > 0
     xax = pretty(1:n)
-    interval = ani.options("interval")
     for (i in 1:n) {
         plot(1:n, ylim = rg, type = "n", xlab = "Samples", ylab = expression("CI: [" ~
             bar(x) - z[alpha/2] * sigma/sqrt(n) ~ ", " ~ bar(x) +
@@ -81,7 +79,7 @@ conf.int = function(level = 0.95, size = 50, cl = c("red",
             ncol = 2)
         legend("topleft", legend = paste("coverage rate:", format(round(mean(cvr[1:i]),
             3), nsmall = 3)), bty = "n")
-        Sys.sleep(interval)
+        ani.pause()
     }
     CI = cbind(y0, y1)
     colnames(CI) = paste(round(c((1 - level)/2, 1 - (1 - level)/2),

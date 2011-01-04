@@ -8,6 +8,7 @@ Several points moving randomly in a circle.}
 \details{This is a solution to the question raised in R-help:
 \url{https://stat.ethz.ch/pipermail/r-help/2008-December/183018.html}.}
 \value{Invisible \code{NULL}.}
+\note{The maximum number of steps in the motion is specified in \code{ani.options('nmax')}.}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link{brownian.motion}}, \code{\link[stats]{rnorm}}}
 \references{\url{http://animation.yihui.name/prob:brownian_motion_circle}}
@@ -16,19 +17,19 @@ Several points moving randomly in a circle.}
 \item{col}{colors of points}
 \item{\dots}{other parameters passed to \code{\link[graphics]{points}}}
 }
-\examples{oopt = ani.options(interval = 0.1, nmax = 300)
-opar = par(mar = rep(0.5, 4))
+\examples{oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 
+    300, 2))
+par(mar = rep(0.5, 4))
 BM.circle(cex = 2, pch = 19)
 
-\dontrun{
-    ani.options(ani.height = 450, ani.width = 450, interval = 0.05, 
-        nmax = 100, title = "Brownian Motion in a Circle", description = "Brownian Motion in a circle.")
-    ani.start()
-    par(mar = rep(0.5, 4))
+saveHTML({
+    par(mar = rep(0.5, 4), pch = 19)
+    ani.options(interval = 0.05, nmax = ifelse(interactive(), 
+        100, 10))
     BM.circle(cex = 2, pch = 19)
-    ani.stop()
-}
+}, img.name = "BM.circle", htmlfile = "BM.circle.html", ani.height = 450, 
+    ani.width = 450, single.opts = "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0", 
+    title = "Brownian Motion in a Circle", description = "Brownian Motion in a circle.")
 
-par(opar)
 ani.options(oopt)}
 

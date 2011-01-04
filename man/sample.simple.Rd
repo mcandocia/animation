@@ -5,11 +5,11 @@
     "red"), p.cex = c(1, 3))
 }
 \description{Demonstration for simple random sampling without replacement.}
-\details{The whole sample frame is denoted by a matrix (\code{nrow * ncol}) in the
-plane just for convenience, and the points being sampled are marked out (by
-red circles by default). Each member of the population has an equal and
-known chance of being selected.}
-\value{None (invisible `\code{NULL}').}
+\details{The whole sample frame is denoted by a matrix (\code{nrow * ncol})
+in the plane just for convenience, and the points being sampled
+are marked out (by red circles by default). Each member of the
+population has an equal and known chance of being selected.}
+\value{None (invisible \code{NULL}).}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link[base]{sample}}, \code{\link{sample.ratio}},
 \code{\link{sample.cluster}}, \code{\link{sample.strat}},
@@ -20,24 +20,23 @@ known chance of being selected.}
 \arguments{\item{nrow}{the desired number of rows of the sample frame.}
 \item{ncol}{the desired number of columns of the sample frame.}
 \item{size}{the sample size.}
-\item{p.col,p.cex}{different colors /magnification rate to annotate the
-population and the sample}
+\item{p.col,p.cex}{different colors /magnification rate to
+annotate the population and the sample}
 }
-\examples{oopt = ani.options(interval = 1, nmax = 30)
-op = par(mar = rep(1, 4))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
+    2))
+par(mar = rep(1, 4))
 sample.simple()
-par(op)
-\dontrun{
-    
-    # HTML animation page
-    ani.options(ani.height = 350, ani.width = 500, nmax = 30, 
-        interval = 1, title = "Demonstration of the simple random sampling without replacement", 
-        description = "Each member of the population has an equal and known chance\\nof being selected.")
-    ani.start()
+
+## HTML animation page
+saveHTML({
     par(mar = rep(1, 4), lwd = 2)
+    ani.options(nmax = ifelse(interactive(), 50, 2))
     sample.simple()
-    ani.stop()
-    
-}
+}, img.name = "sample.simple", htmlfile = "sample.html", ani.height = 350, 
+    ani.width = 500, title = "Demonstration of the simple random sampling without replacement", 
+    description = c("Each member of the population has an equal and", 
+        "known chance of being selected."))
+
 ani.options(oopt)}
 

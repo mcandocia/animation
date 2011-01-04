@@ -1,8 +1,9 @@
 Package: animation
 Type: Package
-Title: Demonstrate Animations in Statistics
-Version: 1.1-5
-Date: 2010-12-25
+Title: A Gallery of Animations in Statistics and Utilities to Create
+        Animations
+Version: 2.0-0
+Date: 2011-01-04
 Author: Yihui Xie
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: This package contains various functions for animations in
@@ -13,12 +14,14 @@ Description: This package contains various functions for animations in
         These functions might be of help in teaching statistics and
         data analysis. Also provided in this package are several
         approaches to save animations to various formats, e.g. Flash,
-        GIF, HTML page and PDF.
+        GIF, HTML page and PDF (saveSWF(), saveMovie(), saveHTML(), and
+        saveLatex() respectively). PDF animations can be inserted into
+        Sweave easily.
 Imports: MASS
 License: GPL-2 | GPL-3
 URL: http://animation.yihui.name
 BugReports: https://github.com/yihui/animation/issues
-Collate: 'ani.options.R' 'ani.start.R' 'ani.stop.R'
+Collate: 'ani.options.R' 'ani.pause.R' 'ani.start.R' 'ani.stop.R'
         'animation-defunct.R' 'animation-package.R'
         'bisection.method.R' 'BM.circle.R' 'boot.iid.R'
         'brownian.motion.R' 'buffon.needle.R' 'clt.ani.R' 'conf.int.R'
@@ -29,8 +32,8 @@ Collate: 'ani.options.R' 'ani.start.R' 'ani.stop.R'
         'mwar.ani.R' 'newton.method.R' 'price.ani.R' 'quincunx.R'
         'Rosling.bubbles.R' 'sample.cluster.R' 'sample.ratio.R'
         'sample.simple.R' 'sample.strat.R' 'sample.system.R'
-        'saveLatex.R' 'saveMovie.R' 'saveSWF.R' 'sim.qqnorm.R'
-        'vi.grid.illusion.R' 'vi.lilac.chaser.R' 'zzz.R'
-Packaged: 2010-12-25 17:57:21 UTC; Yihui
+        'saveHTML.R' 'saveLatex.R' 'saveMovie.R' 'saveSWF.R'
+        'sim.qqnorm.R' 'vi.grid.illusion.R' 'vi.lilac.chaser.R' 'zzz.R'
+Packaged: 2011-01-03 21:54:27 UTC; Yihui
 Repository: CRAN
-Date/Publication: 2011-01-03 12:33:57
+Date/Publication: 2011-01-04 07:27:58

@@ -33,7 +33,8 @@ Train a LDA model without the \eqn{i}-th fold data, and predict with the
 \item Determine the optimum number of features with the largest \eqn{p}.
 }
 
-Note that \eqn{g_{max}} is set by \code{ani.options("nmax")}.}
+Note that \eqn{g_{max}} is set by \code{ani.options("nmax")} (i.e. the maximum
+number of features we want to choose).}
 \value{A list containing \item{accuracy }{a matrix in which the element in
 the i-th row and j-th column is the rate of correct predictions based on
 LDA, i.e. build a LDA model with j variables and predict with data in the
@@ -58,21 +59,23 @@ the plot}
 \item{col.av}{the two colors used to respectively denote rates of correct
 predictions in the i-th fold and the average rates for all k folds}
 }
-\examples{op = par(pch = 19, mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 10, 
+    2))
+par(pch = 19, mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 
     0.5, 0))
 cv.nfeaturesLDA()
-par(op)
 
-\dontrun{
-    # save the animation in HTML pages
-    oopt = ani.options(ani.height = 480, ani.width = 600, interval = 0.5, 
-        nmax = 10, title = "Cross-validation to find the optimum number of features in LDA", 
-        description = "This animation has provided an illustration of the process of\\nfinding out the optimum number of variables using k-fold cross-validation\\nin a linear discriminant analysis (LDA).")
-    ani.start()
+## save the animation in HTML pages
+saveHTML({
+    ani.options(interval = 0.5, nmax = 10)
     par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3, 
         pch = 19, cex = 1.5)
     cv.nfeaturesLDA()
-    ani.stop()
-    ani.options(oopt)
-}}
+}, img.name = "cv.nfeaturesLDA", htmlfile = "cv.nfeaturesLDA.html", 
+    ani.height = 480, ani.width = 600, title = "Cross-validation to find the optimum number of features in LDA", 
+    description = c("This", "animation has provided an illustration of the process of finding", 
+        "out the optimum number of variables using k-fold cross-validation", 
+        "in a linear discriminant analysis (LDA)."))
+
+ani.options(oopt)}
 

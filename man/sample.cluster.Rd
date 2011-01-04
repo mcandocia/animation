@@ -8,7 +8,7 @@
 Each rectangle stands for a cluster, and the simple random sampling
 without replacement is performed for each cluster. All points in the
 clusters being sampled will be drawn out.}
-\value{None (invisible `\code{NULL}').}
+\value{None (invisible \code{NULL}).}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link[base]{sample}}, \code{\link{sample.simple}},
 \code{\link{sample.ratio}}, \code{\link{sample.strat}},
@@ -16,28 +16,27 @@ clusters being sampled will be drawn out.}
 \references{\url{http://animation.yihui.name/samp:cluster_sampling}}
 \keyword{distribution}
 \keyword{dynamic}
-\arguments{\item{pop}{a vector for the size of each cluster in the population.}
+\arguments{\item{pop}{a vector for the size of each cluster in the
+population.}
 \item{size}{the number of clusters to be drawn out.}
-\item{p.col,p.cex}{different colors / magnification rate to annotate the
-population and the sample}
-\item{\dots}{other arguments passed to \code{\link[graphics]{rect}} to
-annotate the ``clusters''}
+\item{p.col,p.cex}{different colors / magnification rate to
+annotate the population and the sample}
+\item{\dots}{other arguments passed to
+\code{\link[graphics]{rect}} to annotate the ``clusters''}
 }
-\examples{oopt = ani.options(interval = 1, nmax = 30)
-op = par(mar = rep(1, 4))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
+    2))
+par(mar = rep(1, 4))
 sample.cluster(col = c("bisque", "white"))
-par(op)
-\dontrun{
-    
-    # HTML animation page
-    ani.options(ani.height = 350, ani.width = 500, nmax = 30, 
-        interval = 1, title = "Demonstration of the cluster sampling", 
-        description = "Once a cluster is sampled, all its elements will be\\nchosen.")
-    ani.start()
+
+## HTML animation page
+saveHTML({
     par(mar = rep(1, 4), lwd = 2)
+    ani.options(nmax = ifelse(interactive(), 50, 2))
     sample.cluster(col = c("bisque", "white"))
-    ani.stop()
-    
-}
+}, img.name = "sample.cluster", htmlfile = "sample.html", ani.height = 350, 
+    ani.width = 500, title = "Demonstration of the cluster sampling", 
+    description = c("Once a cluster is sampled,", "all its elements will be chosen."))
+
 ani.options(oopt)}
 

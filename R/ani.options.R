@@ -1,8 +1,7 @@
-##' Set or query animation parameters.
+##' Set or query animation options.
 ##' There are various parameters that control the behaviour of the
-##' animation, such as time interval, maximum frames, height and width, etc.
-##' This function is based on \code{\link[base]{options}} to set an option
-##' \code{ani} which is a list containing the animation parameters.
+##' animation, such as time interval, maximum number of animation frames,
+##' height and width, etc.
 ##'
 ##' The supported animation parameters:
 ##' \describe{
@@ -11,127 +10,203 @@
 ##' number to set the time interval of the animation (unit in seconds); default
 ##' to be 1. }
 ##'
-##' \item{nmax}{ maximum number of steps for a loop (e.g.
+##' \item{nmax}{ maximum number of steps in a loop (e.g.
 ##' iterations) to create animation frames. Note: the actual number of frames
 ##' can be less than this number, depending on specific animations. Default to
 ##' be 50.}
 ##'
 ##' \item{ani.width, ani.height}{ width and height of image frames
 ##' (unit in px); see graphics devices like \code{\link[grDevices]{png}},
-##' \code{\link[grDevices]{jpeg}}, ...; default to be 480.}
+##' \code{\link[grDevices]{jpeg}}, ...; default to be 480. NB: for different
+##' graphics devices, the units of these values might be different, e.g.
+##' PDF devices usually use inches, whereas bitmap devices often use pixels.}
 ##'
-##' \item{outdir}{character: specify the output dir if we want to create HTML
-##' animation pages; default to be \code{\link[base]{tempdir}}.}
+##' \item{outdir}{character: specify the output directory when we
+##' export the animations using \code{\link{saveHTML}},
+##' \code{\link{saveMovie}}, \code{\link{saveLatex}} and
+##' \code{\link{saveSWF}}; default to be the temporary directory
+##' \code{\link[base]{tempdir}} and we can reset to the current
+##' working directory by \code{ani.options(outdir = getwd())}.}
 ##'
 ##' \item{imgdir}{character: the name of the directory (a relative path) for
 ##' images when creating HTML animation pages; default to be \code{"images"}.}
 ##'
-##' \item{filename}{character: name of the target HTML main file (without path
-##' name; basename only; default to be \code{"index.htm"})}
+##' \item{htmlfile}{character: name of the target HTML main file (without path
+##' name; basename only; default to be \code{"index.html"})}
 ##'
-##' \item{withprompt}{character: prompt to display while
-##' using \code{\link{ani.start}} (restore with \code{\link{ani.stop}})}
+##' \item{ani.dev}{a function or a function name: the graphics device;
+##' e.g.  (\code{\link[grDevices]{png}}, \code{\link[grDevices]{pdf}},
+##' ...); default to be \code{"png"}}
 ##'
 ##' \item{ani.type}{character: image format for animation frames, e.g.
-##' \code{png}, \code{jpg}, ...; default to be \code{"png"}}
+##' \code{png}, \code{jpeg}, ...; default to be \code{"png"}; this will be
+##' used as the file extension of images, so don't forget to change this
+##' option as well when you changed the option \code{ani.dev}}
 ##'
-##' \item{ani.dev}{a
-##' function or a function name: the graphics device; e.g.
-##' (\code{\link[grDevices]{png}}, \code{\link[grDevices]{jpeg}}, ...); default
-##' to be \code{"png"}} \item{title}{character: the title of animation }
+##' \item{title, description}{character: the title and description of
+##' the animation in the HTML page created by \code{\link{saveHTML}}}
 ##'
-##' \item{description}{character: a description about the animation }
-##'
-##' \item{footer}{ logical or character: if \code{TRUE}, write a foot part in
-##' the HTML page containing information such as date/time of creation; if
+##' \item{verbose}{ logical or character: if \code{TRUE}, write a footer part in
+##' the HTML page containing detailed technical information; if
 ##' given a character string, it will be used as the footer message; in other
 ##' cases, the footer of the page will be blank.}
 ##'
 ##' \item{loop}{whether to
-##' iterate or not (default \code{TRUE} to interate for infinite times)}
+##' iterate or not (default \code{TRUE} to iterate for infinite times)}
 ##'
 ##' \item{autobrowse}{logical: whether auto-browse the animation page
-##' immediately after it is created?}
+##' immediately after it is created? (default to be \code{interactive()})}
+##'
+##' \item{autoplay}{logical: whether to autoplay the animation when the HTML
+##' page is loaded (default to be \code{TRUE}); only applicable to
+##' \code{\link{saveHTML}}}
+##'
+##' \item{use.dev}{ whether to use the graphics device specified in
+##' \code{ani.options('ani.dev')} (default to be \code{TRUE}); if
+##' \code{FALSE}, we need to generate image files by our own
+##' approaches in the expression \code{expr} (see functions
+##' \code{\link{saveHTML}}, \code{\link{saveMovie}},
+##' \code{\link{saveLatex}} and \code{\link{saveSWF}}); this can be
+##' useful when the output cannot be captured by standard R graphics
+##' devices -- a typical example is the \pkg{rgl} graphics (we can use
+##' \code{\link[rgl]{rgl.snapshot}} to capture \pkg{rgl} graphics to
+##' png files, or \code{\link[rgl]{rgl.postscript}} to save plots as
+##' postscript/pdf; see \code{demo('rgl_animation')} or
+##' \code{demo('use_Cairo')} for examples or the last example below)}
+##'
+##' \item{withprompt}{character: prompt to display while using
+##' \code{\link{ani.start}} (will be restored with
+##' \code{\link{ani.stop}})}
 ##'
 ##' }
 ##'
-##' @param \dots arguments in \code{tag = value} form, or a list of tagged
-##'   values.  The tags must come from the animation parameters described
-##'   below.
-##' @return a list containing the options.
+##' There are a couple of ``hidden'' options which are designed to
+##' facilitate the usage of some functions, including:
 ##'
-##' When parameters are set, their former values are returned in an invisible
-##'   named list.  Such a list can be passed as an argument to
-##'   \code{\link{ani.options}} to restore the parameter values.
-##' @note Please note that \code{nmax} is usually equal to the number of
-##'   animation frames (e.g. for \code{\link{brownian.motion}}) but not
-##'   \emph{always}! The reason is that sometimes there are more than one frame
-##'   recorded in a single step of a loop, for instance, there are 2 frames
-##'   generated in each step of \code{\link{kmeans.ani}}, and 4 frames in
-##'   \code{\link{knn.ani}}, etc.
+##' \describe{
 ##'
-##' This function can be used for almost all the animation functions such as
-##'   \code{\link{brownian.motion}}, \code{\link{boot.iid}},
-##'   \code{\link{buffon.needle}}, \code{\link{cv.ani}},
-##'   \code{\link{flip.coin}}, \code{\link{kmeans.ani}}, \code{\link{knn.ani}},
-##'   etc. All the parameters will affect the behaviour of HTML animations, but
-##'   only \code{interval} will affect animations in windows graphics device.
+##' \item{convert}{this option will be checked first when calling
+##' \code{\link{im.convert}} (or \code{\link{saveMovie}}) to see if it
+##' contains the path to \file{convert.exe}; we can specify it
+##' beforehand to save the efforts in searching for \file{convert.exe}
+##' in ImageMagick under Windows. For example,
+##' \code{ani.options(convert = shQuote('c:/program
+##' files/imagemagick/convert.exe'))}; note this option also works for
+##' Mac and Linux (see \code{help(im.convert)})}
 ##'
-##' When R is not running interactively, \code{interval} will be set to 0
-##'   because it does not make much sense to let R wait for a possibly very
-##'   long time when we cannot watch the animations in real time.
+##' \item{swftools}{this can help \code{\link{saveSWF}} save the
+##' efforts of searching for the software package ``SWF Tools'' under
+##' Windows; e.g. we can specify \code{ani.options(swftools =
+##' 'c:/program files/swftools')} in advance}
+##'
+##' \item{img.fmt}{the value of this option can be used to determine
+##' the image filename format when we want to use custom graphics
+##' devices to record images, e.g. in \code{\link{saveLatex}}, if
+##' \code{ani.options('use.dev') == FALSE}, then
+##' \code{ani.options('img.fmt')} will be a string like
+##' \code{'path/to/output/img.name\%d.png'}, so we can use it to
+##' generate file names in the argument \code{expr}; see
+##' \code{demo('rgl_animation')} for example or the last example below}
+##'
+##' }
+##' @param ... arguments in \code{tag = value} form, or a list of tagged
+##' values.  The tags usually come from the animation parameters described
+##' below, but they are not restricted to these tags (any tag can be used;
+##' this is similar to \code{\link[base]{options}}).
+##' @return \code{ani.options()} returns a list containing the
+##' options: when parameters are set, their former values are returned
+##' in an invisible named list.  Such a list can be passed as an
+##' argument to \code{\link{ani.options}} to restore the parameter
+##' values.
+##'
+##' \code{ani.options('tag')} returns the value of the option
+##' \code{'tag'}.
+##'
+##' \code{ani.options(c('tag1', 'tag2'))} or \code{ani.options('tag1',
+##' 'tag2')} returns a list containing the corresponding options.
+##' @note Please note that \code{nmax} is not always equal to the
+##' number of animation frames. Sometimes there is more than one frame
+##' recorded in a single step of a loop, for instance, there are 2
+##' frames generated in each step of \code{\link{kmeans.ani}}, and 4
+##' frames in \code{\link{knn.ani}}, etc; whereas for
+##' \code{\link{newton.method}}, the number of animation frames is not
+##' definite, because there are other criteria to break the loop.
+##'
+##' This function can be used for almost all the animation functions
+##' such as \code{\link{brownian.motion}}, \code{\link{boot.iid}},
+##' \code{\link{buffon.needle}}, \code{\link{cv.ani}},
+##' \code{\link{flip.coin}}, \code{\link{kmeans.ani}},
+##' \code{\link{knn.ani}}, etc. Most of the options here will affect
+##' the behaviour of animations of the formats HTML, GIF, SWF and PDF;
+##' on-screen animations are only affected by \code{interval} and
+##' \code{nmax}.
+##'
 ##' @author Yihui Xie <\url{http://yihui.name}>
-##' @seealso \code{\link[base]{options}}
+##' @seealso \code{\link[base]{options}},
+##' \code{\link[grDevices]{dev.interactive}}, \code{\link{saveHTML}},
+##' \code{\link{saveMovie}}, \code{\link{saveLatex}},
+##' \code{\link{saveSWF}}
 ##' @references \url{http://animation.yihui.name/animation:options}
 ##' @keywords misc
 ##' @examples
+##' ## see the first example in help(animation) on how to set and restore
+##' ##   animation options
 ##'
-##' \dontrun{
-##' # store the old option to restore it later
-##' oopt = ani.options(interval = 0.05, nmax = 100, ani.dev = "png",
-##'     ani.type = "png")
-##' ani.start()
-##' opar = par(mar = c(3, 3, 2, 0.5), mgp = c(2, .5, 0), tcl = -0.3,
-##'     cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
-##' brownian.motion( pch = 21, cex = 5, col = "red", bg = "yellow",
-##'     main = "Demonstration of Brownian Motion",)
-##' par(opar)
-##' ani.stop()
+##' ## use the PDF device: remember to set 'ani.type' accordingly
+##' oopt = ani.options(ani.dev = 'pdf', ani.type = 'pdf', ani.height = 5, ani.width = 7)
+##'
+##' ## use the Cairo PDF device
+##' # if (require('Cairo')) {
+##' #     ani.options(ani.dev = CairoPDF, ani.type = 'pdf',
+##' #                 ani.height = 6, ani.width = 6)
+##' # }
+##'
+##' ## change outdir to the current working directory
+##' ani.options(outdir = getwd())
+##'
+##' ## don't loop for GIF/HTML animations
+##' ani.options(loop = FALSE)
+##'
+##' ## don't try to open the output automatically
+##' ani.options(autobrowse = FALSE)
+##'
+##' ## it's a good habit to restore the options in the end so that
+##' ##   other code will not be affected
 ##' ani.options(oopt)
-##' }
+##'
+##' ## how to make use of the hidden option 'img.fmt'
+##' saveHTML(expr = {
+##' png(ani.options('img.fmt'))
+##' for(i in 1:5) plot(runif(10))
+##' dev.off()
+##' }, img.name='custom_plot', use.dev = FALSE, ani.type='png', htmlfile='custom_device.html',
+##' description="Note how we use our own graphics device in 'expr'.")
 ##'
 ani.options = function(...) {
-    mf = list(interval = 1, nmax = 50, ani.width = 480, ani.height = 480,
-        outdir = tempdir(), imgdir = "images", filename = "index.htm",
-        withprompt = "ANI> ", ani.type = "png", ani.dev = "png",
-        title = "Statistical Animations Using R", description = "This is an animation.",
-        footer = TRUE, loop = TRUE, autobrowse = TRUE)
-    if (is.null(getOption("ani")))
-        options(ani = mf)
-    else mf = getOption("ani")
     lst = list(...)
+    .ani.opts = .ani.env$.ani.opts
     if (length(lst)) {
-        if (is.null(names(lst)) & !is.list(lst[[1]])) {
-            if (identical(unlist(lst), "interval") & !interactive())
-                0
-            else getOption("ani")[unlist(lst)][[1]]
-
-        }
-        else {
-            omf = mf
-            mc = list(...)
-            if (is.list(mc[[1]]))
-                mc = mc[[1]]
-            if (length(mc) > 0)
-                mf[pmatch(names(mc), names(mf))] = mc
-            options(ani = mf)
-            if (!identical(omf$nmax, mf$nmax) & interactive()) {
-                message("animation option 'nmax' changed: ", omf$nmax, " --> ", mf$nmax)
+        if (is.null(names(lst)) && !is.list(lst[[1]])) {
+            lst = unlist(lst)
+            if (length(lst) == 1) .ani.opts[[lst]] else .ani.opts[lst]
+        } else {
+            omf = .ani.opts
+            if (is.list(lst[[1]]))
+                lst = lst[[1]]
+            if (length(lst) > 0) {
+                .ani.opts[names(lst)] = lst
+                .ani.env$.ani.opts = .ani.opts
+                if (!identical(omf$nmax, .ani.opts$nmax) && interactive()) {
+                    message("animation option 'nmax' changed: ", omf$nmax,
+                            " --> ", .ani.opts$nmax)
+                }
             }
             invisible(omf)
         }
-    }
-    else {
-        getOption("ani")
+    } else {
+        .ani.opts
     }
 }
+
+## create an environment to store animation options
+.ani.env = new.env()

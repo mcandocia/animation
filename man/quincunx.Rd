@@ -39,17 +39,21 @@ recommended}
 magnification of balls}
 }
 \examples{set.seed(123)
-ani.options(nmax = 200 + 15 - 2, interval = 0.03)
+oopt = ani.options(nmax = ifelse(interactive(), 200 + 
+    15 - 2, 2), interval = 0.03)
 freq = quincunx(balls = 200, col.balls = rainbow(200))
-# frequency table
+## frequency table
 barplot(freq, space = 0)
 
-\dontrun{
-    ani.options(ani.height = 500, ani.width = 600, interval = 0.03, 
-        nmax = 213, title = "Demonstration of the Galton Box", 
-        description = "Balls falling through pins will show you the Normal\\ndistribution.")
-    ani.start()
-    quincunx()
-    ani.stop()
-}}
+## HTML animation page
+saveHTML({
+    ani.options(nmax = ifelse(interactive(), 200 + 15 - 2, 2), 
+        interval = 0.03)
+    quincunx(balls = 200, col.balls = rainbow(200))
+}, img.name = "quincunx", htmlfile = "quincunx.html", ani.height = 500, 
+    ani.width = 600, title = "Demonstration of the Galton Box", 
+    description = c("Balls", "falling through pins will show you the Normal", 
+        "distribution."))
+
+ani.options(oopt)}
 

@@ -7,10 +7,10 @@
 This demo shows the possible QQ plots created by random numbers generated
 from a Normal distribution so that users can get a rough idea about how QQ
 plots really look like.}
-\details{When the sample size is small, it is hard to get a correct inference about
-the distribution of data from a QQ plot. Even if the sample size is large,
-usually there are outliers far away from the straight line. Therefore,
-don't overinterpret the QQ plots.}
+\details{When the sample size is small, it is hard to get a correct
+inference about the distribution of data from a QQ plot. Even if
+the sample size is large, usually there are outliers far away from
+the straight line. Therefore, don't overinterpret the QQ plots.}
 \value{\code{NULL}}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link[stats]{qqnorm}}}
@@ -20,22 +20,23 @@ don't overinterpret the QQ plots.}
 \arguments{\item{n}{integer: sample size}
 \item{\dots}{other arguments passed to \code{\link[stats]{qqnorm}}}
 }
-\examples{oopt = ani.options(interval = 0.1, nmax = 100)
-op = par(mar = c(3, 3, 2, 0.5), mgp = c(1.5, 0.5, 
-    0), tcl = -0.3)
-sim.qqnorm()
-par(op)
+\examples{oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 
+    100, 2))
+par(mar = c(3, 3, 2, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
 
-\dontrun{
-    
-    # HTML animation page
-    ani.options(ani.height = 500, ani.width = 500, nmax = 100, 
-        interval = 0.1, title = "Demonstration of Simulated QQ Plots", 
-        description = "This animation shows the QQ plots of random numbers\\nfrom a Normal distribution. Does them really look like normally\\ndistributed?")
-    ani.start()
+sim.qqnorm()
+
+## HTML animation pages
+saveHTML({
     par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
+    ani.options(interval = 0.1, nmax = ifelse(interactive(), 
+        100, 2))
     sim.qqnorm(n = 15, pch = 20, main = "")
-    ani.stop()
-}
+}, img.name = "sim.qqnorm", htmlfile = "sim.qqnorm.html", ani.height = 500, 
+    ani.width = 500, title = "Demonstration of Simulated QQ Plots", 
+    description = c("This animation shows the QQ plots of random numbers", 
+        "from a Normal distribution. Does them really look like normally", 
+        "distributed?"))
+
 ani.options(oopt)}
 

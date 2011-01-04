@@ -34,20 +34,22 @@
 ##' @examples
 ##'
 ##' set.seed(123)
-##' ani.options(nmax = 200 + 15 -2, interval = 0.03)
+##' oopt=ani.options(nmax = ifelse(interactive(), 200 + 15 -2, 2), interval = 0.03)
 ##' freq = quincunx(balls = 200, col.balls = rainbow(200))
-##' # frequency table
+##' ## frequency table
 ##' barplot(freq, space = 0)
 ##'
-##' \dontrun{
-##' ani.options(ani.height = 500, ani.width = 600,
-##'     interval = 0.03, nmax = 213, title = "Demonstration of the Galton Box",
-##'     description = "Balls falling through pins will show you the Normal
-##'     distribution.")
-##' ani.start()
-##' quincunx()
-##' ani.stop()
-##' }
+##' ## HTML animation page
+##' saveHTML({
+##' ani.options(nmax = ifelse(interactive(), 200 + 15 -2, 2), interval = 0.03)
+##' quincunx(balls = 200, col.balls = rainbow(200))
+##' }, img.name='quincunx', htmlfile='quincunx.html',
+##' ani.height = 500, ani.width = 600,
+##'     title = "Demonstration of the Galton Box",
+##'     description = c("Balls", 'falling through pins will show you the Normal',
+##'     "distribution."))
+##'
+##' ani.options(oopt)
 ##'
 quincunx = function(balls = 200, layers = 15, pch.layers = 2,
     pch.balls = 19, col.balls = sample(colors(), balls, TRUE),
@@ -56,7 +58,6 @@ quincunx = function(balls = 200, layers = 15, pch.layers = 2,
     if (ani.options("nmax") != (balls + layers - 2))
         warning("It's strongly recommended that ani.options(nmax = balls + layers -2)")
     nmax = max(balls + layers - 2, ani.options("nmax"))
-    interval = ani.options("interval")
     layerx = layery = NULL
     for (i in 1:layers) {
         layerx = c(layerx, seq(0.5 * (i + 1), layers - 0.5 *
@@ -90,7 +91,7 @@ quincunx = function(balls = 200, layers = 15, pch.layers = 2,
         else hist(finalx[1:(i - layers + 2)], breaks = 1:layers,
             xlim = rgx, ylim = rgy, main = "", xlab = "", ylab = "",
             ann = FALSE, axes = FALSE)
-        Sys.sleep(interval)
+        ani.pause()
     }
     par(op)
     return(invisible(c(table(finalx))))

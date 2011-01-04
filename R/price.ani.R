@@ -16,10 +16,12 @@
 ##' @examples
 ##'
 ##' ## see more examples in ?vanke1127
+##' saveHTML({
 ##' data(vanke1127)
-##' with(vanke1127, {
-##'     price.ani(price, time, lwd = 2)
-##' })
+##'     price.ani(vanke1127$price, vanke1127$time, lwd = 2)
+##' },img.name='vanke1127',htmlfile='vanke1127.html',
+##' title='Stock prices of Vanke', description=c('Barplots',
+##' 'of the stock prices of Vanke Co. Ltd', 'on 2009/11/27'))
 ##'
 price.ani = function(price, time, time.begin = min(time),
     span = 15 * 60, ..., xlab = "price", ylab = "frequency",
@@ -47,15 +49,16 @@ price.ani = function(price, time, time.begin = min(time),
             tab.price = table(sub.price)
             if (miss.main)
                 main = paste(time1, time2, sep = " - ")
-            plot(as.numeric(names(tab.price)), tab.price, type = "h",
+            plot(as.numeric(names(tab.price)), as.numeric(tab.price), type = "h",
                 ..., xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim,
                 main = main, panel.first = grid())
         }
         else {
             message("no prices between ", time1, " and ", time2)
+            flush.console()
         }
         time1 = time2
-        Sys.sleep(ani.options("interval"))
+        ani.pause()
     }
 }
 

@@ -27,7 +27,9 @@ iterations; if it is equal to \code{ani.options('nmax')}, it's quite
 likely that the root is not reliable because the maximum number of
 iterations has been reached}}
 \author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link[stats]{deriv}}, \code{\link[stats]{uniroot}}}
+\note{The maximum number of iterations is specified in \code{ani.options('nmax')}.}
+\seealso{\code{\link[stats]{deriv}}, \code{\link[stats]{uniroot}},
+\code{\link[graphics]{curve}}}
 \references{\url{http://en.wikipedia.org/wiki/Bisection_method}
 
 \url{http://animation.yihui.name/compstat:bisection_method}}
@@ -43,24 +45,29 @@ curve (for two times) directly?}
 \item{xlab,ylab,main}{axis and main titles to be used in the plot}
 \item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}
 }
-\examples{# default example
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 30, 
+    2))
+
+## default example
 xx = bisection.method()
 xx$root
 
-# a cubic curve
+## a cubic curve
 f = function(x) x^3 - 7 * x - 10
 xx = bisection.method(f, c(-3, 5))
 
-\dontrun{
-    # interaction: use your mouse to select the end-points
-    bisection.method(f, c(-3, 5), interact = TRUE)
-    
-    # HTML animation pages
-    ani.start(nmax = 50, ani.height = 400, ani.width = 600, interval = 1, 
-        title = "The Bisection Method for Root-finding on an Interval", 
-        description = "The bisection method is a root-finding algorithm\\nwhich works by repeatedly dividing an interval in half and then\\nselecting the subinterval in which a root exists.")
+## interaction: use your mouse to select the two end-points
+if (interactive()) bisection.method(f, c(-3, 5), interact = TRUE)
+
+## HTML animation pages
+saveHTML({
     par(mar = c(4, 4, 1, 2))
     bisection.method(main = "")
-    ani.stop()
-}}
+}, img.name = "bisection.method", htmlfile = "bisection.method.html", 
+    ani.height = 400, ani.width = 600, interval = 1, title = "The Bisection Method for Root-finding on an Interval", 
+    description = c("The bisection method is a root-finding algorithm", 
+        "which works by repeatedly dividing an interval in half and then", 
+        "selecting the subinterval in which a root exists."))
+
+ani.options(oopt)}
 

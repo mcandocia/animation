@@ -1,35 +1,47 @@
 \name{saveMovie}
 \alias{saveMovie}
 \title{Convert images to a single animation file (typically GIF).}
-\usage{saveMovie(expr, interval = 1, moviename = "animation.gif", 
-    loop = 0, dev = png, filename = "Rplot", fmt = "\%03d", fileext = "png", 
-    outdir = getwd(), convert = "convert", cmd.fun, clean = TRUE, 
-    ani.first, para = par(no.readonly = TRUE), ...)
+\usage{saveMovie(expr, movie.name = "animation.gif", img.name = "Rplot", 
+    convert = "convert", cmd.fun = system, clean = TRUE, ...)
 }
 \description{Convert images to a single animation file (typically GIF).
-This function opens a graphical device first to generate a sequence of
-images based on \code{expr}, then makes use of the command \code{convert}
-in `ImageMagick' to convert these images to a single animated movie (in
-formats such as GIF and MPG, etc). An alternative software package is
-GraphicsMagick, which is smaller than ImageMagick.}
-\details{This function calls \code{\link{im.convert}} to convert images to a single
+This function opens a graphical device (specified in \code{ani.options('ani.dev')})
+first to generate a sequence of images based on \code{expr}, then makes use
+of the command \command{convert} in `ImageMagick' to convert these images to
+a single animated movie (as a GIF or MPG file). An alternative software
+package is GraphicsMagick (use \code{convert = 'gm convert'}), which is
+smaller than ImageMagick.}
+\details{This function calls \code{\link{im.convert}} (or \code{\link{gm.convert}},
+depending on the argument \code{convert}) to convert images to a single
 animation.
 
-The convenience of this function is that it can create a single movie file,
-however, there are two problems too: (1) we need a special (free)
-software ImageMagick; (2) the speed of the animation cannot be conveniently
-controlled, as we have specified a fixed \code{interval}. Other approaches
+The advantage of this function is that it can create a single movie file,
+however, there are two problems too: (1) we need a special (free) software
+ImageMagick or GraphicsMagick; (2) the speed of the animation will be beyond
+our control, as the \code{interval} option is fixed. Other approaches
 in this package may have greater flexibilities, e.g. the HTML approach (see
-\code{\link{ani.start}}).}
+\code{\link{saveHTML}}).
+
+See \code{\link{ani.options}} for the options that may affect the output, e.g.
+the graphics device (including the height/width specifications), the file
+extension of image frames, and the time interval between image frames, etc.
+Note that \code{ani.options('interval')} can be a numeric vector!}
 \value{An integer indicating failure (-1) or success (0) of the converting
 (refer to \code{\link[base]{system}} and \code{\link{im.convert}}).}
 \note{See \code{\link{im.convert}} for details on the configuration of
-ImageMagick (typically for Windows users).}
+ImageMagick (typically for Windows users) or GraphicsMagick.
+
+It is recommended to use \code{ani.pause()} to pause between animation
+frames in \code{expr}, because this function will only pause when called in
+a non-interactive graphics device, which can save a lot of time.
+See the demo \code{'Xmas2'} for example (\code{demo('Xmas2', package = 'animation')}).}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link{im.convert}}, \code{\link{gm.convert}}, \code{\link{saveSWF}},
 \code{\link[base]{system}}, \code{\link[grDevices]{png}},
-\code{\link[grDevices]{jpeg}}}
-\references{\url{http://www.imagemagick.org/script/convert.php}
+\code{\link{saveLatex}}, \code{\link{saveHTML}}}
+\references{ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
+
+GraphicsMagick: \url{http://www.graphicsmagick.org}
 
 \url{http://animation.yihui.name/animation:start}}
 \keyword{dynamic}
@@ -38,40 +50,31 @@ ImageMagick (typically for Windows users).}
 \arguments{\item{expr}{an expression to generate animations; use either the animation
 functions (e.g. \code{brownian.motion()}) in this package or a custom
 expression (e.g. \code{for(i in 1:10) plot(runif(10), ylim = 0:1)}).}
-\item{interval}{duration between animation frames (unit in seconds)}
-\item{moviename}{file name of the movie (with the extension)}
-\item{loop}{iterations of the movie; set iterations to zero to repeat the
-animation an infinite number of times, otherwise the animation repeats
-itself up to \code{loop} times (N.B. for GIF only!)}
-\item{dev}{a function for a graphical device such as
-\code{\link[grDevices]{png}}, \code{\link[grDevices]{jpeg}} and
-\code{\link[grDevices]{bmp}}, etc.}
-\item{filename}{file name of the sequence of images (`pure' name; without
+\item{movie.name}{file name of the movie (with the extension)}
+\item{img.name}{file name of the sequence of images (`pure' name; without
 any format or extension)}
-\item{fmt}{a C-style string formatting command, such as \code{\%3d}}
-\item{fileext}{the file extensions of the image frames}
-\item{outdir}{the directory for the movie frames}
-\item{convert}{the ImageMagick command to convert images (default to be
-\code{convert}, but might be \code{imconvert} under some Windows
-platforms); see the 'Note' section for details}
-\item{cmd.fun}{a function to invoke the OS command; by default,
-\code{shell} under Windows and \code{\link[base]{system}} under other OS}
+\item{convert}{the command to convert images (default to be
+\command{convert} (i.e. use ImageMagick), but might be \command{imconvert}
+under some Windows platforms); can be \command{gm convert} in order to use
+GraphicsMagick; see the 'Note' section for details}
+\item{cmd.fun}{a function to invoke the OS command; by default
+\code{\link[base]{system}}}
 \item{clean}{whether to delete the individual image frames}
-\item{ani.first}{an expression to be evaluated before plotting (this will
-be useful to set graphical parameters in advance, e.g. \code{ani.first =
-par(pch = 20)}}
-\item{para}{a list: the graphics parameters to be set before plotting;
-passed to \code{\link[graphics]{par}}; note \code{ani.first} can override
-this argument}
-\item{\dots}{other arguments passed to the graphical device, such as
-\code{height} and \code{width}, ...}
+\item{\dots}{other arguments passed to \code{\link{ani.options}}, e.g.
+\code{ani.height} and \code{ani.width}, ...}
 }
 \examples{## make sure ImageMagick has been installed in your system
-\dontrun{
-    saveMovie(for (i in 1:10) plot(runif(10), ylim = 0:1), loop = 1)
-    oopt = ani.options(nmax = 100)
-    saveMovie(brownian.motion(pch = 21, cex = 5, col = "red", 
-        bg = "yellow"), interval = 0.1, width = 600, height = 600)
-    ani.options(oopt)
-}}
+saveMovie({
+    for (i in 1:10) plot(runif(10), ylim = 0:1)
+})
+
+## if the above conversion was successful, the option 'convert' should
+##    not be NULL under Windows
+ani.options("convert")
+## like 'C:/Software/LyX/etc/ImageMagick/convert.exe'
+
+saveMovie({
+    brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
+}, movie.name = "brownian_motion.gif", interval = 0.1, nmax = 30, 
+    ani.width = 600, ani.height = 600)}
 

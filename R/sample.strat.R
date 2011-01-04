@@ -20,23 +20,22 @@
 ##' @keywords distribution dynamic
 ##' @examples
 ##'
-##' oopt = ani.options(interval = 1, nmax = 30)
-##' op = par(mar = rep(1, 4), lwd = 2)
-##' sample.strat(col = c("bisque", "white"))
-##' par(op)
-##' \dontrun{
-##'
-##' # HTML animation page
-##' ani.options(ani.height = 350, ani.width = 500, outdir = getwd(), nmax = 30,
-##'     interval = 1, title = "Demonstration of the stratified sampling",
-##'     description = "Every rectangle stands for a stratum, and the simple
-##'     random sampling without replacement is performed within each stratum.")
-##' ani.start()
+##' oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
 ##' par(mar = rep(1, 4), lwd = 2)
-##' sample.strat(col = c("bisque", "white"))
-##' ani.stop()
 ##'
-##' }
+##' sample.strat(col = c("bisque", "white"))
+##'
+##' ## HTML animation page
+##' saveHTML({
+##' par(mar = rep(1, 4), lwd = 2)
+##' ani.options(nmax = ifelse(interactive(), 50, 2))
+##' sample.strat(col = c("bisque", "white"))
+##' }, img.name='sample.strat', htmlfile='sample.html',
+##' ani.height = 350, ani.width = 500,
+##'     title = "Demonstration of the stratified sampling",
+##'     description = c("Every rectangle stands for a stratum, and the simple",
+##'     "random sampling without replacement is performed within each stratum."))
+##'
 ##' ani.options(oopt)
 ##'
 sample.strat = function(pop = ceiling(10 * runif(10,
@@ -48,7 +47,6 @@ sample.strat = function(pop = ceiling(10 * runif(10,
     nrow = length(pop)
     size = rep(size, length = nrow)
     nmax = ani.options("nmax")
-    interval = ani.options("interval")
     for (i in 1:nmax) {
         plot(1, axes = FALSE, ann = FALSE, type = "n", xlim = c(0.5,
             ncol + 0.5), ylim = c(0.5, nrow + 0.5), xaxs = "i",
@@ -61,7 +59,7 @@ sample.strat = function(pop = ceiling(10 * runif(10,
             points(sample(pop[j], size[j]), rep(j, size[j]),
                 col = p.col[2], cex = p.cex[2])
         }
-        Sys.sleep(interval)
+        ani.pause()
     }
     invisible(NULL)
 }

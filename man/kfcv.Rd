@@ -4,11 +4,11 @@
 \usage{kfcv(k, N)
 }
 \description{Sample sizes for k-fold cross-validation.
-Compute sample sizes for \emph{k}-fold cross-validation.}
+Compute sample sizes for \eqn{k}-fold cross-validation.}
 \details{If N/k is an integer, the sample sizes are k `N/k's (N/k, N/k, ...),
 otherwise the remainder will be allocated to each group as `uniformly' as
 possible, and at last these sample sizes will be permuted randomly.}
-\value{A vector of length \code{k} containing \emph{k} sample sizes.}
+\value{A vector of length \code{k} containing \eqn{k} sample sizes.}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link{cv.ani}}}
 \keyword{arith}
@@ -16,9 +16,9 @@ possible, and at last these sample sizes will be permuted randomly.}
 \arguments{\item{k}{number of groups.}
 \item{N}{total sample size.}
 }
-\examples{# divisible
+\examples{## divisible
 kfcv(5, 25)
 
-# not divisible
+## not divisible
 kfcv(10, 77)}
 

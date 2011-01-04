@@ -28,7 +28,8 @@
 ##'   \item Determine the optimum number of features with the largest \eqn{p}.
 ##' }
 ##'
-##' Note that \eqn{g_{max}} is set by \code{ani.options("nmax")}.
+##' Note that \eqn{g_{max}} is set by \code{ani.options("nmax")} (i.e. the maximum
+##' number of features we want to choose).
 ##'
 ##' @param data a data matrix containg the predictors in columns
 ##' @param cl a factor indicating the classification of the rows of \code{data}
@@ -52,24 +53,26 @@
 ##' @keywords multivariate dynamic dplot classif
 ##' @examples
 ##'
-##' op = par(pch = 19, mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 0.5, 0))
+##' oopt = ani.options(nmax = ifelse(interactive(), 10, 2))
+##' par(pch = 19, mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 0.5, 0))
 ##' cv.nfeaturesLDA()
-##' par(op)
 ##'
-##' \dontrun{
-##' # save the animation in HTML pages
-##' oopt = ani.options(ani.height = 480, ani.width = 600, interval = 0.5, nmax = 10,
-##'     title = "Cross-validation to find the optimum number of features in LDA",
-##'     description = "This animation has provided an illustration of the process of
-##'     finding out the optimum number of variables using k-fold cross-validation
-##'     in a linear discriminant analysis (LDA).")
-##' ani.start()
-##' par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3, pch = 19, cex = 1.5)
+##' ## save the animation in HTML pages
+##' saveHTML({
+##' ani.options(interval = 0.5, nmax = 10)
+##' par(mar = c(3, 3, 1, 0.5),
+##' mgp = c(1.5, 0.5, 0), tcl = -0.3, pch = 19, cex = 1.5)
 ##' cv.nfeaturesLDA()
-##' ani.stop()
+##' },
+##' img.name='cv.nfeaturesLDA',htmlfile='cv.nfeaturesLDA.html',
+##' ani.height = 480, ani.width = 600,
+##' title = "Cross-validation to find the optimum number of features in LDA",
+##' description = c("This",
+##' 'animation has provided an illustration of the process of finding',
+##' 'out the optimum number of variables using k-fold cross-validation',
+##' 'in a linear discriminant analysis (LDA).'))
+##'
 ##' ani.options(oopt)
-##' }
-##'
 ##'
 cv.nfeaturesLDA = function(data = matrix(rnorm(600),
     60), cl = gl(3, 20), k = 5, cex.rg = c(0.5, 3), col.av = c("blue",
@@ -96,7 +99,6 @@ cv.nfeaturesLDA = function(data = matrix(rnorm(600),
     acc = matrix(nrow = k, ncol = nmax)
     loc = cbind(rep(1:nmax, each = k), rep(1:k, nmax))
     op = par(mfrow = c(1, 2))
-    interval = ani.options("interval")
     for (j in 1:nmax) {
         for (i in 2:(k + 1)) {
             idx = kf[i - 1]:(kf[i] - 1)
@@ -130,10 +132,9 @@ cv.nfeaturesLDA = function(data = matrix(rnorm(600),
                 fill = 1:2, bty = "n", cex = 0.8)
             legend("bottomleft", legend = levels(dat[idx, ncol(dat)])[unique(styl.pch)],
                 pch = unique(styl.pch), bty = "n", cex = 0.8)
-            Sys.sleep(interval)
+            ani.pause()
         }
     }
-    ani.options(nmax = k * nmax)
     par(op)
     rownames(acc) = paste("Fold", 1:k, sep = "")
     colnames(acc) = 1:nmax

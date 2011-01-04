@@ -15,14 +15,16 @@
 ##' \code{nmax} in \code{\link{ani.options}}.
 ##'
 ##' @param obs the number of sample points to be generated from the
-##'   distribution
-##' @param FUN the function to generate \code{n} random numbers from a certain
-##'   distribution
-##' @param col a vector of length 2 specifying the colors of the histogram and
-##'   the density line
+##' distribution
+##' @param FUN the function to generate \code{n} random numbers from a
+##' certain distribution
+##' @param col a vector of length 2 specifying the colors of the
+##' histogram and the density line
 ##' @param mat,widths,heights arguments passed to
-##'   \code{\link[graphics]{layout}} to set the layout of the two graphs.
-##' @param \dots other arguments passed to \code{\link[graphics]{hist}}
+##' \code{\link[graphics]{layout}} to set the layout of the two
+##' graphs.
+##' @param \dots other arguments passed to \code{\link[graphics]{plot.default}}
+##' to plot the P-values
 ##' @return None.
 ##' @author Yihui Xie <\url{http://yihui.name}>
 ##' @seealso \code{\link[graphics]{hist}}, \code{\link[stats]{density}}
@@ -33,34 +35,31 @@
 ##' @keywords dynamic distribution dplot
 ##' @examples
 ##'
-##'
-##' oopt = ani.options(interval = 0.1, nmax = 150)
+##' oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 150, 2))
 ##' op = par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
 ##' clt.ani(type = "s")
 ##' par(op)
 ##'
-##' \dontrun{
-##' # HTML animation page
-##' ani.options(ani.height = 500, ani.width = 600, nmax = 100,
-##'     interval = 0.1, title = "Demonstration of the Central Limit Theorem",
-##'     description = "This animation shows the distribution of the sample
-##'     mean as the sample size grows.")
-##' ani.start()
+##' ## HTML animation page
+##' saveHTML({
 ##' par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
+##' ani.options(interval = 0.1, nmax = ifelse(interactive(), 150, 10))
 ##' clt.ani(type = "h")
-##' ani.stop()
-##' }
+##' }, img.name='clt.ani', htmlfile='clt.ani.html',
+##' ani.height = 500, ani.width = 600,
+##'     title = "Demonstration of the Central Limit Theorem",
+##'     description = c("This animation shows the distribution of the sample",
+##'     "mean as the sample size grows."))
 ##'
-##' ani.options(oopt)
-##'
-##' # other distributions: Chi-square with df = 5
+##' ## other distributions: Chi-square with df = 5
 ##' f = function(n) rchisq(n, 5)
 ##' clt.ani(FUN = f)
+##'
+##' ani.options(oopt)
 ##'
 clt.ani = function(obs = 300, FUN = rexp, col = c("bisque",
     "red", "black"), mat = matrix(1:2, 2), widths = rep(1, ncol(mat)),
     heights = rep(1, nrow(mat)), ...) {
-    interval = ani.options("interval")
     nmax = ani.options("nmax")
     x = matrix(nrow = nmax, ncol = obs)
     for (i in 1:nmax) x[i, ] = apply(matrix(replicate(obs,
@@ -75,7 +74,7 @@ clt.ani = function(obs = 300, FUN = rexp, col = c("bisque",
             3), nsmall = 3)), bty = "n")
         plot(pvalue[1:i], xlim = c(1, nmax), ylim = range(pvalue),
             xlab = "n", ylab = "P-value", col = col[3], ...)
-        Sys.sleep(interval)
+        ani.pause()
     }
     invisible(data.frame(n = 1:nmax, p.value = pvalue))
 }
