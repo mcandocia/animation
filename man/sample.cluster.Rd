@@ -3,6 +3,7 @@
 \title{Demonstration for the cluster sampling.}
 \usage{sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), 
     size = 3, p.col = c("blue", "red"), p.cex = c(1, 3), ...)
+
 }
 \description{Demonstration for the cluster sampling.
 Each rectangle stands for a cluster, and the simple random sampling
@@ -39,4 +40,18 @@ saveHTML({
     description = c("Once a cluster is sampled,", "all its elements will be chosen."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

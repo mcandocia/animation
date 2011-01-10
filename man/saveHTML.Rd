@@ -46,7 +46,7 @@ paragraphs (see the first example below).}
 \seealso{\code{\link{saveMovie}}, \code{\link{saveSWF}},
 \code{\link{saveLatex}}; \code{\link{ani.start}},
 \code{\link{ani.stop}} (early versions of HTML animations)}
-\arguments{\item{expr}{an R expresion to be evaluated to create a sequence of
+\arguments{\item{expr}{an R expression to be evaluated to create a sequence of
 images}
 \item{img.name}{the filename of the images (the real output will
 be like \file{img.name1.png}, \file{img.name2.png}, ...); this
@@ -56,7 +56,7 @@ as possible; meanwhile, the following characters in
 \code{img.name} will be replaced by \code{_} to make it a legal
 jQuery string:
 
-\verb{!"#$\%&'()*+,./:;?@[\\]^`{|}~}}
+\verb{!"#$\%&'()*+,./:;?@[\]^`{|}~}}
 \item{global.opts}{a string: the global options of the animation;
 e.g. we can specify the default theme to be blue using
 \verb{$.fn.scianimator.defaults.theme = 'blue';} note these
@@ -87,7 +87,7 @@ saveHTML({
     }
 }, img.name = "unif_plot", imgdir = "unif_dir", htmlfile = "random.html", 
     autobrowse = FALSE, title = "Demo of 20 uniform random numbers", 
-    description = c("This is a silly example.\\n\\n", "You can describe it in more detail.", 
+    description = c("This is a silly example.\n\n", "You can describe it in more detail.", 
         "For example, bla bla..."))
 
 
@@ -137,4 +137,61 @@ saveHTML({
 }, img.name = "brownian_motion_b", htmlfile = "index.html", single.opts = "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0", 
     description = c("Random walk of 10 points on the 2D plane", 
         "(without the navigation panel)"))}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

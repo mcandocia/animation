@@ -5,6 +5,8 @@
     rnorm(X), size = length(X)/2, p.col = c("blue", "red"), p.cex = c(1, 
     3), p.pch = c(20, 21), m.col = c("black", "gray"), legend.loc = "topleft", 
     ...)
+
+
 }
 \description{Demonstrate the ratio estimation in sampling survey.
 This function demonstrates the advantage of ratio estimation when further information
@@ -66,4 +68,30 @@ saveHTML({
         "Y/X which will generally improve the estimation."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -4,6 +4,7 @@
 \usage{quincunx(balls = 200, layers = 15, pch.layers = 2, 
     pch.balls = 19, col.balls = sample(colors(), balls, TRUE), 
     cex.balls = 2)
+
 }
 \description{Demonstration of the Quincunx (Bean Machine/Galton Box).
 This function simulates the quincunx with ``balls'' (beans) falling through
@@ -56,4 +57,19 @@ saveHTML({
         "distribution."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

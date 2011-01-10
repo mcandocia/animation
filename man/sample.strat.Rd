@@ -4,6 +4,8 @@
 \usage{sample.strat(pop = ceiling(10 * runif(10, 0.5, 1)), 
     size = ceiling(pop * runif(length(pop), 0, 0.5)), p.col = c("blue", 
         "red"), p.cex = c(1, 3), ...)
+
+
 }
 \description{Demonstration for the stratified sampling.}
 \details{Each rectangle stands for a stratum, and the simple random sampling
@@ -42,4 +44,19 @@ saveHTML({
         "random sampling without replacement is performed within each stratum."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

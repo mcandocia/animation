@@ -1,3 +1,57 @@
+		  CHANGES IN animation VERSION 2.0-1
+
+
+NEW FEATURES
+
+    o demo('Xmas_card') contributed by Yuan Huang
+
+    o demo('flowers') to show how to download images from the Internet
+  and create an animation
+
+    o a new function pdftk() as a wrapper to call the Pdftk toolkit
+  (mainly for compressing PDF graphics output)
+
+    o saveLatex(), saveSWF() and saveMovie() can compress the PDF
+  graphics using Pdftk (if available) now; if ani.options('ani.type')
+  is 'pdf' and the 'pdftk' option is set, these functions will try the
+  compression first
+
+    o new functions ani.record() and ani.replay() to record and replay
+  the animations; they can be used to capture the changes in the
+  graphics made by low-level plotting commands (see ?ani.record for
+  examples)
+
+
+SIGNIFICANT CHANGES
+
+    o the function tidy.source() was completely removed from this
+  package; users should go to the formatR package (tidy.source() is
+  there now)
+
+
+MINOR CHANGES
+
+    o the argument 'expr' in saveHTML(), saveLatex(), saveMovie() and
+  saveSWF() will be evaluated by eval(), so we may pass a real R
+  expression (see ?expression) to 'expr', e.g. saveHTML(expression(for
+  (i in 1:10) plot(runif(30)))); but note this argument does not *have
+  to* be a real R expression -- you can still use an arbitrary R code
+  chunk, e.g. saveHTML(for (i in 1:10) plot(runif(30))) (thanks,
+  Aquery)
+
+
+TO APPEAR
+
+    o Changes made by Thomas Julou (using ffmpeg)
+
+    o A function boot.loess() added to show the bootstrapping effects
+  on loess().
+
+    o A function cart.ani() to show the splitting process of
+  classification and regression trees.
+
+
+
 		  CHANGES IN animation VERSION 2.0-0
 
 
@@ -94,16 +148,6 @@ MINOR CHANGES
   keep the current working directory untouched when evaluating 'expr'
   (i.e.  'expr' will be evaluated under getwd())
 
-
-TO APPEAR
-
-    o Changes made by Thomas Julou (using ffmpeg)
-
-    o A function boot.loess() added to show the bootstrapping effects
-  on loess().
-
-    o A function cart.ani() to show the splitting process of
-  classification and regression trees.
 
 
 

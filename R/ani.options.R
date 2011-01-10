@@ -3,6 +3,7 @@
 ##' animation, such as time interval, maximum number of animation frames,
 ##' height and width, etc.
 ##'
+##' \subsection{Animation options}{
 ##' The supported animation parameters:
 ##' \describe{
 ##'
@@ -72,16 +73,24 @@
 ##' \code{\link[rgl]{rgl.snapshot}} to capture \pkg{rgl} graphics to
 ##' png files, or \code{\link[rgl]{rgl.postscript}} to save plots as
 ##' postscript/pdf; see \code{demo('rgl_animation')} or
-##' \code{demo('use_Cairo')} for examples or the last example below)}
+##' \code{demo('use_Cairo')} for examples or the last example
+##' below). Note, however, we do not really have to create the images
+##' using R graphics devices -- see \code{demo('flowers')} on how to
+##' download images from the Internet and create an HTML animation
+##' page!}
 ##'
 ##' \item{withprompt}{character: prompt to display while using
 ##' \code{\link{ani.start}} (will be restored with
 ##' \code{\link{ani.stop}})}
 ##'
 ##' }
+##' }
+##'
+##' \subsection{Hidden options}{
 ##'
 ##' There are a couple of ``hidden'' options which are designed to
-##' facilitate the usage of some functions, including:
+##' facilitate the usage of some functions but are not initialized
+##' like the above options when the package is loaded, including:
 ##'
 ##' \describe{
 ##'
@@ -108,6 +117,17 @@
 ##' generate file names in the argument \code{expr}; see
 ##' \code{demo('rgl_animation')} for example or the last example below}
 ##'
+##' \item{pdftk}{the path of the program \command{Pdftk},
+##' e.g. \code{ani.options(pdftk = 'C:/Software/pdftk.exe')} or
+##' \code{ani.options(pdftk = '/home/john/bin/pdftk')};
+##' \command{pdftk} will be used to compress the PDF graphics output
+##' in the function \code{\link{pdftk}}; compression will not be tried
+##' if this options is \code{NULL}. This option will only affect
+##' \code{\link{saveMovie}}, \code{\link{saveLatex}} and
+##' \code{\link{saveSWF}} when \code{ani.options('ani.type')} is
+##' \code{'pdf'}.}
+##'
+##' }
 ##' }
 ##' @param ... arguments in \code{tag = value} form, or a list of tagged
 ##' values.  The tags usually come from the animation parameters described
@@ -145,8 +165,10 @@
 ##' @seealso \code{\link[base]{options}},
 ##' \code{\link[grDevices]{dev.interactive}}, \code{\link{saveHTML}},
 ##' \code{\link{saveMovie}}, \code{\link{saveLatex}},
-##' \code{\link{saveSWF}}
+##' \code{\link{saveSWF}}, \code{\link{pdftk}}
 ##' @references \url{http://animation.yihui.name/animation:options}
+##'
+##' \url{http://www.pdflabs.com/docs/pdftk-man-page/}
 ##' @keywords misc
 ##' @examples
 ##' ## see the first example in help(animation) on how to set and restore

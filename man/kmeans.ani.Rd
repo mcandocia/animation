@@ -4,6 +4,7 @@
 \usage{kmeans.ani(x = cbind(X1 = runif(50), X2 = runif(50)), 
     centers = 3, pch = 1:3, col = 1:3, hints = c("Move centers!", 
         "Find cluster?"))
+
 }
 \description{Demonstration of the k-Means clustering algorithm.
 This function provides a demo of the k-Means cluster algorithm for data
@@ -82,4 +83,34 @@ saveHTML({
     description = "Move! Average! Cluster! Move! Average! Cluster! ...")
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -22,3 +22,6 @@ plot(HuSpeech, type = "b", pch = 20, xlab = "paragraph index",
     ylab = "word count")
 ## see ?moving.block for an animation example}
 
+
+
+

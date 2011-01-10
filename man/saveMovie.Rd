@@ -3,6 +3,7 @@
 \title{Convert images to a single animation file (typically GIF).}
 \usage{saveMovie(expr, movie.name = "animation.gif", img.name = "Rplot", 
     convert = "convert", cmd.fun = system, clean = TRUE, ...)
+
 }
 \description{Convert images to a single animation file (typically GIF).
 This function opens a graphical device (specified in \code{ani.options('ani.dev')})
@@ -77,4 +78,13 @@ saveMovie({
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
 }, movie.name = "brownian_motion.gif", interval = 0.1, nmax = 30, 
     ani.width = 600, ani.height = 600)}
+
+
+
+
+
+
+
+
+
 

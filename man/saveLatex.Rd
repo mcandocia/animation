@@ -5,6 +5,8 @@
     centering = TRUE, caption, label, pkg.opts, documentclass = "article", 
     latex.filename = "animation.tex", pdflatex = "pdflatex", 
     install.animate = TRUE, overwrite = TRUE, ...)
+
+
 }
 \description{Insert animations into a LaTeX document and compile it.
 Record animation frames and insert them into a LaTeX document with the
@@ -23,21 +25,19 @@ viewer set in \code{getOption("pdfviewer")} if
 \value{Invisible \code{NULL}}
 \note{This function will detect if it was called in a Sweave
 environment -- if so, \code{img.name} will be automatically
-adjusted to \code{prefix.string-label}
-(\code{ani.options('sweave.prefix')} will be set to this string,
-too), and the LaTeX output will not be a complete document, but
-rather a single line like
-
-\verb{\\animategraphics[ani.opts]{1/interval}{img.name}{}{}}
+adjusted to \code{prefix.string-label}, and the LaTeX output will
+not be a complete document, but rather a single line like
+\preformatted{\animategraphics[ani.opts]{1/interval}{img.name}{}{}}
 
 This automatic feature can be useful to Sweave users (but remember
 to set the Sweave option \code{results=tex}). See
 \code{demo('Sweave_animation')} for a complete example.
 
 PDF devices are recommended because of their high quality and
-usually they are more friendly to LaTeX. But sometimes the size of
-PDF files is much larger. Use \code{ani.options(ani.dev = 'pdf',
-ani.type = 'pdf')} to set the PDF device.
+usually they are more friendly to LaTeX, but the size of PDF files
+is often much larger; in this case, we may set the option
+\code{'pdftk'} to compress the PDF graphics output. To set the PDF
+device, use \code{ani.options(ani.dev = 'pdf', ani.type = 'pdf')}
 
 So far animations created by the LaTeX package \pkg{animate} can
 only be viewed with Acrobat Reader (Windows) or \command{acroread}
@@ -49,7 +49,7 @@ to install \command{acroread} and set \code{options(pdfviewer =
 \seealso{\code{\link{saveMovie}} to convert image frames to a
 single GIF/MPEG file; \code{\link{saveSWF}} to convert images to
 Flash; \code{\link{saveHTML}} to create an HTML page containing
-the animation}
+the animation; \code{\link{pdftk}} to compress PDF graphics}
 \references{To know more about the \code{animate} package, please
 refer to
 \url{http://www.ctan.org/tex-archive/macros/latex/contrib/animate/}.
@@ -69,10 +69,10 @@ automatically calculated); note that we do not have to specify
 \item{img.name}{basename of file names of animation frames; see
 the Note section for a possible adjustment on \code{img.name}}
 \item{ani.opts}{options to control the behavior of the animation
-(passed to the LaTeX macro \code{"\animategraphics"}; default to
+(passed to the LaTeX macro \code{"\\animategraphics"}; default to
 be \code{"controls,width=\\linewidth"})}
 \item{centering}{logical: whether to center the graph using the
-LaTeX environment \verb{\\begin{center}} and \verb{\\end{center}}}
+LaTeX environment \verb{\begin{center}} and \verb{\end{center}}}
 \item{caption,label}{caption and label for the graphics in the
 figure environment}
 \item{pkg.opts}{global options for the \code{animate} package}
@@ -104,5 +104,21 @@ saveLatex({
 }, img.name = "BM", ani.opts = "controls,loop,width=0.8\\\\textwidth", 
     latex.filename = ifelse(interactive(), "brownian_motion.tex", 
         ""), interval = 0.1, nmax = 10, ani.dev = "pdf", ani.type = "pdf", 
-    ani.width = 7, ani.height = 7)}
+    ani.width = 7, ani.height = 7)
+
+## the PDF graphics output is often too large because it is uncompressed;
+## try the option ani.options('pdftk') to compress the PDF graphics
+##   see ?pdftk and ?ani.options}
+
+
+
+
+
+
+
+
+
+
+
+
 

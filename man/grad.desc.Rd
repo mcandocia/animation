@@ -4,6 +4,8 @@
 \usage{grad.desc(FUN = function(x, y) x^2 + 2 * y^2, rg = c(-3, 
     -3, 3, 3), init = c(-3, 3), gamma = 0.05, tol = 0.001, len = 50, 
     interact = FALSE, col.contour = "red", col.arrow = "blue")
+
+
 }
 \description{Gradient Descent Algorithm for the 2D case.
 This function provids a visual illustration for the process of
@@ -68,8 +70,8 @@ arrows respectively (default to be red and blue)}
 oopt = ani.options(interval = 0.3, nmax = ifelse(interactive(), 
     50, 2))
 xx = grad.desc()
-xx$par
-xx$persp(col = "lightblue", phi = 30)
+xx$par  # solution
+xx$persp(col = "lightblue", phi = 30)   # perspective plot
 
 ## define more complex functions; a little time-consuming
 f1 = function(x, y) x^2 + 3 * sin(y)
@@ -99,4 +101,36 @@ saveHTML({
     description = "The arrows will take you to the optimum step by step.")
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

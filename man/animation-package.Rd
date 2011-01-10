@@ -15,8 +15,7 @@ statistics; other kinds of output such as Flash (SWF) or GIF animations
 or PDF animations are also available if required software packages have
 been installed. See below for details on each type of animation.
 
-\describe{
-\item{\strong{On-screen Animations}}{
+\subsection{On-screen Animations}{
 It's natural and easy to create an animation in R using the windows graphics
 device, e.g. in \code{x11()} or \code{windows()}. A basic scheme is like
 the Example 1 (see below).
@@ -26,7 +25,7 @@ rendering speed of the windows graphics devices is often slow, so the
 animation might not be smooth (especially under Linux and Mac OS).
 }
 
-\item{\strong{HTML Pages}}{
+\subsection{HTML Pages}{
 The generation of HTML animation pages does not rely on any third-party
 software either, and we only need a web browser to watch the animation.
 This package has two sets of functions to create HTML pages:
@@ -38,24 +37,23 @@ The HTML interface is just like a movie player -- it comes with a series
 of buttons to control the animation (play, stop, next, previous, ...).
 }
 
-\item{\strong{GIF Animations}}{
+\subsection{GIF Animations}{
 If ImageMagick or GraphicsMagick has been installed, we can use
 \code{\link{im.convert}} or \code{\link{gm.convert}} to create a GIF
 animation (combining several R plots together).
 }
 
-\item{\strong{Flash Animations}}{
+\subsection{Flash Animations}{
 If SWF Tools has been installed, we can use \code{\link{saveSWF}} to
 create a Flash animation (again, combining R plots).
 }
 
-\item{\strong{PDF Animations}}{
+\subsection{PDF Animations}{
 If LaTeX is present in the system, we can use \code{\link{saveLatex}}
 to insert animations into a PDF document and watch the animation
 using the Adobe reader.
 
 The animation is created by the LaTeX package \code{animate}.
-}
 }
 This package also contains several functions to create animations
 for various statistical topics.}
@@ -85,13 +83,12 @@ oopt = ani.options(interval = 0.2, nmax = 10)
 ## use a loop to create images one by one
 for (i in 1:ani.options("nmax")) {
     plot(rnorm(30))
-    ## pause for a while ('interval')
-    ani.pause()
+    ani.pause()   ## pause for a while ('interval')
 }
 ## restore the options
 ani.options(oopt)
 
-
+## see ?ani.record for an alternative way to set up an animation
 
 ### 2. Animations in HTML pages ###
 saveHTML({
@@ -131,4 +128,53 @@ saveLatex({
         main = "Brownian Motion")
 }, img.name = "BM_plot", latex.filename = ifelse(interactive(), 
     "brownian_motion.tex", ""), interval = 0.1, nmax = 20)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

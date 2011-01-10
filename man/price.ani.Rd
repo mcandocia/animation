@@ -4,6 +4,7 @@
 \usage{price.ani(price, time, time.begin = min(time), span = 15 * 
     60, ..., xlab = "price", ylab = "frequency", xlim, ylim, 
     main)
+
 }
 \description{Demonstrate stock prices in animations.
 This function can display the frequencies of stock prices in a certain time
@@ -28,4 +29,9 @@ saveHTML({
 }, img.name = "vanke1127", htmlfile = "vanke1127.html", title = "Stock prices of Vanke", 
     description = c("Barplots", "of the stock prices of Vanke Co. Ltd", 
         "on 2009/11/27"))}
+
+
+
+
+
 

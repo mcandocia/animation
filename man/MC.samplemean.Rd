@@ -3,6 +3,7 @@
 \title{Sample Mean Monte Carlo integration.}
 \usage{MC.samplemean(FUN = function(x) x - x^2, n = ani.options("nmax"), 
     col.rect = c("gray", "black"), adj.x = TRUE, ...)
+
 }
 \description{Sample Mean Monte Carlo integration.
 Integrate a function from 0 to 1 using the Sample Mean Monte Carlo
@@ -76,4 +77,29 @@ saveHTML({
         "function values."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

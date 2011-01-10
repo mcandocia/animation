@@ -38,3 +38,7 @@ vi.grid.illusion()
 vi.grid.illusion(type = "h", lwd = 22, nrow = 5, ncol = 5, 
     col = "white")}
 
+
+
+
+

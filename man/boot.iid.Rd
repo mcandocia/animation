@@ -5,6 +5,8 @@
     mat = matrix(1:2, 2), widths = rep(1, ncol(mat)), heights = rep(1, 
         nrow(mat)), col = c("black", "red", "bisque", "red", 
         "gray"), cex = c(1.5, 0.8), main, ...)
+
+
 }
 \description{Demonstrate bootstrapping for iid data.
 Use a sunflower scatter plot to
@@ -77,4 +79,28 @@ saveHTML({
         "may be useful for novices."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

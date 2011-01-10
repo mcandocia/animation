@@ -4,6 +4,7 @@
 \usage{g.brownian.motion(p = 20, start = 1900, digits = 14, 
     file = file.path(ani.options("outdir"), ani.options("htmlfile")), 
     width = 800, height = 600)
+
 }
 \description{Brownian Motion using Google Visualization API.}
 \details{We can use R to generate random numbers from the Normal distribution and
@@ -40,4 +41,9 @@ g.brownian.motion(15, digits = 2, width = 600, height = 500)
 unlink(file.path(ani.options("outdir"), ani.options("htmlfile")))
 
 ani.options(oopt)}
+
+
+
+
+
 

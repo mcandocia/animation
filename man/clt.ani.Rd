@@ -4,6 +4,7 @@
 \usage{clt.ani(obs = 300, FUN = rexp, col = c("bisque", "red", 
     "black"), mat = matrix(1:2, 2), widths = rep(1, ncol(mat)), 
     heights = rep(1, nrow(mat)), ...)
+
 }
 \description{Demonstration of the Central Limit Theorem.}
 \details{First of all, a number of \code{obs} observations are generated from a
@@ -64,4 +65,23 @@ f = function(n) rchisq(n, 5)
 clt.ani(FUN = f)
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,101 @@
+\name{ani.record}
+\alias{ani.record}
+\title{Record and replay animations.}
+\usage{ani.record(reset = FALSE)
+ani.replay(list)
+
+}
+\description{Record and replay animations.
+These two functions use \code{\link[grDevices]{recordPlot}} and
+\code{\link[grDevices]{replayPlot}} to record image frames and
+replay the animation respectively.}
+\details{\code{ani.record}: one difficulty in capturing images in R (base graphics) is that
+the off-screen graphics devices cannot capture low-level plotting
+commands as \emph{new} image files -- only high-level plotting
+commands can produce new image files; \code{\link{ani.record}}
+uses \code{\link[grDevices]{recordPlot}} to record the plots when
+any changes are made on the current plot.
+
+\code{ani.replay}: it can replay the recorded plots as an animation. Moreover, we can
+convert the recorded plots to other formats too, e.g. use
+\code{\link{saveHTML}} and friends.
+
+The recorded plots are stored as a list in
+\code{.ani.env$.images}, which is the default value to be passed
+to \code{\link{ani.replay}}; \code{.ani.env} is an invisible
+\code{\link[base]{environment}} created when this package is
+loaded, and it will be used to store some commonly used objects
+such as animation options (\code{\link{ani.options}}).
+
+
+}
+\value{\code{ani.record}: Invisible \code{NULL}.
+
+}
+\note{Although we can record changes made by low-level plotting
+commands using \code{\link{ani.record}}, there is a price to pay
+-- we need memory to store the recorded plots, which are usually
+verg large when the plots are complicated (e.g. we draw millions
+of points or polygons in a single plot).
+
+If we use base graphics, we should bear in mind that the
+background colors of the plots might be transparent, which could
+lead to problems in HTML animation pages when we use the
+\code{\link[grDevices]{png}} device (see the examples below).}
+\author{Yihui Xie <\url{http://yihui.name}>}
+\seealso{\code{\link[grDevices]{recordPlot}} and
+\code{\link[grDevices]{replayPlot}}; \code{\link{ani.pause}}}
+\arguments{\item{reset}{if \code{TRUE}, the recording list will be cleared,
+otherwise new plots will be appended to the existing list of recorded
+plots}
+\item{list}{a list of recorded plots; if missing, the recorded
+plots by \code{\link{ani.record}} will be used}
+}
+\examples{library(animation)
+
+n = 20
+x = sort(rnorm(n))
+y = rnorm(n)
+## set up an empty frame, then add points one by one
+par(bg = "white")   # ensure the background color is white
+plot(x, y, type = "n")
+
+ani.record(reset = TRUE)   # clear history before recording
+
+for (i in 1:n) {
+    points(x[i], y[i], pch = 19, cex = 2)
+    ani.record()   # record the current frame
+}
+
+## now we can replay it, with an appropriate pause between frames
+oopts = ani.options(interval = 0.5)
+ani.replay()
+
+## or export the animation to an HTML page
+saveHTML(ani.replay(), img.name = "record_plot")
+
+ani.options(oopts)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\alias{ani.replay}

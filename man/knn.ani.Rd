@@ -4,6 +4,8 @@
 \usage{knn.ani(train, test, cl, k = 10, interact = FALSE, 
     tt.col = c("blue", "red"), cl.pch = seq_along(unique(cl)), 
     dist.lty = 2, dist.col = "gray", knn.col = "green")
+
+
 }
 \description{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane.}
 \details{For each row of the test set, the \eqn{k} nearest (in Euclidean
@@ -93,4 +95,34 @@ saveHTML({
         "decided by majority vote, with ties broken at random."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

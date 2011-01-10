@@ -6,6 +6,9 @@
     bg, xlab = "x", ylab = "y", main, xlim = range(x), ylim = range(y), 
     ..., grid = TRUE, text = 1:ani.options("nmax"), text.col = rgb(0, 
         0, 0, 0.5), text.cex = 5)
+
+
+
 }
 \description{The bubbles animation in Hans Rosling's Talk.
 (``Debunking third-world myths with the best stats you've ever seen'')}
@@ -73,4 +76,23 @@ saveHTML({
         "(with 'years' as the background)"))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

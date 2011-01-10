@@ -4,6 +4,7 @@
 \usage{ecol.death.sim(nr = 10, nc = 10, num.sp = c(50, 50), 
     col.sp = c(1, 2), pch.sp = c(1, 2), col.die = 1, pch.die = 4, 
     cex = 3, ...)
+
 }
 \description{A simulation of the death of two species with certain probabilities.}
 \details{Suppose there are two plant species in a field: A and B. One of them will
@@ -43,4 +44,11 @@ ani.options(nmax = ifelse(interactive(), 1000, 2),
 ecol.death.sim(col.sp = c(8, 2), pch.sp = c(20, 17))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
 

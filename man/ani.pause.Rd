@@ -20,3 +20,12 @@ ani.options(oopt)
 
 ## see demo('Xmas2', package = 'animation') for another example}
 
+
+
+
+
+
+
+
+
+

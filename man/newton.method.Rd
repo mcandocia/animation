@@ -4,6 +4,8 @@
 \usage{newton.method(FUN = function(x) x^2 - 4, init = 10, 
     rg = c(-1, 10), tol = 0.001, interact = FALSE, col.lp = c("blue", 
         "red", "red"), main, xlab, ylab, ...)
+
+
 }
 \description{Demonstration of the Newton-Raphson method for root-finding.
 This function provides an illustration of the iterations in Newton's
@@ -20,7 +22,7 @@ The iteration goes on in this way:
 
 From the starting value \eqn{x_0}, vertical lines and points are
 plotted to show the location of the sequence of iteration values
-\eqn{x_1, x_2, \ldots}{x1, x2, \\dots}; tangent lines are drawn to
+\eqn{x_1, x_2, \ldots}{x1, x2, \dots}; tangent lines are drawn to
 illustrate the relationship between successive iterations; the
 iteration values are in the right margin of the plot.}
 \value{A list containing \item{root }{the root found by the
@@ -60,7 +62,7 @@ par(pch = 20)
 
 ## default example
 xx = newton.method()
-xx$root
+xx$root  # solution
 
 ## take a long long journey
 newton.method(function(x) 5 * x^3 - 7 * x^2 - 40 * 
@@ -74,7 +76,7 @@ xx = newton.method(function(x) exp(-x) * x, rg = c(0,
 ## does not converge!
 xx = newton.method(function(x) atan(x), rg = c(-5, 
     5), init = 1.5)
-xx$root
+xx$root   # Inf
 
 ## interaction: use your mouse to select the starting point
 if (interactive()) {
@@ -93,4 +95,42 @@ saveHTML({
     description = "Go along with the tangent lines and iterate.")
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

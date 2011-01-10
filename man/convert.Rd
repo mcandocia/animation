@@ -4,6 +4,8 @@
 \usage{im.convert(files, output = "animation.gif", convert = c("convert", 
     "gm convert"), cmd.fun = system, extra.opts = "", clean = FALSE)
 gm.convert(..., convert = "gm convert")
+
+
 }
 \description{A wrapper for the `convert' utility of ImageMagick or GraphicsMagick.
 The main purpose of these two functions is to create GIF animations.}
@@ -107,5 +109,22 @@ im.convert(files = bm.files, output = "bm-animation3.gif")
 
 ani.options(oopt)
 setwd(owd)}
-\alias{gm.convert}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\alias{gm.convert}

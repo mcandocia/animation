@@ -3,6 +3,7 @@
 \title{Probability in flipping coins.}
 \usage{flip.coin(faces = 2, prob, border = "white", grid = "white", 
     col = 1:2, type = "p", pch = 21, bg = "transparent", digits = 3)
+
 }
 \description{Probability in flipping coins.
 This function provides a simulation to the process of flipping coins and
@@ -67,4 +68,21 @@ saveHTML({
         "which might be helpful in understanding the concept of probability."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -3,6 +3,7 @@
 \title{Demonstration of the Bisection Method for root-finding on an interval.}
 \usage{bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 
     10), tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
+
 }
 \description{Demonstration of the Bisection Method for root-finding on an interval.
 This is a visual demonstration of finding the root of an equation \eqn{f(x) = 0} on
@@ -50,7 +51,7 @@ curve (for two times) directly?}
 
 ## default example
 xx = bisection.method()
-xx$root
+xx$root  # solution
 
 ## a cubic curve
 f = function(x) x^3 - 7 * x - 10
@@ -70,4 +71,28 @@ saveHTML({
         "selecting the subinterval in which a root exists."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

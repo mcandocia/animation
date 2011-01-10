@@ -4,6 +4,7 @@
 \usage{mwar.ani(x, k = 15, conf = 2, mat = matrix(1:2, 2), 
     widths = rep(1, ncol(mat)), heights = rep(1, nrow(mat)), 
     lty.rect = 2, ...)
+
 }
 \description{Demonstration for ``Moving Window Auto-Regression''.
 This function just fulfills a very naive idea about moving window
@@ -64,4 +65,24 @@ saveHTML({
         "window moves."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

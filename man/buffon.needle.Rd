@@ -5,6 +5,8 @@
     3, 2, 3), 2), heights = c(3, 2), col = c("lightgray", "red", 
     "gray", "red", "blue", "black", "red"), expand = 0.4, type = "l", 
     ...)
+
+
 }
 \description{Simulation of Buffon's Needle.
 This function provides a simulation for the problem of Buffon's Needle,
@@ -84,4 +86,24 @@ saveHTML({
         "the result for each dropping."))
 
 ani.options(oopt)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -14,4 +14,3 @@ in \code{\link{ani.options}}.}
 \references{\url{http://animation.yihui.name/animation:create_html_animation_page}}
 \keyword{utilities}
 \examples{## see help(ani.start)}
-
