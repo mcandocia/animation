@@ -3,6 +3,7 @@
 \title{Demonstration for the systematic sampling.}
 \usage{sample.system(nrow = 10, ncol = 10, size = 15, p.col = c("blue", 
     "red"), p.cex = c(1, 3))
+
 }
 \description{Demonstration for the systematic sampling.}
 \details{The whole sample frame is denoted by a matrix (\code{nrow * ncol})

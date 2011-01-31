@@ -4,10 +4,13 @@
 \usage{saveLatex(expr, nmax, img.name = "Rplot", ani.opts, 
     centering = TRUE, caption, label, pkg.opts, documentclass = "article", 
     latex.filename = "animation.tex", pdflatex = "pdflatex", 
-    install.animate = TRUE, overwrite = TRUE, ...)
-
+    install.animate = TRUE, overwrite = TRUE, full.path = FALSE, 
+    ...)
 
 }
+
+
+
 \description{Insert animations into a LaTeX document and compile it.
 Record animation frames and insert them into a LaTeX document with the
 \code{animate} package. Compile the document if an appropriate LaTeX
@@ -36,8 +39,9 @@ to set the Sweave option \code{results=tex}). See
 PDF devices are recommended because of their high quality and
 usually they are more friendly to LaTeX, but the size of PDF files
 is often much larger; in this case, we may set the option
-\code{'pdftk'} to compress the PDF graphics output. To set the PDF
-device, use \code{ani.options(ani.dev = 'pdf', ani.type = 'pdf')}
+\code{'qpdf'} or \code{'pdftk'} to compress the PDF graphics
+output. To set the PDF device, use \code{ani.options(ani.dev =
+'pdf', ani.type = 'pdf')}
 
 So far animations created by the LaTeX package \pkg{animate} can
 only be viewed with Acrobat Reader (Windows) or \command{acroread}
@@ -46,10 +50,11 @@ the PDF animation is driven by JavaScript). Linux users may need
 to install \command{acroread} and set \code{options(pdfviewer =
 'acroread')}.}
 \author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link{saveMovie}} to convert image frames to a
-single GIF/MPEG file; \code{\link{saveSWF}} to convert images to
-Flash; \code{\link{saveHTML}} to create an HTML page containing
-the animation; \code{\link{pdftk}} to compress PDF graphics}
+\seealso{\code{\link{saveGIF}} to convert image frames to a single
+GIF/MPEG file; \code{\link{saveSWF}} to convert images to Flash;
+\code{\link{saveHTML}} to create an HTML page containing the
+animation; \code{\link{saveVideo}} to convert images to a video;
+\code{\link{qpdf}} or \code{\link{pdftk}} to compress PDF graphics}
 \references{To know more about the \code{animate} package, please
 refer to
 \url{http://www.ctan.org/tex-archive/macros/latex/contrib/animate/}.
@@ -91,24 +96,37 @@ ignore the compiling)}
 \code{ani.options('outdir')}? If you have not installed the LaTeX
 package \code{animate}, it suffices just to copy these to files.}
 \item{overwrite}{whether to overwrite the existing image frames}
-\item{\dots}{other arguments passed to the graphics device
+\item{full.path}{whether to use the full path (\code{TRUE}) or
+relative path (\code{FALSE}) for the animation frames; usually the
+relative path suffices, but sometimes the images and the LaTeX
+document might not be in the same directory, so \code{full.path =
+TRUE} could be useful}
+\item{...}{other arguments passed to the graphics device
 \code{ani.options('ani.dev')}, e.g. \code{ani.height}
 and \code{ani.width}}
 }
 \examples{## brownian motion: note the 'loop' option in ani.opts
+# and the careful settings in documentclass
 saveLatex({
     par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
         cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow", 
         main = "Demonstration of Brownian Motion")
-}, img.name = "BM", ani.opts = "controls,loop,width=0.8\\\\textwidth", 
+}, img.name = "BM", ani.opts = "controls,loop,width=0.95\\\\textwidth", 
     latex.filename = ifelse(interactive(), "brownian_motion.tex", 
         ""), interval = 0.1, nmax = 10, ani.dev = "pdf", ani.type = "pdf", 
-    ani.width = 7, ani.height = 7)
+    ani.width = 7, ani.height = 7, documentclass = paste("\\\\documentclass{article}", 
+        "\\\\usepackage[papersize={7in,7in},margin=0.3in]{geometry}", 
+        sep = "\n"))
 
-## the PDF graphics output is often too large because it is uncompressed;
-## try the option ani.options('pdftk') to compress the PDF graphics
-##   see ?pdftk and ?ani.options}
+## the PDF graphics output is often too large because it is
+#   uncompressed;
+## try the option ani.options('pdftk') to compress the PDF
+#   graphics
+## see ?pdftk and ?ani.options}
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 \alias{sim.qqnorm}
 \title{Simulation of QQ plots for the Normal distribution.}
 \usage{sim.qqnorm(n = 20, ...)
+
 }
 \description{Simulation of QQ plots for the Normal distribution.
 This demo shows the possible QQ plots created by random numbers generated

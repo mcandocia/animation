@@ -6,6 +6,7 @@
     cex.balls = 2)
 
 }
+
 \description{Demonstration of the Quincunx (Bean Machine/Galton Box).
 This function simulates the quincunx with ``balls'' (beans) falling through
 several layers (denoted by triangles) and the distribution of the final
@@ -52,11 +53,12 @@ saveHTML({
         interval = 0.03)
     quincunx(balls = 200, col.balls = rainbow(200))
 }, img.name = "quincunx", htmlfile = "quincunx.html", ani.height = 500, 
-    ani.width = 600, title = "Demonstration of the Galton Box", 
-    description = c("Balls", "falling through pins will show you the Normal", 
-        "distribution."))
+    ani.width = 600, single.opts = "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0", 
+    title = "Demonstration of the Galton Box", description = c("Balls", 
+        "falling through pins will show you the Normal", "distribution."))
 
 ani.options(oopt)}
+
 
 
 

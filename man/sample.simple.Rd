@@ -3,6 +3,7 @@
 \title{Demonstration for simple random sampling without replacement.}
 \usage{sample.simple(nrow = 10, ncol = 10, size = 15, p.col = c("blue", 
     "red"), p.cex = c(1, 3))
+
 }
 \description{Demonstration for simple random sampling without replacement.}
 \details{The whole sample frame is denoted by a matrix (\code{nrow * ncol})

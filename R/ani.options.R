@@ -24,7 +24,7 @@
 ##'
 ##' \item{outdir}{character: specify the output directory when we
 ##' export the animations using \code{\link{saveHTML}},
-##' \code{\link{saveMovie}}, \code{\link{saveLatex}} and
+##' \code{\link{saveGIF}}, \code{\link{saveLatex}} and
 ##' \code{\link{saveSWF}}; default to be the temporary directory
 ##' \code{\link[base]{tempdir}} and we can reset to the current
 ##' working directory by \code{ani.options(outdir = getwd())}.}
@@ -66,7 +66,7 @@
 ##' \code{ani.options('ani.dev')} (default to be \code{TRUE}); if
 ##' \code{FALSE}, we need to generate image files by our own
 ##' approaches in the expression \code{expr} (see functions
-##' \code{\link{saveHTML}}, \code{\link{saveMovie}},
+##' \code{\link{saveHTML}}, \code{\link{saveGIF}},
 ##' \code{\link{saveLatex}} and \code{\link{saveSWF}}); this can be
 ##' useful when the output cannot be captured by standard R graphics
 ##' devices -- a typical example is the \pkg{rgl} graphics (we can use
@@ -95,7 +95,7 @@
 ##' \describe{
 ##'
 ##' \item{convert}{this option will be checked first when calling
-##' \code{\link{im.convert}} (or \code{\link{saveMovie}}) to see if it
+##' \code{\link{im.convert}} (or \code{\link{saveGIF}}) to see if it
 ##' contains the path to \file{convert.exe}; we can specify it
 ##' beforehand to save the efforts in searching for \file{convert.exe}
 ##' in ImageMagick under Windows. For example,
@@ -117,15 +117,28 @@
 ##' generate file names in the argument \code{expr}; see
 ##' \code{demo('rgl_animation')} for example or the last example below}
 ##'
+##' \item{qpdf}{the path of the program \command{qpdf},
+##' e.g. \code{ani.options(qpdf = 'C:/Software/qpdf/bin/qpdf.exe')};
+##' \command{qpdf} is mainly used to compress PDF files in this
+##' package, and it is a smaller tool than \command{pdftk}. It is
+##' recommended over \command{pdftk} especially under Linux, because
+##' tests show that \command{pdftk} does not work well under Linux in
+##' compressing PDF files, while \command{qpdf} is much better.}
+##'
 ##' \item{pdftk}{the path of the program \command{Pdftk},
 ##' e.g. \code{ani.options(pdftk = 'C:/Software/pdftk.exe')} or
 ##' \code{ani.options(pdftk = '/home/john/bin/pdftk')};
 ##' \command{pdftk} will be used to compress the PDF graphics output
 ##' in the function \code{\link{pdftk}}; compression will not be tried
 ##' if this options is \code{NULL}. This option will only affect
-##' \code{\link{saveMovie}}, \code{\link{saveLatex}} and
+##' \code{\link{saveGIF}}, \code{\link{saveLatex}} and
 ##' \code{\link{saveSWF}} when \code{ani.options('ani.type')} is
 ##' \code{'pdf'}.}
+##'
+##' \item{ffmpeg}{the path of the progam \command{ffmpeg},
+##' e.g. \code{ani.options(ffmpeg =
+##' 'C:/Software/ffmpeg/bin/ffmpeg.exe')}; FFmpeg is used to convert a
+##' sequence of images to a video. See \code{\link{saveVideo}}}.
 ##'
 ##' }
 ##' }
@@ -164,9 +177,11 @@
 ##' @author Yihui Xie <\url{http://yihui.name}>
 ##' @seealso \code{\link[base]{options}},
 ##' \code{\link[grDevices]{dev.interactive}}, \code{\link{saveHTML}},
-##' \code{\link{saveMovie}}, \code{\link{saveLatex}},
+##' \code{\link{saveGIF}}, \code{\link{saveLatex}},
 ##' \code{\link{saveSWF}}, \code{\link{pdftk}}
 ##' @references \url{http://animation.yihui.name/animation:options}
+##'
+##' \url{http://qpdf.sourceforge.net/}
 ##'
 ##' \url{http://www.pdflabs.com/docs/pdftk-man-page/}
 ##' @keywords misc

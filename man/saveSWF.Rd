@@ -1,8 +1,9 @@
 \name{saveSWF}
 \alias{saveSWF}
 \title{Convert images to Flash animations.}
-\usage{saveSWF(expr, img.name = "Rplot", swf.name = "animation.swf", 
+\usage{saveSWF(expr, swf.name = "animation.swf", img.name = "Rplot", 
     swftools, ...)
+
 }
 \description{Convert images to Flash animations.
 This function opens a graphical device first to generate a
@@ -21,14 +22,16 @@ We can also set the path to SWF Tools by
 \code{ani.options('ani.type')} can only be one of \code{png},
 \code{pdf} and \code{jpeg}.
 
-Also note that PDF graphics can be compressed using Pdftk (if it
-is installed and \code{ani.options('pdftk')} has been set); see
-\code{\link{pdftk}}.}
+Also note that PDF graphics can be compressed using qpdf or Pdftk
+(if either one is installed and \code{ani.options('qpdf')} or
+\code{ani.options('pdftk')} has been set); see \code{\link{qpdf}}
+or \code{\link{pdftk}}.}
 \author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link{saveMovie}}, \code{\link{saveLatex}},
-\code{\link{saveHTML}}, \code{\link[base]{system}},
-\code{\link[grDevices]{png}}, \code{\link[grDevices]{jpeg}},
-\code{\link[grDevices]{pdf}}, \code{\link{pdftk}}}
+\seealso{\code{\link{saveGIF}}, \code{\link{saveLatex}},
+\code{\link{saveHTML}}, \code{\link{saveVideo}},
+\code{\link[base]{system}}, \code{\link[grDevices]{png}},
+\code{\link[grDevices]{jpeg}}, \code{\link[grDevices]{pdf}},
+\code{\link{qpdf}}, \code{\link{pdftk}}}
 \references{\url{http://animation.yihui.name/animation:start#create_flash_animations}}
 \keyword{dynamic}
 \keyword{device}
@@ -58,7 +61,8 @@ saveSWF({
 }, swf.name = "kNN.swf", interval = 1.5, nmax = ifelse(interactive(), 
     40, 2))
 
-## from pdf (vector plot) to swf; can set the option 'pdftk' to compress PDF
+## from pdf (vector plot) to swf; can set the option
+#   'pdftk' to compress PDF
 saveSWF({
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
 }, swf.name = "brownian.swf", interval = 0.2, nmax = 30, ani.dev = "pdf", 

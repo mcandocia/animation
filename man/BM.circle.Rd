@@ -2,6 +2,7 @@
 \alias{BM.circle}
 \title{Brownian Motion in a circle.}
 \usage{BM.circle(n = 20, col = rainbow(n), ...)
+
 }
 \description{Brownian Motion in a circle.
 Several points moving randomly in a circle.}

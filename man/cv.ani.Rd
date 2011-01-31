@@ -3,6 +3,7 @@
 \title{Demonstration for the process of cross-validation.}
 \usage{cv.ani(x = runif(150), k = 10, col = c("green", "red", 
     "blue"), pch = c(4, 1), ...)
+
 }
 \description{Demonstration for the process of cross-validation.
 This function uses rectangles to illustrate the \eqn{k} folds and

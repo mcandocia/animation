@@ -2,6 +2,7 @@
 \alias{pdftk}
 \title{A wrapper for the PDF toolkit Pdftk.}
 \usage{pdftk(input, operation, output, other.opts = "compress dont_ask")
+
 }
 \description{A wrapper for the PDF toolkit Pdftk.
 If the toolkit Pdftk is available in the system, it will be called

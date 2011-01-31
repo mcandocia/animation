@@ -3,6 +3,7 @@
 \title{Demonstration of Law of Large Numbers.}
 \usage{lln.ani(FUN = rnorm, mu = 0, np = 30, pch = 20, col.poly = "bisque", 
     col.mu = "gray", ...)
+
 }
 \description{Demonstration of Law of Large Numbers.
 This function plots the sample mean as the sample size grows to check

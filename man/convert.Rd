@@ -5,8 +5,9 @@
     "gm convert"), cmd.fun = system, extra.opts = "", clean = FALSE)
 gm.convert(..., convert = "gm convert")
 
-
 }
+
+
 \description{A wrapper for the `convert' utility of ImageMagick or GraphicsMagick.
 The main purpose of these two functions is to create GIF animations.}
 \details{\code{im.convert}: the function \code{im.convert} simply wraps the arguments of the
@@ -68,7 +69,7 @@ A reported problem is \code{cmd.fun = shell} might not work under
 Windows but \code{cmd.fun = system} works fine. Try this option in
 case of failures.}
 \author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link{saveMovie}}}
+\seealso{\code{\link{saveGIF}}}
 \references{ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
 
 GraphicsMagick: \url{http://www.graphicsmagick.org}}

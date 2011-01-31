@@ -5,6 +5,7 @@
     col = 1:2, type = "p", pch = 21, bg = "transparent", digits = 3)
 
 }
+
 \description{Probability in flipping coins.
 This function provides a simulation to the process of flipping coins and
 computes the frequencies for `heads' and `tails'.}

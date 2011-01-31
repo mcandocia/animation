@@ -47,7 +47,12 @@
 ##' \code{ani.options('outdir')}? If you have not installed the LaTeX
 ##' package \code{animate}, it suffices just to copy these to files.
 ##' @param overwrite whether to overwrite the existing image frames
-##' @param \dots other arguments passed to the graphics device
+##' @param full.path whether to use the full path (\code{TRUE}) or
+##' relative path (\code{FALSE}) for the animation frames; usually the
+##' relative path suffices, but sometimes the images and the LaTeX
+##' document might not be in the same directory, so \code{full.path =
+##' TRUE} could be useful
+##' @param ... other arguments passed to the graphics device
 ##' \code{ani.options('ani.dev')}, e.g. \code{ani.height}
 ##' and \code{ani.width}
 ##'
@@ -65,8 +70,9 @@
 ##' PDF devices are recommended because of their high quality and
 ##' usually they are more friendly to LaTeX, but the size of PDF files
 ##' is often much larger; in this case, we may set the option
-##' \code{'pdftk'} to compress the PDF graphics output. To set the PDF
-##' device, use \code{ani.options(ani.dev = 'pdf', ani.type = 'pdf')}
+##' \code{'qpdf'} or \code{'pdftk'} to compress the PDF graphics
+##' output. To set the PDF device, use \code{ani.options(ani.dev =
+##' 'pdf', ani.type = 'pdf')}
 ##'
 ##' So far animations created by the LaTeX package \pkg{animate} can
 ##' only be viewed with Acrobat Reader (Windows) or \command{acroread}
@@ -75,10 +81,11 @@
 ##' to install \command{acroread} and set \code{options(pdfviewer =
 ##' 'acroread')}.
 ##' @author Yihui Xie <\url{http://yihui.name}>
-##' @seealso \code{\link{saveMovie}} to convert image frames to a
-##' single GIF/MPEG file; \code{\link{saveSWF}} to convert images to
-##' Flash; \code{\link{saveHTML}} to create an HTML page containing
-##' the animation; \code{\link{pdftk}} to compress PDF graphics
+##' @seealso \code{\link{saveGIF}} to convert image frames to a single
+##' GIF/MPEG file; \code{\link{saveSWF}} to convert images to Flash;
+##' \code{\link{saveHTML}} to create an HTML page containing the
+##' animation; \code{\link{saveVideo}} to convert images to a video;
+##' \code{\link{qpdf}} or \code{\link{pdftk}} to compress PDF graphics
 ##' @references To know more about the \code{animate} package, please
 ##' refer to
 ##' \url{http://www.ctan.org/tex-archive/macros/latex/contrib/animate/}.
@@ -88,15 +95,18 @@
 ##' @examples
 ##'
 ##' ## brownian motion: note the 'loop' option in ani.opts
+##' #   and the careful settings in documentclass
 ##' saveLatex({
 ##'     par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0),
 ##'         tcl = -0.3, cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
 ##'     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow",
 ##'         main = "Demonstration of Brownian Motion")
-##' }, img.name = "BM", ani.opts = "controls,loop,width=0.8\\\\textwidth",
+##' }, img.name = "BM", ani.opts = "controls,loop,width=0.95\\\\textwidth",
 ##'     latex.filename = ifelse(interactive(), "brownian_motion.tex", ""),
 ##'     interval = 0.1, nmax = 10,
-##'     ani.dev = 'pdf', ani.type = 'pdf', ani.width = 7, ani.height = 7)
+##'     ani.dev = 'pdf', ani.type = 'pdf', ani.width = 7, ani.height = 7,
+##' documentclass = paste("\\\\documentclass{article}",
+##' "\\\\usepackage[papersize={7in,7in},margin=0.3in]{geometry}", sep = "\n"))
 ##'
 ##' ## the PDF graphics output is often too large because it is uncompressed;
 ##' ## try the option ani.options('pdftk') to compress the PDF graphics
@@ -105,12 +115,13 @@
 saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
     centering = TRUE, caption = NULL, label = NULL,
     pkg.opts = NULL, documentclass = "article", latex.filename = "animation.tex",
-    pdflatex = "pdflatex", install.animate = TRUE, overwrite = TRUE, ...) {
+    pdflatex = "pdflatex", install.animate = TRUE, overwrite = TRUE,
+    full.path = FALSE, ...) {
     oopt = ani.options(...)
     if (!missing(nmax)) ani.options(nmax = nmax)
     on.exit(ani.options(oopt))
     outdir = ani.options('outdir')
-    ani.ext = ani.options('ani.type')
+    file.ext = ani.options('ani.type')
     use.dev = ani.options('use.dev')
     ## detect if I'm in a Sweave environment
     in.sweave = FALSE
@@ -122,7 +133,7 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
                     ## yes, I'm in Sweave w.p. 95%
                     img.name = paste(chunkopts$prefix.string, chunkopts$label, sep = '-')
                     ani.options(img.fmt = file.path(outdir, paste(img.name, '%d.',
-                                ani.ext, sep = '')))
+                                file.ext, sep = '')))
                     ## outdir = '.'
                     in.sweave = TRUE
                     break
@@ -136,14 +147,14 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
     owd = setwd(outdir)
     on.exit(setwd(owd), add = TRUE)
     ani.dev = ani.options('ani.dev')
-    num = ifelse(ani.ext == "pdf" && use.dev, "", "%d")
-    img.fmt = file.path(outdir, sprintf("%s%s.%s", img.name, num, ani.ext))
+    num = ifelse(file.ext == "pdf" && use.dev, "", "%d")
+    img.fmt = file.path(outdir, sprintf("%s%s.%s", img.name, num, file.ext))
     if (!in.sweave)
         ani.options(img.fmt = img.fmt)
     if (is.character(ani.dev))
         ani.dev = get(ani.dev)
     ani.files.len = length(list.files(path = dirname(img.name), pattern =
-                           sprintf('^%s[0-9]*\\.%s$', img.name, ani.ext)))
+                           sprintf('^%s[0-9]*\\.%s$', basename(img.name), file.ext)))
     if (overwrite || !ani.files.len) {
         if (use.dev)
             ani.dev(img.fmt,
@@ -153,23 +164,25 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
         setwd(owd1)
         if (use.dev) dev.off()
         ## compress PDF files
-        if (ani.ext == 'pdf' && !is.null(ani.options('pdftk'))) {
+        if (file.ext == 'pdf' &&
+            ((use.pdftk <- !is.null(ani.options('pdftk'))) ||
+             (use.qpdf <- !is.null(ani.options('qpdf'))))) {
             for (f in list.files(path = dirname(img.name), pattern =
                                  sprintf('^%s[0-9]*\\.pdf$', img.name), full.names = TRUE))
-                pdftk(f)
+                if (use.qpdf) qpdf(f) else if (use.pdftk) pdftk(f)
         }
     }
     ani.files.len = length(list.files(path = dirname(img.name), pattern =
-                           sprintf('^%s[0-9]*\\.%s$', img.name, ani.ext)))
+                           sprintf('^%s[0-9]*\\.%s$', basename(img.name), file.ext)))
 
     if (missing(nmax)) {
         ## count the number of images generated
-        start.num = ifelse(ani.ext == 'pdf' && use.dev, '', 1)
-        end.num = ifelse(ani.ext == 'pdf' && use.dev, '', ani.files.len)
+        start.num = ifelse(file.ext == 'pdf' && use.dev, '', 1)
+        end.num = ifelse(file.ext == 'pdf' && use.dev, '', ani.files.len)
     } else {
         ## PDF animations should start from 0 to nmax-1
-        start.num = ifelse(ani.ext == 'pdf' && use.dev, 0, 1)
-        end.num = ifelse(ani.ext == 'pdf' && use.dev, nmax - 1, nmax)
+        start.num = ifelse(file.ext == 'pdf' && use.dev, 0, 1)
+        end.num = ifelse(file.ext == 'pdf' && use.dev, nmax - 1, nmax)
     }
 
     if (missing(ani.opts)) ani.opts = "controls,width=\\linewidth"
@@ -182,6 +195,8 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
     }
 
     if (!in.sweave && length(documentclass)) {
+        if (img.name == sub('\\.tex$', '', latex.filename))
+            stop("'img.name' should not be the same with 'latex.filename'!")
         if (!grepl('^\\\\documentclass', documentclass))
             documentclass = sprintf('\\documentclass{%s}', documentclass)
         cat(sprintf("
@@ -198,7 +213,9 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
                     ifelse(is.null(pkg.opts), "", sprintf("[%s]", pkg.opts)),
                     ifelse(centering, '\\begin{center}', ''),
                     ani.opts,
-                    1/interval, img.name, start.num, end.num,
+                    1/interval,
+                    ifelse(full.path, normalizePath(file.path(outdir, img.name)), img.name),
+                    start.num, end.num,
                     ifelse(is.null(caption), "", sprintf("\\caption{%s}", caption)),
                     ifelse(is.null(label), "", sprintf("\\label{%s}", label)),
                     ifelse(centering, '\\end{center}', '')),
@@ -229,7 +246,9 @@ saveLatex = function(expr, nmax, img.name = "Rplot", ani.opts,
 %s
 ", ifelse(centering, '\\begin{center}', ''),
                     ani.opts,
-                    1/interval, img.name, start.num, end.num,
+                    1/interval,
+                    ifelse(full.path, normalizePath(file.path(outdir, img.name)), img.name),
+                    start.num, end.num,
                     ifelse(centering, '\\end{center}', '')))
     }
     invisible(NULL)

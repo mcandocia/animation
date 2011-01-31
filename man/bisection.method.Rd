@@ -5,6 +5,7 @@
     10), tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
 
 }
+
 \description{Demonstration of the Bisection Method for root-finding on an interval.
 This is a visual demonstration of finding the root of an equation \eqn{f(x) = 0} on
 an interval using the Bisection Method.}

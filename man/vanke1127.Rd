@@ -38,7 +38,7 @@ saveHTML({
 }, img.name = "vanke_c", description = "Prices changing along with time interval 5 min")
 
 ## GIF animation
-saveMovie(price.ani(vanke1127$price, vanke1127$time, 
+saveGIF(price.ani(vanke1127$price, vanke1127$time, 
     lwd = 2), movie.name = "price.gif", loop = 1)
 
 ani.options(oopt)}

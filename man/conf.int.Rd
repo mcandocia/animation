@@ -3,6 +3,7 @@
 \title{Demonstration of the concept of confidence intervals.}
 \usage{conf.int(level = 0.95, size = 50, cl = c("red", "gray"), 
     ...)
+
 }
 \description{Demonstration of the concept of confidence intervals.
 This function gives a demonstration of the concept of confidence intervals

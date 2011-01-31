@@ -7,9 +7,10 @@
     ..., grid = TRUE, text = 1:ani.options("nmax"), text.col = rgb(0, 
         0, 0, 0.5), text.cex = 5)
 
-
-
 }
+
+
+
 \description{The bubbles animation in Hans Rosling's Talk.
 (``Debunking third-world myths with the best stats you've ever seen'')}
 \details{In Hans Rosling's attractive talk ``Debunking third-world myths
@@ -56,7 +57,8 @@ text}
 \examples{oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 
     50, 2))
 
-## use default arguments (random numbers); you may try to find the real data
+## use default arguments (random numbers); you may try to
+#   find the real data
 par(mar = c(4, 4, 0.2, 0.2))
 Rosling.bubbles()
 

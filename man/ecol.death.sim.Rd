@@ -6,6 +6,7 @@
     cex = 3, ...)
 
 }
+
 \description{A simulation of the death of two species with certain probabilities.}
 \details{Suppose there are two plant species in a field: A and B. One of them will
 die at each time and a new plant will grow in the place where the old plant

@@ -1,3 +1,79 @@
+		  CHANGES IN animation VERSION 2.0-2
+
+
+NEW FEATURES
+
+    o demo('IBM') to show IBM stock closing prices from 2000 to 2010
+
+    o ani.record() gained a new argument 'replay.cur', which can be
+  helpful when we want to capture low-level plot changes without
+  storing all the plots in memory (default behaviour of ani.record())
+
+    o a new function saveVideo() to convert a sequence of images to a
+  video using FFmpeg (thanks, Thomas Julou)
+
+    o we can easily create an animation using Rweb now; see a demo in
+  system.file('misc', 'Rweb', 'demo.html', package = 'animation')
+
+    o a new function qpdf() as a wrapper to the program 'qpdf', which
+  is mainly used to compress the PDF files (it is recommended over
+  Pdftk)
+
+    o saveLatex() gained a new argument 'full.path': when the
+  animation frames are not in the same directory with the LaTeX
+  document, we can set full.path = TRUE to ensure LaTeX can find the
+  image files
+
+    o grad.desc() gained two new arguments: 'gr' to provide the
+  gradient function, and 'main' to specify to title of the plot
+  (thanks, Zeno Adams)
+
+    o clt.ani() gained two arguments 'mean' and 'sd' to draw the
+  theoretical limiting distribution
+
+    o a new demo('ggobi_animation') to show how to record GGobi plots
+  as an animation in the HTML file
+
+
+SIGNIFICANT CHANGES
+
+    o saveMovie() was renamed to saveGIF() to better reflect what the
+  function does; this change will not affect users because 'saveMovie'
+  is still an alias to 'saveGIF' (i.e. they are identical)
+
+
+MINOR CHANGES
+
+    o saveSWF() puts all the image frames into the temp dir instead of
+  ani.options('outdir') (similar to saveGIF())
+
+    o the location of the argument 'img.name' was moved to the 3rd
+  place in saveSWF() to be consistent to other saveXXX() functions
+
+    o clt.ani() gained a new argument 'xlim' to set the x-axis limit
+  of the histogram
+
+    o knn.ani() gained the ... argument to pass additional arguments
+  to create the empty "frame" for the animation
+
+
+BUG FIXES
+
+    o use packageDescription() instead of packageVersion() in
+  saveHTML() and ani.stop() because there is a weird error reported
+  when using packageVersion() (thanks, Alex Tek)
+
+
+TO APPEAR
+
+    o A function boot.loess() added to show the bootstrapping effects
+  on loess().
+
+    o A function cart.ani() to show the splitting process of
+  classification and regression trees.
+
+
+
 		  CHANGES IN animation VERSION 2.0-1
 
 
@@ -38,17 +114,6 @@ MINOR CHANGES
   to* be a real R expression -- you can still use an arbitrary R code
   chunk, e.g. saveHTML(for (i in 1:10) plot(runif(30))) (thanks,
   Aquery)
-
-
-TO APPEAR
-
-    o Changes made by Thomas Julou (using ffmpeg)
-
-    o A function boot.loess() added to show the bootstrapping effects
-  on loess().
-
-    o A function cart.ani() to show the splitting process of
-  classification and regression trees.
 
 
 

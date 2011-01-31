@@ -5,6 +5,7 @@
     size = 3, p.col = c("blue", "red"), p.cex = c(1, 3), ...)
 
 }
+
 \description{Demonstration for the cluster sampling.
 Each rectangle stands for a cluster, and the simple random sampling
 without replacement is performed for each cluster. All points in the

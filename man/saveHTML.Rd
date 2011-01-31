@@ -3,6 +3,7 @@
 \title{Insert animations into an HTML page.}
 \usage{saveHTML(expr, img.name = "Rplot", global.opts = "", 
     single.opts = "", ...)
+
 }
 \description{Insert animations into an HTML page.
 This function first records all the plots in the R expression as
@@ -40,12 +41,21 @@ HTML file.
 For \code{\link{saveHTML}}, \code{ani.options('description')} can
 be a character vector, in which case this vector will be pasted
 into a scalar; use \code{"\n\n"} in the string to separate
-paragraphs (see the first example below).}
+paragraphs (see the first example below).
+
+For the users who do not have R at hand, there is a demo in
+\code{system.file('misc', 'Rweb', 'demo.html', package =
+'animation')} to show how to create animations online without R
+being installed locally. It depends, however, on whether the Rweb
+service can be provided for public use in a long period (currently
+we are using the Rweb at Tama University). See the last example
+below.}
 \author{Yihui Xie <\url{http://yihui.name}>}
 \references{\url{https://github.com/brentertz/scianimator}}
-\seealso{\code{\link{saveMovie}}, \code{\link{saveSWF}},
-\code{\link{saveLatex}}; \code{\link{ani.start}},
-\code{\link{ani.stop}} (early versions of HTML animations)}
+\seealso{\code{\link{saveGIF}}, \code{\link{saveSWF}},
+\code{\link{saveLatex}}, \code{\link{saveVideo}};
+\code{\link{ani.start}}, \code{\link{ani.stop}} (early versions of
+HTML animations)}
 \arguments{\item{expr}{an R expression to be evaluated to create a sequence of
 images}
 \item{img.name}{the filename of the images (the real output will
@@ -93,9 +103,10 @@ saveHTML({
 
 
 ## we can merge another animation into the former page
-##   as long as 'htmlfile' is the same
-## this time I don't want the animation to autoplay, and will use
-##   text labels for the buttons (instead of UTF-8 symbols)
+## as long as 'htmlfile' is the same
+## this time I don't want the animation to autoplay, and
+#   will use
+## text labels for the buttons (instead of UTF-8 symbols)
 saveHTML({
     par(mar = c(4, 4, 0.5, 0.5))
     ani.options(interval = 0.5)
@@ -112,7 +123,8 @@ saveHTML({
 
 
 ## use the function brownian.motion() in this package
-## note this page is created in 'index.html' under ani.options('outdir')
+## note this page is created in 'index.html' under
+#   ani.options('outdir')
 saveHTML({
     par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
         cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
@@ -124,9 +136,11 @@ saveHTML({
 
 
 
-## we may feel that the navigation panel is too wide, so let's remove it next
+## we may feel that the navigation panel is too wide, so
+#   let's remove it next
 ## the default value of 'controls' is:
-## ['first', 'previous', 'play', 'next', 'last', 'navigator', 'loop', 'speed']
+## ['first', 'previous', 'play', 'next', 'last',
+#   'navigator', 'loop', 'speed']
 ## we need to remove 'navigator'
 saveHTML({
     par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
@@ -136,7 +150,17 @@ saveHTML({
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
 }, img.name = "brownian_motion_b", htmlfile = "index.html", single.opts = "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0", 
     description = c("Random walk of 10 points on the 2D plane", 
-        "(without the navigation panel)"))}
+        "(without the navigation panel)"))
+
+
+## use Rweb to create animations
+if (interactive()) browseURL(system.file("misc", "Rweb", 
+    "demo.html", package = "animation"))}
+
+
+
+
+
 
 
 

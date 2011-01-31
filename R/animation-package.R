@@ -32,12 +32,20 @@
 ##'
 ##' The HTML interface is just like a movie player -- it comes with a series
 ##' of buttons to control the animation (play, stop, next, previous, ...).
+##'
+##' This HTML approach is flexible enough to be used even in Rweb,
+##' which means we do not really have to install R to create
+##' animations! There is a demo in \code{system.file('misc', 'Rweb',
+##' 'demo.html', package = 'animation')}. We can use
+##' \code{\link{saveHTML}} to create animations directly in Rweb; this
+##' can be helpful when we do not have R or cannot install R.
 ##' }
 ##'
-##' \subsection{GIF Animations}{
-##' If ImageMagick or GraphicsMagick has been installed, we can use
-##' \code{\link{im.convert}} or \code{\link{gm.convert}} to create a GIF
-##' animation (combining several R plots together).
+##' \subsection{GIF Animations}{ If ImageMagick or GraphicsMagick has
+##' been installed, we can use \code{\link{im.convert}} or
+##' \code{\link{gm.convert}} to create a GIF animation (combining
+##' several R plots together), or use \code{\link{saveGIF}} to create
+##' a GIF animation from an R code chunk.
 ##' }
 ##'
 ##' \subsection{Flash Animations}{
@@ -51,6 +59,14 @@
 ##' using the Adobe reader.
 ##'
 ##' The animation is created by the LaTeX package \code{animate}.
+##' }
+##'
+##' \subsection{Video}{
+##'
+##' The function \code{\link{saveVideo}} can use FFmpeg to convert
+##' images to various video formats (e.g. \file{mp4}, \file{avi} and
+##' \file{wmv}, etc).
+##'
 ##' }
 ##' This package also contains several functions to create animations
 ##' for various statistical topics.
@@ -71,6 +87,10 @@
 ##'
 ##' (NB: some functions mentioned in the above article have been
 ##' slightly modified; see the help pages for the up-to-date usage.)
+##'
+##' @seealso \code{\link{saveHTML}}, \code{\link{saveGIF}},
+##' \code{\link{saveSWF}}, \code{\link{saveVideo}},
+##' \code{\link{saveLatex}}
 ##' @keywords package dynamic device dplot
 ##' @example animation/inst/examples/animation-package-Ex.R
 ##'
@@ -80,7 +100,7 @@ NULL
 
 
 
-##' Word Counts of a Speech by Chinese President Hu.
+##' Word counts of a speech by the Chinese President Hu.
 ##' This speech came on the 30th anniversary of China's economic
 ##' reform in 1978.
 ##'
@@ -103,6 +123,31 @@ NULL
 ##' plot(HuSpeech, type = "b", pch = 20, xlab = "paragraph index",
 ##'     ylab = "word count")
 ##' ## see ?moving.block for an animation example
+##'
+NULL
+
+
+
+
+
+##' Word counts of a speech by the US President Obama.
+##' This data recorded the number of words in each paragraph of Barack
+##' Obama's speech in Chicago after winning the presidential election.
+##'
+##' The format is: int [1:59] 2 45 52 53 11 48 28 15 50 29 ...
+##'
+##' Source: The full text of speech is at
+##' \url{http://www.baltimoresun.com/news/nation-world/bal-text1105,0,5055673,full.story}
+##' @name ObamaSpeech
+##' @docType data
+##' @usage data(ObamaSpeech)
+##' @keywords datasets
+##' @examples
+##'
+##' data(ObamaSpeech)
+##' ## pattern: longer paragraph and shorter paragraph
+##' plot(ObamaSpeech, type = "b", pch = 20, xlab = "paragraph index",
+##'     ylab = "word count")
 ##'
 NULL
 
@@ -217,7 +262,7 @@ NULL
 ##' }, img.name='vanke_c', description = "Prices changing along with time interval 5 min")
 ##'
 ##'     ## GIF animation
-##'     saveMovie(price.ani(vanke1127$price, vanke1127$time, lwd = 2),
+##'     saveGIF(price.ani(vanke1127$price, vanke1127$time, lwd = 2),
 ##'         movie.name = "price.gif", loop = 1)
 ##'
 ##' ani.options(oopt)

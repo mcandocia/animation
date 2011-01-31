@@ -2,6 +2,7 @@
 \alias{ani.start}
 \title{Start the generation of an HTML animation page.}
 \usage{ani.start(...)
+
 }
 \description{Start the generation of an HTML animation page.
 This function copies JavaScript file \file{FUN.js} and CSS file \file{ANI.css}

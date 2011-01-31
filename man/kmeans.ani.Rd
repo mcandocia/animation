@@ -6,6 +6,7 @@
         "Find cluster?"))
 
 }
+
 \description{Demonstration of the k-Means clustering algorithm.
 This function provides a demo of the k-Means cluster algorithm for data
 containing only two variables (columns).}

@@ -2,6 +2,7 @@
 \alias{moving.block}
 \title{Cycle through an R object and plot each subset of elements.}
 \usage{moving.block(dat = runif(100), block, FUN, ...)
+
 }
 \description{Cycle through an R object and plot each subset of elements.
 For a long numeric vector or matrix (or data frame), we can plot only a
@@ -41,12 +42,12 @@ plotted in each step)}
 \item{\dots}{other arguments passed to \code{FUN}}
 }
 \examples{## (1) Brownian motion
-#  block length: 101 (i.e. 300-200+1)
+# block length: 101 (i.e. 300-200+1)
 oopt = ani.options(nmax = ifelse(interactive(), 200, 
     2), interval = 0.1)
-#  plot y = dat against x = i + 1:block
-#  customize xlab and ylab with 'i' and 'block'
-#  restrict ylim using the range of 'dat'
+# plot y = dat against x = i + 1:block
+# customize xlab and ylab with 'i' and 'block'
+# restrict ylim using the range of 'dat'
 moving.block(dat = cumsum(rnorm(300)), FUN = function(..., 
     dat = dat, i = i, block = block) {
     plot(..., x = i + 1:block, xlab = sprintf("block length = \%d", 
@@ -55,8 +56,9 @@ moving.block(dat = cumsum(rnorm(300)), FUN = function(...,
 }, type = "o", pch = 20)
 
 
-## (2) Word counts of Hu's speech (block = 10; length(HuSpeech) = 75)
-#  see any pattern in the President's speech?
+## (2) Word counts of Hu's speech (block = 10;
+#   length(HuSpeech) = 75)
+# see any pattern in the President's speech?
 ani.options(nmax = ifelse(interactive(), 66, 2), interval = 0.5)
 data(HuSpeech)
 moving.block(dat = HuSpeech, FUN = function(..., dat = dat, 
@@ -67,12 +69,14 @@ moving.block(dat = HuSpeech, FUN = function(..., dat = dat,
 
 
 ## (3) sunspot data: observe the 11-year cycles
-#  block = 11 years x 12 months/year = 132
-#  set interval greater than 0 if your computer really rocks!
+# block = 11 years x 12 months/year = 132
+# set interval greater than 0 if your computer really
+#   rocks!
 ani.options(nmax = ifelse(interactive(), 2857, 2), 
     interval = 0)
 spt.att = tsp(sunspot.month)
-#  the time index (we need it to correctly draw the ticks of x-axis)
+# the time index (we need it to correctly draw the ticks of
+#   x-axis)
 ts.idx = seq(spt.att[1], spt.att[2], 1/spt.att[3])
 moving.block(dat = sunspot.month, block = 132, FUN = function(..., 
     dat = dat, i = i, block = block) {
@@ -83,10 +87,10 @@ moving.block(dat = sunspot.month, block = 132, FUN = function(...,
 
 
 ## (4) earth quake: order the data by 'depth' first
-#  see how the locations change as 'depth' increases
+# see how the locations change as 'depth' increases
 ani.options(nmax = ifelse(interactive(), 900, 2), 
     interval = 0.01)
-#  compute the mean depth for each block of data
+# compute the mean depth for each block of data
 moving.block(quakes[order(quakes$depth), c("long", 
     "lat")], FUN = function(..., dat = dat, i = i, block = block) {
     plot(..., xlab = sprintf("\%s[\%s:\%s]", colnames(dat)[1], i + 

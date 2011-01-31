@@ -6,6 +6,7 @@
     lty.rect = 2, ...)
 
 }
+
 \description{Demonstration for ``Moving Window Auto-Regression''.
 This function just fulfills a very naive idea about moving window
 regression using rectangles to denote the ``windows'' and move them, and

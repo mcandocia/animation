@@ -5,6 +5,7 @@
     col.rect = c("gray", "black"), adj.x = TRUE, ...)
 
 }
+
 \description{Sample Mean Monte Carlo integration.
 Integrate a function from 0 to 1 using the Sample Mean Monte Carlo
 algorithm}

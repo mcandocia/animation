@@ -6,6 +6,7 @@
     main)
 
 }
+
 \description{Demonstrate stock prices in animations.
 This function can display the frequencies of stock prices in a certain time
 span with the span changing.}

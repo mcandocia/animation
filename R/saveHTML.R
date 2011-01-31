@@ -68,11 +68,20 @@
 ##' be a character vector, in which case this vector will be pasted
 ##' into a scalar; use \code{"\n\n"} in the string to separate
 ##' paragraphs (see the first example below).
+##'
+##' For the users who do not have R at hand, there is a demo in
+##' \code{system.file('misc', 'Rweb', 'demo.html', package =
+##' 'animation')} to show how to create animations online without R
+##' being installed locally. It depends, however, on whether the Rweb
+##' service can be provided for public use in a long period (currently
+##' we are using the Rweb at Tama University). See the last example
+##' below.
 ##' @author Yihui Xie <\url{http://yihui.name}>
 ##' @references \url{https://github.com/brentertz/scianimator}
-##' @seealso \code{\link{saveMovie}}, \code{\link{saveSWF}},
-##' \code{\link{saveLatex}}; \code{\link{ani.start}},
-##' \code{\link{ani.stop}} (early versions of HTML animations)
+##' @seealso \code{\link{saveGIF}}, \code{\link{saveSWF}},
+##' \code{\link{saveLatex}}, \code{\link{saveVideo}};
+##' \code{\link{ani.start}}, \code{\link{ani.stop}} (early versions of
+##' HTML animations)
 ##' @example animation/inst/examples/saveHTML-ex.R
 saveHTML = function(expr, img.name = 'Rplot',
                     global.opts = '', single.opts = '', ...) {
@@ -143,8 +152,8 @@ saveHTML = function(expr, img.name = 'Rplot',
                                          ani.options('title')), html)
     html = sub('<meta name="generator" content=".*">',
               sprintf('<meta name="generator" content="R package animation %s">',
-                      packageVersion('animation')), html)
-    div.str = sprintf('	<div id="%s"></div>', img.name0)
+                      packageDescription('animation', fields = 'Version')), html)
+    div.str = sprintf('	<div class="scianimator"><div id="%s" style="display: inline-block;"></div></div>', img.name0)
     js.str = sprintf('	<script src="js/%s.js"></script>', img.name)
     n = grep('<!-- highlight R code -->', html, fixed = TRUE)
     ## make sure there are no duplicate div/scripts
@@ -160,13 +169,13 @@ saveHTML = function(expr, img.name = 'Rplot',
     }
     js.temp = readLines(system.file('misc', 'scianimator', 'js', 'template.js',
                               package = 'animation'))
-    if (!ani.options('autoplay')) js.temp = js.temp[-11]
+    if (!ani.options('autoplay')) js.temp = js.temp[-10]
     js.temp = paste(js.temp, collapse = '\n')
     imglen = length(list.files(imgdir, pattern = paste(img.name, '[0-9]+\\.', ani.type, sep = '')))
     imglist = file.path(ani.options('imgdir'), sprintf(paste(img.name, '%d.', ani.type, sep = ''), seq_len(imglen)))
     js.temp = sprintf(js.temp, global.opts, img.name0,
                       paste(shQuote(imglist, 'sh'), collapse = ', '),
-                      ani.options('ani.height'), ani.options('ani.width'),
+                      ani.options('ani.width'),
                       1000 * ani.options('interval'),
                       ifelse(ani.options('loop'), 'loop', 'none'),
                       ifelse(nzchar(single.opts), paste(',\n', single.opts), ''),

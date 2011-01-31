@@ -35,12 +35,20 @@ the HTML page and is much more visually appealing.
 
 The HTML interface is just like a movie player -- it comes with a series
 of buttons to control the animation (play, stop, next, previous, ...).
+
+This HTML approach is flexible enough to be used even in Rweb,
+which means we do not really have to install R to create
+animations! There is a demo in \code{system.file('misc', 'Rweb',
+'demo.html', package = 'animation')}. We can use
+\code{\link{saveHTML}} to create animations directly in Rweb; this
+can be helpful when we do not have R or cannot install R.
 }
 
-\subsection{GIF Animations}{
-If ImageMagick or GraphicsMagick has been installed, we can use
-\code{\link{im.convert}} or \code{\link{gm.convert}} to create a GIF
-animation (combining several R plots together).
+\subsection{GIF Animations}{ If ImageMagick or GraphicsMagick has
+been installed, we can use \code{\link{im.convert}} or
+\code{\link{gm.convert}} to create a GIF animation (combining
+several R plots together), or use \code{\link{saveGIF}} to create
+a GIF animation from an R code chunk.
 }
 
 \subsection{Flash Animations}{
@@ -54,6 +62,14 @@ to insert animations into a PDF document and watch the animation
 using the Adobe reader.
 
 The animation is created by the LaTeX package \code{animate}.
+}
+
+\subsection{Video}{
+
+The function \code{\link{saveVideo}} can use FFmpeg to convert
+images to various video formats (e.g. \file{mp4}, \file{avi} and
+\file{wmv}, etc).
+
 }
 This package also contains several functions to create animations
 for various statistical topics.}
@@ -72,6 +88,9 @@ animations. \emph{R News}, \bold{8}(2):23--27, October 2008.  URL:
 
 (NB: some functions mentioned in the above article have been
 slightly modified; see the help pages for the up-to-date usage.)}
+\seealso{\code{\link{saveHTML}}, \code{\link{saveGIF}},
+\code{\link{saveSWF}}, \code{\link{saveVideo}},
+\code{\link{saveLatex}}}
 \keyword{package}
 \keyword{dynamic}
 \keyword{device}
@@ -88,7 +107,8 @@ for (i in 1:ani.options("nmax")) {
 ## restore the options
 ani.options(oopt)
 
-## see ?ani.record for an alternative way to set up an animation
+## see ?ani.record for an alternative way to set up an
+#   animation
 
 ### 2. Animations in HTML pages ###
 saveHTML({
@@ -104,7 +124,7 @@ saveHTML({
 
 
 ### 3. GIF animations ###
-saveMovie({
+saveGIF({
     ani.options(nmax = 30)
     brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
 }, interval = 0.05, movie.name = "bm_demo.gif", ani.width = 600, 

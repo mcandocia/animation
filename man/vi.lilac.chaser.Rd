@@ -3,6 +3,7 @@
 \title{Visual Illusions: Lilac Chaser.}
 \usage{vi.lilac.chaser(np = 16, col = "magenta", bg = "gray", 
     p.cex = 7, c.cex = 5)
+
 }
 \description{Visual Illusions: Lilac Chaser.
 Stare at the center cross for a few (say 30) seconds to experience the

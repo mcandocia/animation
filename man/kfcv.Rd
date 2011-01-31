@@ -2,6 +2,7 @@
 \alias{kfcv}
 \title{Sample sizes for k-fold cross-validation.}
 \usage{kfcv(k, N)
+
 }
 \description{Sample sizes for k-fold cross-validation.
 Compute sample sizes for \eqn{k}-fold cross-validation.}

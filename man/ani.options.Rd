@@ -2,6 +2,7 @@
 \alias{ani.options}
 \title{Set or query animation options.}
 \usage{ani.options(...)
+
 }
 \description{Set or query animation options.
 There are various parameters that control the behaviour of the
@@ -28,7 +29,7 @@ PDF devices usually use inches, whereas bitmap devices often use pixels.}
 
 \item{outdir}{character: specify the output directory when we
 export the animations using \code{\link{saveHTML}},
-\code{\link{saveMovie}}, \code{\link{saveLatex}} and
+\code{\link{saveGIF}}, \code{\link{saveLatex}} and
 \code{\link{saveSWF}}; default to be the temporary directory
 \code{\link[base]{tempdir}} and we can reset to the current
 working directory by \code{ani.options(outdir = getwd())}.}
@@ -70,7 +71,7 @@ page is loaded (default to be \code{TRUE}); only applicable to
 \code{ani.options('ani.dev')} (default to be \code{TRUE}); if
 \code{FALSE}, we need to generate image files by our own
 approaches in the expression \code{expr} (see functions
-\code{\link{saveHTML}}, \code{\link{saveMovie}},
+\code{\link{saveHTML}}, \code{\link{saveGIF}},
 \code{\link{saveLatex}} and \code{\link{saveSWF}}); this can be
 useful when the output cannot be captured by standard R graphics
 devices -- a typical example is the \pkg{rgl} graphics (we can use
@@ -99,7 +100,7 @@ like the above options when the package is loaded, including:
 \describe{
 
 \item{convert}{this option will be checked first when calling
-\code{\link{im.convert}} (or \code{\link{saveMovie}}) to see if it
+\code{\link{im.convert}} (or \code{\link{saveGIF}}) to see if it
 contains the path to \file{convert.exe}; we can specify it
 beforehand to save the efforts in searching for \file{convert.exe}
 in ImageMagick under Windows. For example,
@@ -121,15 +122,28 @@ devices to record images, e.g. in \code{\link{saveLatex}}, if
 generate file names in the argument \code{expr}; see
 \code{demo('rgl_animation')} for example or the last example below}
 
+\item{qpdf}{the path of the program \command{qpdf},
+e.g. \code{ani.options(qpdf = 'C:/Software/qpdf/bin/qpdf.exe')};
+\command{qpdf} is mainly used to compress PDF files in this
+package, and it is a smaller tool than \command{pdftk}. It is
+recommended over \command{pdftk} especially under Linux, because
+tests show that \command{pdftk} does not work well under Linux in
+compressing PDF files, while \command{qpdf} is much better.}
+
 \item{pdftk}{the path of the program \command{Pdftk},
 e.g. \code{ani.options(pdftk = 'C:/Software/pdftk.exe')} or
 \code{ani.options(pdftk = '/home/john/bin/pdftk')};
 \command{pdftk} will be used to compress the PDF graphics output
 in the function \code{\link{pdftk}}; compression will not be tried
 if this options is \code{NULL}. This option will only affect
-\code{\link{saveMovie}}, \code{\link{saveLatex}} and
+\code{\link{saveGIF}}, \code{\link{saveLatex}} and
 \code{\link{saveSWF}} when \code{ani.options('ani.type')} is
 \code{'pdf'}.}
+
+\item{ffmpeg}{the path of the progam \command{ffmpeg},
+e.g. \code{ani.options(ffmpeg =
+'C:/Software/ffmpeg/bin/ffmpeg.exe')}; FFmpeg is used to convert a
+sequence of images to a video. See \code{\link{saveVideo}}}.
 
 }
 }}
@@ -163,9 +177,11 @@ on-screen animations are only affected by \code{interval} and
 \author{Yihui Xie <\url{http://yihui.name}>}
 \seealso{\code{\link[base]{options}},
 \code{\link[grDevices]{dev.interactive}}, \code{\link{saveHTML}},
-\code{\link{saveMovie}}, \code{\link{saveLatex}},
+\code{\link{saveGIF}}, \code{\link{saveLatex}},
 \code{\link{saveSWF}}, \code{\link{pdftk}}}
 \references{\url{http://animation.yihui.name/animation:options}
+
+\url{http://qpdf.sourceforge.net/}
 
 \url{http://www.pdflabs.com/docs/pdftk-man-page/}}
 \keyword{misc}
@@ -174,17 +190,19 @@ values.  The tags usually come from the animation parameters described
 below, but they are not restricted to these tags (any tag can be used;
 this is similar to \code{\link[base]{options}}).}
 }
-\examples{## see the first example in help(animation) on how to set and restore
-##   animation options
+\examples{## see the first example in help(animation) on how to set
+#   and restore
+## animation options
 
-## use the PDF device: remember to set 'ani.type' accordingly
+## use the PDF device: remember to set 'ani.type'
+#   accordingly
 oopt = ani.options(ani.dev = "pdf", ani.type = "pdf", 
     ani.height = 5, ani.width = 7)
 
 ## use the Cairo PDF device
 # if (require('Cairo')) {
-#     ani.options(ani.dev = CairoPDF, ani.type = 'pdf',
-#                 ani.height = 6, ani.width = 6)
+# ani.options(ani.dev = CairoPDF, ani.type = 'pdf',
+# ani.height = 6, ani.width = 6)
 # }
 
 ## change outdir to the current working directory
@@ -196,8 +214,9 @@ ani.options(loop = FALSE)
 ## don't try to open the output automatically
 ani.options(autobrowse = FALSE)
 
-## it's a good habit to restore the options in the end so that
-##   other code will not be affected
+## it's a good habit to restore the options in the end so
+#   that
+## other code will not be affected
 ani.options(oopt)
 
 ## how to make use of the hidden option 'img.fmt'

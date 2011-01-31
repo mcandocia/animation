@@ -6,8 +6,9 @@
     3), p.pch = c(20, 21), m.col = c("black", "gray"), legend.loc = "topleft", 
     ...)
 
-
 }
+
+
 \description{Demonstrate the ratio estimation in sampling survey.
 This function demonstrates the advantage of ratio estimation when further information
 (ratio) about x and y is available.}
@@ -42,7 +43,8 @@ bottomright, ... (see \code{\link[graphics]{legend}})}
 \examples{oopt = ani.options(interval = 2, nmax = ifelse(interactive(), 
     50, 2))
 
-## observe the location of the red line (closer to the population mean)
+## observe the location of the red line (closer to the
+#   population mean)
 res = sample.ratio()
 
 ## absolute difference with the true mean
@@ -53,7 +55,8 @@ legend("topleft", c("Ratio Estimation", "Sample Average"),
 
 ## if the ratio does not actually exist:
 sample.ratio(X = rnorm(50), Y = rnorm(50))
-## ratio estimation may not be better than the simple average
+## ratio estimation may not be better than the simple
+#   average
 
 
 ## HTML animation page

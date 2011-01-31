@@ -6,6 +6,7 @@
         4), ...)
 
 }
+
 \description{Hit or Miss Monte Carlo integration.
 Integrate a function using the Hit-or-Miss Monte Carlo algorithm}
 \details{We compute the proportion of points hitting the area under the

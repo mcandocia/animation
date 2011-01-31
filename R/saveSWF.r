@@ -32,14 +32,16 @@
 ##' \code{ani.options('ani.type')} can only be one of \code{png},
 ##' \code{pdf} and \code{jpeg}.
 ##'
-##' Also note that PDF graphics can be compressed using Pdftk (if it
-##' is installed and \code{ani.options('pdftk')} has been set); see
-##' \code{\link{pdftk}}.
+##' Also note that PDF graphics can be compressed using qpdf or Pdftk
+##' (if either one is installed and \code{ani.options('qpdf')} or
+##' \code{ani.options('pdftk')} has been set); see \code{\link{qpdf}}
+##' or \code{\link{pdftk}}.
 ##' @author Yihui Xie <\url{http://yihui.name}>
-##' @seealso \code{\link{saveMovie}}, \code{\link{saveLatex}},
-##' \code{\link{saveHTML}}, \code{\link[base]{system}},
-##' \code{\link[grDevices]{png}}, \code{\link[grDevices]{jpeg}},
-##' \code{\link[grDevices]{pdf}}, \code{\link{pdftk}}
+##' @seealso \code{\link{saveGIF}}, \code{\link{saveLatex}},
+##' \code{\link{saveHTML}}, \code{\link{saveVideo}},
+##' \code{\link[base]{system}}, \code{\link[grDevices]{png}},
+##' \code{\link[grDevices]{jpeg}}, \code{\link[grDevices]{pdf}},
+##' \code{\link{qpdf}}, \code{\link{pdftk}}
 ##' @references
 ##'   \url{http://animation.yihui.name/animation:start#create_flash_animations}
 ##' @keywords dynamic device utilities
@@ -57,7 +59,7 @@
 ##' nmax = 30, ani.dev = "pdf", ani.type = "pdf",
 ##' ani.height = 6, ani.width=6)
 ##'
-saveSWF = function(expr, img.name = "Rplot", swf.name = "animation.swf",
+saveSWF = function(expr, swf.name = "animation.swf", img.name = "Rplot",
     swftools = NULL, ...) {
     oopt = ani.options(...)
     on.exit(ani.options(oopt))
@@ -75,7 +77,7 @@ saveSWF = function(expr, img.name = "Rplot", swf.name = "animation.swf",
     if (is.character(ani.dev)) ani.dev = get(ani.dev)
     num = ifelse(ani.options('ani.type') == 'pdf', '', '%d')
     img.fmt = paste(img.name, num, ".", file.ext, sep = "")
-    img.fmt = file.path(outdir, img.fmt)
+    img.fmt = file.path(tempdir(), img.fmt)
     ani.options(img.fmt = img.fmt)
     if ((use.dev <- ani.options('use.dev')))
         ani.dev(img.fmt, width = ani.options('ani.width'),
@@ -86,10 +88,12 @@ saveSWF = function(expr, img.name = "Rplot", swf.name = "animation.swf",
     if (use.dev) dev.off()
 
     ## compress PDF files
-    if (file.ext == 'pdf' && !is.null(ani.options('pdftk'))) {
+    if (file.ext == 'pdf' &&
+        ((use.pdftk <- !is.null(ani.options('pdftk'))) ||
+         (use.qpdf <- !is.null(ani.options('qpdf'))))) {
         for (f in list.files(path = dirname(img.name), pattern =
                              sprintf('^%s[0-9]*\\.pdf$', img.name), full.names = TRUE))
-            pdftk(f)
+            if (use.qpdf) qpdf(f) else if (use.pdftk) pdftk(f)
     }
 
     if (!is.null(ani.options('swftools'))) {
@@ -107,7 +111,7 @@ saveSWF = function(expr, img.name = "Rplot", swf.name = "animation.swf",
                    ifelse(.Platform$OS.type == 'windows', '.exe', ''), sep = '')))
     version = try(system(paste(tool, '--version'), intern = TRUE))
     if (inherits(version, 'try-error')) {
-        warning('The command ', tool, ' was not available. Please install: http://www.swftools.org')
+        warning('The command ', tool, ' is not available. Please install: http://www.swftools.org')
         return()
     }
     if (!length(grep('swftools', version))) {

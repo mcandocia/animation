@@ -6,6 +6,7 @@
     width = 800, height = 600)
 
 }
+
 \description{Brownian Motion using Google Visualization API.}
 \details{We can use R to generate random numbers from the Normal distribution and
 write them into an HTML document, then the Google Visualization gadget

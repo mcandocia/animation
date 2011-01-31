@@ -1,4 +1,4 @@
-##' Convert images to a single animation file (typically GIF).
+##' Convert images to a single animation file (typically GIF) using ImageMagick or GraphicsMagick.
 ##' This function opens a graphical device (specified in \code{ani.options('ani.dev')})
 ##' first to generate a sequence of images based on \code{expr}, then makes use
 ##' of the command \command{convert} in `ImageMagick' to convert these images to
@@ -21,6 +21,7 @@
 ##' the graphics device (including the height/width specifications), the file
 ##' extension of image frames, and the time interval between image frames, etc.
 ##' Note that \code{ani.options('interval')} can be a numeric vector!
+##' @aliases saveGIF saveMovie
 ##' @param expr an expression to generate animations; use either the animation
 ##'   functions (e.g. \code{brownian.motion()}) in this package or a custom
 ##'   expression (e.g. \code{for(i in 1:10) plot(runif(10), ylim = 0:1)}).
@@ -45,10 +46,17 @@
 ##' frames in \code{expr}, because this function will only pause when called in
 ##' a non-interactive graphics device, which can save a lot of time.
 ##' See the demo \code{'Xmas2'} for example (\code{demo('Xmas2', package = 'animation')}).
+##'
+##' \code{\link{saveGIF}} has an alias \code{\link{saveMovie}}
+##' (i.e. they are essentially identical); the latter name is for
+##' compatibility to older versions of this package (< 2.0-2). It is
+##' recommended to use \code{\link{saveGIF}} to avoid confusions
+##' between \code{\link{saveMovie}} and \code{\link{saveVideo}}.
 ##' @author Yihui Xie <\url{http://yihui.name}>
-##' @seealso \code{\link{im.convert}}, \code{\link{gm.convert}}, \code{\link{saveSWF}},
-##'   \code{\link[base]{system}}, \code{\link[grDevices]{png}},
-##'   \code{\link{saveLatex}}, \code{\link{saveHTML}}
+##' @seealso \code{\link{im.convert}}, \code{\link{gm.convert}},
+##' \code{\link{saveSWF}}, \code{\link{saveVideo}},
+##' \code{\link[base]{system}}, \code{\link[grDevices]{png}},
+##' \code{\link{saveLatex}}, \code{\link{saveHTML}}
 ##' @references
 ##' ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
 ##'
@@ -59,18 +67,18 @@
 ##' @examples
 ##'
 ##' ## make sure ImageMagick has been installed in your system
-##' saveMovie({for(i in 1:10) plot(runif(10), ylim = 0:1)})
+##' saveGIF({for(i in 1:10) plot(runif(10), ylim = 0:1)})
 ##'
 ##' ## if the above conversion was successful, the option 'convert' should
 ##' ##    not be NULL under Windows
 ##' ani.options('convert')
 ##' ## like "C:/Software/LyX/etc/ImageMagick/convert.exe"
 ##'
-##' saveMovie({brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")},
+##' saveGIF({brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")},
 ##'     movie.name = 'brownian_motion.gif',
 ##'     interval = 0.1, nmax = 30, ani.width = 600, ani.height = 600)
 ##'
-saveMovie = function(expr, movie.name = "animation.gif", img.name = "Rplot",
+saveGIF = function(expr, movie.name = "animation.gif", img.name = "Rplot",
              convert = "convert", cmd.fun = system, clean = TRUE, ...) {
     oopt = ani.options(...)
     on.exit(ani.options(oopt))
@@ -97,10 +105,12 @@ saveMovie = function(expr, movie.name = "animation.gif", img.name = "Rplot",
     if (use.dev) dev.off()
 
     ## compress PDF files
-    if (file.ext == 'pdf' && !is.null(ani.options('pdftk'))) {
+    if (file.ext == 'pdf' &&
+        ((use.pdftk <- !is.null(ani.options('pdftk'))) ||
+         (use.qpdf <- !is.null(ani.options('qpdf'))))) {
         for (f in list.files(path = dirname(img.name), pattern =
                              sprintf('^%s[0-9]*\\.pdf$', img.name), full.names = TRUE))
-            pdftk(f)
+            if (use.qpdf) qpdf(f) else if (use.pdftk) pdftk(f)
     }
 
     img.files = sprintf(img.fmt, seq_len(length(list.files(pattern =
@@ -109,3 +119,5 @@ saveMovie = function(expr, movie.name = "animation.gif", img.name = "Rplot",
     im.convert(img.files, output = movie.name, convert = convert,
                cmd.fun = cmd.fun, clean = clean)
 }
+
+saveMovie = saveGIF

@@ -6,8 +6,9 @@
     "gray", "red", "blue", "black", "red"), expand = 0.4, type = "l", 
     ...)
 
-
 }
+
+
 \description{Simulation of Buffon's Needle.
 This function provides a simulation for the problem of Buffon's Needle,
 which is one of the oldest problems in the field of geometrical

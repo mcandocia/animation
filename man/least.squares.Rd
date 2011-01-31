@@ -6,8 +6,9 @@
     "black"), est.pch = 19, v.col = "red", v.lty = 2, rss.pch = 19, 
     rss.type = "o", mfrow = c(1, 2), ...)
 
-
 }
+
+
 \description{Demonstrate the least squares method.
 This is a simple demonstration of the meaning of least squares in
 univariate linear regression.}

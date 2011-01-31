@@ -32,7 +32,7 @@ x 50} (feet).}
 \examples{library(animation)
 data(CLELAL09)
 ## see demo('CLEvsLAL', package = 'animation')
-##   for a `replay' of the game}
+## for a `replay' of the game}
 
 
 

@@ -2,9 +2,11 @@
 \alias{cv.nfeaturesLDA}
 \title{Cross-validation to find the optimum number of features (variables) in LDA.}
 \usage{cv.nfeaturesLDA(data = matrix(rnorm(600), 60), cl = gl(3, 
-    20), k = 5, cex.rg = c(0.5, 3), col.av = c("blue", "red"))
+    20), k = 5, cex.rg = c(0.5, 3), col.av = c("blue", "red"), 
+    ...)
 
 }
+
 \description{Cross-validation to find the optimum number of features (variables) in LDA.
 This function provids an illustration of the process of finding out
 the optimum number of variables using k-fold cross-validation in a linear
@@ -59,19 +61,20 @@ edition. pp. 400
 the plot}
 \item{col.av}{the two colors used to respectively denote rates of correct
 predictions in the i-th fold and the average rates for all k folds}
+\item{...}{arguments passed to \code{\link[graphics]{points}} to
+draw the points which denote the correct rate}
 }
 \examples{oopt = ani.options(nmax = ifelse(interactive(), 10, 
     2))
-par(pch = 19, mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 
-    0.5, 0))
-cv.nfeaturesLDA()
+par(mar = c(3, 3, 0.2, 0.7), mgp = c(1.5, 0.5, 0))
+cv.nfeaturesLDA(pch = 19)
 
 ## save the animation in HTML pages
 saveHTML({
     ani.options(interval = 0.5, nmax = 10)
     par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3, 
         pch = 19, cex = 1.5)
-    cv.nfeaturesLDA()
+    cv.nfeaturesLDA(pch = 19)
 }, img.name = "cv.nfeaturesLDA", htmlfile = "cv.nfeaturesLDA.html", 
     ani.height = 480, ani.width = 600, title = "Cross-validation to find the optimum number of features in LDA", 
     description = c("This", "animation has provided an illustration of the process of finding", 
