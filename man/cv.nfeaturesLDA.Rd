@@ -1,13 +1,13 @@
 \name{cv.nfeaturesLDA}
 \alias{cv.nfeaturesLDA}
-\title{Cross-validation to find the optimum number of features (variables) in LDA.}
+\title{Cross-validation to find the optimum number of features (variables) in LDA}
 \usage{cv.nfeaturesLDA(data = matrix(rnorm(600), 60), cl = gl(3, 
     20), k = 5, cex.rg = c(0.5, 3), col.av = c("blue", "red"), 
     ...)
 
 }
 
-\description{Cross-validation to find the optimum number of features (variables) in LDA.
+\description{
 This function provids an illustration of the process of finding out
 the optimum number of variables using k-fold cross-validation in a linear
 discriminant analysis (LDA).}

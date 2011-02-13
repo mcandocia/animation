@@ -1,11 +1,11 @@
 \name{conf.int}
 \alias{conf.int}
-\title{Demonstration of the concept of confidence intervals.}
+\title{Demonstration of the concept of confidence intervals}
 \usage{conf.int(level = 0.95, size = 50, cl = c("red", "gray"), 
     ...)
 
 }
-\description{Demonstration of the concept of confidence intervals.
+\description{
 This function gives a demonstration of the concept of confidence intervals
 in mathematical statistics.}
 \details{Keep on drawing samples from the Normal distribution N(0, 1), computing the

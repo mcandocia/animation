@@ -1,8 +1,8 @@
 \name{animation-package}
 \alias{animation-package}
 \alias{animation-package}
-\title{A Gallery of Animations in Statistics and Utilities to Create Animations.}
-\description{A Gallery of Animations in Statistics and Utilities to Create Animations.
+\title{A Gallery of Animations in Statistics and Utilities to Create Animations}
+\description{
 This package contains various functions for animations in
 statistics which could probably aid in teaching statistics and
 data analysis; it also has several utilities to export R animations

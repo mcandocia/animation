@@ -1,11 +1,11 @@
 \name{saveHTML}
 \alias{saveHTML}
-\title{Insert animations into an HTML page.}
+\title{Insert animations into an HTML page}
 \usage{saveHTML(expr, img.name = "Rplot", global.opts = "", 
     single.opts = "", ...)
 
 }
-\description{Insert animations into an HTML page.
+\description{
 This function first records all the plots in the R expression as
 bitmap images, then inserts them into an HTML page and finally
 create the animation using the SciAnimator library.}

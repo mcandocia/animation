@@ -1,10 +1,10 @@
 \name{ani.start}
 \alias{ani.start}
-\title{Start the generation of an HTML animation page.}
+\title{Start the generation of an HTML animation page}
 \usage{ani.start(...)
 
 }
-\description{Start the generation of an HTML animation page.
+\description{
 This function copies JavaScript file \file{FUN.js} and CSS file \file{ANI.css}
 to the same directory as the HTML animation page, create a directory
 \file{images} and open a graphics device in this directory (the device is

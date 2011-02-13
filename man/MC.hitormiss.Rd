@@ -1,13 +1,13 @@
 \name{MC.hitormiss}
 \alias{MC.hitormiss}
-\title{Hit or Miss Monte Carlo integration.}
+\title{Hit or Miss Monte Carlo integration}
 \usage{MC.hitormiss(FUN = function(x) x - x^2, n = ani.options("nmax"), 
     from = 0, to = 1, col.points = c("black", "red"), pch.points = c(20, 
         4), ...)
 
 }
 
-\description{Hit or Miss Monte Carlo integration.
+\description{
 Integrate a function using the Hit-or-Miss Monte Carlo algorithm}
 \details{We compute the proportion of points hitting the area under the
 curve, and the integral can be estimated by the proportion

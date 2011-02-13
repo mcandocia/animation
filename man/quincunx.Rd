@@ -1,13 +1,13 @@
 \name{quincunx}
 \alias{quincunx}
-\title{Demonstration of the Quincunx (Bean Machine/Galton Box).}
+\title{Demonstration of the Quincunx (Bean Machine/Galton Box)}
 \usage{quincunx(balls = 200, layers = 15, pch.layers = 2, 
     pch.balls = 19, col.balls = sample(colors(), balls, TRUE), 
     cex.balls = 2)
 
 }
 
-\description{Demonstration of the Quincunx (Bean Machine/Galton Box).
+\description{
 This function simulates the quincunx with ``balls'' (beans) falling through
 several layers (denoted by triangles) and the distribution of the final
 locations at which the balls hit is denoted by a histogram.}

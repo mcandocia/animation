@@ -1,6 +1,6 @@
 \name{grad.desc}
 \alias{grad.desc}
-\title{Gradient Descent Algorithm for the 2D case.}
+\title{Gradient Descent Algorithm for the 2D case}
 \usage{grad.desc(FUN = function(x, y) x^2 + 2 * y^2, rg = c(-3, 
     -3, 3, 3), init = c(-3, 3), gamma = 0.05, tol = 0.001, gr, 
     len = 50, interact = FALSE, col.contour = "red", col.arrow = "blue", 
@@ -9,7 +9,7 @@
 }
 
 
-\description{Gradient Descent Algorithm for the 2D case.
+\description{
 This function provids a visual illustration for the process of
 minimizing a real-valued function through Gradient Descent Algorithm.}
 \details{Gradient descent is an optimization algorithm. To find a local

@@ -1,6 +1,6 @@
 \name{least.squares}
 \alias{least.squares}
-\title{Demonstrate the least squares method.}
+\title{Demonstrate the least squares method}
 \usage{least.squares(x, y, n = 15, ani.type = c("slope", 
     "intercept"), a, b, a.range, b.range, ab.col = c("gray", 
     "black"), est.pch = 19, v.col = "red", v.lty = 2, rss.pch = 19, 
@@ -9,7 +9,7 @@
 }
 
 
-\description{Demonstrate the least squares method.
+\description{
 This is a simple demonstration of the meaning of least squares in
 univariate linear regression.}
 \details{With either the intercept or the slope changing, the lines will be

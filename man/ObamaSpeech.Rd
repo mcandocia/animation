@@ -1,9 +1,9 @@
 \name{ObamaSpeech}
 \alias{ObamaSpeech}
 \alias{ObamaSpeech}
-\title{Word counts of a speech by the US President Obama.}
+\title{Word counts of a speech by the US President Obama}
 \usage{data(ObamaSpeech)}
-\description{Word counts of a speech by the US President Obama.
+\description{
 This data recorded the number of words in each paragraph of Barack
 Obama's speech in Chicago after winning the presidential election.}
 \details{The format is: int [1:59] 2 45 52 53 11 48 28 15 50 29 ...

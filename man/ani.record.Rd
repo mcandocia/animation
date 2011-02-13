@@ -1,12 +1,12 @@
 \name{ani.record}
 \alias{ani.record}
-\title{Record and replay animations.}
+\title{Record and replay animations}
 \usage{ani.record(reset = FALSE, replay.cur = FALSE)
 ani.replay(list)
 
 }
 
-\description{Record and replay animations.
+\description{
 These two functions use \code{\link[grDevices]{recordPlot}} and
 \code{\link[grDevices]{replayPlot}} to record image frames and
 replay the animation respectively.}

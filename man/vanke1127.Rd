@@ -1,9 +1,9 @@
 \name{vanke1127}
 \alias{vanke1127}
 \alias{vanke1127}
-\title{Stock prices of Vanke Co.}
+\title{Stock prices of Vanke Co}
 \usage{data(vanke1127)}
-\description{Stock prices of Vanke Co., Ltd on 2009/11/27.
+\description{, Ltd on 2009/11/27.
 This is a sample of stock prices of the Vanke Co., Ltd on 2009/11/27.}
 \details{Format: a data frame with 2831 observations on the following 2 variables.
 \describe{ \item{time}{POSIXt: the time corresponding to stock

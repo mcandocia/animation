@@ -1,7 +1,7 @@
 \name{animation-defunct}
 \alias{animation-defunct}
 \alias{animation-defunct}
-\title{Defunct functions in the animation package.}
+\title{Defunct functions in the animation package}
 \description{Defunct functions in the animation package.}
 \details{\code{highlight.def} is irrelevant to animations and hence it is no longer
 in this package; the source code was moved to

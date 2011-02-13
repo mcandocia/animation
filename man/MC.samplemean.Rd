@@ -1,12 +1,12 @@
 \name{MC.samplemean}
 \alias{MC.samplemean}
-\title{Sample Mean Monte Carlo integration.}
+\title{Sample Mean Monte Carlo integration}
 \usage{MC.samplemean(FUN = function(x) x - x^2, n = ani.options("nmax"), 
     col.rect = c("gray", "black"), adj.x = TRUE, ...)
 
 }
 
-\description{Sample Mean Monte Carlo integration.
+\description{
 Integrate a function from 0 to 1 using the Sample Mean Monte Carlo
 algorithm}
 \details{\emph{Sample Mean Monte Carlo} integration can compute

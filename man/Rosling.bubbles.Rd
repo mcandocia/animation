@@ -1,6 +1,6 @@
 \name{Rosling.bubbles}
 \alias{Rosling.bubbles}
-\title{The bubbles animation in Hans Rosling's Talk.}
+\title{The bubbles animation in Hans Rosling's Talk}
 \usage{Rosling.bubbles(x, y, circles, squares, rectangles, 
     stars, thermometers, boxplots, inches = TRUE, fg = par("col"), 
     bg, xlab = "x", ylab = "y", main, xlim = range(x), ylim = range(y), 
@@ -11,7 +11,7 @@
 
 
 
-\description{The bubbles animation in Hans Rosling's Talk.
+\description{
 (``Debunking third-world myths with the best stats you've ever seen'')}
 \details{In Hans Rosling's attractive talk ``Debunking third-world myths
 with the best stats you've ever seen'', he used a lot of bubble

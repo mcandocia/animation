@@ -1,6 +1,6 @@
 \name{newton.method}
 \alias{newton.method}
-\title{Demonstration of the Newton-Raphson method for root-finding.}
+\title{Demonstration of the Newton-Raphson method for root-finding}
 \usage{newton.method(FUN = function(x) x^2 - 4, init = 10, 
     rg = c(-1, 10), tol = 0.001, interact = FALSE, col.lp = c("blue", 
         "red", "red"), main, xlab, ylab, ...)
@@ -8,7 +8,7 @@
 }
 
 
-\description{Demonstration of the Newton-Raphson method for root-finding.
+\description{
 This function provides an illustration of the iterations in Newton's
 method.}
 \details{Newton's method (also known as the Newton-Raphson method or the

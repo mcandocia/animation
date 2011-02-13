@@ -1,12 +1,12 @@
 \name{sample.cluster}
 \alias{sample.cluster}
-\title{Demonstration for the cluster sampling.}
+\title{Demonstration for the cluster sampling}
 \usage{sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), 
     size = 3, p.col = c("blue", "red"), p.cex = c(1, 3), ...)
 
 }
 
-\description{Demonstration for the cluster sampling.
+\description{
 Each rectangle stands for a cluster, and the simple random sampling
 without replacement is performed for each cluster. All points in the
 clusters being sampled will be drawn out.}

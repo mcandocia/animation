@@ -1,6 +1,6 @@
 \name{boot.iid}
 \alias{boot.iid}
-\title{Demonstrate bootstrapping for iid data.}
+\title{Demonstrate bootstrapping for iid data}
 \usage{boot.iid(x = runif(20), statistic = mean, m = length(x), 
     mat = matrix(1:2, 2), widths = rep(1, ncol(mat)), heights = rep(1, 
         nrow(mat)), col = c("black", "red", "bisque", "red", 
@@ -9,7 +9,7 @@
 }
 
 
-\description{Demonstrate bootstrapping for iid data.
+\description{
 Use a sunflower scatter plot to illustrate the results of
 resampling, and a histogram to show the distribution of the
 statistic of interest.}

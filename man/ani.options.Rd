@@ -1,10 +1,10 @@
 \name{ani.options}
 \alias{ani.options}
-\title{Set or query animation options.}
+\title{Set or query animation options}
 \usage{ani.options(...)
 
 }
-\description{Set or query animation options.
+\description{
 There are various parameters that control the behaviour of the
 animation, such as time interval, maximum number of animation frames,
 height and width, etc.}

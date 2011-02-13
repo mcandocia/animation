@@ -1,13 +1,13 @@
 \name{kmeans.ani}
 \alias{kmeans.ani}
-\title{Demonstration of the k-Means clustering algorithm.}
+\title{Demonstration of the k-Means clustering algorithm}
 \usage{kmeans.ani(x = cbind(X1 = runif(50), X2 = runif(50)), 
     centers = 3, pch = 1:3, col = 1:3, hints = c("Move centers!", 
         "Find cluster?"))
 
 }
 
-\description{Demonstration of the k-Means clustering algorithm.
+\description{
 This function provides a demo of the k-Means cluster algorithm for data
 containing only two variables (columns).}
 \details{The k-Means cluster algorithm may be regarded as a series of iterations of:

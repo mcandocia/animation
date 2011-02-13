@@ -1,7 +1,7 @@
 \name{ani.pause}
 \alias{ani.pause}
-\title{Pause for a while.}
-\description{Pause for a while.
+\title{Pause for a while}
+\description{
 If this function is called in an interactive graphics device, it will
 pause for a time interval (specified in \code{ani.options('interval')});
 otherwise it will do nothing.}

@@ -1,13 +1,13 @@
 \name{mwar.ani}
 \alias{mwar.ani}
-\title{Demonstration for ``Moving Window Auto-Regression''.}
+\title{Demonstration for ``Moving Window Auto-Regression''}
 \usage{mwar.ani(x, k = 15, conf = 2, mat = matrix(1:2, 2), 
     widths = rep(1, ncol(mat)), heights = rep(1, nrow(mat)), 
     lty.rect = 2, ...)
 
 }
 
-\description{Demonstration for ``Moving Window Auto-Regression''.
+\description{
 This function just fulfills a very naive idea about moving window
 regression using rectangles to denote the ``windows'' and move them, and
 the corresponding AR(1) coefficients as long as rough confidence intervals

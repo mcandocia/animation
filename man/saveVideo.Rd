@@ -1,12 +1,12 @@
 \name{saveVideo}
 \alias{saveVideo}
-\title{Convert a sequence of images to a video by FFmpeg.}
+\title{Convert a sequence of images to a video by FFmpeg}
 \usage{saveVideo(expr, video.name = "animation.mp4", img.name = "Rplot", 
     ffmpeg = "ffmpeg", other.opts = "", clean = FALSE, ...)
 
 }
 
-\description{Convert a sequence of images to a video by FFmpeg.
+\description{
 This function opens a graphics device to record the images
 produced in the code \code{expr}, then uses FFmpeg to convert
 these images to a video.}

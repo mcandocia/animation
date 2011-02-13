@@ -1,12 +1,12 @@
 \name{flip.coin}
 \alias{flip.coin}
-\title{Probability in flipping coins.}
+\title{Probability in flipping coins}
 \usage{flip.coin(faces = 2, prob, border = "white", grid = "white", 
     col = 1:2, type = "p", pch = 21, bg = "transparent", digits = 3)
 
 }
 
-\description{Probability in flipping coins.
+\description{
 This function provides a simulation to the process of flipping coins and
 computes the frequencies for `heads' and `tails'.}
 \details{If \code{faces} is a single integer, say 2, a sequence of integers from 1

@@ -1,6 +1,6 @@
 \name{knn.ani}
 \alias{knn.ani}
-\title{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane.}
+\title{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane}
 \usage{knn.ani(train, test, cl, k = 10, interact = FALSE, 
     tt.col = c("blue", "red"), cl.pch = seq_along(unique(cl)), 
     dist.lty = 2, dist.col = "gray", knn.col = "green", ...)

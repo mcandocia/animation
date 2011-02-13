@@ -1,12 +1,12 @@
 \name{saveGIF}
 \alias{saveGIF}
-\title{Convert images to a single animation file (typically GIF) using ImageMagick or GraphicsMagick.}
+\title{Convert images to a single animation file (typically GIF) using ImageMagick or GraphicsMagick}
 \usage{saveGIF(expr, movie.name = "animation.gif", img.name = "Rplot", 
     convert = "convert", cmd.fun = system, clean = TRUE, ...)
 
 }
 
-\description{Convert images to a single animation file (typically GIF) using ImageMagick or GraphicsMagick.
+\description{
 This function opens a graphical device (specified in \code{ani.options('ani.dev')})
 first to generate a sequence of images based on \code{expr}, then makes use
 of the command \command{convert} in `ImageMagick' to convert these images to

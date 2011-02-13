@@ -1,10 +1,10 @@
 \name{sim.qqnorm}
 \alias{sim.qqnorm}
-\title{Simulation of QQ plots for the Normal distribution.}
-\usage{sim.qqnorm(n = 20, ...)
+\title{Simulation of QQ plots for the Normal distribution}
+\usage{sim.qqnorm(n = 20, last.plot, ...)
 
 }
-\description{Simulation of QQ plots for the Normal distribution.
+\description{
 This demo shows the possible QQ plots created by random numbers generated
 from a Normal distribution so that users can get a rough idea about how QQ
 plots really look like.}
@@ -19,13 +19,17 @@ the straight line. Therefore, don't overinterpret the QQ plots.}
 \keyword{distribution}
 \keyword{dplot}
 \arguments{\item{n}{integer: sample size}
-\item{\dots}{other arguments passed to \code{\link[stats]{qqnorm}}}
+\item{last.plot}{an expression to be evaluated after the plot is
+drawn, e.g. \code{expression(abline(0, 1))} to add the diagonal
+line}
+\item{...}{other arguments passed to \code{\link[stats]{qqnorm}}}
 }
 \examples{oopt = ani.options(interval = 0.1, nmax = ifelse(interactive(), 
     100, 2))
 par(mar = c(3, 3, 2, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
 
-sim.qqnorm()
+sim.qqnorm(n = 20, last.plot = expression(abline(0, 
+    1)))
 
 ## HTML animation pages
 saveHTML({

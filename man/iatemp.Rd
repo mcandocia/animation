@@ -1,7 +1,7 @@
 \name{iatemp}
 \alias{iatemp}
 \alias{iatemp}
-\title{Average yearly temperatures in central Iowa.}
+\title{Average yearly temperatures in central Iowa}
 \usage{data(iatemp)}
 \description{Average yearly temperatures in central Iowa.}
 \details{The format is:

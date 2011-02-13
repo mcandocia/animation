@@ -1,7 +1,7 @@
 \name{ani.stop}
 \alias{ani.stop}
-\title{Write the HTML animation page.}
-\description{Write the HTML animation page.
+\title{Write the HTML animation page}
+\description{
 And restore previous options such as \code{prompt}; then close the graphical
 device opened in \code{\link{ani.start}}.}
 \value{None (invisible \code{NULL}); a string will be printed in the

@@ -1,11 +1,11 @@
 \name{saveSWF}
 \alias{saveSWF}
-\title{Convert images to Flash animations.}
+\title{Convert images to Flash animations}
 \usage{saveSWF(expr, swf.name = "animation.swf", img.name = "Rplot", 
     swftools, ...)
 
 }
-\description{Convert images to Flash animations.
+\description{
 This function opens a graphical device first to generate a
 sequence of images based on \code{expr}, then makes use of the
 commands in `SWF Tools' (\command{png2swf}, \command{jpeg2swf},

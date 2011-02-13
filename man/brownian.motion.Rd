@@ -1,6 +1,6 @@
 \name{brownian.motion}
 \alias{brownian.motion}
-\title{Demonstration of Brownian motion on the 2D plane.}
+\title{Demonstration of Brownian motion on the 2D plane}
 \usage{brownian.motion(n = 10, xlim = c(-20, 20), ylim = c(-20, 
     20), ...)
 

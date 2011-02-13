@@ -1,9 +1,9 @@
 \name{HuSpeech}
 \alias{HuSpeech}
 \alias{HuSpeech}
-\title{Word counts of a speech by the Chinese President Hu.}
+\title{Word counts of a speech by the Chinese President Hu}
 \usage{data(HuSpeech)}
-\description{Word counts of a speech by the Chinese President Hu.
+\description{
 This speech came on the 30th anniversary of China's economic
 reform in 1978.}
 \details{On Dec 18, 2008, Chinese President Hu gave a speech on the 30th

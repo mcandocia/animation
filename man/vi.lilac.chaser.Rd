@@ -1,11 +1,11 @@
 \name{vi.lilac.chaser}
 \alias{vi.lilac.chaser}
-\title{Visual Illusions: Lilac Chaser.}
+\title{Visual Illusions: Lilac Chaser}
 \usage{vi.lilac.chaser(np = 16, col = "magenta", bg = "gray", 
     p.cex = 7, c.cex = 5)
 
 }
-\description{Visual Illusions: Lilac Chaser.
+\description{
 Stare at the center cross for a few (say 30) seconds to experience the
 phenomena of the illusion.}
 \details{Just try it out.}

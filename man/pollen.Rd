@@ -1,9 +1,9 @@
 \name{pollen}
 \alias{pollen}
 \alias{pollen}
-\title{Synthetic dataset about the geometric features of pollen grains.}
+\title{Synthetic dataset about the geometric features of pollen grains}
 \usage{data(pollen)}
-\description{Synthetic dataset about the geometric features of pollen grains.
+\description{
 There are 3848 observations on 5 variables. From the 1986 ASA Data
 Exposition dataset, made up by David Coleman of RCA Labs.}
 \details{Format: a data frame with 3848 observations on the following 5

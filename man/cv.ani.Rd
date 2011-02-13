@@ -1,11 +1,11 @@
 \name{cv.ani}
 \alias{cv.ani}
-\title{Demonstration for the process of cross-validation.}
+\title{Demonstration for the process of cross-validation}
 \usage{cv.ani(x = runif(150), k = 10, col = c("green", "red", 
     "blue"), pch = c(4, 1), ...)
 
 }
-\description{Demonstration for the process of cross-validation.
+\description{
 This function uses rectangles to illustrate the \eqn{k} folds and
 mark the test set and the training set with different colors.}
 \details{Briefly speaking, the process of cross-validation is just to split

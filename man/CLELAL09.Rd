@@ -1,7 +1,7 @@
 \name{CLELAL09}
 \alias{CLELAL09}
 \alias{CLELAL09}
-\title{The NBA game between CLE Cavaliers and LAL Lakers on Dec 25, 2009.}
+\title{The NBA game between CLE Cavaliers and LAL Lakers on Dec 25, 2009}
 \usage{data(CLELAL09)}
 \description{The NBA game between CLE Cavaliers and LAL Lakers on Dec 25, 2009.}
 \details{Cleveland Cavaliers played against Los Angeles Lakers at Staples

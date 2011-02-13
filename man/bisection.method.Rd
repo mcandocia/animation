@@ -1,12 +1,12 @@
 \name{bisection.method}
 \alias{bisection.method}
-\title{Demonstration of the Bisection Method for root-finding on an interval.}
+\title{Demonstration of the Bisection Method for root-finding on an interval}
 \usage{bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 
     10), tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
 
 }
 
-\description{Demonstration of the Bisection Method for root-finding on an interval.
+\description{
 This is a visual demonstration of finding the root of an equation \eqn{f(x) = 0} on
 an interval using the Bisection Method.}
 \details{Suppose we want to solve the equation \eqn{f(x) = 0}. Given two points a

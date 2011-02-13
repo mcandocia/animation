@@ -1,6 +1,6 @@
 \name{sample.system}
 \alias{sample.system}
-\title{Demonstration for the systematic sampling.}
+\title{Demonstration for the systematic sampling}
 \usage{sample.system(nrow = 10, ncol = 10, size = 15, p.col = c("blue", 
     "red"), p.cex = c(1, 3))
 

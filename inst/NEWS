@@ -1,3 +1,34 @@
+		  CHANGES IN animation VERSION 2.0-3
+
+
+NEW FEATURES
+
+    o sim.qqnorm() gained a new argument 'last.plot' to do something
+  after drawing the QQ plot, e.g. add a diagonal line (abline(0, 1))
+
+
+MINOR CHANGES
+
+    o for saveLatex(): when full.path = TRUE, \ will be replaced with
+  / in the file path so that LaTeX can really find the animation file
+  under Windows
+
+    o ani.options() will perform a simple check on the validity of the
+  options and issue warnings if the device and the file extension do
+  not match, or the width and height for the pdf() device are greater
+  than 100 inches
+
+
+TO APPEAR
+
+    o A function boot.loess() added to show the bootstrapping effects
+  on loess().
+
+    o A function cart.ani() to show the splitting process of
+  classification and regression trees.
+
+
+  
 		  CHANGES IN animation VERSION 2.0-2
 
 
@@ -62,15 +93,6 @@ BUG FIXES
     o use packageDescription() instead of packageVersion() in
   saveHTML() and ani.stop() because there is a weird error reported
   when using packageVersion() (thanks, Alex Tek)
-
-
-TO APPEAR
-
-    o A function boot.loess() added to show the bootstrapping effects
-  on loess().
-
-    o A function cart.ani() to show the splitting process of
-  classification and regression trees.
 
 
 

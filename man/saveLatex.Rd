@@ -1,6 +1,6 @@
 \name{saveLatex}
 \alias{saveLatex}
-\title{Insert animations into a LaTeX document and compile it.}
+\title{Insert animations into a LaTeX document and compile it}
 \usage{saveLatex(expr, nmax, img.name = "Rplot", ani.opts, 
     centering = TRUE, caption, label, pkg.opts, documentclass = "article", 
     latex.filename = "animation.tex", pdflatex = "pdflatex", 
@@ -11,7 +11,7 @@
 
 
 
-\description{Insert animations into a LaTeX document and compile it.
+\description{
 Record animation frames and insert them into a LaTeX document with the
 \code{animate} package. Compile the document if an appropriate LaTeX
 command is provided.}
@@ -100,7 +100,8 @@ package \code{animate}, it suffices just to copy these to files.}
 relative path (\code{FALSE}) for the animation frames; usually the
 relative path suffices, but sometimes the images and the LaTeX
 document might not be in the same directory, so \code{full.path =
-TRUE} could be useful}
+TRUE} could be useful; in the latter case, remember that you
+should never use spaces in the filenames or paths!}
 \item{...}{other arguments passed to the graphics device
 \code{ani.options('ani.dev')}, e.g. \code{ani.height}
 and \code{ani.width}}

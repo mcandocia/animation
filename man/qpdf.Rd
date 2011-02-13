@@ -1,10 +1,10 @@
 \name{qpdf}
 \alias{qpdf}
-\title{A wrapper for the PDF toolkit qpdf.}
+\title{A wrapper for the PDF toolkit qpdf}
 \usage{qpdf(input, output, options = "--stream-data=compress")
 
 }
-\description{A wrapper for the PDF toolkit qpdf.
+\description{
 If the tool qpdf is available in the system, it will be called
 to manipulate the PDF files (especially to compress the PDF
 files).}

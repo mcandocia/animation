@@ -1,6 +1,6 @@
 \name{buffon.needle}
 \alias{buffon.needle}
-\title{Simulation of Buffon's Needle.}
+\title{Simulation of Buffon's Needle}
 \usage{buffon.needle(l = 0.8, d = 1, redraw = TRUE, mat = matrix(c(1, 
     3, 2, 3), 2), heights = c(3, 2), col = c("lightgray", "red", 
     "gray", "red", "blue", "black", "red"), expand = 0.4, type = "l", 
@@ -9,7 +9,7 @@
 }
 
 
-\description{Simulation of Buffon's Needle.
+\description{
 This function provides a simulation for the problem of Buffon's Needle,
 which is one of the oldest problems in the field of geometrical
 probability.}

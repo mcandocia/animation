@@ -1,10 +1,10 @@
 \name{BM.circle}
 \alias{BM.circle}
-\title{Brownian Motion in a circle.}
+\title{Brownian Motion in a circle}
 \usage{BM.circle(n = 20, col = rainbow(n), ...)
 
 }
-\description{Brownian Motion in a circle.
+\description{
 Several points moving randomly in a circle.}
 \details{This is a solution to the question raised in R-help:
 \url{https://stat.ethz.ch/pipermail/r-help/2008-December/183018.html}.}

@@ -1,10 +1,10 @@
 \name{kfcv}
 \alias{kfcv}
-\title{Sample sizes for k-fold cross-validation.}
+\title{Sample sizes for k-fold cross-validation}
 \usage{kfcv(k, N)
 
 }
-\description{Sample sizes for k-fold cross-validation.
+\description{
 Compute sample sizes for \eqn{k}-fold cross-validation.}
 \details{If N/k is an integer, the sample sizes are k `N/k's (N/k, N/k, ...),
 otherwise the remainder will be allocated to each group as `uniformly' as

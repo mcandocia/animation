@@ -1,6 +1,6 @@
 \name{convert}
 \alias{im.convert}
-\title{A wrapper for the `convert' utility of ImageMagick or GraphicsMagick.}
+\title{A wrapper for the `convert' utility of ImageMagick or GraphicsMagick}
 \usage{im.convert(files, output = "animation.gif", convert = c("convert", 
     "gm convert"), cmd.fun = system, extra.opts = "", clean = FALSE)
 gm.convert(..., convert = "gm convert")
@@ -8,7 +8,7 @@ gm.convert(..., convert = "gm convert")
 }
 
 
-\description{A wrapper for the `convert' utility of ImageMagick or GraphicsMagick.
+\description{
 The main purpose of these two functions is to create GIF animations.}
 \details{\code{im.convert}: the function \code{im.convert} simply wraps the arguments of the
 \command{convert} utility of ImageMagick to make it easier to call

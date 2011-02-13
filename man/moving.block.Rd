@@ -1,10 +1,10 @@
 \name{moving.block}
 \alias{moving.block}
-\title{Cycle through an R object and plot each subset of elements.}
+\title{Cycle through an R object and plot each subset of elements}
 \usage{moving.block(dat = runif(100), block, FUN, ...)
 
 }
-\description{Cycle through an R object and plot each subset of elements.
+\description{
 For a long numeric vector or matrix (or data frame), we can plot only a
 subset of its elements to take a closer look at its structure. With a
 moving ``block'' from the beginning to the end of a vector or matrix or any

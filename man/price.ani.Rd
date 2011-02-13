@@ -1,13 +1,13 @@
 \name{price.ani}
 \alias{price.ani}
-\title{Demonstrate stock prices in animations.}
+\title{Demonstrate stock prices in animations}
 \usage{price.ani(price, time, time.begin = min(time), span = 15 * 
     60, ..., xlab = "price", ylab = "frequency", xlim, ylim, 
     main)
 
 }
 
-\description{Demonstrate stock prices in animations.
+\description{
 This function can display the frequencies of stock prices in a certain time
 span with the span changing.}
 \value{invisible \code{NULL}}
