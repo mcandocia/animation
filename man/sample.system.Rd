@@ -24,16 +24,14 @@ are marked by red circles.}
 \item{p.col,p.cex}{different colors / magnification rate to
 annotate the population and the sample}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
-    2))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
 par(mar = rep(1, 4), lwd = 2)
 
 sample.system()
 
 ## HTML animation pages
 saveHTML({
-    ani.options(interval = 1, nmax = ifelse(interactive(), 30, 
-        2))
+    ani.options(interval = 1, nmax = ifelse(interactive(), 30, 2))
     par(mar = rep(1, 4), lwd = 2)
     sample.system()
 }, img.name = "sample.system", htmlfile = "sample.html", ani.height = 350, 

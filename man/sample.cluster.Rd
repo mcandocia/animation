@@ -1,8 +1,8 @@
 \name{sample.cluster}
 \alias{sample.cluster}
 \title{Demonstration for the cluster sampling}
-\usage{sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), 
-    size = 3, p.col = c("blue", "red"), p.cex = c(1, 3), ...)
+\usage{sample.cluster(pop = ceiling(10 * runif(10, 0.2, 1)), size = 3, 
+    p.col = c("blue", "red"), p.cex = c(1, 3), ...)
 
 }
 
@@ -26,8 +26,7 @@ annotate the population and the sample}
 \item{\dots}{other arguments passed to
 \code{\link[graphics]{rect}} to annotate the ``clusters''}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
-    2))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
 par(mar = rep(1, 4))
 sample.cluster(col = c("bisque", "white"))
 

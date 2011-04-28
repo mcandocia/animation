@@ -75,9 +75,12 @@ saveSWF = function(expr, swf.name = "animation.swf", img.name = "Rplot",
     }
     interval = ani.options('interval')
     if (is.character(ani.dev)) ani.dev = get(ani.dev)
-    num = ifelse(ani.options('ani.type') == 'pdf', '', '%d')
+    digits = ceiling(log10(ani.options("nmax"))) + 2
+    num = ifelse(ani.options("ani.type") == "pdf", "", paste("%0", digits, "d", sep = ""))
     img.fmt = paste(img.name, num, ".", file.ext, sep = "")
     img.fmt = file.path(tempdir(), img.fmt)
+    ## remove existing image files first
+    unlink(file.path(tempdir(), paste(img.name, '*.', file.ext, sep = '')))
     ani.options(img.fmt = img.fmt)
     if ((use.dev <- ani.options('use.dev')))
         ani.dev(img.fmt, width = ani.options('ani.width'),
@@ -115,23 +118,24 @@ saveSWF = function(expr, swf.name = "animation.swf", img.name = "Rplot",
         }
     }
     tool = shQuote(tool)
-    version = try(system(paste(tool, '--version'), intern = TRUE))
+    version = try(system(paste(tool, '--version'), intern = TRUE,
+                         ignore.stdout = !interactive(), ignore.stderr = !interactive()))
     if (inherits(version, 'try-error') || !length(grep('swftools', version))) {
         warning('The command ', tool, ' is not available. Please install: http://www.swftools.org')
         return()
     }
-    wildcard = paste(img.name, "*.", file.ext, sep = "")
+    wildcard = paste(shQuote(list.files(tempdir(), paste(img.name, ".*\\.", file.ext, sep = ""),
+                                        full.names = TRUE)), collapse = ' ')
     convert = paste(tool, wildcard, "-o", swf.name)
     cmd = -1
     if (file.ext == "png" || file.ext == "jpeg") {
         convert = paste(convert, "-r", 1/interval)
         message("Executing: ", convert)
-        cmd = system(convert)
-    }
-    else {
+        cmd = system(convert, ignore.stdout = !interactive(), ignore.stderr = !interactive())
+    } else {
         convert = paste(convert, " -s framerate=", 1/interval, sep = "")
         message("Executing: ", convert)
-        cmd = system(convert)
+        cmd = system(convert, ignore.stdout = !interactive(), ignore.stderr = !interactive())
     }
     if (cmd == 0) {
         message("\n\nFlash has been created at: ",

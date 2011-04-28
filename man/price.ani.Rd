@@ -2,8 +2,7 @@
 \alias{price.ani}
 \title{Demonstrate stock prices in animations}
 \usage{price.ani(price, time, time.begin = min(time), span = 15 * 
-    60, ..., xlab = "price", ylab = "frequency", xlim, ylim, 
-    main)
+    60, ..., xlab = "price", ylab = "frequency", xlim, ylim, main)
 
 }
 

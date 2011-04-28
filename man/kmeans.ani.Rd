@@ -1,9 +1,8 @@
 \name{kmeans.ani}
 \alias{kmeans.ani}
 \title{Demonstration of the k-Means clustering algorithm}
-\usage{kmeans.ani(x = cbind(X1 = runif(50), X2 = runif(50)), 
-    centers = 3, pch = 1:3, col = 1:3, hints = c("Move centers!", 
-        "Find cluster?"))
+\usage{kmeans.ani(x = cbind(X1 = runif(50), X2 = runif(50)), centers = 3, 
+    pch = 1:3, col = 1:3, hints = c("Move centers!", "Find cluster?"))
 
 }
 
@@ -58,8 +57,8 @@ par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0))
 kmeans.ani()
 
 ## the kmeans() example; very fast to converge!
-x = rbind(matrix(rnorm(100, sd = 0.3), ncol = 2), 
-    matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+x = rbind(matrix(rnorm(100, sd = 0.3), ncol = 2), matrix(rnorm(100, 
+    mean = 1, sd = 0.3), ncol = 2))
 colnames(x) = c("x", "y")
 kmeans.ani(x, centers = 2)
 

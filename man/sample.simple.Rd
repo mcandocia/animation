@@ -24,8 +24,7 @@ population has an equal and known chance of being selected.}
 \item{p.col,p.cex}{different colors /magnification rate to
 annotate the population and the sample}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
-    2))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
 par(mar = rep(1, 4))
 sample.simple()
 

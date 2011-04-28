@@ -1,9 +1,9 @@
 \name{knn.ani}
 \alias{knn.ani}
 \title{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane}
-\usage{knn.ani(train, test, cl, k = 10, interact = FALSE, 
-    tt.col = c("blue", "red"), cl.pch = seq_along(unique(cl)), 
-    dist.lty = 2, dist.col = "gray", knn.col = "green", ...)
+\usage{knn.ani(train, test, cl, k = 10, interact = FALSE, tt.col = c("blue", 
+    "red"), cl.pch = seq_along(unique(cl)), dist.lty = 2, dist.col = "gray", 
+    knn.col = "green", ...)
 
 }
 
@@ -71,17 +71,16 @@ oopt = ani.options(interval = 2, nmax = ifelse(interactive(),
 x = matrix(c(rnorm(80, mean = -1), rnorm(80, mean = 1)), 
     ncol = 2, byrow = TRUE)
 y = matrix(rnorm(20, mean = 0, sd = 1.2), ncol = 2)
-knn.ani(train = x, test = y, cl = rep(c("first class", 
-    "second class"), each = 40), k = 30)
+knn.ani(train = x, test = y, cl = rep(c("first class", "second class"), 
+    each = 40), k = 30)
 
-x = matrix(c(rnorm(30, mean = -2), rnorm(30, mean = 2), 
-    rnorm(30, mean = 0)), ncol = 2, byrow = TRUE)
+x = matrix(c(rnorm(30, mean = -2), rnorm(30, mean = 2), rnorm(30, 
+    mean = 0)), ncol = 2, byrow = TRUE)
 y = matrix(rnorm(20, sd = 2), ncol = 2)
 knn.ani(train = x, test = y, cl = rep(c("first", "second", 
     "third"), each = 15), k = 25, cl.pch = c(2, 3, 19), dist.lty = 3)
 
-## an interactive demo: choose the test set by
-#   mouse-clicking
+## an interactive demo: choose the test set by mouse-clicking
 if (interactive()) {
     ani.options(nmax = 5)
     knn.ani(interact = TRUE)

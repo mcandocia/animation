@@ -1,8 +1,8 @@
 \name{vi.lilac.chaser}
 \alias{vi.lilac.chaser}
 \title{Visual Illusions: Lilac Chaser}
-\usage{vi.lilac.chaser(np = 16, col = "magenta", bg = "gray", 
-    p.cex = 7, c.cex = 5)
+\usage{vi.lilac.chaser(np = 16, col = "magenta", bg = "gray", p.cex = 7, 
+    c.cex = 5)
 
 }
 \description{

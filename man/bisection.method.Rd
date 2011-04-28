@@ -1,8 +1,8 @@
 \name{bisection.method}
 \alias{bisection.method}
 \title{Demonstration of the Bisection Method for root-finding on an interval}
-\usage{bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 
-    10), tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
+\usage{bisection.method(FUN = function(x) x^2 - 4, rg = c(-1, 10), 
+    tol = 0.001, interact = FALSE, main, xlab, ylab, ...)
 
 }
 
@@ -47,8 +47,7 @@ curve (for two times) directly?}
 \item{xlab,ylab,main}{axis and main titles to be used in the plot}
 \item{\dots}{other arguments passed to \code{\link[graphics]{curve}}}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 30, 
-    2))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 30, 2))
 
 ## default example
 xx = bisection.method()
