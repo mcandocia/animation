@@ -47,7 +47,8 @@ conf.int(0.9, main = "Demonstration of Confidence Intervals")
 
 ## save the animation in HTML pages
 saveHTML({
-    ani.options(interval = 0.15, nmax = ifelse(interactive(), 100, 10))
+    ani.options(interval = 0.15, nmax = ifelse(interactive(), 
+        100, 10))
     par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
     conf.int()
 }, img.name = "conf.int", htmlfile = "conf.int.html", ani.height = 400, 

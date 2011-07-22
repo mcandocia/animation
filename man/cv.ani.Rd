@@ -1,8 +1,8 @@
 \name{cv.ani}
 \alias{cv.ani}
 \title{Demonstration for the process of cross-validation}
-\usage{cv.ani(x = runif(150), k = 10, col = c("green", "red", "blue"), 
-    pch = c(4, 1), ...)
+\usage{cv.ani(x = runif(150), k = 10, col = c("green", "red", 
+    "blue"), pch = c(4, 1), ...)
 
 }
 \description{

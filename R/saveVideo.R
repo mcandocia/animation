@@ -41,8 +41,7 @@
 ##'
 ##' @examples
 ##' oopts = ani.options(ffmpeg = 'D:/Installer/ffmpeg/bin/ffmpeg.exe')
-##' ## usually Linux users do not need to worry about the path
-##' #   as long as FFmpeg has been installed
+##' ## usually Linux users do not need to worry about the path as long as FFmpeg has been installed
 ##' if (.Platform$OS.type != 'windows') ani.options(ffmpeg = 'ffmpeg')
 ##'
 ##' saveVideo({
@@ -68,15 +67,11 @@ saveVideo = function(expr, video.name = 'animation.mp4', img.name = 'Rplot',
     if (!grepl('^["\']', ffmpeg)) ffmpeg = shQuote(ffmpeg)
 
     version = try(system(paste(ffmpeg, '-version'), intern = TRUE,
-                         ignore.stdout = !interactive(), ignore.stderr = !interactive()))
+                         ignore.stdout = .ani.env$check, ignore.stderr = .ani.env$check))
     if (inherits(version, 'try-error')) {
         warning('The command "', ffmpeg, '" is not available in your system. Please install FFmpeg first: ',
                 ifelse(.Platform$OS.type == 'windows', 'http://ffmpeg.arrozcru.org/autobuilds/',
                        'http://ffmpeg.org/download.html'))
-        return()
-    }
-    if (!length(grep('FFmpeg', version))) {
-        warning("FFmpeg not found; please install it first: http://ffmpeg.org")
         return()
     }
 
@@ -100,7 +95,7 @@ saveVideo = function(expr, video.name = 'animation.mp4', img.name = 'Rplot',
     ## call FFmpeg
     ffmpeg = paste(ffmpeg, "-y", "-r", 1/ani.options('interval'), "-i", img.fmt, other.opts, video.name)
     message("Executing: ", ffmpeg)
-    cmd = system(ffmpeg, ignore.stdout = !interactive(), ignore.stderr = !interactive())
+    cmd = system(ffmpeg, ignore.stdout = .ani.env$check, ignore.stderr = .ani.env$check)
 
     if (clean) {
         unlink(file.path(tempdir(), paste(img.name, "*.", file.ext, sep = "")))

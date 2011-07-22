@@ -3,8 +3,8 @@
 \title{Demonstrate bootstrapping for iid data}
 \usage{boot.iid(x = runif(20), statistic = mean, m = length(x), 
     mat = matrix(1:2, 2), widths = rep(1, ncol(mat)), heights = rep(1, 
-        nrow(mat)), col = c("black", "red", "bisque", "red", "gray"), 
-    cex = c(1.5, 0.8), main, ...)
+        nrow(mat)), col = c("black", "red", "bisque", "red", 
+        "gray"), cex = c(1.5, 0.8), main, ...)
 
 }
 
@@ -59,7 +59,8 @@ two graphs.}
 \examples{## bootstrap for 20 random numbers from U(0, 1)
 par(mar = c(1.5, 3, 1, 0.1), cex.lab = 0.8, cex.axis = 0.8, 
     mgp = c(2, 0.5, 0), tcl = -0.3)
-oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
+oopt = ani.options(nmax = ifelse(interactive(), 50, 
+    2))
 ## don't want the titles
 boot.iid(main = c("", ""))
 
@@ -77,7 +78,8 @@ saveHTML({
     ani.options(nmax = ifelse(interactive(), 50, 10))
     boot.iid(main = c("", ""), heights = c(1, 2))
 }, img.name = "boot.iid", htmlfile = "boot.iid.html", ani.height = 500, 
-    ani.width = 600, title = "Bootstrapping the i.i.d data", description = c("This is a naive version of bootstrapping but", 
+    ani.width = 600, title = "Bootstrapping the i.i.d data", 
+    description = c("This is a naive version of bootstrapping but", 
         "may be useful for novices."))
 
 ani.options(oopt)}

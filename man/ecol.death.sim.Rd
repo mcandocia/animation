@@ -1,8 +1,9 @@
 \name{ecol.death.sim}
 \alias{ecol.death.sim}
 \title{A simulation of the death of two species with certain probabilities}
-\usage{ecol.death.sim(nr = 10, nc = 10, num.sp = c(50, 50), col.sp = c(1, 
-    2), pch.sp = c(1, 2), col.die = 1, pch.die = 4, cex = 3, ...)
+\usage{ecol.death.sim(nr = 10, nc = 10, num.sp = c(50, 50), 
+    col.sp = c(1, 2), pch.sp = c(1, 2), col.die = 1, pch.die = 4, 
+    cex = 3, ...)
 
 }
 
@@ -33,12 +34,14 @@ annotate the plant which dies (symbol default to be an `X')}
 \item{\dots}{other arguments passed to \code{\link[graphics]{plot}} to set
 up the plot}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 2), interval = 0.3)
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
+    2), interval = 0.3)
 par(ann = FALSE, mar = rep(0, 4))
 ecol.death.sim()
 
 ## large scale simulation
-ani.options(nmax = ifelse(interactive(), 1000, 2), interval = 0.02)
+ani.options(nmax = ifelse(interactive(), 1000, 2), 
+    interval = 0.02)
 ecol.death.sim(col.sp = c(8, 2), pch.sp = c(20, 17))
 
 ani.options(oopt)}

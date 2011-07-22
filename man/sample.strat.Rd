@@ -1,11 +1,12 @@
 \name{sample.strat}
 \alias{sample.strat}
 \title{Demonstration for the stratified sampling}
-\usage{sample.strat(pop = ceiling(10 * runif(10, 0.5, 1)), size = ceiling(pop * 
-    runif(length(pop), 0, 0.5)), p.col = c("blue", "red"), p.cex = c(1, 
-    3), ...)
+\usage{sample.strat(pop = ceiling(10 * runif(10, 0.5, 1)), 
+    size = ceiling(pop * runif(length(pop), 0, 0.5)), p.col = c("blue", 
+        "red"), p.cex = c(1, 3), ...)
 
 }
+
 
 \description{Demonstration for the stratified sampling.}
 \details{Each rectangle stands for a stratum, and the simple random sampling
@@ -27,7 +28,8 @@ population and the sample}
 \item{\dots}{other arguments passed to \code{\link[graphics]{rect}} to
 annotate the ``strata''}
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 2))
+\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
+    2))
 par(mar = rep(1, 4), lwd = 2)
 
 sample.strat(col = c("bisque", "white"))

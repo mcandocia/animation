@@ -19,12 +19,13 @@ Description: This package contains various functions for animations in
         saveHTML(), saveLatex(), and saveVideo() respectively). PDF
         animations can be inserted into Sweave easily.
 SystemRequirements: ImageMagick (http://imagemagick.org) or
-        GraphicsMagick (http://www.graphicsmagick.org) for saveGIF();
-        (PDF)LaTeX for saveLatex(); SWF Tools (http://swftools.org) for
-        saveSWF(); FFmpeg (http://ffmpeg.org) for saveVideo()
-Version: 2.0-4
+        GraphicsMagick (http://www.graphicsmagick.org) or LyX
+        (http://www.lyx.org) for saveGIF(); (PDF)LaTeX for saveLatex();
+        SWF Tools (http://swftools.org) for saveSWF(); FFmpeg
+        (http://ffmpeg.org) for saveVideo()
+Version: 2.0-5
 URL: http://animation.yihui.name, https://github.com/yihui/animation
-Date: 2011-04-28
+Date: 2011-07-22
 Collate: 'animation-defunct.R' 'animation-package.R' 'ani.options.R'
         'ani.pause.R' 'ani.record.R' 'ani.start.R' 'ani.stop.R'
         'bisection.method.R' 'BM.circle.R' 'boot.iid.R' 'boot.lowess.R'
@@ -39,6 +40,6 @@ Collate: 'animation-defunct.R' 'animation-package.R' 'ani.options.R'
         'sample.system.R' 'saveGIF.R' 'saveHTML.R' 'saveLatex.R'
         'saveSWF.R' 'saveVideo.R' 'sim.qqnorm.R' 'vi.grid.illusion.R'
         'vi.lilac.chaser.R' 'zzz.R'
-Packaged: 2011-04-27 21:12:26 UTC; yihui
+Packaged: 2011-07-21 23:15:25 UTC; yihui
 Repository: CRAN
-Date/Publication: 2011-04-28 08:29:28
+Date/Publication: 2011-07-23 13:49:35

@@ -190,18 +190,19 @@ values.  The tags usually come from the animation parameters described
 below, but they are not restricted to these tags (any tag can be used;
 this is similar to \code{\link[base]{options}}).}
 }
-\examples{## see the first example in help(animation) on how to set and
-#   restore
-## animation options
+\examples{## see the first example in help(animation) on how to set
+#   and restore
+##   animation options
 
-## use the PDF device: remember to set 'ani.type' accordingly
-oopt = ani.options(ani.dev = "pdf", ani.type = "pdf", ani.height = 5, 
-    ani.width = 7)
+## use the PDF device: remember to set 'ani.type'
+#   accordingly
+oopt = ani.options(ani.dev = "pdf", ani.type = "pdf", 
+    ani.height = 5, ani.width = 7)
 
 ## use the Cairo PDF device
 # if (require('Cairo')) {
-# ani.options(ani.dev = CairoPDF, ani.type = 'pdf',
-# ani.height = 6, ani.width = 6)
+#     ani.options(ani.dev = CairoPDF, ani.type = 'pdf',
+#                 ani.height = 6, ani.width = 6)
 # }
 
 ## change outdir to the current working directory
@@ -213,8 +214,9 @@ ani.options(loop = FALSE)
 ## don't try to open the output automatically
 ani.options(autobrowse = FALSE)
 
-## it's a good habit to restore the options in the end so that
-## other code will not be affected
+## it's a good habit to restore the options in the end so
+#   that
+##   other code will not be affected
 ani.options(oopt)
 
 ## how to make use of the hidden option 'img.fmt'
@@ -222,8 +224,8 @@ saveHTML(expr = {
     png(ani.options("img.fmt"))
     for (i in 1:5) plot(runif(10))
     dev.off()
-}, img.name = "custom_plot", use.dev = FALSE, ani.type = "png", htmlfile = "custom_device.html", 
-    description = "Note how we use our own graphics device in 'expr'.")}
+}, img.name = "custom_plot", use.dev = FALSE, ani.type = "png", 
+    htmlfile = "custom_device.html", description = "Note how we use our own graphics device in 'expr'.")}
 
 
 
