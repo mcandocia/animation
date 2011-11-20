@@ -1,3 +1,28 @@
+		  CHANGES IN animation VERSION 2.0-6
+
+
+NEW FEATURES
+
+  o demo('elephant') to show a winking pink elephant; who said
+  elephants cannot dance? (thanks, Neil Gunther)
+
+  o all animations are using dev.hold() and dev.flush() now, so they
+  will no longer flicker under Linux and Mac
+
+MINOR CHANGES
+
+  o saveGIF() and im.convert() returns the command for the conversion,
+  which might be helpful for debugging. A note on the limit of
+  ImageMagick or GraphicsMagick was added to the documentation of
+  im.convert() (thanks, Florian Knorr)
+
+  o fixed a typo in ?animation (imgname should be img.name; thanks,
+  Neuwirth Erich)
+
+  o ani.pause() gained an argument 'interval' to specify the time
+  interval directly
+
+
 		  CHANGES IN animation VERSION 2.0-5
 
 
@@ -35,12 +60,6 @@ MINOR CHANGES
   the team that the rows correspond to
 
 
-TO APPEAR
-
-    o A function cart.ani() to show the splitting process of
-  classification and regression trees.
-
-
 
 		  CHANGES IN animation VERSION 2.0-3
 
@@ -63,7 +82,7 @@ MINOR CHANGES
   than 100 inches
 
 
-  
+
 		  CHANGES IN animation VERSION 2.0-2
 
 

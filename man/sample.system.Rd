@@ -1,30 +1,34 @@
 \name{sample.system}
 \alias{sample.system}
 \title{Demonstration for the systematic sampling}
-\usage{sample.system(nrow = 10, ncol = 10, size = 15, p.col = c("blue", 
+\usage{
+sample.system(nrow = 10, ncol = 10, size = 15, p.col = c("blue", 
     "red"), p.cex = c(1, 3))
+}
+\arguments{
+  \item{nrow}{the desired number of rows of the sample
+  frame.}
 
+  \item{ncol}{the desired number of columns of the sample
+  frame.}
+
+  \item{size}{the sample size.}
+
+  \item{p.col,p.cex}{different colors / magnification rate
+  to annotate the population and the sample}
 }
-\description{Demonstration for the systematic sampling.}
-\details{The whole sample frame is denoted by a matrix (\code{nrow * ncol})
-in the plane, and the sample points with equal intervals are drawn
-out according to a random starting point. The points being sampled
-are marked by red circles.}
-\value{None (invisible \code{NULL}).}
-\author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link[base]{sample}}, \code{\link{sample.simple}},
-\code{\link{sample.cluster}}, \code{\link{sample.ratio}},
-\code{\link{sample.strat}}}
-\references{\url{http://animation.yihui.name/samp:systematic_sampling}}
-\keyword{distribution}
-\keyword{dynamic}
-\arguments{\item{nrow}{the desired number of rows of the sample frame.}
-\item{ncol}{the desired number of columns of the sample frame.}
-\item{size}{the sample size.}
-\item{p.col,p.cex}{different colors / magnification rate to
-annotate the population and the sample}
+\value{
+  None (invisible \code{NULL}).
 }
-\examples{oopt = ani.options(nmax = ifelse(interactive(), 50, 
+\description{
+  The whole sample frame is denoted by a matrix (\code{nrow
+  * ncol}) in the plane, and the sample points with equal
+  intervals are drawn out according to a random starting
+  point. The points being sampled are marked by red
+  circles.
+}
+\examples{
+oopt = ani.options(nmax = ifelse(interactive(), 50, 
     2))
 par(mar = rep(1, 4), lwd = 2)
 
@@ -40,19 +44,19 @@ saveHTML({
     ani.width = 500, title = "Demonstration of the systematic sampling", 
     description = "Sampling with equal distances.")
 
-ani.options(oopt)}
+ani.options(oopt)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+\author{
+  Yihui Xie <\url{http://yihui.name}>
+}
+\references{
+  \url{http://animation.yihui.name/samp:systematic_sampling}
+}
+\seealso{
+  \code{\link[base]{sample}}, \code{\link{sample.simple}},
+  \code{\link{sample.cluster}}, \code{\link{sample.ratio}},
+  \code{\link{sample.strat}}
+}
+\keyword{distribution}
+\keyword{dynamic}

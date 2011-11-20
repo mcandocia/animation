@@ -1,7 +1,8 @@
-##' Insert animations into an HTML page.
+##' Insert animations into an HTML page
+##'
 ##' This function first records all the plots in the R expression as
 ##' bitmap images, then inserts them into an HTML page and finally
-##' create the animation using the SciAnimator library.
+##' creates the animation using the SciAnimator library.
 ##'
 ##' This is a much better version than \code{\link{ani.start}} and
 ##' \code{\link{ani.stop}}, and all users are encouraged to try this
@@ -31,7 +32,7 @@
 ##' \code{img.name} will be replaced by \code{_} to make it a legal
 ##' jQuery string:
 ##'
-##' \verb{!"#$%&'()*+,./:;?@@[\]^`{|}~}
+##' \verb{!"#$\%&'()*+,./:;?@@[\]^`{|}~}
 ##' @param global.opts a string: the global options of the animation;
 ##' e.g. we can specify the default theme to be blue using
 ##' \verb{$.fn.scianimator.defaults.theme = 'blue';} note these
@@ -55,14 +56,11 @@
 ##' @return the path of the output
 ##' @note Microsoft IE might restrict the HTML page from running
 ##' JavaScript and try to ``protect your security'' when you view the
-##' animation page.  If this happens, you have two choices: (1)
-##' abandon the well-known fragile IE and try some really secure web
-##' browsers such as Firefox (or anything but IE); or (2) tell IE that
-##' you allow the blocked content.
+##' animation page, but this is not really a security problem.
 ##'
 ##' When you want to publish the HTML page on the web, you have  to
 ##' upload the associated \file{css} and \file{js} folders with the
-##' HTML file.
+##' HTML file as well as the images.
 ##'
 ##' For \code{\link{saveHTML}}, \code{ani.options('description')} can
 ##' be a character vector, in which case this vector will be pasted
@@ -82,7 +80,7 @@
 ##' \code{\link{saveLatex}}, \code{\link{saveVideo}};
 ##' \code{\link{ani.start}}, \code{\link{ani.stop}} (early versions of
 ##' HTML animations)
-##' @example animation/inst/examples/saveHTML-ex.R
+##' @example inst/examples/saveHTML-ex.R
 saveHTML = function(expr, img.name = 'Rplot',
                     global.opts = '', single.opts = '', ...) {
     oopt = ani.options(...)

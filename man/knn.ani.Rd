@@ -1,71 +1,84 @@
 \name{knn.ani}
 \alias{knn.ani}
-\title{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane}
-\usage{knn.ani(train, test, cl, k = 10, interact = FALSE, 
+\title{Demonstration of the k-Nearest Neighbour classification}
+\usage{
+knn.ani(train, test, cl, k = 10, interact = FALSE, 
     tt.col = c("blue", "red"), cl.pch = seq_along(unique(cl)), 
     dist.lty = 2, dist.col = "gray", knn.col = "green", ...)
-
 }
+\arguments{
+  \item{train}{matrix or data frame of training set cases
+  containing only 2 columns}
 
+  \item{test}{matrix or data frame of test set cases. A
+  vector will be interpreted as a row vector for a single
+  case. It should also contain only 2 columns. This data
+  set will be \emph{ignored} if \code{interact = TRUE}; see
+  \code{interact} below.}
 
-\description{Demonstrate the process of k-Nearest Neighbour classification on the 2D plane.}
-\details{For each row of the test set, the \eqn{k} nearest (in Euclidean
-distance) training set vectors are found, and the classification
-is decided by majority vote, with ties broken at random. For a
-single test sample point, the basic steps are:
+  \item{cl}{factor of true classifications of training set}
 
-\enumerate{ \item locate the test point \item compute the
-distances between the test point and all points in the training
-set \item find \eqn{k} shortest distances and the corresponding
-training set points \item vote for the result (find the maximum in
-the table for the true classifications) }
+  \item{k}{number of neighbours considered.}
 
-As there are four steps in an iteration, the total number of
-animation frames should be \code{4 * min(nrow(test),
-ani.options("nmax"))} at last.}
-\value{A vector of class labels for the test set.}
-\note{There is a special restriction (only two columns) on the
-training and test data set just for sake of the convenience for
-making a scatterplot.  This is only a rough demonstration; for
-practical applications, please refer to existing kNN functions
-such as \code{\link[class]{knn}} in \pkg{class}, etc.
+  \item{interact}{logical. If \code{TRUE}, the user will
+  have to choose a test set for himself using mouse click
+  on the screen; otherwise compute kNN classification based
+  on argument \code{test}.}
 
-If either one of \code{train} and \code{test} is missing, there'll
-be random matrices prepared for them. (It's the same for
-\code{cl}.)}
-\author{Yihui Xie <\url{http://yihui.name}>}
-\seealso{\code{\link[class]{knn}}}
-\references{Venables, W. N. and Ripley, B. D. (2002) \emph{Modern Applied
-Statistics with S}. Fourth edition. Springer.
+  \item{tt.col}{a vector of length 2 specifying the colors
+  for the training data and test data.}
 
-\url{http://animation.yihui.name/dmml:k-nearest_neighbour_algorithm}}
-\keyword{hplot}
-\keyword{iplot}
-\keyword{dynamic}
-\keyword{classif}
-\arguments{\item{train}{matrix or data frame of training set cases containing
-only 2 columns}
-\item{test}{matrix or data frame of test set cases. A vector will
-be interpreted as a row vector for a single case. It should also
-contain only 2 columns. This data set will be \emph{ignored} if
-\code{interact = TRUE}; see \code{interact} below.}
-\item{cl}{factor of true classifications of training set}
-\item{k}{number of neighbours considered.}
-\item{interact}{logical. If \code{TRUE}, the user will have to
-choose a test set for himself using mouse click on the screen;
-otherwise compute kNN classification based on argument
-\code{test}.}
-\item{tt.col}{a vector of length 2 specifying the colors for the
-training data and test data.}
-\item{cl.pch}{a vector specifying symbols for each class}
-\item{dist.lty,dist.col}{the line type and color to annotate the
-distances}
-\item{knn.col}{the color to annotate the k-nearest neighbour
-points using a polygon}
-\item{...}{additional arguments to create the empty frame for the
-animation (passed to \code{\link[graphics]{plot.default}})}
+  \item{cl.pch}{a vector specifying symbols for each class}
+
+  \item{dist.lty,dist.col}{the line type and color to
+  annotate the distances}
+
+  \item{knn.col}{the color to annotate the k-nearest
+  neighbour points using a polygon}
+
+  \item{...}{additional arguments to create the empty frame
+  for the animation (passed to
+  \code{\link[graphics]{plot.default}})}
 }
-\examples{## a binary classification problem
+\value{
+  A vector of class labels for the test set.
+}
+\description{
+  Demonstrate the process of k-Nearest Neighbour
+  classification on the 2D plane.
+}
+\details{
+  For each row of the test set, the \eqn{k} nearest (in
+  Euclidean distance) training set vectors are found, and
+  the classification is decided by majority vote, with ties
+  broken at random. For a single test sample point, the
+  basic steps are:
+
+  \enumerate{ \item locate the test point \item compute the
+  distances between the test point and all points in the
+  training set \item find \eqn{k} shortest distances and
+  the corresponding training set points \item vote for the
+  result (find the maximum in the table for the true
+  classifications) }
+
+  As there are four steps in an iteration, the total number
+  of animation frames should be \code{4 * min(nrow(test),
+  ani.options("nmax"))} at last.
+}
+\note{
+  There is a special restriction (only two columns) on the
+  training and test data set just for sake of the
+  convenience for making a scatterplot.  This is only a
+  rough demonstration; for practical applications, please
+  refer to existing kNN functions such as
+  \code{\link[class]{knn}} in \pkg{class}, etc.
+
+  If either one of \code{train} and \code{test} is missing,
+  there'll be random matrices prepared for them. (It's the
+  same for \code{cl}.)
+}
+\examples{
+## a binary classification problem
 oopt = ani.options(interval = 2, nmax = ifelse(interactive(), 
     10, 2))
 x = matrix(c(rnorm(80, mean = -1), rnorm(80, mean = 1)), 
@@ -98,35 +111,21 @@ saveHTML({
         "distance) training set vectors are found, and the classification is", 
         "decided by majority vote, with ties broken at random."))
 
-ani.options(oopt)}
+ani.options(oopt)
+}
+\author{
+  Yihui Xie <\url{http://yihui.name}>
+}
+\references{
+  Venables, W. N. and Ripley, B. D. (2002) \emph{Modern
+  Applied Statistics with S}. Fourth edition. Springer.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  \url{http://animation.yihui.name/dmml:k-nearest_neighbour_algorithm}
+}
+\seealso{
+  \code{\link[class]{knn}}
+}
+\keyword{classif}
+\keyword{dynamic}
+\keyword{hplot}
+\keyword{iplot}

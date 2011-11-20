@@ -1,16 +1,19 @@
+\docType{data}
 \name{vanke1127}
 \alias{vanke1127}
-\alias{vanke1127}
-\title{Stock prices of Vanke Co}
-\usage{data(vanke1127)}
-\description{, Ltd on 2009/11/27.
-This is a sample of stock prices of the Vanke Co., Ltd on 2009/11/27.}
-\details{Format: a data frame with 2831 observations on the following 2 variables.
-\describe{ \item{time}{POSIXt: the time corresponding to stock
-prices} \item{price}{a numeric vector: stock prices} }}
-\docType{data}
-\keyword{datasets}
-\examples{data(vanke1127)
+\title{Stock prices of Vanke Co., Ltd on 2009/11/27}
+\format{A data frame with 2831 observations on the following 2
+variables. \describe{ \item{time}{POSIXt: the time corresponding
+to stock prices} \item{price}{a numeric vector: stock prices} }}
+\source{
+  This data can be obtained from most stock websites.
+}
+\description{
+  This is a sample of stock prices of the Vanke Co., Ltd on
+  2009/11/27.
+}
+\examples{
+data(vanke1127)
 tab.price = table(vanke1127$price)
 plot(as.numeric(names(tab.price)), as.numeric(tab.price), 
     type = "h", xlab = "price", ylab = "frequency")
@@ -39,31 +42,6 @@ saveHTML({
 saveGIF(price.ani(vanke1127$price, vanke1127$time, 
     lwd = 2), movie.name = "price.gif", loop = 1)
 
-ani.options(oopt)}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ani.options(oopt)
+}
+\keyword{dataset}
