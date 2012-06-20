@@ -16,6 +16,9 @@
   \url{http://www.basketballgeek.com/data/} (transformed
   based on the original data)
 }
+\usage{
+data(CLELAL09)
+}
 \description{
   Cleveland Cavaliers played against Los Angeles Lakers at
   Staples Center in LA on Dec 25, 2009 and won the game by
@@ -32,7 +35,6 @@
 \examples{
 library(animation)
 data(CLELAL09)
-## see demo('CLEvsLAL', package = 'animation') for a
-#   `replay' of the game
+## see demo('CLEvsLAL', package = 'animation') for a `replay' of the game
 }
-\keyword{dataset}
+\keyword{datasets}

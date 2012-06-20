@@ -7,6 +7,9 @@
   The full text of speech is at
   \url{http://cpc.people.com.cn/GB/64093/64094/8544901.html}
 }
+\usage{
+data(HuSpeech)
+}
 \description{
   This speech came on the 30th anniversary of China's
   economic reform in 1978.
@@ -20,8 +23,7 @@
 \examples{
 data(HuSpeech)
 ## clear pattern: 1/3 short, 1/3 long, 1/3 short again
-plot(HuSpeech, type = "b", pch = 20, xlab = "paragraph index", 
-    ylab = "word count")
+plot(HuSpeech, type = "b", pch = 20, xlab = "paragraph index", ylab = "word count")
 ## see ?moving.block for an animation example
 }
-\keyword{dataset}
+\keyword{datasets}

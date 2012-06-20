@@ -18,6 +18,9 @@ someone.}  \item{bandwidth}{amount of data downloaded by all
 \source{
   \url{http://yihui.name}
 }
+\usage{
+data(pageview)
+}
 \description{
   The data is collected by Awstats for the website
   \url{http://yihui.name}.
@@ -28,4 +31,4 @@ plot(pageview[, 1:2], type = "b", col = "red", main = "Number of Visits in Yihui
 ## partial auto-correlation
 pacf(pageview$visits)
 }
-\keyword{dataset}
+\keyword{datasets}

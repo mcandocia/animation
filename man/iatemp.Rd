@@ -7,6 +7,9 @@
 \source{
   \url{http://www.wrcc.dri.edu/cgi-bin/divplot1_form.pl?1305}
 }
+\usage{
+data(iatemp)
+}
 \description{
   Temperatures in central Iowa over 106 years.
 }
@@ -14,4 +17,4 @@
 data(iatemp)
 plot(iatemp)
 }
-\keyword{dataset}
+\keyword{datasets}
