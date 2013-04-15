@@ -2,8 +2,7 @@
 \alias{saveHTML}
 \title{Insert animations into an HTML page}
 \usage{
-saveHTML(expr, img.name = "Rplot", global.opts = "", single.opts = "", 
-    ...)
+saveHTML(expr, img.name = "Rplot", global.opts = "", single.opts = "", ...)
 }
 \arguments{
   \item{expr}{an R expression to be evaluated to create a
@@ -127,7 +126,7 @@ saveHTML({
         plot(rnorm(50), ylim = c(-3, 3))
         ani.pause()
     }
-}, img.name = "norm_plot", single.opts = "'utf8': false", autoplay = FALSE, interval = 0.5, 
+}, img.name = "norm_plot", single.opts = "utf8: false", autoplay = FALSE, interval = 0.5, 
     imgdir = "norm_dir", htmlfile = "random.html", ani.height = 400, ani.width = 600, 
     title = "Demo of 50 Normal random numbers", description = c("When you write a long long long long description,", 
         "R will try to wrap the words automatically.", "Oh, really?!"))
@@ -160,8 +159,7 @@ saveHTML({
 
 
 ## use Rweb to create animations
-if (interactive()) browseURL(system.file("misc", "Rweb", "demo.html", 
-    package = "animation"))
+if (interactive()) browseURL(system.file("misc", "Rweb", "demo.html", package = "animation"))
 }
 \author{
   Yihui Xie <\url{http://yihui.name}>

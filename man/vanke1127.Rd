@@ -2,14 +2,11 @@
 \name{vanke1127}
 \alias{vanke1127}
 \title{Stock prices of Vanke Co., Ltd on 2009/11/27}
-\format{A data frame with 2831 observations on the following 2
-variables. \describe{ \item{time}{POSIXt: the time corresponding
-to stock prices} \item{price}{a numeric vector: stock prices} }}
+\format{A data frame with 2831 observations on the following 2 variables.
+  \describe{ \item{time}{POSIXt: the time corresponding to stock prices}
+  \item{price}{a numeric vector: stock prices} }}
 \source{
   This data can be obtained from most stock websites.
-}
-\usage{
-data(vanke1127)
 }
 \description{
   This is a sample of stock prices of the Vanke Co., Ltd on
@@ -18,8 +15,8 @@ data(vanke1127)
 \examples{
 data(vanke1127)
 tab.price = table(vanke1127$price)
-plot(as.numeric(names(tab.price)), as.numeric(tab.price), type = "h", 
-    xlab = "price", ylab = "frequency")
+plot(as.numeric(names(tab.price)), as.numeric(tab.price), type = "h", xlab = "price", 
+    ylab = "frequency")
 
 oopt = ani.options(interval = 0.5, loop = FALSE, title = "Stock price of Vanke")
 

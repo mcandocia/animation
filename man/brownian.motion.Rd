@@ -39,8 +39,7 @@ brownian.motion(n = 10, xlim = c(-20, 20), ylim = c(-20, 20), ...)
   \code{ani.options('nmax')}.
 }
 \examples{
-oopt = ani.options(interval = 0.05, nmax = ifelse(interactive(), 150, 
-    2))
+oopt = ani.options(interval = 0.05, nmax = ifelse(interactive(), 150, 2))
 brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow", main = "Demonstration of Brownian Motion")
 ani.options(oopt)
 
@@ -61,10 +60,8 @@ ani.options(oopt)
   Yihui Xie <\url{http://yihui.name}>
 }
 \references{
-  \url{http://animation.yihui.name/prob:brownian_motion}
+  \url{http://vis.supstat.com/2012/11/brownian-motion-with-r}
 }
 \seealso{
   \code{\link[stats]{rnorm}}
 }
-\keyword{dplot}
-\keyword{dynamic}

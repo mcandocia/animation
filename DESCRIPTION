@@ -2,21 +2,21 @@ Package: animation
 Type: Package
 Title: A gallery of animations in statistics and utilities to create
         animations
-Version: 2.1
-Date: 2012-06-20
+Version: 2.2
+Date: 2013-04-15
 Author: Yihui Xie
 Maintainer: Yihui Xie <xie@yihui.name>
-Description: This package contains various functions for animations in
-        statistics, covering many areas such as probability theory,
-        mathematical statistics, multivariate statistics, nonparametric
-        statistics, sampling survey, linear models, time series,
-        computational statistics, data mining and machine learning.
-        These functions might be of help in teaching statistics and
-        data analysis. Also provided in this package are several
-        approaches to save animations to various formats, e.g. Flash,
-        GIF, HTML pages, PDF and videos (saveSWF(), saveGIF(),
+Description: This package contains a variety of functions for
+        animations in statistics, covering areas such as probability
+        theory, mathematical statistics, multivariate statistics,
+        nonparametric statistics, sampling survey, linear models, time
+        series, computational statistics, data mining and machine
+        learning. These functions might be helpful in teaching
+        statistics and data analysis. Also provided in this package are
+        several approaches to save animations to various formats, e.g.
+        Flash, GIF, HTML pages, PDF and videos (saveSWF(), saveGIF(),
         saveHTML(), saveLatex(), and saveVideo() respectively). PDF
-        animations can be inserted into Sweave easily.
+        animations can be inserted into Sweave/knitr easily.
 SystemRequirements: ImageMagick (http://imagemagick.org) or
         GraphicsMagick (http://www.graphicsmagick.org) or LyX
         (http://www.lyx.org) for saveGIF(); (PDF)LaTeX for saveLatex();
@@ -25,8 +25,9 @@ SystemRequirements: ImageMagick (http://imagemagick.org) or
 Depends: R (>= 2.14.0)
 Imports: MASS
 License: GPL-2 | GPL-3
-URL: https://github.com/yihui/animation
+URL: http://yihui.name/animation
 BugReports: https://github.com/yihui/animation/issues
+LazyData: yes
 Collate: 'animation-defunct.R' 'animation-package.R' 'ani.options.R'
         'ani.pause.R' 'ani.record.R' 'ani.start.R' 'ani.stop.R'
         'bisection.method.R' 'BM.circle.R' 'boot.iid.R' 'boot.lowess.R'
@@ -41,6 +42,7 @@ Collate: 'animation-defunct.R' 'animation-package.R' 'ani.options.R'
         'sample.system.R' 'saveGIF.R' 'saveHTML.R' 'saveLatex.R'
         'saveSWF.R' 'saveVideo.R' 'sim.qqnorm.R' 'vi.grid.illusion.R'
         'vi.lilac.chaser.R' 'zzz.R'
-Packaged: 2012-06-20 04:46:15 UTC; yihui
+Packaged: 2013-04-14 05:55:40 UTC; yihui
+NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2012-06-20 06:01:22
+Date/Publication: 2013-04-14 16:58:16

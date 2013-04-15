@@ -7,16 +7,12 @@
   The full text of speech is at
   \url{http://www.baltimoresun.com/news/nation-world/bal-text1105,0,5055673,full.story}
 }
-\usage{
-data(ObamaSpeech)
-}
 \description{
   This data recorded the number of words in each paragraph
   of Barack Obama's speech in Chicago after winning the
   presidential election.
 }
 \examples{
-data(ObamaSpeech)
 ## pattern: longer paragraph and shorter paragraph
 plot(ObamaSpeech, type = "b", pch = 20, xlab = "paragraph index", ylab = "word count")
 }

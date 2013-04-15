@@ -129,9 +129,8 @@ ani.options(...)
   \code{\link{saveSWF}}); this can be useful when the
   output cannot be captured by standard R graphics devices
   -- a typical example is the \pkg{rgl} graphics (we can
-  use \code{\link[rgl]{rgl.snapshot}} to capture \pkg{rgl}
-  graphics to png files, or
-  \code{\link[rgl]{rgl.postscript}} to save plots as
+  use \code{rgl.snapshot} to capture \pkg{rgl} graphics to
+  png files, or \code{rgl.postscript} to save plots as
   postscript/pdf; see \code{demo('rgl_animation')} or
   \code{demo('use_Cairo')} for examples or the last example
   below). Note, however, we do not really have to create
@@ -213,8 +212,7 @@ ani.options(...)
 ## options
 
 ## use the PDF device: remember to set 'ani.type' accordingly
-oopt = ani.options(ani.dev = "pdf", ani.type = "pdf", ani.height = 5, 
-    ani.width = 7)
+oopt = ani.options(ani.dev = "pdf", ani.type = "pdf", ani.height = 5, ani.width = 7)
 
 ## use the Cairo PDF device if (require('Cairo')) { ani.options(ani.dev =
 ## CairoPDF, ani.type = 'pdf', ani.height = 6, ani.width = 6) }

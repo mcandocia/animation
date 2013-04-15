@@ -53,8 +53,7 @@ lln.ani(FUN = rnorm, mu = 0, np = 30, pch = 20, col.poly = "bisque", col.mu = "g
   `\code{.}'.
 }
 \examples{
-oopt = ani.options(interval = 0.01, nmax = ifelse(interactive(), 150, 
-    2))
+oopt = ani.options(interval = 0.01, nmax = ifelse(interactive(), 150, 2))
 
 lln.ani(pch = ".")
 
@@ -78,6 +77,3 @@ ani.options(oopt)
 \references{
   \url{http://animation.yihui.name/prob:law_of_large_numbers}
 }
-\keyword{distribution}
-\keyword{dplot}
-\keyword{dynamic}

@@ -2,8 +2,8 @@
 \alias{flip.coin}
 \title{Probability in flipping coins}
 \usage{
-flip.coin(faces = 2, prob = NULL, border = "white", grid = "white", col = 1:2, 
-    type = "p", pch = 21, bg = "transparent", digits = 3)
+flip.coin(faces = 2, prob = NULL, border = "white", grid = "white", col = 1:2, type = "p", 
+    pch = 21, bg = "transparent", digits = 3)
 }
 \arguments{
   \item{faces}{an integer or a character vector. See
@@ -67,8 +67,8 @@ flip.coin(faces = 2, prob = NULL, border = "white", grid = "white", col = 1:2,
 \examples{
 oopt = ani.options(interval = 0.2, nmax = ifelse(interactive(), 100, 2))
 ## a coin would stand on the table?? just kidding :)
-flip.coin(faces = c("Head", "Stand", "Tail"), type = "n", prob = c(0.45, 
-    0.1, 0.45), col = c(1, 2, 4))
+flip.coin(faces = c("Head", "Stand", "Tail"), type = "n", prob = c(0.45, 0.1, 0.45), 
+    col = c(1, 2, 4))
 
 flip.coin(bg = "yellow")
 
@@ -88,13 +88,9 @@ ani.options(oopt)
   Yihui Xie <\url{http://yihui.name}>
 }
 \references{
-  \url{http://animation.yihui.name/prob:flipping_coins}
+  \url{http://vis.supstat.com/2013/03/simulation-of-coin-flipping}
 }
 \seealso{
   \code{\link[graphics]{points}},
   \code{\link[base]{sample}}
 }
-\keyword{distribution}
-\keyword{dplot}
-\keyword{dynamic}
-\keyword{hplot}
