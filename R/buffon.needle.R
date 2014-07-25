@@ -15,13 +15,12 @@
 #' the scenario, the top-right one is to help us understand the connection
 #' between dropping needles and the mathematical method to estimate \eqn{\pi},
 #' and the bottom one is the result for each drop.
-#'
 #' @param l numerical. length of the needle; shorter than \code{d}.
 #' @param d numerical. distances between lines; it should be longer than
 #'   \code{l}.
 #' @param redraw logical. redraw former `needles' or not for each drop.
-#' @param mat,heights arguments passed to \code{\link[graphics]{layout}} to set
-#'   the layout of the three graphs.
+#' @param mat,heights arguments passed to \code{\link{layout}} to set the layout
+#'   of the three graphs.
 #' @param col a character vector of length 7 specifying the colors of:
 #'   background of the area between parallel lines, the needles, the sin curve,
 #'   points below / above the sin curve, estimated \eqn{\pi} values, and the
@@ -42,12 +41,12 @@
 #'   \code{FALSE} when doing a large amount of simulations.
 #'
 #'   The maximum number of drops is specified in \code{ani.options('nmax')}.
-#' @author Yihui Xie <\url{http://yihui.name}>
+#' @author Yihui Xie
 #' @references Ramaley, J. F. (Oct 1969). Buffon's Noodle Problem. \emph{The
 #'   American Mathematical Monthly} \bold{76} (8): 916-918.
 #'
-#'   \url{http://animation.yihui.name/prob:buffon_s_needle}
-#' @keywords dplot hplot dynamic math
+#'   \url{http://vis.supstat.com/2013/04/buffons-needle}
+#' @export
 #' @example inst/examples/buffon.needle-ex.R
 buffon.needle = function(
   l = 0.8, d = 1, redraw = TRUE, mat = matrix(c(1, 3, 2, 3), 2), heights = c(3, 2),

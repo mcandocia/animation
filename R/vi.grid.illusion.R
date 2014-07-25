@@ -16,25 +16,26 @@
 #' @param type type of illusions: \code{'s'} for Scintillating grid illusions
 #'   and \code{'h'} for Hermann grid illusions
 #' @return \code{NULL}
-#' @author Yihui Xie <\url{http://yihui.name}>
-#' @seealso \code{\link[graphics]{points}}, \code{\link[graphics]{abline}}
+#' @author Yihui Xie
+#' @seealso \code{\link{points}}, \code{\link{abline}}
 #' @references \url{http://vis.supstat.com/2013/03/make-visual-illusions-in-r}
+#' @export
 #' @examples
 #' ## default to be Scintillating grid illusions
 #' vi.grid.illusion()
 #'
 #' ## set wider lines to see Hermann grid illusions
-#' vi.grid.illusion(type = "h", lwd = 22, nrow = 5, ncol = 5,
-#'     col = "white")
-vi.grid.illusion = function(nrow = 8, ncol = 8, lwd = 8, cex = 3,
-                            col = "darkgray", type = c("s", "h")) {
-  op = par(mar = rep(0, 4), bg = "black")
+#' vi.grid.illusion(type = 'h', lwd = 22, nrow = 5, ncol = 5,
+#'     col = 'white')
+vi.grid.illusion = function(
+  nrow = 8, ncol = 8, lwd = 8, cex = 3, col = 'darkgray', type = c('s', 'h')
+) {
+  op = par(mar = rep(0, 4), bg = 'black')
   plot.new()
   x = seq(0, 1, length = ncol)
   y = seq(0, 1, length = nrow)
   abline(v = x, h = y, col = col, lwd = lwd)
-  if (type[1] == "s")
-    points(rep(x, each = nrow), rep(y, ncol), col = "white",
-           cex = cex, pch = 20)
+  if (type[1] == 's')
+    points(rep(x, each = nrow), rep(y, ncol), col = 'white', cex = cex, pch = 20)
   par(op)
 }

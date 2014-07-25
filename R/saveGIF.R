@@ -34,7 +34,7 @@
 #'   platforms); can be \command{gm convert} in order to use GraphicsMagick; see
 #'   the 'Note' section for details
 #' @param cmd.fun a function to invoke the OS command; by default
-#'   \code{\link[base]{system}}
+#'   \code{\link{system}}
 #' @param clean whether to delete the individual image frames
 #' @param \dots other arguments passed to \code{\link{ani.options}}, e.g.
 #'   \code{ani.height} and \code{ani.width}, ...
@@ -52,20 +52,16 @@
 #'   identical); the latter name is for compatibility to older versions of this
 #'   package (< 2.0-2). It is recommended to use \code{\link{saveGIF}} to avoid
 #'   confusions between \code{\link{saveMovie}} and \code{\link{saveVideo}}.
-#' @author Yihui Xie <\url{http://yihui.name}>
-#' @seealso \code{\link{im.convert}}, \code{\link{gm.convert}},
-#'   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link[base]{system}},
-#'   \code{\link[grDevices]{png}}, \code{\link{saveLatex}},
-#'   \code{\link{saveHTML}}
-#' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
-#'
-#' GraphicsMagick: \url{http://www.graphicsmagick.org}
-#'
-#' \url{http://animation.yihui.name/animation:start}
-#' @keywords dynamic device utilities
+#' @author Yihui Xie
+#' @family utilities
+#' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
+#'   GraphicsMagick: \url{http://www.graphicsmagick.org}
+#' @export
 #' @example inst/examples/saveGIF-ex.R
-saveGIF = function(expr, movie.name = "animation.gif", img.name = "Rplot",
-                   convert = "convert", cmd.fun = system, clean = TRUE, ...) {
+saveGIF = function(
+  expr, movie.name = 'animation.gif', img.name = 'Rplot', convert = 'convert',
+  cmd.fun, clean = TRUE, ...
+) {
   oopt = ani.options(...)
   on.exit(ani.options(oopt))
   ## create images in the temp dir
@@ -75,35 +71,33 @@ saveGIF = function(expr, movie.name = "animation.gif", img.name = "Rplot",
   file.ext = ani.options('ani.type')
 
   ## clean up the files first
-  unlink(paste(img.name, "*.", file.ext, sep = ""))
+  unlink(paste(img.name, '*.', file.ext, sep = ''))
 
   ## draw the plots and record them in image files
   ani.dev = ani.options('ani.dev')
   if (is.character(ani.dev)) ani.dev = get(ani.dev)
-  img.fmt = paste(img.name, "%d.", file.ext, sep = "")
-  img.fmt = file.path(getwd(), img.fmt)
+  img.fmt = paste(img.name, '%d.', file.ext, sep = '')
   if ((use.dev <- ani.options('use.dev')))
-    ani.dev(img.fmt, width = ani.options('ani.width'),
+    ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
             height = ani.options('ani.height'))
-  owd1 = setwd(owd)
-  eval(expr)
-  setwd(owd1)
+  in_dir(owd, expr)
   if (use.dev) dev.off()
 
   ## compress PDF files
-  if (file.ext == 'pdf' &&
-    ((use.qpdf <- !is.null(ani.options('qpdf'))) ||
-    (use.pdftk <- !is.null(ani.options('pdftk'))))) {
-    for (f in list.files(path = dirname(img.name), pattern =
-      sprintf('^%s[0-9]*\\.pdf$', img.name), full.names = TRUE))
-      if (use.qpdf) qpdf(f) else if (use.pdftk) pdftk(f)
-  }
-
-  img.files = sprintf(img.fmt, seq_len(length(list.files(pattern =
-    paste(img.name, "[0-9]+\\.", file.ext, sep = "")))))
+  if (file.ext == 'pdf')
+    compress_pdf(img.name)
+  img.files = sprintf(img.fmt, seq_len(length(list.files(
+    pattern = paste(img.name, '[0-9]+\\.', file.ext, sep = '')
+  ))))
+  if (missing(cmd.fun))
+    cmd.fun = if (.Platform$OS.type == 'windows') shell else system
   ## convert to animations
   im.convert(img.files, output = movie.name, convert = convert,
              cmd.fun = cmd.fun, clean = clean)
+
+  outpath = normalizePath(movie.name) # get the full path
+  setwd(owd)
+  file.copy(outpath, movie.name)
 }
 #' @rdname saveGIF
 saveMovie = saveGIF

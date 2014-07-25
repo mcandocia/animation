@@ -1,3 +1,38 @@
+		  CHANGES IN animation VERSION 2.3
+
+NEW FEATURES
+
+  o added a new argument 'navigator' to saveHTML() so that we can remove the
+  navigator conveniently without having to understand SciAnimator library
+
+MAJOR CHANGES
+
+  o the default value for the argument `other.opts` in saveVideo() was changed
+  to '-pix_fmt yuv420p' when the output format is MP4 (Skye Bender-deMoll, #49)
+
+  o the defunct functions highlight.def(), write.rss() and ani.news() were
+  finally removed from this package
+
+  o the functions ani.start() and ani.stop() are defunct and will be removed
+  in the next version of this package; please use saveHTML() instead
+
+  o the animation option `outdir` in ani.options() was removed because it
+  was confusing to many users that the output is in a temporary directory by
+  default; now all files are written relative to the current working
+  directory (#31)
+
+  o the animation option `convert` in ani.options() is expected to be the
+  path to ImageMagick/GraphicsMagick _without_ quotes, i.e. not the
+  shQuote() version (#35)
+
+  o the animation option 'htmlfile' in ani.options() was removed, because it
+  was only used in saveHTML() and g.brownian.motion(), and is not a general
+  enough option
+
+  o the 'clean' argument in saveVideo() was removed: images will be created
+  in the temporary directory, and will not be explicitly cleaned (R will
+  clean them then it quits)
+
 		  CHANGES IN animation VERSION 2.2
 
 MINOR CHANGES

@@ -11,14 +11,14 @@
 #' @param n integer: sample size
 #' @param last.plot an expression to be evaluated after the plot is drawn, e.g.
 #'   \code{expression(abline(0, 1))} to add the diagonal line
-#' @param ... other arguments passed to \code{\link[stats]{qqnorm}}
+#' @param ... other arguments passed to \code{\link{qqnorm}}
 #' @return \code{NULL}
-#' @author Yihui Xie <\url{http://yihui.name}>
-#' @seealso \code{\link[stats]{qqnorm}}
-#' @keywords dynamic distribution dplot
+#' @author Yihui Xie
+#' @seealso \code{\link{qqnorm}}
+#' @export
 #' @example inst/examples/sim.qqnorm-ex.R
 sim.qqnorm = function(n = 20, last.plot = NULL, ...) {
-  for(i in 1:ani.options("nmax")) {
+  for(i in 1:ani.options('nmax')) {
     dev.hold()
     qqnorm(rnorm(n), ...)
     eval(last.plot)
