@@ -1,3 +1,4 @@
+% Please edit documentation in R/animation-package.R
 \docType{package}
 \name{animation-package}
 \alias{animation}
@@ -143,7 +144,3 @@ The associated website for this package:
 \code{\link{saveHTML}}, \code{\link{saveGIF}},
   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link{saveLatex}}
 }
-\keyword{device}
-\keyword{dplot}
-\keyword{dynamic}
-\keyword{package}

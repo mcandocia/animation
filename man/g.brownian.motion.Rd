@@ -1,3 +1,4 @@
+% Please edit documentation in R/g.brownian.motion.R
 \name{g.brownian.motion}
 \alias{g.brownian.motion}
 \title{Brownian Motion using Google Visualization API}
@@ -15,7 +16,7 @@ but it's the required by the Google gadget}
 
 \item{file}{the HTML filename}
 
-\item{width,height}{width and height of the animation}
+\item{width, height}{width and height of the animation}
 }
 \value{
 \code{NULL}. An HTML page will be opened as the side effect.
@@ -32,7 +33,7 @@ The number of frames is controlled by \code{ani.options('nmax')} as
 
   Due to the ``security settings'' of Adobe Flash player, you might not be
   able to view the generated Flash animation locally, i.e. using an address
-  like \url{file:///C:/Temp/index.html}. In this case, you can upload the
+  like \samp{file:///C:/Temp/index.html}. In this case, you can upload the
   HTML file to a web server and use the http address to view the Flash file.
 }
 \examples{

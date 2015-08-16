@@ -1,3 +1,4 @@
+% Please edit documentation in R/im.convert.R
 \name{im.convert}
 \alias{gm.convert}
 \alias{im.convert}

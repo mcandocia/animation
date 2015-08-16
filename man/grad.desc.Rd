@@ -1,3 +1,4 @@
+% Please edit documentation in R/grad.desc.R
 \name{grad.desc}
 \alias{grad.desc}
 \title{Gradient Descent Algorithm for the 2D case}
@@ -32,10 +33,10 @@ point \eqn{(x,y)}, e.g. \code{function(x, y) 2 * x + 4 * y}. If it is
 \item{len}{desired length of the independent sequences (to compute z values
 for contours)}
 
-\item{interact}{logical; whether choose the starting values by cliking on the
+\item{interact}{logical; whether choose the starting values by clicking on the
 contour plot directly?}
 
-\item{col.contour,col.arrow}{colors for the contour lines and arrows
+\item{col.contour, col.arrow}{colors for the contour lines and arrows
 respectively (default to be red and blue)}
 
 \item{main}{the title of the plot; if missing, it will be derived from

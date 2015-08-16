@@ -1,6 +1,6 @@
 # animation
 
-[![Build Status](https://travis-ci.org/yihui/animation.png)](https://travis-ci.org/yihui/animation)
+[![Build Status](https://travis-ci.org/yihui/animation.svg)](https://travis-ci.org/yihui/animation)
 
 ## Introduction
 
@@ -19,7 +19,7 @@ install.packages('animation')
 To install the GitHub version under development:
 
 ```s
-install.packages('animation', repos = 'http://rforge.net', type = 'source')
+install.packages('animation', repos = 'http://yihui.name/xran')
 ```
 
 If you want to contribute, the documentation and NAMESPACE of this package

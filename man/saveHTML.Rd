@@ -1,3 +1,4 @@
+% Please edit documentation in R/saveHTML.R
 \name{saveHTML}
 \alias{saveHTML}
 \title{Insert animations into an HTML page}

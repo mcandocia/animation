@@ -1,3 +1,4 @@
+% Please edit documentation in R/lln.ani.R
 \name{lln.ani}
 \alias{lln.ani}
 \title{Demonstration of Law of Large Numbers}
@@ -71,5 +72,5 @@ ani.options(oopt)
 Yihui Xie
 }
 \references{
-\url{http://http://vis.supstat.com/2013/04/law-of-large-numbers/}
+\url{http://vis.supstat.com/2013/04/law-of-large-numbers/}
 }

@@ -70,7 +70,7 @@
 #'   \bold{53}(1), 1-27. URL \url{http://www.jstatsoft.org/v53/i01/}.
 #' @seealso \code{\link{saveHTML}}, \code{\link{saveGIF}},
 #'   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link{saveLatex}}
-#' @keywords package dynamic device dplot
+#' @import datasets grDevices graphics stats utils
 #' @example inst/examples/animation-package-ex.R
 NULL
 
@@ -146,7 +146,7 @@ NULL
 #'   \item{CRACK}{a numeric vector} \item{WEIGHT}{a numeric vector}
 #'   \item{DENSITY}{a numeric vector} }
 #' @source collected from Statlib Datasets Archive:
-#'   \url{http://stat.cmu.edu/datasets/}
+#'   \url{http://lib.stat.cmu.edu/data-expo/}
 #' @examples
 #' ## some dense points in the center?
 #' plot(pollen[, 1:2], pch = 20, col = rgb(0, 0, 0, 0.1))
