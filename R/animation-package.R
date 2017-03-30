@@ -56,11 +56,11 @@
 #' @note Bug reports and feature requests can be sent to
 #'   \url{https://github.com/yihui/animation/issues}.
 #' @references The associated website for this package:
-#'   \url{http://vis.supstat.com}
+#'   \url{https://yihui.name/animation}
 #'
 #'   Yihui Xie and Xiaoyue Cheng. animation: A package for statistical
 #'   animations. \emph{R News}, \bold{8}(2):23--27, October 2008.  URL:
-#'   \url{http://CRAN.R-project.org/doc/Rnews/Rnews_2008-2.pdf}
+#'   \url{https://CRAN.R-project.org/doc/Rnews/Rnews_2008-2.pdf}
 #'
 #'   (NB: some functions mentioned in the above article have been slightly
 #'   modified; see the help pages for the up-to-date usage.)
@@ -71,7 +71,6 @@
 #' @seealso \code{\link{saveHTML}}, \code{\link{saveGIF}},
 #'   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link{saveLatex}}
 #' @import datasets grDevices graphics stats utils
-#' @example inst/examples/animation-package-ex.R
 NULL
 
 #' Word counts of a speech by the Chinese President Hu
@@ -102,7 +101,7 @@ NULL
 #' @docType data
 #' @format int [1:59] 2 45 52 53 11 48 28 15 50 29 ...
 #' @source The full text of speech is at
-#'   \url{http://www.baltimoresun.com/news/nation-world/bal-text1105,0,5055673,full.story}
+#'   \url{http://web.archive.org/web/20160306143403/http://www.baltimoresun.com/news/nation-world/bal-text1105-story.html}
 #'
 #'
 #' @examples
@@ -163,7 +162,6 @@ NULL
 #'   \describe{ \item{time}{POSIXt: the time corresponding to stock prices}
 #'   \item{price}{a numeric vector: stock prices} }
 #' @source This data can be obtained from most stock websites.
-#' @example inst/examples/vanke1127-ex.R
 NULL
 
 #' Average yearly temperatures in central Iowa

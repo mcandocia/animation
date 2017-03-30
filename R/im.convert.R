@@ -72,11 +72,11 @@
 #' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
 #'   GraphicsMagick: \url{http://www.graphicsmagick.org}
 #' @export
-#' @example inst/examples/im.convert-ex.R
 im.convert = function(
   files, output = 'animation.gif', convert = c('convert', 'gm convert'),
   cmd.fun = if (.Platform$OS.type == 'windows') shell else system, extra.opts = '', clean = FALSE
 ) {
+  movie.name = basename(output)
   interval = head(ani.options('interval'), length(files))
   convert = match.arg(convert)
   if (convert == 'convert') {
@@ -111,12 +111,12 @@ im.convert = function(
 
   loop = ifelse(isTRUE(ani.options('loop')), 0, ani.options('loop'))
   convert = sprintf(
-    '%s -loop %s %s %s %s', shQuote(convert), loop,
+    '%s -loop %s %s %s %s', convert, loop,
     extra.opts, paste(
       '-delay', interval * 100,
       if (length(interval) == 1) paste(files, collapse = ' ') else files,
       collapse = ' '),
-    shQuote(output)
+    shQuote(movie.name)
   )
   # there might be an error "the input line is too long", and we need to quote
   # the command; see http://stackoverflow.com/q/682799/559676
@@ -132,7 +132,8 @@ im.convert = function(
     message('Output at: ', output)
     if (clean)
       unlink(files)
-    auto_browse(output)
+    if (file.exists(output))
+      auto_browse(output)
   } else message('an error occurred in the conversion... see Notes in ?im.convert')
   invisible(convert)
 }

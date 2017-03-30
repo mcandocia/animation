@@ -57,13 +57,15 @@
 #' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
 #'   GraphicsMagick: \url{http://www.graphicsmagick.org}
 #' @export
-#' @example inst/examples/saveGIF-ex.R
 saveGIF = function(
   expr, movie.name = 'animation.gif', img.name = 'Rplot', convert = 'convert',
   cmd.fun, clean = TRUE, ...
 ) {
   oopt = ani.options(...)
   on.exit(ani.options(oopt))
+  if(!dir.exists(dirname(movie.name))){
+    dir.create(dirname(movie.name))
+  }
   ## create images in the temp dir
   owd = setwd(tempdir())
   on.exit(setwd(owd), add = TRUE)
@@ -92,12 +94,14 @@ saveGIF = function(
   if (missing(cmd.fun))
     cmd.fun = if (.Platform$OS.type == 'windows') shell else system
   ## convert to animations
-  im.convert(img.files, output = movie.name, convert = convert,
+  im.convert(img.files, output =  path.expand(movie.name), convert = convert,
              cmd.fun = cmd.fun, clean = clean)
-
-  outpath = normalizePath(movie.name) # get the full path
   setwd(owd)
-  file.copy(outpath, movie.name, overwrite = TRUE)
+  if (!grepl(tempdir(),movie.name,fixed = T)){
+    file.copy(file.path(tempdir(), basename(movie.name)), 
+              path.expand(movie.name), overwrite = TRUE)
+    # auto_browse(path.expand(movie.name))
+  }
 }
 #' @rdname saveGIF
 saveMovie = saveGIF

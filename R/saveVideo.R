@@ -33,16 +33,20 @@
 #' @references \url{http://ffmpeg.org/documentation.html}
 #' @family utilities
 #' @export
-#' @example inst/examples/saveVideo-ex.R
 saveVideo = function(
   expr, video.name = 'animation.mp4', img.name = 'Rplot', ffmpeg = ani.options('ffmpeg'),
   other.opts = if (grepl('[.]mp4$', video.name)) '-pix_fmt yuv420p', ...
 ) {
   oopt = ani.options(...)
   on.exit(ani.options(oopt))
+  
+  if(!dir.exists(dirname(video.name))){
+    dir.create(dirname(video.name))
+  }
+  
   owd = setwd(tempdir())
   on.exit(setwd(owd), add = TRUE)
-  
+
   # default ffmpeg command to 'ffmpeg' if not specified
   if (is.null(ffmpeg)) {
     ffmpeg = 'ffmpeg'
@@ -74,17 +78,19 @@ saveVideo = function(
   if (use.dev) dev.off()
 
   ## call FFmpeg
-  ffmpeg = paste(ffmpeg, '-y', '-r', 1/ani.options('interval'), '-i',
+  ffmpeg = paste(ffmpeg, '-y', '-framerate', 1/ani.options('interval'), '-i',
                  basename(img.fmt), other.opts, basename(video.name))
   message('Executing: ', ffmpeg)
   cmd = system(ffmpeg)
 
   if (cmd == 0) {
     setwd(owd)
-    file.copy(file.path(tempdir(), basename(video.name)), video.name, overwrite = TRUE)
+    if(!grepl(tempdir(),video.name,fixed = T))
+      file.copy(file.path(tempdir(), basename(video.name)), video.name, overwrite = TRUE)
     message('\n\nVideo has been created at: ',
             output.path <- normalizePath(video.name))
     auto_browse(output.path)
+
   }
   invisible(cmd)
 }

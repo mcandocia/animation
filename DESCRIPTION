@@ -2,24 +2,22 @@ Package: animation
 Type: Package
 Title: A Gallery of Animations in Statistics and Utilities to Create
         Animations
-Version: 2.4
-Date: 2015-08-16
+Version: 2.5
+Date: 2017-03-30
 Authors@R: c(
-    person("Yihui","Xie", role=c("cre","aut"),email="xie@yihui.name"),
+    person("Yihui","Xie", role=c("aut", "cre"), email="xie@yihui.name"),
     person("Christian", "Mueller",role="ctb"),
-    person("Lijia", "Yu", role="ctb"),
+    person("Lijia", "Yu", role=c("ctb"), email="yulj2010@gmail.com"),
     person("Weicheng","Zhu",role="ctb")
     )
-Maintainer: Yihui Xie <xie@yihui.name>
-Description: Provides functions for animations in statistics, covering topics in
-    probability theory, mathematical statistics, multivariate statistics,
-    nonparametric statistics, sampling survey, linear models, time series,
+Description: Provides functions for animations in statistics, covering topics
+    in probability theory, mathematical statistics, multivariate statistics,
+    non-parametric statistics, sampling survey, linear models, time series,
     computational statistics, data mining and machine learning. These functions
     may be helpful in teaching statistics and data analysis. Also provided in
     this package are a series of functions to save animations to various formats,
-    e.g. Flash, GIF, HTML pages, PDF and videos (saveSWF(), saveGIF(),
-    saveHTML(), saveLatex(), and saveVideo() respectively). PDF animations can
-    be inserted into Sweave/knitr easily.
+    e.g. Flash, 'GIF', HTML pages, 'PDF' and videos. 'PDF' animations can be
+    inserted into 'Sweave' / 'knitr' easily.
 SystemRequirements: ImageMagick (http://imagemagick.org) or
         GraphicsMagick (http://www.graphicsmagick.org) or LyX
         (http://www.lyx.org) for saveGIF(); (PDF)LaTeX for saveLatex();
@@ -27,16 +25,18 @@ SystemRequirements: ImageMagick (http://imagemagick.org) or
         (http://ffmpeg.org) or avconv (https://libav.org/avconv.html)
         for saveVideo()
 Depends: R (>= 2.14.0)
-Suggests: MASS, testit
+Suggests: MASS, class, testit
 License: GPL
-URL: http://yihui.name/animation
+URL: https://yihui.name/animation
 BugReports: https://github.com/yihui/animation/issues
 LazyData: yes
+RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2015-08-16 04:05:57 UTC; yihui
-Author: Yihui Xie [cre, aut],
+Packaged: 2017-03-30 13:58:26 UTC; yihui
+Author: Yihui Xie [aut, cre],
   Christian Mueller [ctb],
   Lijia Yu [ctb],
   Weicheng Zhu [ctb]
+Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2015-08-16 07:30:50
+Date/Publication: 2017-03-30 16:19:33 UTC
